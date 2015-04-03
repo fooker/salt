@@ -1,0 +1,13 @@
+AuthorizedKeysFile .ssh/authorized_keys
+
+PasswordAuthentication yes
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+AllowAgentForwarding yes
+AllowTcpForwarding yes
+PrintMotd no
+UsePrivilegeSeparation sandbox
+
+Subsystem	sftp	/usr/lib/ssh/sftp-server

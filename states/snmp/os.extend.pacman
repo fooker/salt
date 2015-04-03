@@ -1,0 +1,7 @@
+#! /bin/sh
+
+# Refresh the database
+/usr/bin/pacman -Sy > /dev/null
+
+# Count the outstanding updates
+/usr/bin/pacman -Qu | wc -l

@@ -1,0 +1,33 @@
+config_version	1.2
+
+
+snapshot_root	/.snapshots/
+no_create_root	1
+
+
+cmd_cp		/usr/bin/cp
+cmd_rm		/usr/bin/rm
+cmd_rsync	/usr/bin/rsync
+cmd_ssh		/usr/bin/ssh
+cmd_logger	/usr/bin/logger
+cmd_du		/usr/bin/du
+
+
+{% for retention in pillar['rsnapshot']['retentions'] -%}
+retain		{{ retention|first().name }}
+{% endfor %}
+
+
+verbose		2
+loglevel	3
+logfile		/var/log/rsnapshot
+
+
+lockfile	/var/run/rsnapshot.pid
+
+
+link_dest	1
+sync_first	1
+
+
+include_conf	/etc/rsnapshot.d/
