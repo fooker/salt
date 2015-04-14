@@ -1,20 +1,15 @@
 table nat
 chain POSTROUTING {
   # Simple PNAT masquerading
-  out-interface ext.br MASQUERADE;
+  out-interface (ext.br ffx.br) MASQUERADE;
 }
 
 table filter {
   chain FORWARD {
-    # Allow forwarding from internal to external
-    out-interface ext.br {
-      in-interface int.mngt.br ACCEPT;
-      in-interface int.priv.br ACCEPT;
-      in-interface int.open.br ACCEPT;
-    }
-    
-    # Allow forwarding from private to open internal network
-    out-interface int.open.br in-interface int.priv.br ACCEPT;
+    # Allow forwarding between some networks
+    in-interface (int.mngt.br int.priv.br int.open.br) out-interface ext.br      ACCEPT;
+    in-interface int.priv.br                           out-interface ffx.br      ACCEPT;
+    in-interface int.priv.br                           out-interface int.open.br ACCEPT;
   
     # Allow related connections to be forwarded back to originator
     mod conntrack ctstate INVALID DROP;

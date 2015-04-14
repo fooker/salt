@@ -15,7 +15,7 @@ base:
 #    - tinc
 
   'home.router':
-    - router/nat
+    - router/gateway
     - router/dns
     - router/dhcp
     - router/netboot
