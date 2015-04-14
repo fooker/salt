@@ -10,4 +10,7 @@ AllowTcpForwarding yes
 PrintMotd no
 UsePrivilegeSeparation sandbox
 
+Ciphers aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512,hmac-sha2-256,hmac-sha1
+
 Subsystem	sftp	/usr/lib/ssh/sftp-server
