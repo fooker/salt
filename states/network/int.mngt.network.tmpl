@@ -1,0 +1,18 @@
+[Match]
+Name=int.mngt
+
+
+[Network]
+Address={{ pillar['addresses'][grains['id']]['int']['ip4']['mngt']['address'] }}/{{ pillar['networks']['mngt']['netmask'] }}
+
+{% if 'ext' not in pillar['addresses'][grains['id']] -%}
+Gateway={{ pillar['networks']['mngt']['gateway'] }}
+{%- endif %}
+
+{% if grains['role'] == 'gateway' -%}
+IPForward=true
+{%- endif %}
+
+{% if 'ext' not in pillar['addresses'][grains['id']] or grains['role'] == 'gateway' -%}
+DNS={{ pillar['networks']['mngt']['gateway'] }}
+{%- endif %}

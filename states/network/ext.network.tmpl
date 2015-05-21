@@ -1,0 +1,13 @@
+[Match]
+Name=ext
+
+
+[Network]
+Address={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}/{{ pillar['addresses'][grains['id']]['ext']['ip4']['netmask'] }}
+Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
+
+{% if grains['role'] == 'gateway' -%}
+IPForward=true
+{%- endif %}
+
+DNS=8.8.8.8 8.8.4.4

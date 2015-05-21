@@ -1,15 +1,14 @@
 table nat
 chain POSTROUTING {
   # Simple PNAT masquerading
-  out-interface (ext.br ffx.br) MASQUERADE;
+  out-interface ext MASQUERADE;
 }
 
 table filter {
   chain FORWARD {
     # Allow forwarding between some networks
-    in-interface (int.mngt.br int.priv.br int.open.br) out-interface ext.br      ACCEPT;
-    in-interface int.priv.br                           out-interface ffx.br      ACCEPT;
-    in-interface int.priv.br                           out-interface int.open.br ACCEPT;
+    in-interface (int.mngt int.priv int.open) out-interface ext      ACCEPT;
+    in-interface int.priv                     out-interface int.open ACCEPT;
   
     # Allow related connections to be forwarded back to originator
     mod conntrack ctstate INVALID DROP;
@@ -19,14 +18,14 @@ table filter {
   chain INPUT {
   
     # Allow access to all service from internal private and management
-    in-interface (int.priv.br int.mngt.br) ACCEPT;
+    in-interface (int.priv int.mngt) ACCEPT;
   }
 }
 
 table nat
 chain PREROUTING {
 {%- for f in pillar['nat']['forwardings'] %}
-  in-interface ext.br
+  in-interface ext
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   DNAT to {{ f['thost'] }}:{{ f['tport'] }};
 {% endfor -%}
@@ -35,7 +34,7 @@ chain PREROUTING {
 table filter
 chain FORWARD {
 {%- for f in pillar['nat']['forwardings'] %}
-  in-interface ext.br
+  in-interface ext
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   destination {{ f['thost'] }} ACCEPT;
 {% endfor -%}

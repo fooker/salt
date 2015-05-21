@@ -10,6 +10,7 @@ dnsmasq:
       - pkg: dnsmasq
     - watch:
       - file: /etc/dnsmasq.conf
+      - file: /etc/dnsmasq.hosts
       - file: /etc/dnsmasq.conf.d/*
 
 dnsmasq.conf:

@@ -1,0 +1,11 @@
+Name={{ grains['id'] }}
+
+DeviceType=tap
+Interface=int.mngt{% if bridged %}.tinc{% endif %}
+
+Mode=switch
+ReplayWindow=512
+
+{% for host in pillar['tinc']['hosts'].keys() if host != grains['id'] and 'ext' in pillar['addresses'][host] and 'hostname' in pillar['addresses'][host]['ext'] -%}
+ConnectTo={{ host }}
+{% endfor -%}

@@ -19,7 +19,7 @@ sshd.conf:
     - makedirs: True
     - template: jinja
 
-{% for owner, key in pillar['sshd']['authorized_keys'].items() %}
+{% for owner, key in pillar['ssh']['authorized_keys'].items() %}
 sshd.root.authorized_keys.{{ owner }}:
   ssh_auth:
     - present

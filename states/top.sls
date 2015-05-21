@@ -1,24 +1,36 @@
 base:
   '*':
-    - sysctl
+    - common.sysctl
+    - common.tools
+    - common.root
+
+    - network
 
     - snmp
     - snmp.sys
     - snmp.os
     - snmp.opennms
 
+    - ssh
+
     - rsnapshot.target
 
-  'srv.* or home.router':
+  'public:True':
+    - match: grain
     - iptables
-    - ssh
-#    - tinc
+    - tinc
 
-  'home.router':
-    - router/gateway
-    - router/dns
-    - router/dhcp
-    - router/netboot
-  
-  'srv.bunker':
-    - rsnapshot
+  'router':
+    - router.gateway
+    - router.dns
+    - router.dhcp
+#    - router.netboot
+    - router.ffx
+    - router.vnstat
+
+  'brueckenkopf':
+    - salt.master
+    - opennms
+
+#  'bunker':
+#    - rsnapshot

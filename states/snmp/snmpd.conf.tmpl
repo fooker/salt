@@ -1,4 +1,4 @@
-agentaddress udp:{{ pillar.ip.int.mngt }}
+agentaddress udp:{{ pillar['addresses'][grains['id']]['int']['ip4']['mngt']['address'] }}
 agentaddress udp:127.0.0.1
 
 includeDir /etc/snmp/snmpd.conf.d

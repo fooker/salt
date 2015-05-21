@@ -1,3 +1,5 @@
+{% set instance = 'mngt.int.open-desk.net' %}
+
 tinc:
   pkg:
     - installed
@@ -5,54 +7,92 @@ tinc:
   service:
     - running
     - enable: True
-    - name: tincd@mngt
+    - name: 'tincd@{{ instance | replace('-', '\\\\x2d') }}'
     - require:
       - pkg: tinc
     - watch:
-      - file: /etc/tinc/mngt/*
+      - file: /etc/tinc/{{ instance }}/*
 
 
 tinc.conf:
   file:
     - managed
-    - name: /etc/tinc/mngt/tinc.conf
-    - source: salt://tinc/conf.tmpl
-    - makedirs: True
+    - name: /etc/tinc/{{ instance }}/tinc.conf
+    - source: salt://tinc/tinc.conf.tmpl
+    - context:
+        bridged: {{ 'bridged' in pillar['tinc']['hosts'][grains['id']] }}
     - template: jinja
+    - makedirs: True
+
+
+{% if 'bridged' in pillar['tinc']['hosts'][grains['id']] and pillar['tinc']['hosts'][grains['id']]['bridged'] -%}
+
+tinc.netdev:
+  file:
+    - managed
+    - name: /etc/systemd/network/40-int.mngt.tinc.netdev
+    - source: salt://tinc/netdev.tmpl
+    - context:
+        bridged: True
+    - template: jinja
+    - makedirs: True
+
+
+tinc.network:
+  file:
+    - managed
+    - name: /etc/systemd/network/40-int.mngt.tinc.network
+    - source: salt://tinc/network.tmpl
+    - template: jinja
+    - makedirs: True
+
+{%- else -%}
+
+tinc.netdev:
+  file:
+    - managed
+    - name: /etc/systemd/network/70-int.mngt.netdev
+    - source: salt://tinc/netdev.tmpl
+    - context:
+        bridged: False
+    - template: jinja
+    - makedirs: True
+
+{%- endif %}
 
 
 tinc.key:
   file:
     - managed
-    - name: /etc/tinc/mngt/rsa_key.priv
+    - name: /etc/tinc/{{ instance }}/rsa_key.priv
     - contents: |
-        {{ pillar['tinc']['keys']['private'] | indent(8) }}
+        {{ pillar['tinc']['hosts'][grains['id']]['priv'] | indent(8) }}
+    - mode: 600
 
 
-{#
-tinc.host:
+{%- for name, host in pillar['tinc']['hosts'].items() %}
+
+tinc.host.{{ name }}:
   file:
     - managed
-    - name: 
-  
-
-tinc.host.{{ grains['id'] | replace('.', '_') | replace('-', '_') }}:
-  file:
-    - managed
-    - name: /etc/tinc/mngt/hosts/{{ grains['id'] | replace('.', '_') | replace('-', '_') }}
+    - name: /etc/tinc/{{ instance }}/hosts/{{ name }}
     - source: salt://tinc/host.tmpl
-    - makedirs: True
+    - context:
+        host: {{ name }}
     - template: jinja
+    - makedirs: True
+
+{% endfor -%}
 
 
-{% for peer, contents in salt['mine.get']('*', 'cmd.run').items() if peer != grains['id'] %}
-tinc.host.{{ peer | replace('.', '_') | replace('-', '_') }}:
+{%- if 'ext' in pillar['addresses'][grains['id']] and 'hostname' in pillar['addresses'][grains['id']]['ext'] %}
+
+tinc.ferm:
   file:
     - managed
-    - name: /etc/tinc/mngt/hosts/{{ peer | replace('.', '_') | replace('-', '_') }}
-    - contents: |
-        {{ contents | indent(8) }}
+    - name: /etc/ferm.d/tinc.conf
+    - source: salt://tinc/ferm.conf.tmpl
+    - template: jinja
     - makedirs: True
-{% endfor %}
-#}
 
+{% endif -%}

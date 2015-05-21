@@ -1,0 +1,14 @@
+[Match]
+Name=int.open
+
+
+[Network]
+Address={{ pillar['addresses'][grains['id']]['int']['ip4']['open']['address'] }}/{{ pillar['networks']['open']['netmask'] }}
+
+{% if pillar['addresses'][grains['id']]['int']['ip4']['open']['address'] != pillar['networks']['open']['gateway'] -%}
+Gateway={{ pillar['networks']['open']['gateway'] }}
+{%- endif %}
+
+{% if grains['role'] == 'gateway' -%}
+IPForward=true
+{%- endif %}

@@ -1,0 +1,22 @@
+# This is the one and only
+dhcp-authoritative
+
+# Provide DHCP ranges for each network
+{%- for network in pillar['networks'].values() %}
+dhcp-range={{ network['dynamic'][0] }},{{ network['dynamic'][1] }},1d
+{%- endfor %}
+
+# Declare additional options
+dhcp-option=option:router,0.0.0.0
+dhcp-option=option:domain-name,{{ pillar['domain']['name'] }}
+dhcp-option=option:domain-search,{{ pillar['domain']['name'] }}
+dhcp-option=option:mtu,9000
+
+# Declare static addresses
+{%- for hostname, host in pillar['addresses'].items() %}
+{%- if host['int']['mac'] %}
+{%- for netname, net in host['int']['ip4'].items() %}
+dhcp-host={{ host['int']['mac'] }},{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }},{{ net['address'] }},infinite
+{%- endfor %}
+{% endif %}
+{%- endfor %}

@@ -1,4 +1,4 @@
-Address={{ pillar['name'] }}
-Port=10000
+Address={{ pillar['addresses'][host]['ext']['hostname'] }}
+Port={{ pillar['tinc']['port'] }}
 
-{{ pillar['tinc']['keys']['public'] }}
+{{ pillar['tinc']['hosts'][host]['pub'] }}

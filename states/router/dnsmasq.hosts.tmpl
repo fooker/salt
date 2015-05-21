@@ -1,3 +1,5 @@
-{% for host, addr in pillar['dns']['hosts'].items() %}
-{{ addr }}	{{ host }}
+{%- for hostname, host in pillar['addresses'].items() %}
+{%- for netname, net in host['int']['ip4'].items() %}
+{{ net['address'] }}	{{ hostname }}	{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }}
+{%- endfor %}
 {%- endfor %}

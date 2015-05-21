@@ -11,8 +11,12 @@ rsnapshot.conf:
     - makedirs: True
     - template: jinja
 
-rsnapshot.d:
+{# for host, contents in salt['publish.publish']('*', 'template.render', 'salt://rsnapshot/target/rsnapshot.conf.tmpl').items() %}
+rsnapshot.conf.{{ host }}:
   file:
-    - directory
-    - name: /etc/rsnapshot.d
+    - managed
+    - name: /etc/rsnapshot.d/{{ host }}
+    - contents: |
+        {{ contents|indent(8) }}
     - makedirs: True
+{% endfor #}
