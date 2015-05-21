@@ -4,6 +4,7 @@ base:
     - ssh
     - sysctl
     - tinc
+    - private.tinc
     - backup
 
   '{{ grains.id }}':
