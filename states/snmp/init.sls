@@ -20,3 +20,10 @@ snmpd.conf:
     - makedirs: True
     - template: jinja
 
+
+snmpd.iptables:
+  file:
+    - managed
+    - name: /etc/ferm.d/snmpd.conf
+    - source: salt://snmp/ferm.conf
+    - makedirs: True
