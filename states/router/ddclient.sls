@@ -8,6 +8,8 @@ ddclient:
     - name: ddclient
     - require:
       - pkg: ddclient
+    - watch:
+      - file: /etc/ddclient/ddclient.conf
 
 
 ddclient.conf:
