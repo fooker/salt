@@ -1,0 +1,3 @@
+opennms:
+  snmp:
+    username: opennms

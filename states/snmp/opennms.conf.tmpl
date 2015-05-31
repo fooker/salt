@@ -1,0 +1,2 @@
+rouser {{ pillar['opennms']['snmp']['username'] }}
+createUser {{ pillar['opennms']['snmp']['username'] }} SHA {{ pillar['opennms']['snmp']['password'] }}

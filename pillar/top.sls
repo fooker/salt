@@ -5,6 +5,8 @@ base:
     - sysctl
     - tinc
     - private.tinc
+    - opennms
+    - private.opennms
     - backup
 
   '{{ grains.id }}':
