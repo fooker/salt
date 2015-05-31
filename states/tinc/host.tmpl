@@ -1,4 +1,10 @@
 Address={{ pillar['addresses'][host]['ext']['hostname'] }}
 Port={{ pillar['tinc']['port'] }}
 
+{% if False and 'bridged' in pillar['tinc']['hosts'][host] and pillar['tinc']['hosts'][host]['bridged'] -%}
+Subnet={{ pillar['networks']['mngt']['network'] }}/{{ pillar['networks']['mngt']['netmask'] }}
+{%- else -%}
+Subnet={{ pillar['addresses'][host]['int']['ip4']['mngt']['address'] }}
+{%- endif %}
+
 {{ pillar['tinc']['hosts'][host]['pub'] }}

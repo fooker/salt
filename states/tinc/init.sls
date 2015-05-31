@@ -1,4 +1,4 @@
-{% set instance = 'mngt.int.open-desk.net' %}
+{% set instance = 'mngt' %}
 
 tinc:
   pkg:
@@ -20,7 +20,7 @@ tinc.conf:
     - name: /etc/tinc/{{ instance }}/tinc.conf
     - source: salt://tinc/tinc.conf.tmpl
     - context:
-        bridged: {{ 'bridged' in pillar['tinc']['hosts'][grains['id']] }}
+        bridged: {{ 'bridged' in pillar['tinc']['hosts'][grains['id']] and pillar['tinc']['hosts'][grains['id']]['bridged'] }}
     - template: jinja
     - makedirs: True
 
@@ -75,7 +75,7 @@ tinc.key:
 tinc.host.{{ name }}:
   file:
     - managed
-    - name: /etc/tinc/{{ instance }}/hosts/{{ name }}
+    - name: /etc/tinc/{{ instance }}/hosts/{{ name | replace('-', '_') }}
     - source: salt://tinc/host.tmpl
     - context:
         host: {{ name }}
