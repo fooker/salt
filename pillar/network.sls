@@ -129,7 +129,7 @@ addresses:
       ip4:
         address: 37.120.172.185
         netmask: 22
-        gateway: 37.120.160.1
+        gateway: 37.120.172.1
   south-zitadelle:
     int:
       mac: ~
@@ -141,7 +141,7 @@ addresses:
       ip4:
         address: 37.120.172.177
         netmask: 22
-        gateway: 37.120.160.1
+        gateway: 37.120.172.1
 
 domain:
   name: open-desk.net
