@@ -1,0 +1,16 @@
+# Check every 300 seconds
+
+daemon=300
+# Use ssl-support.
+ssl=yes
+
+# Update via web
+use=web, web=https://{{ pillar['ddclient']['provider'] }}/nic/ip
+
+# Define hostname
+protocol=noip, \
+server={{ pillar['ddclient']['provider'] }}, \
+login={{ pillar['ddclient']['username'] }}, \
+password={{ pillar['ddclient']['password'] }} \
+{{ pillar['ddclient']['hostname'] }}
+

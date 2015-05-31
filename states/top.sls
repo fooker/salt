@@ -27,6 +27,7 @@ base:
 #    - router.netboot
     - router.ffx
     - router.vnstat
+    - router.ddclient
 
   'brueckenkopf':
     - salt.master
