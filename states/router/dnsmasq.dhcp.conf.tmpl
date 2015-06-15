@@ -14,9 +14,9 @@ dhcp-option=option:mtu,9000
 
 # Declare static addresses
 {%- for hostname, host in pillar['addresses'].items() %}
-{%- if host['int']['mac'] %}
 {%- for netname, net in host['int']['ip4'].items() %}
-dhcp-host={{ host['int']['mac'] }},{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }},{{ net['address'] }},infinite
-{%- endfor %}
+{%- if net['mac'] %}
+dhcp-host={{ net['mac'] }},{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }},{{ net['address'] }},infinite
 {% endif %}
+{%- endfor %}
 {%- endfor %}

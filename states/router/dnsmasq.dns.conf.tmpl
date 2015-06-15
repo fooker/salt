@@ -1,6 +1,6 @@
 # Specify internal domain
 domain={{ pillar['domain']['name'] }}
-local=/{{ pillar['domain']['name'] }}/
+local=/int.{{ pillar['domain']['name'] }}/
 
 # Do not read /etc/hosts but read hosts from /etc/dnsmasq.hosts
 no-hosts
@@ -21,5 +21,6 @@ dhcp-generate-names
 # Do not get upstream DNS servers from /etc/resolv.conf (and do not poll it)
 # but use servers definde below
 no-resolv
-server=208.67.222.222
-server=208.67.220.220
+{% for server in pillar['domain']['servers'] -%}
+server={{ server }}
+{% endfor %}

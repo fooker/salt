@@ -10,6 +10,7 @@ base:
     - backup
     - ddclient
     - private.ddclient
+    - private.dsl
 
   '{{ grains.id }}':
     - host.{{ grains.id }}

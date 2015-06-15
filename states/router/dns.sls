@@ -5,7 +5,8 @@ dns.dnsmasq:
   file:
     - managed
     - name: /etc/dnsmasq.conf.d/dns.conf
-    - source: salt://router/dnsmasq.dns.conf
+    - source: salt://router/dnsmasq.dns.conf.tmpl
+    - template: jinja
     - makedirs: True
 
 dns.ferm:

@@ -1,13 +1,13 @@
 table nat
 chain POSTROUTING {
   # Simple PNAT masquerading
-  out-interface ext MASQUERADE;
+  out-interface ppp0 MASQUERADE;
 }
 
 table filter {
   chain FORWARD {
     # Allow forwarding between some networks
-    in-interface (int.mngt int.priv int.open) out-interface ext      ACCEPT;
+    in-interface (int.mngt int.priv int.open) out-interface ppp0     ACCEPT;
     in-interface int.priv                     out-interface int.open ACCEPT;
   
     # Allow related connections to be forwarded back to originator
@@ -25,7 +25,7 @@ table filter {
 table nat
 chain PREROUTING {
 {%- for f in pillar['nat']['forwardings'] %}
-  in-interface ext
+  in-interface ppp0
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   DNAT to {{ f['thost'] }}:{{ f['tport'] }};
 {% endfor -%}
@@ -34,7 +34,7 @@ chain PREROUTING {
 table filter
 chain FORWARD {
 {%- for f in pillar['nat']['forwardings'] %}
-  in-interface ext
+  in-interface ppp0
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   destination {{ f['thost'] }} ACCEPT;
 {% endfor -%}

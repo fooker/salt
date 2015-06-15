@@ -10,4 +10,6 @@ Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
 IPForward=true
 {%- endif %}
 
+{% if grains['role'] != 'gateway' -%}
 DNS=8.8.8.8 8.8.4.4
+{%- endif %}

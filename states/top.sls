@@ -22,9 +22,10 @@ base:
 
   'router':
     - router.gateway
+    - router.dsl
     - router.dns
     - router.dhcp
-#    - router.netboot
+    - router.netboot
     - router.ffx
     - router.vnstat
     - router.ddclient
