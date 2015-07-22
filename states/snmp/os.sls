@@ -8,7 +8,7 @@ snmpd.conf.os:
 snmpd.extends.os.pacman:
   file:
     - managed
-    - name: /etc/snmp/extends/pacman
-    - source: salt://snmp/os.extend.pacman
+    - name: /etc/snmp/extends/os.updates
+    - source: salt://snmp/os.updates.extend.pacman
     - makedirs: True
     - mode: 755

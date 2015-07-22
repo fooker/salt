@@ -1,10 +1,8 @@
 sysctl:
   # Disable IPv6 autoconfiguration
   net.ipv6.conf.default.accept_ra: 0
-  net.ipv6.conf.all.accept_ra: 0
 
   # Enable IPv6 Privacy Extensions
-  net.ipv6.conf.all.use_tempaddr: 2
   net.ipv6.conf.default.use_tempaddr: 2
 
   # Enable source route verification
@@ -27,23 +25,17 @@ sysctl:
 
   # Do not accept ICMP redirects
   net.ipv4.conf.default.accept_redirects: 0
-  net.ipv4.conf.all.accept_redirects: 0
   net.ipv6.conf.default.accept_redirects: 0
-  net.ipv6.conf.all.accept_redirects: 0
 
   # Do not send ICMP redirects
   net.ipv4.conf.default.send_redirects: 0
-  net.ipv4.conf.all.send_redirects: 0
 
   # Disable secure redirects
   net.ipv4.conf.default.secure_redirects: 0
-  net.ipv4.conf.all.secure_redirects: 0
 
   # Do not accept IP source route packets
   net.ipv4.conf.default.accept_source_route: 0
-  net.ipv4.conf.all.accept_source_route: 0
   net.ipv6.conf.default.accept_source_route: 0
-  net.ipv6.conf.all.accept_source_route: 0
 
   # When the kernel panics, reboot in 3 seconds
   kernel.panic: 3

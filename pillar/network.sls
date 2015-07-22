@@ -28,12 +28,8 @@ addresses:
         open:
           mac: 00:0d:b9:34:db:e4
           address: 10.0.42.1
-    ext:
-      hostname: basis.dev.open-desk.net
-      ip4:
-        address: 10.13.37.2
-        netmask: 24
-        gateway: 10.13.37.1
+#    ext:
+#      hostname: basis.dev.open-desk.net
   modem:
     int:
       ip4:
@@ -101,32 +97,26 @@ addresses:
     int:
       ip4:
         priv:
-          mac: 3c:97:0e:16:e2:8b
+          mac: b8:27:eb:1c:32:39
           address: 10.0.23.66
-  amp:
-    int:
-      ip4:
-        mngt:
-          mac: 12:16:03:a6:8a:c9
-          address: 10.0.0.67
-        priv:
-          mac: 00:05:cd:38:94:8a
-          address: 10.0.23.67
   cinema:
     int:
       ip4:
         mngt:
           mac: 7e:ac:2c:53:1f:03
-          address: 10.0.0.68
+          address: 10.0.0.67
+        priv:
+          mac: 00:05:cd:38:94:8a
+          address: 10.0.23.67
   paper:
     int:
       ip4:
         mngt:
           mac: fa:cc:94:3d:a7:81
-          address: 10.0.0.69
+          address: 10.0.0.68
         priv:
           mac: 12:57:94:84:1f:46
-          address: 10.0.23.69
+          address: 10.0.23.68
   r4g9:
     int:
       ip4:

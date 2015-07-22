@@ -7,3 +7,4 @@ tools:
       - vnstat
       - screen
       - less
+      - vim

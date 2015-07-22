@@ -5,7 +5,7 @@ Name=int.priv
 [Network]
 Address={{ pillar['addresses'][grains['id']]['int']['ip4']['priv']['address'] }}/{{ pillar['networks']['priv']['netmask'] }}
 
-{% if pillar['addresses'][grains['id']]['int']['ip4']['priv']['address'] != pillar['networks']['priv']['gateway'] -%}
+{% if grains['role'] != 'gateway' and 'ext' not in pillar['addresses'][grains['id']] and 'mngt' not in pillar['addresses'][grains['id']]['int']['ip4'] -%}
 Gateway={{ pillar['networks']['priv']['gateway'] }}
 {%- endif %}
 

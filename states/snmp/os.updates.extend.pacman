@@ -1,0 +1,22 @@
+#! /bin/bash
+
+CACHE_FILE='/var/cache/snmp.os.updates'
+
+# Refreshthe list of outstanding updates if required
+if [[ ! -e "${CACHE_FILE}" ]] || \
+   [[ $(( $(date '+%s') - $(date '+%s' -r "${CACHE_FILE}") )) -gt $(( 60 * 60 )) ]]; then
+	# Refresh the database
+	/usr/bin/pacman -Sy > /dev/null
+	
+	# Cache the number list of outstanding packages
+	/usr/bin/pacman -Qu > "${CACHE_FILE}"
+fi
+
+# Print the number of outstanding updates
+cat "${CACHE_FILE}" | wc -l
+
+# If updates are available exit accordingly
+[[ -s "${CACHE_FILE}" ]] && exit 1
+
+# Everything is fine
+exit 0

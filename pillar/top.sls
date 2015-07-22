@@ -1,16 +1,17 @@
 base:
   '*':
+    - sysctl
     - network
     - ssh
-    - sysctl
     - tinc
     - private.tinc
     - opennms
     - private.opennms
     - backup
-    - ddclient
+
+  'router':
+    - forwardings
     - private.ddclient
     - private.dsl
-
-  '{{ grains.id }}':
-    - host.{{ grains.id }}
+    - ddclient
+    - locums

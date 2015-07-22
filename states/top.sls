@@ -10,6 +10,7 @@ base:
     - snmp.sys
     - snmp.os
     - snmp.opennms
+#    - snmp.lldp
 
     - ssh
 
@@ -25,10 +26,12 @@ base:
     - router.dsl
     - router.dns
     - router.dhcp
+    - router.ntp
     - router.netboot
-    - router.ffx
+#    - router.ffx
     - router.vnstat
     - router.ddclient
+    - router.locums
 
   'brueckenkopf':
     - salt.master

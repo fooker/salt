@@ -24,7 +24,7 @@ table filter {
 
 table nat
 chain PREROUTING {
-{%- for f in pillar['nat']['forwardings'] %}
+{%- for f in pillar['forwardings'][grains['id']] %}
   in-interface ppp0
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   DNAT to {{ f['thost'] }}:{{ f['tport'] }};
@@ -33,7 +33,7 @@ chain PREROUTING {
 
 table filter
 chain FORWARD {
-{%- for f in pillar['nat']['forwardings'] %}
+{%- for f in pillar['forwardings'][grains['id']] %}
   in-interface ppp0
   proto {{ f['proto'] }} dport {{ f['dport'] }}
   destination {{ f['thost'] }} ACCEPT;
