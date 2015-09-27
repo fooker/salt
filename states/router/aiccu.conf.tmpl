@@ -1,0 +1,14 @@
+username {{ pillar['aiccu']['username'] }}
+password {{ pillar['aiccu']['password'] }}
+
+tunnel_id {{ pillar['aiccu']['tunnel'] }}
+
+ipv6_interface ext.sixxs
+
+verbose true
+daemonize true
+automatic true
+
+requiretls true
+
+behindnat false

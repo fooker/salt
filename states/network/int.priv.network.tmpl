@@ -3,10 +3,16 @@ Name=int.priv
 
 
 [Network]
-Address={{ pillar['addresses'][grains['id']]['int']['ip4']['priv']['address'] }}/{{ pillar['networks']['priv']['netmask'] }}
+Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip4'] }}/{{ pillar['networks']['priv']['ip4']['netmask'] }}
+Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip6'] }}/{{ pillar['networks']['priv']['ip6']['netmask'] }}
 
-{% if grains['role'] != 'gateway' and 'ext' not in pillar['addresses'][grains['id']] and 'mngt' not in pillar['addresses'][grains['id']]['int']['ip4'] -%}
-Gateway={{ pillar['networks']['priv']['gateway'] }}
+{% if grains['role'] == 'gateway' -%}
+Address=fe80::1/64
+{%- endif %}
+
+{% if grains['role'] != 'gateway' and 'ext' not in pillar['addresses'][grains['id']] and 'mngt' not in pillar['addresses'][grains['id']]['int'] -%}
+Gateway={{ pillar['networks']['priv']['ip4']['gateway'] }}
+Gateway={{ pillar['networks']['priv']['ip6']['gateway'] }}
 {%- endif %}
 
 {% if grains['role'] == 'gateway' -%}

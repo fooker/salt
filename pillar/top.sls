@@ -11,7 +11,8 @@ base:
 
   'router':
     - forwardings
-    - private.ddclient
     - private.dsl
+    - private.aiccu
+    - private.ddclient
     - ddclient
     - locums

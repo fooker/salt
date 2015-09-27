@@ -1,10 +1,6 @@
-locums:
-  cinema:
-    nets:
-      - mngt
-    devs:
-      - projector
-  paper:
-    nets:
-      - mngt
-      - priv
+locums: {}
+#  cinema:
+#    nets:
+#      - mngt
+#    devs:
+#      - projector

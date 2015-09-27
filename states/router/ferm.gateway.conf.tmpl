@@ -1,42 +1,45 @@
+domain ip
 table nat
 chain POSTROUTING {
   # Simple PNAT masquerading
   out-interface ppp0 MASQUERADE;
 }
 
+domain (ip ip6)
 table filter {
   chain FORWARD {
     # Allow forwarding between some networks
-    in-interface (int.mngt int.priv int.open) out-interface ppp0     ACCEPT;
-    in-interface int.priv                     out-interface int.open ACCEPT;
-  
+    in-interface (int.mngt int.priv int.open) out-interface ppp0      ACCEPT;
+    in-interface (int.mngt int.priv int.open) out-interface ext.sixxs ACCEPT;
+    in-interface int.priv                     out-interface int.open  ACCEPT;
+
     # Allow related connections to be forwarded back to originator
     mod conntrack ctstate INVALID DROP;
     mod conntrack ctstate (ESTABLISHED RELATED) ACCEPT;
   }
-  
+
   chain INPUT {
-  
     # Allow access to all service from internal private and management
     in-interface (int.priv int.mngt) ACCEPT;
   }
 }
 
-table nat
-chain PREROUTING {
-{%- for f in pillar['forwardings'][grains['id']] %}
-  in-interface ppp0
-  proto {{ f['proto'] }} dport {{ f['dport'] }}
-  DNAT to {{ f['thost'] }}:{{ f['tport'] }};
-{% endfor -%}
-}
 
-table filter
-chain FORWARD {
-{%- for f in pillar['forwardings'][grains['id']] %}
-  in-interface ppp0
-  proto {{ f['proto'] }} dport {{ f['dport'] }}
-  destination {{ f['thost'] }} ACCEPT;
-{% endfor -%}
+domain ip {
+  {%- for f in pillar['forwardings'][grains['id']] %}
+  table nat
+  chain PREROUTING {
+    in-interface ppp0
+    proto {{ f['proto'] }} dport {{ f['dport'] }}
+    DNAT to {{ f['thost'] }}:{{ f['tport'] }};
+  }
+
+  table filter
+  chain FORWARD {
+    in-interface ppp0
+    proto {{ f['proto'] }} dport {{ f['dport'] }}
+    destination {{ f['thost'] }} ACCEPT;
+  }
+  {% endfor -%}
 }
 

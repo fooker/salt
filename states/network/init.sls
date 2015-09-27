@@ -41,7 +41,7 @@ network.ext.network:
 {% endif %}
 
 
-{% if 'mngt' in pillar['addresses'][grains['id']]['int']['ip4'] %}
+{% if 'mngt' in pillar['addresses'][grains['id']]['int'] %}
 network.int.mngt.network:
   file:
     - managed
@@ -51,7 +51,7 @@ network.int.mngt.network:
 {% endif %}
 
 
-{% if 'priv' in pillar['addresses'][grains['id']]['int']['ip4'] %}
+{% if 'priv' in pillar['addresses'][grains['id']]['int'] %}
 network.int.priv.network:
   file:
     - managed
@@ -61,7 +61,7 @@ network.int.priv.network:
 {% endif %}
 
 
-{% if 'open' in pillar['addresses'][grains['id']]['int']['ip4'] %}
+{% if 'open' in pillar['addresses'][grains['id']]['int'] %}
 network.int.open.network:
   file:
     - managed

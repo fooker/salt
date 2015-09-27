@@ -1,134 +1,136 @@
 networks:
   mngt:
-    network: 10.0.0.0
-    netmask: 24
-    gateway: 10.0.0.1
-    dynamic: [10.0.0.128, 10.0.0.253]
+    ip4:
+      network: 10.0.0.0
+      netmask: 24
+      gateway: 10.0.0.1
+      dynamic: [10.0.0.128, 10.0.0.253]
+    ip6:
+      network: '2001:4dd0:ae46:1::'
+      netmask: 64
+      gateway: 2001:4dd0:ae46:1::1
   priv:
-    network: 10.0.23.0
-    netmask: 24
-    gateway: 10.0.23.1
-    dynamic: [10.0.23.128, 10.0.23.253]
+    ip4:
+      network: 10.0.23.0
+      netmask: 24
+      gateway: 10.0.23.1
+      dynamic: [10.0.23.128, 10.0.23.253]
+    ip6:
+      network: '2001:4dd0:ae46:2::'
+      netmask: 64
+      gateway: 2001:4dd0:ae46:2::1
   open:
-    network: 10.0.42.0
-    netmask: 24
-    gateway: 10.0.42.1
-    dynamic: [10.0.42.128, 10.0.42.253]
+    ip4:
+      network: 10.0.42.0
+      netmask: 24
+      gateway: 10.0.42.1
+      dynamic: [10.0.42.128, 10.0.42.253]
+    ip6:
+      network: '2001:4dd0:ae46:3::'
+      netmask: 64
+      gateway: 2001:4dd0:ae46:3::1
 
 addresses:
   router:
     int:
-      ip4:
-        mngt:
-          mac: 00:0d:b9:34:db:e4
-          address: 10.0.0.1
-        priv:
-          mac: 00:0d:b9:34:db:e4
-          address: 10.0.23.1
-        open:
-          mac: 00:0d:b9:34:db:e4
-          address: 10.0.42.1
-#    ext:
-#      hostname: basis.dev.open-desk.net
+      mngt:
+        mac: 00:0d:b9:34:db:e4
+        ip4: 10.0.0.1
+        ip6: 2001:4dd0:ae46:1::1
+      priv:
+        mac: 00:0d:b9:34:db:e4
+        ip4: 10.0.23.1
+        ip6: 2001:4dd0:ae46:2::1
+      open:
+        mac: 00:0d:b9:34:db:e4
+        ip4: 10.0.42.1
+        ip6: 2001:4dd0:ae46:3::1
   modem:
     int:
-      ip4:
-        mngt:
-          mac: 00:1d:aa:87:58:ac
-          address: 10.0.0.2
+      mngt:
+        mac: 00:1d:aa:87:58:ac
+        ip4: 10.0.0.2
+        ip6: 2001:4dd0:ae46:1::2
   phone:
     int:
-      ip4:
-        mngt:
-          mac: 00:e1:6d:b8:3c:53
-          address: 10.0.0.3
+      mngt:
+        mac: 00:e1:6d:b8:3c:53
+        ip4: 10.0.0.3
+        ip6: 2001:4dd0:ae46:1::3
   br1:
     int:
-      ip4:
-        mngt:
-          mac: 58:0a:20:9a:11:72
-          address: 10.0.0.16
+      mngt:
+        mac: 58:0a:20:9a:11:72
+        ip4: 10.0.0.16
+        ip6: 2001:4dd0:ae46:1::10
   br2:
     int:
-      ip4:
-        mngt:
-          mac: 08:cc:68:43:35:a2
-          address: 10.0.0.17
+      mngt:
+        mac: 08:cc:68:43:35:a2
+        ip4: 10.0.0.17
+        ip6: 2001:4dd0:ae46:1::11
   br3:
     int:
-      ip4:
-        mngt:
-          mac: 64:d8:14:5e:c4:81
-          address: 10.0.0.18
+      mngt:
+        mac: 64:d8:14:5e:c4:81
+        ip4: 10.0.0.18
+        ip6: 2001:4dd0:ae46:1::12
   ap1:
     int:
-      ip4:
-        mngt:
-          mac: 18:9c:5d:3f:3c:60
-          address: 10.0.0.32
+      mngt:
+        mac: 04:18:d6:80:2d:b7
+        ip4: 10.0.0.32
+        ip6: 2001:4dd0:ae46:1::20
   ap2:
     int:
-      ip4:
-        mngt:
-          mac: 18:9c:5d:3f:82:00
-          address: 10.0.0.33
-  ap:
-    int:
-      ip4:
-        mngt:
-          mac: ~
-          address: 10.0.0.63
+      mngt:
+        mac: 04:18:d6:80:2c:ff
+        ip4: 10.0.0.33
+        ip6: 2001:4dd0:ae46:1::21
   nas:
     int:
-      ip4:
-        mngt:
-          mac: 00:d0:b8:1e:cd:00
-          address: 10.0.0.64
-        priv:
-          mac: 00:d0:b8:1e:cd:00
-          address: 10.0.23.64
+      mngt:
+        mac: 00:d0:b8:1e:cd:00
+        ip4: 10.0.0.64
+        ip6: 2001:4dd0:ae46:1::40
+      priv:
+        mac: 00:d0:b8:1e:cd:00
+        ip4: 10.0.23.64
+        ip6: 2001:4dd0:ae46:2::40
   ps4:
     int:
-      ip4:
-        priv:
-          mac: 10:ae:60:7b:e0:a7
-          address: 10.0.23.65
+      priv:
+        mac: 00:d9:d1:09:19:fb
+        ip4: 10.0.23.65
+        ip6: 2001:4dd0:ae46:2::41
   foopi:
     int:
-      ip4:
-        priv:
-          mac: b8:27:eb:1c:32:39
-          address: 10.0.23.66
+      priv:
+        mac: b8:27:eb:1c:32:39
+        ip4: 10.0.23.66
+        ip6: 2001:4dd0:ae46:2::42
   cinema:
     int:
-      ip4:
-        mngt:
-          mac: 7e:ac:2c:53:1f:03
-          address: 10.0.0.67
-        priv:
-          mac: 00:05:cd:38:94:8a
-          address: 10.0.23.67
-  paper:
+      mngt:
+        mac: 7e:ac:2c:53:1f:03
+        ip4: 10.0.0.67
+        ip6: 2001:4dd0:ae46:1::43
+      priv:
+        mac: 00:05:cd:38:94:8a
+        ip4: 10.0.23.67
+        ip6: 2001:4dd0:ae46:2::43
+  mobile:
     int:
-      ip4:
-        mngt:
-          mac: fa:cc:94:3d:a7:81
-          address: 10.0.0.68
-        priv:
-          mac: 12:57:94:84:1f:46
-          address: 10.0.23.68
-  r4g9:
-    int:
-      ip4:
-        priv:
-          mac: 3c:97:0e:16:e2:8b
-          address: 10.0.23.127
+      priv:
+        mac: 68:f7:28:b4:43:61
+        ip4: 10.0.23.127
+        ip6: 2001:4dd0:ae46:2::7f
   brueckenkopf:
     int:
-      ip4:
-        mngt:
-          mac: 00:50:56:b3:4b:d0
-          address: 10.0.0.254
+      mngt:
+        mac: 00:50:56:b3:4b:d0
+        ip4: 10.0.0.254
+        ip6: 2001:4dd0:ae46:1::fe
     ext:
       hostname: brueckenkopf.dev.open-desk.net
       ip4:
@@ -137,10 +139,10 @@ addresses:
         gateway: 193.174.29.1
   bunker:
     int:
-      ip4:
-        mngt:
-          mac: ~
-          address: 10.0.0.94
+      mngt:
+        mac: ~
+        ip4: 10.0.0.94
+        ip6: 2001:4dd0:ae46:1::5e
     ext:
       hostname: bunker.dev.open-desk.net
       ip4:
@@ -149,10 +151,10 @@ addresses:
         gateway: 37.120.160.1
   north-zitadelle:
     int:
-      ip4:
-        mngt:
-          mac: ~
-          address: 10.0.0.95
+      mngt:
+        mac: ~
+        ip4: 10.0.0.95
+        ip6: 2001:4dd0:ae46:1::5f
     ext:
       hostname: north.zitadelle.dev.open-desk.net
       ip4:
@@ -161,10 +163,10 @@ addresses:
         gateway: 37.120.172.1
   south-zitadelle:
     int:
-      ip4:
-        mngt:
-          mac: ~
-          address: 10.0.0.96
+      mngt:
+        mac: ~
+        ip4: 10.0.0.96
+        ip6: 2001:4dd0:ae46:1::60
     ext:
       hostname: south.zitadelle.dev.open-desk.net
       ip4:
@@ -175,8 +177,8 @@ addresses:
 domain:
   name: open-desk.net
   servers:
-    - 185.16.40.143
-    - 87.216.170.85
-    - 109.69.8.34
-    - 195.34.136.145
+    - 78.47.34.12
+    - 5.9.49.12
+    - 2a01:4f8:192:2393::f023:90af
+    - 2a01:6f0:ffff:42::53
 

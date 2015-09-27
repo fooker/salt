@@ -24,14 +24,15 @@ base:
   'router':
     - router.gateway
     - router.dsl
+    - router.aiccu
     - router.dns
     - router.dhcp
     - router.ntp
     - router.netboot
-#    - router.ffx
     - router.vnstat
     - router.ddclient
-    - router.locums
+#    - locums
+#    - openvpn
 
   'brueckenkopf':
     - salt.master

@@ -19,7 +19,7 @@ locums.{{ locum }}.lxc.conf:
   file:
     - managed
     - name: /var/lib/lxc/{{ locum }}/config
-    - source: salt://router/locums.lxc.conf.tmpl
+    - source: salt://locums/lxc.conf.tmpl
     - makedirs: True
     - template: jinja
     - context:
