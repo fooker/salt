@@ -8,7 +8,7 @@ networks:
     ip6:
       network: '2001:4dd0:ae46:1::'
       netmask: 64
-      gateway: 2001:4dd0:ae46:1::1
+      gateway: '2001:4dd0:ae46:1::1'
   priv:
     ip4:
       network: 10.0.23.0
@@ -16,9 +16,9 @@ networks:
       gateway: 10.0.23.1
       dynamic: [10.0.23.128, 10.0.23.253]
     ip6:
-      network: '2001:4dd0:ae46:2::'
+      network: '2001:4dd0:ae46:23::'
       netmask: 64
-      gateway: 2001:4dd0:ae46:2::1
+      gateway: '2001:4dd0:ae46:23::1'
   open:
     ip4:
       network: 10.0.42.0
@@ -26,9 +26,9 @@ networks:
       gateway: 10.0.42.1
       dynamic: [10.0.42.128, 10.0.42.253]
     ip6:
-      network: '2001:4dd0:ae46:3::'
+      network: '2001:4dd0:ae46:42::'
       netmask: 64
-      gateway: 2001:4dd0:ae46:3::1
+      gateway: '2001:4dd0:ae46:42::1'
 
 addresses:
   router:
@@ -36,15 +36,15 @@ addresses:
       mngt:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.0.1
-        ip6: 2001:4dd0:ae46:1::1
+        ip6: 2001:4dd0:ae46:0::1
       priv:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.23.1
-        ip6: 2001:4dd0:ae46:2::1
+        ip6: 2001:4dd0:ae46:23::1
       open:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.42.1
-        ip6: 2001:4dd0:ae46:3::1
+        ip6: 2001:4dd0:ae46:42::1
   modem:
     int:
       mngt:
