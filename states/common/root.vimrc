@@ -1,3 +1,5 @@
+""" This file is managed by saltstack - any changes will be overwritten """
+
 " Set a cool color scheme
 colorscheme desert
 

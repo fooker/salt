@@ -1,2 +1,4 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
 rouser {{ pillar['opennms']['snmp']['username'] }}
 createUser {{ pillar['opennms']['snmp']['username'] }} SHA {{ pillar['opennms']['snmp']['password'] }}

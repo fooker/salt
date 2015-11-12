@@ -1,3 +1,5 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
 {% if 'ext' in pillar['addresses'][host] and 'hostname' in pillar['addresses'][host]['ext'] -%}
 Address={{ pillar['addresses'][host]['ext']['hostname'] }}
 Port={{ pillar['tinc']['port'] }}

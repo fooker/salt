@@ -1,5 +1,8 @@
-#! /bin/bash
+#!/bin/bash
 
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Define the cache file
 CACHE_FILE='/var/cache/snmp.os.updates'
 
 # Refreshthe list of outstanding updates if required
