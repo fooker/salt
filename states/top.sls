@@ -38,6 +38,9 @@ base:
     - match: compound
     - common.ntp
 
+  '*-zitadelle':
+    - mariadb
+
   '* and not *-zitadelle':
     - match: compound
     - common.ssmtp

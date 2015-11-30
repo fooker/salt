@@ -1,0 +1,72 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Client configuration
+[client]
+port					= 3306
+socket					= /run/mysqld/mysqld.sock
+
+
+# Server configuration
+[server]
+port					= 3306
+socket					= /run/mysqld/mysqld.sock
+
+server-id				= {{ grains['server_id'] }}
+report_host				= {{ grains['id'] }}
+
+default-storage-engine		= InnoDB
+innodb_autoinc_lock_mode	= 2
+innodb_doublewrite			= 1
+query_cache_size			= 0
+
+binlog_format				= ROW
+expire_logs_days			= 7
+max_binlog_size				= 500M
+
+binlog_ignore_db			= mysql
+skip-external-locking
+key_buffer_size			= 16M
+max_allowed_packet		= 1M
+table_open_cache		= 64
+sort_buffer_size		= 512K
+net_buffer_length		= 8K
+read_buffer_size		= 256K
+read_rnd_buffer_size	= 512K
+myisam_sort_buffer_size	= 8M
+
+#init_connect			= 'SET collation_connection = utf8_general_ci,NAMES utf8'
+#collation_server		= utf8_general_ci
+#character_set_client	= utf8
+#character_set_server	= utf8
+
+wsrep_on				= on
+wsrep_provider			= /usr/lib/libgalera_smm.so
+wsrep_node_address		= {{ pillar['addresses'][grains['id']]['int']['mngt']['ip4'] }}
+wsrep_node_name			= {{ grains['id'] }}
+wsrep_cluster_name		= open-desk
+wsrep_cluster_address	= gcomm://{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
+  {{ pillar['addresses'][node]['int']['mngt']['ip4'] }}
+  {%- if not loop.last -%},{%- endif -%}
+{%- endfor %}
+wsrep_sst_method		= rsync
+
+
+# Tools configuration
+[mysqldump]
+quick
+max_allowed_packet		= 16M
+
+
+[mysql]
+no-auto-rehash
+
+
+[myisamchk]
+key_buffer_size			= 20M
+sort_buffer_size		= 20M
+read_buffer				= 2M
+write_buffer			= 2M
+
+
+[mysqlhotcopy]
+interactive-timeout

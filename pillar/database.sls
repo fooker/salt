@@ -1,0 +1,3 @@
+database:
+  replication:
+    username: replicator

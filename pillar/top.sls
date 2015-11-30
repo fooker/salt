@@ -8,6 +8,7 @@ base:
     - opennms
     - private.opennms
     - backup
+    - cluster
 
   'router':
     - forwardings
@@ -16,3 +17,6 @@ base:
     - private.ddclient
     - ddclient
     - locums
+
+  '*-zitadelle':
+    - database
