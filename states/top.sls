@@ -49,5 +49,3 @@ base:
     - salt.master
     - opennms
 
-#  'bunker':
-#    - rsnapshot
