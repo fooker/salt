@@ -34,6 +34,10 @@ base:
 #    - locums
 #    - openvpn
 
+  '* and not router':
+    - match: compound
+    - common.ntp
+
   'brueckenkopf':
     - salt.master
     - opennms

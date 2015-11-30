@@ -5,7 +5,7 @@ dsl.ppp:
   file:
     - managed
     - name: /etc/systemd/system/ppp@uplink.service.d/restart.conf
-    - content: |
+    - contents: |
         [Service]
         Restart=on-failure
         RestartSec=30s
