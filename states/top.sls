@@ -38,6 +38,10 @@ base:
     - match: compound
     - common.ntp
 
+  '* and not *-zitadelle':
+    - match: compound
+    - common.ssmtp
+
   'brueckenkopf':
     - salt.master
     - opennms
