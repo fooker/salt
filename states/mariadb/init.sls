@@ -61,6 +61,13 @@ mariadb.auth.local:
     - allow_passwordless: True
     - unix_socket: True
 
+mariadb.auth.monitoring:
+  mysql_user:
+    - present
+    - name: monitoring
+    - password: "{{ pillar['database']['monitoring']['password'] }}"
+    - host: {{ pillar['addresses'][pillar['database']['monitoring']['host']]['int']['mngt']['ip4'] }}
+
 mariadb.iptables:
   file:
     - managed

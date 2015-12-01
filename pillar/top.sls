@@ -20,3 +20,4 @@ base:
 
   '*-zitadelle':
     - database
+    - private.database
