@@ -8,7 +8,7 @@ server 2.de.pool.ntp.org iburst
 server 3.de.pool.ntp.org iburst
 {%- else -%}
 # Use the router as NTP server
-server {{ pillar['addresses']['router']['int']['10.0.23.1'] }} iburst
+server {{ pillar['addresses']['router']['int']['priv']['ip4'] }} iburst
 {%- endif %}
 
 # Remember local drift
