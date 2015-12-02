@@ -21,7 +21,5 @@ Gateway={{ pillar['networks']['mngt']['ip6']['gateway'] }}
 IPForward=true
 {%- endif %}
 
-{% if 'ext' not in pillar['addresses'][grains['id']] or grains['role'] == 'gateway' -%}
 DNS={{ pillar['networks']['mngt']['ip4']['gateway'] }}
 DNS={{ pillar['networks']['mngt']['ip6']['gateway'] }}
-{%- endif %}

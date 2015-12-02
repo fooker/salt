@@ -45,8 +45,7 @@ wsrep_node_address		= {{ pillar['addresses'][grains['id']]['int']['mngt']['ip4']
 wsrep_node_name			= {{ grains['id'] }}
 wsrep_cluster_name		= open-desk
 wsrep_cluster_address	= gcomm://{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
-  {{ pillar['addresses'][node]['int']['mngt']['ip4'] }}
-  {%- if not loop.last -%},{%- endif -%}
+  {{ node }}{%- if not loop.last -%},{%- endif -%}
 {%- endfor %}
 wsrep_sst_method		= rsync
 
