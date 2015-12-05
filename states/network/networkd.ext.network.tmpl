@@ -4,10 +4,14 @@
 Name=ext
 
 
-[Network]
+[Address]
 Address={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}/{{ pillar['addresses'][grains['id']]['ext']['ip4']['netmask'] }}
-Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
 
+[Route]
+Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
+Metric=100
+
+[Network]
 {% if grains['role'] == 'gateway' -%}
 IPForward=true
 {%- endif %}

@@ -96,19 +96,19 @@ addresses:
       priv:
         mac: 00:d0:b8:1e:cd:00
         ip4: 10.0.23.64
-        ip6: 2001:4dd0:ae46:2::40
+        ip6: 2001:4dd0:ae46:23::40
   ps4:
     int:
       priv:
         mac: 00:d9:d1:09:19:fb
         ip4: 10.0.23.65
-        ip6: 2001:4dd0:ae46:2::41
+        ip6: 2001:4dd0:ae46:23::41
   foopi:
     int:
       priv:
         mac: b8:27:eb:1c:32:39
         ip4: 10.0.23.66
-        ip6: 2001:4dd0:ae46:2::42
+        ip6: 2001:4dd0:ae46:23::42
   cinema:
     int:
       mngt:
@@ -118,13 +118,13 @@ addresses:
       priv:
         mac: 00:05:cd:38:94:8a
         ip4: 10.0.23.67
-        ip6: 2001:4dd0:ae46:2::43
+        ip6: 2001:4dd0:ae46:23::43
   mobile:
     int:
       priv:
         mac: 68:f7:28:b4:43:61
         ip4: 10.0.23.127
-        ip6: 2001:4dd0:ae46:2::7f
+        ip6: 2001:4dd0:ae46:23::7f
   brueckenkopf:
     int:
       mngt:

@@ -4,19 +4,28 @@
 Name=int.priv
 
 
-[Network]
+[Address]
 Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip4'] }}/{{ pillar['networks']['priv']['ip4']['netmask'] }}
+
+[Address]
 Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip6'] }}/{{ pillar['networks']['priv']['ip6']['netmask'] }}
 
 {% if grains['role'] == 'gateway' -%}
+[Address]
 Address=fe80::1/64
 {%- endif %}
 
-{% if grains['role'] != 'gateway' and 'ext' not in pillar['addresses'][grains['id']] and 'mngt' not in pillar['addresses'][grains['id']]['int'] -%}
+{% if grains['role'] != 'gateway' -%}
+[Route]
 Gateway={{ pillar['networks']['priv']['ip4']['gateway'] }}
+Metric=200
+
+[Route]
 Gateway={{ pillar['networks']['priv']['ip6']['gateway'] }}
+Metric=200
 {%- endif %}
 
+[Network]
 {% if grains['role'] == 'gateway' -%}
 IPForward=true
 {%- endif %}
