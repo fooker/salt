@@ -27,6 +27,7 @@ base:
     - router.aiccu
     - router.dns
     - router.dhcp
+    - router.radvd
     - router.ntp
     - router.netboot
     - router.vnstat
