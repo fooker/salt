@@ -44,9 +44,7 @@ wsrep_provider			= /usr/lib/libgalera_smm.so
 wsrep_node_address		= {{ pillar['addresses'][grains['id']]['int']['mngt']['ip4'] }}
 wsrep_node_name			= {{ grains['id'] }}
 wsrep_cluster_name		= open-desk
-wsrep_cluster_address	= gcomm://{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
-  {{ node }}{%- if not loop.last -%},{%- endif -%}
-{%- endfor %}
+wsrep_cluster_address	= gcomm://{{ pillar['cluster']['nodes']|reject('equalto', grains['id'])|sort()|join(',') }}
 wsrep_sst_method		= rsync
 
 
