@@ -19,3 +19,5 @@ IPForward=true
 {% if grains['role'] != 'gateway' -%}
 DNS=8.8.8.8 8.8.4.4
 {%- endif %}
+
+IPv6AcceptRouterAdvertisements=yes
