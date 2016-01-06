@@ -1,9 +1,7 @@
 salt-master:
-  pkg:
-    - installed
+  pkg.installed:
     - name: salt-zmq
-  service:
-    - running
+  service.running:
     - enable: True
     - name: salt-master
     - require:
@@ -12,15 +10,13 @@ salt-master:
       - file: /etc/salt/master
 
 salt-master.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/salt/master
     - source: salt://salt/master.conf
     - makedirs: True
 
 salt-master.iptables:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/salt-master.conf
     - source: salt://salt/master.ferm.conf
     - makedirs: True

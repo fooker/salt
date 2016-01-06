@@ -1,9 +1,7 @@
 dnsmasq:
-  pkg:
-    - installed
+  pkg.installed:
     - name: dnsmasq
-  service:
-    - running
+  service.running:
     - enable: True
     - name: dnsmasq
     - require:
@@ -14,23 +12,20 @@ dnsmasq:
       - file: /etc/dnsmasq.conf.d/*
 
 dnsmasq.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/dnsmasq.conf
     - source: salt://router/dnsmasq.conf
     - makedirs: True
 
 dnsmasq.conf.d:
-  file:
-    - directory
+  file.directory:
     - name: /etc/dnsmasq.conf.d
     - makedirs: True
 
 dnsmasq.hosts:
-  file:
-    - managed
+  file.managed:
     - name: /etc/dnsmasq.hosts
     - source: salt://router/dnsmasq.hosts.tmpl
     - makedirs: True
     - template: jinja
-  
+

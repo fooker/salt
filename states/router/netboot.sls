@@ -2,15 +2,13 @@ include:
   - router.dnsmasq
 
 tftp.dnsmasq:
-  file:
-    - managed
+  file.managed:
     - name: /etc/dnsmasq.conf.d/tftp.conf
     - source: salt://router/dnsmasq.tftp.conf
     - makedirs: True
 
 tftp.ferm:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/tftp.conf
     - source: salt://router/ferm.tftp.conf
     - makedirs: True

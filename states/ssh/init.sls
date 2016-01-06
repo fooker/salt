@@ -1,9 +1,7 @@
 sshd:
-  pkg:
-    - installed
+  pkg.installed:
     - name: openssh
-  service:
-    - running
+  service.running:
     - enable: True
     - name: sshd
     - require:
@@ -12,8 +10,7 @@ sshd:
       - file: /etc/ssh/sshd_config
 
 sshd.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ssh/sshd_config
     - source: salt://ssh/sshd.conf.tmpl
     - makedirs: True
@@ -21,16 +18,14 @@ sshd.conf:
 
 {% for owner, key in pillar['ssh']['authorized_keys'].items() %}
 sshd.root.authorized_keys.{{ owner }}:
-  ssh_auth:
-    - present
+  ssh_auth.present:
     - user: root
     - name: {{ key }}
     - comment: {{ owner }}
 {% endfor %}
 
 sshd.iptables:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/sshd.conf
     - source: salt://ssh/ferm.conf
     - makedirs: True

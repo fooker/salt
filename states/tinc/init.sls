@@ -1,11 +1,9 @@
 {% set instance = 'mngt' %}
 
 tinc:
-  pkg:
-    - installed
+  pkg.installed:
     - name: tinc
-  service:
-    - running
+  service.running:
     - enable: True
     - name: 'tincd@{{ instance | replace('-', '\\\\x2d') }}'
     - require:
@@ -15,8 +13,7 @@ tinc:
 
 
 tinc.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/tinc/{{ instance }}/tinc.conf
     - source: salt://tinc/tinc.conf.tmpl
     - context:
@@ -28,8 +25,7 @@ tinc.conf:
 {% if 'bridged' in pillar['tinc']['hosts'][grains['id']] and pillar['tinc']['hosts'][grains['id']]['bridged'] -%}
 
 tinc.netdev:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/40-int.mngt.tinc.netdev
     - source: salt://tinc/netdev.tmpl
     - context:
@@ -39,8 +35,7 @@ tinc.netdev:
 
 
 tinc.network:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/40-int.mngt.tinc.network
     - source: salt://tinc/network.tmpl
     - template: jinja
@@ -49,8 +44,7 @@ tinc.network:
 {%- else -%}
 
 tinc.netdev:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/70-int.mngt.netdev
     - source: salt://tinc/netdev.tmpl
     - context:
@@ -62,8 +56,7 @@ tinc.netdev:
 
 
 tinc.key:
-  file:
-    - managed
+  file.managed:
     - name: /etc/tinc/{{ instance }}/rsa_key.priv
     - contents: |
         {{ pillar['tinc']['hosts'][grains['id']]['priv'] | indent(8) }}
@@ -73,8 +66,7 @@ tinc.key:
 {%- for name, host in pillar['tinc']['hosts'].items() %}
 
 tinc.host.{{ name }}:
-  file:
-    - managed
+  file.managed:
     - name: /etc/tinc/{{ instance }}/hosts/{{ name | replace('-', '_') }}
     - source: salt://tinc/host.tmpl
     - context:
@@ -88,8 +80,7 @@ tinc.host.{{ name }}:
 {%- if 'ext' in pillar['addresses'][grains['id']] and 'hostname' in pillar['addresses'][grains['id']]['ext'] %}
 
 tinc.ferm:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/tinc.conf
     - source: salt://tinc/ferm.conf.tmpl
     - template: jinja

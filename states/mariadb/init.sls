@@ -1,18 +1,15 @@
 mariadb.tools:
-  pkg:
-    - installed
+  pkg.installed:
     - pkgs:
       - mysql-python  # Required to make mysql_* states work
       - lsof
 
 mariadb:
-  pkg:
-    - installed
+  pkg.installed:
     - sources:
       - mariadb: 'http://arch.jensgutermuth.de/testing/os/x86_64/mariadb-10.1.9-2-x86_64.pkg.tar.xz'
       - galera: 'salt://mariadb/galera-25.3.13-1-x86_64.pkg.tar.xz'
-  service:
-    - running
+  service.running:
     - enable: True
     - name: mysqld
     - require:
@@ -23,16 +20,14 @@ mariadb:
       - pkg: mariadb
 
 mariadb.config:
-  file:
-    - managed
+  file.managed:
     - name: /etc/mysql/my.cnf
     - source: salt://mariadb/my.cnf.tmpl
     - makedirs: True
     - template: jinja
 
 mariadb.init.pre:
-  cmd:
-    - run
+  cmd.run:
     - name: mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     - creates: /var/lib/mysql
     - require:
@@ -40,8 +35,7 @@ mariadb.init.pre:
       - file: /etc/mysql/*
 
 mariadb.init.post:
-  mysql_query:
-    - run
+  mysql_query.run:
     - database: mysql
     - query: |
         INSTALL SONAME 'wsrep_info';
@@ -54,23 +48,20 @@ mariadb.auth.local:
   # mysql> INSTALL PLUGIN unix_socket SONAME 'auth_socket';
   # mysql> UPDATE mysql.user SET plugin='unix_socket' WHERE user='root' AND host='localhost';
   # mysql> FLUSH PRIVILEGES;
-  mysql_user:
-    - present
+  mysql_user.present:
     - name: root
     - host: localhost
     - allow_passwordless: True
     - unix_socket: True
 
 mariadb.auth.monitoring:
-  mysql_user:
-    - present
+  mysql_user.present:
     - name: monitoring
     - password: "{{ pillar['database']['monitoring']['password'] }}"
     - host: {{ pillar['addresses'][pillar['database']['monitoring']['host']]['int']['mngt']['ip4'] }}
 
 mariadb.iptables:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/mariadb.conf
     - source: salt://mariadb/ferm.conf
     - makedirs: True

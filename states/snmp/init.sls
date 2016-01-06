@@ -1,9 +1,7 @@
 snmpd:
-  pkg:
-    - installed
+  pkg.installed:
     - name: net-snmp
-  service:
-    - running
+  service.running:
     - enable: True
     - name: snmpd
     - require:
@@ -13,8 +11,7 @@ snmpd:
       - file: /etc/snmp/snmpd.conf.d/*
 
 snmpd.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/snmp/snmpd.conf
     - source: salt://snmp/snmpd.conf.tmpl
     - makedirs: True
@@ -22,8 +19,7 @@ snmpd.conf:
 
 
 snmpd.iptables:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/snmpd.conf
     - source: salt://snmp/ferm.conf
     - makedirs: True

@@ -1,9 +1,7 @@
 ssmtp:
-  pkg:
-    - installed
+  pkg.installed:
     - name: ssmtp
-  file:
-    - managed
+  file.managed:
     - name: /etc/ssmtp/ssmtp.conf
     - source: salt://common/ssmtp.conf.tmpl
     - makedirs: True

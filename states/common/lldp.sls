@@ -1,9 +1,7 @@
 lldpd:
-  pkg:
-    - installed
+  pkg.installed:
     - name: lldpd
-  service:
-    - running
+  service.running:
     - name: lldpd
     - enable: True
     - require:

@@ -1,9 +1,7 @@
 vnstat:
-  pkg:
-    - installed
+  pkg.installed:
     - name: vnstat
-  service:
-    - running
+  service.running:
     - enable: True
     - name: vnstat
     - require:

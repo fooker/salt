@@ -1,9 +1,7 @@
 aiccu:
-  pkg:
-    - installed
+  pkg.installed:
     - name: aiccu
-  service:
-    - running
+  service.running:
     - enable: True
     - name: aiccu
     - require:
@@ -12,8 +10,7 @@ aiccu:
       - file: /etc/aiccu.conf
 
 aiccu.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/aiccu.conf
     - source: salt://router/aiccu.conf.tmpl
     - template: jinja

@@ -1,9 +1,7 @@
 snmpd.lldpd:
-  pkg:
-    - installed
+  pkg.installed:
     - name: lldpd
-  service:
-    - running
+  service.running:
     - name: lldpd
     - enable: True
     - require:
@@ -12,8 +10,7 @@ snmpd.lldpd:
       - file: /etc/systemd/system/lldpd.service.d/snmp.conf
 
 snmpd.lldpd.service:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/system/lldpd.service.d/snmp.conf
     - contents: |
         [Service]

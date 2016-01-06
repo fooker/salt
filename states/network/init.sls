@@ -1,6 +1,5 @@
 network:
-  service:
-    - running
+  service.running:
     - enable: True
     - name: systemd-networkd
     - watch:
@@ -8,13 +7,11 @@ network:
 
 
 resolve:
-  file:
-    - symlink
+  file.symlink:
     - name: /etc/resolv.conf
     - target: /run/systemd/resolve/resolv.conf
     - force: True
-  service:
-    - running
+  service.running:
     - enable: True
     - name: systemd-resolved
     - watch:
@@ -23,8 +20,7 @@ resolve:
 
 
 resolve.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/resolved.conf
     - contents: |
         [Resolve]
@@ -34,8 +30,7 @@ resolve.conf:
 
 {% if 'mngt' in pillar['addresses'][grains['id']]['int'] %}
 network.int.mngt.network:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/60-int.mngt.network
     - source: salt://network/networkd.int.mngt.network.tmpl
     - template: jinja
@@ -44,8 +39,7 @@ network.int.mngt.network:
 
 {% if 'priv' in pillar['addresses'][grains['id']]['int'] %}
 network.int.priv.network:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/60-int.priv.network
     - source: salt://network/networkd.int.priv.network.tmpl
     - template: jinja
@@ -54,8 +48,7 @@ network.int.priv.network:
 
 {% if 'open' in pillar['addresses'][grains['id']]['int'] %}
 network.int.open.network:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/60-int.open.network
     - source: salt://network/networkd.int.open.network.tmpl
     - template: jinja
@@ -64,8 +57,7 @@ network.int.open.network:
 
 {% if 'ext' in pillar['addresses'][grains['id']] %}
 network.ext.network:
-  file:
-    - managed
+  file.managed:
     - name: /etc/systemd/network/70-ext.network
     - source: salt://network/networkd.ext.network.tmpl
     - template: jinja

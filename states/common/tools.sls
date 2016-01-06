@@ -1,6 +1,5 @@
 tools:
-  pkg:
-    - installed
+  pkg.installed:
     - pkgs:
       - htop
       - iotop

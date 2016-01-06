@@ -1,9 +1,7 @@
 ntp:
-  pkg:
-    - installed
+  pkg.installed:
     - name: ntp
-  service:
-    - running
+  service.running:
     - name: ntpd
     - enable: True
     - require:
@@ -12,8 +10,7 @@ ntp:
       - file: /etc/ntp.conf
 
 ntp.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ntp.conf
     - source: salt://common/ntp.conf.tmpl
     - makedirs: True

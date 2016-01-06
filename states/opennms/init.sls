@@ -1,11 +1,9 @@
 
 
 opennms.nginx:
-  pkg:
-    - installed
+  pkg.installed:
     - name: nginx
-  service:
-    - running
+  service.running:
     - enable: True
     - name: nginx
     - require:
@@ -15,15 +13,13 @@ opennms.nginx:
 
 
 opennms.nginx.conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/nginx/nginx.conf
     - source: salt://opennms/nginx.conf
 
 
 opennms.iptables:
-  file:
-    - managed
+  file.managed:
     - name: /etc/ferm.d/opennms.conf
     - source: salt://opennms/ferm.conf
     - makedirs: True
