@@ -1,3 +1,1 @@
 database:
-  replication:
-    username: replicator
