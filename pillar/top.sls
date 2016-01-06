@@ -18,6 +18,7 @@ base:
     - ddclient
     - locums
 
-  '*-zitadelle':
+  '*-zitadelle or bunker':
+    - match: compound
     - database
     - private.database

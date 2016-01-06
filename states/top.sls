@@ -32,8 +32,6 @@ base:
     - router.netboot
     - router.vnstat
     - router.ddclient
-#    - locums
-#    - openvpn
 
   '* and not router':
     - match: compound
@@ -41,6 +39,9 @@ base:
 
   '*-zitadelle':
     - mariadb
+    - glusterfs
+    - web
+    - web.apps.chez_janine
 
   '* and not *-zitadelle':
     - match: compound
@@ -50,3 +51,7 @@ base:
     - salt.master
     - opennms
 
+  'bunker':
+    - mariadb
+    - glusterfs
+    - rsnapshot

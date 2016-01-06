@@ -1,14 +1,22 @@
+include:
+  - cluster
+
 mariadb.tools:
   pkg.installed:
     - pkgs:
       - mysql-python  # Required to make mysql_* states work
       - lsof
 
-mariadb:
+mariadb.server:
+  pkg.installed:
+    - name: mariadb
+
+mariadb.galera:
   pkg.installed:
     - sources:
-      - mariadb: 'http://arch.jensgutermuth.de/testing/os/x86_64/mariadb-10.1.9-2-x86_64.pkg.tar.xz'
       - galera: 'salt://mariadb/galera-25.3.13-1-x86_64.pkg.tar.xz'
+
+mariadb:
   service.running:
     - enable: True
     - name: mysqld
