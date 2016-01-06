@@ -72,7 +72,7 @@ addresses:
   br3:
     int:
       mngt:
-        mac: 64:d8:14:5e:c4:81
+        mac: 9c:57:ad:a0:ad:67
         ip4: 10.0.0.18
         ip6: 2001:4dd0:ae46:1::12
   ap1:
