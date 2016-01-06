@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+  ServerName chez-janine.de
+  ServerAlias www.chez-janine.de
+
+  DocumentRoot /srv/http/chez_janine
+
+  DirectoryIndex index.php
+
+  <Directory /srv/http/chez_janine>
+    Require all granted
+
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^index\.php$ - [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /index.php [L]
+  </Directory>
+
+  <Directory /srv/data/web/chez_janine>
+    Require all granted
+  </Directory>
+
+  php_value open_basedir /srv/http/chez_janine/:/srv/data/web/chez_janine/:/tmp/:/usr/share/pear/
+</VirtualHost>
