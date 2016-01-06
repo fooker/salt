@@ -1,5 +1,7 @@
 base:
   '*':
+    - salt.minion
+
     - common.sysctl
     - common.tools
     - common.root

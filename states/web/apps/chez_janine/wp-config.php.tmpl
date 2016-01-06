@@ -2,7 +2,7 @@
 
 define('DB_NAME',     'chez_janine');
 define('DB_USER',     'chez_janine');
-define('DB_PASSWORD', '{{ pillar['database']['accounts']['chez_janine'] }}');
+define('DB_PASSWORD', '{{ pillar['database']['accounts']['chez_janine']['password'] }}');
 define('DB_HOST',     'localhost');
 define('DB_CHARSET',  'utf8mb4');
 define('DB_COLLATE',  '');

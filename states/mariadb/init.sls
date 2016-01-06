@@ -65,8 +65,8 @@ mariadb.auth.local:
 mariadb.auth.monitoring:
   mysql_user.present:
     - name: monitoring
-    - password: "{{ pillar['database']['monitoring']['password'] }}"
-    - host: {{ pillar['addresses'][pillar['database']['monitoring']['host']]['int']['mngt']['ip4'] }}
+    - password: "{{ pillar['database']['accounts']['monitoring']['password'] }}"
+    - host: {{ pillar['addresses'][pillar['database']['accounts']['monitoring']['host']]['int']['mngt']['ip4'] }}
 
 mariadb.iptables:
   file.managed:

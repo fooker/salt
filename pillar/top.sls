@@ -4,21 +4,17 @@ base:
     - network
     - ssh
     - tinc
-    - private.tinc
     - opennms
-    - private.opennms
     - backup
     - cluster
 
   'router':
     - forwardings
-    - private.dsl
-    - private.aiccu
-    - private.ddclient
+    - dsl
+    - aiccu
     - ddclient
     - locums
 
   '*-zitadelle or bunker':
     - match: compound
     - database
-    - private.database

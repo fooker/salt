@@ -10,8 +10,8 @@ web.apps.chez_janine.mariadb:
       - service: mariadb
   mysql_user.present:
     - name: chez_janine
+    - password: "{{ pillar['database']['accounts']['chez_janine']['password'] }}"
     - host: localhost
-    - password: {{ pillar['database']['accounts']['chez_janine'] }}
     - require:
       - service: mariadb
   mysql_grants.present:
