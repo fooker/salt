@@ -1,0 +1,19 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name=cluster-*
+
+
+[Network]
+# This tunnel is hardly bound to the external interface
+BindCarrier=ext
+
+# Only use Link Local Addressing for v6
+LinkLocalAddressing=ipv6
+
+# Forward to other cluster nodes
+IPForward=yes
+
+# Don't accept any other addresses
+IPv6AcceptRouterAdvertisements=no
+

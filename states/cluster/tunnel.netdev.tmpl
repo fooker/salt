@@ -1,0 +1,14 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[NetDev]
+Description=Cluster Link to {{ remote }}
+
+Name=cluster-{{ pillar['cluster']['nodes'].index(remote) }}
+
+Kind=gre
+
+
+[Tunnel]
+Local={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}
+Remote={{ pillar['addresses'][remote]['ext']['ip4']['address'] }}
+

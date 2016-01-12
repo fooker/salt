@@ -20,4 +20,10 @@ IPForward=true
 DNS=8.8.8.8 8.8.4.4
 {%- endif %}
 
+{% if accumulator is defined and accumulator['tunnels'] is defined -%}
+{% for tunnel in accumulator['tunnels'] -%}
+Tunnel={{ tunnel }}
+{% endfor %}
+{%- endif %}
+
 IPv6AcceptRouterAdvertisements=yes

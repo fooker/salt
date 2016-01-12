@@ -1,0 +1,25 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+config setup
+
+conn %default
+	type=tunnel
+	ikelifetime=60m
+	keylife=20m
+	rekeymargin=3m
+	keyingtries=1
+	authby=secret
+	keyexchange=ikev2
+	mobike=no
+	auto=start
+
+{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
+conn {{ node }}
+	leftid={{ grains['id'] }}
+	left={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}
+	leftsubnet=%dynamic[gre/%any]
+	rightid={{ node }}
+	right={{ pillar['addresses'][node]['ext']['ip4']['address'] }}
+	rightsubnet=%dynamic[gre/%any]
+{% endfor %}
+

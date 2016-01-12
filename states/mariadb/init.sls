@@ -17,6 +17,13 @@ mariadb.galera:
       - galera: 'salt://mariadb/galera-25.3.13-1-x86_64.pkg.tar.xz'
 
 mariadb:
+  file.managed:
+    - name: /etc/systemd/system/mysqld.service.d/net.conf
+    - contents: |
+        [Unit]
+        Wants=tincd@mngt.service
+        After=tincd@mngt.service
+    - makedirs: True
   service.running:
     - enable: True
     - name: mysqld
