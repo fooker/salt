@@ -39,8 +39,3 @@ glusterfs.peers:
 #      - service: glusterfs
 #      - glusterfs: glusterfs.peers
 
-glusterfs.iptables:
-  file.managed:
-    - name: /etc/ferm.d/glusterfs.conf
-    - source: salt://glusterfs/ferm.conf
-    - makedirs: True

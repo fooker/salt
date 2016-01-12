@@ -2,4 +2,7 @@
 
 table filter
 chain INPUT
-proto (tcp udp) dport {{ pillar['tinc']['port'] }} ACCEPT;
+interface ext
+proto (tcp udp)
+dport {{ pillar['tinc']['port'] }}
+ACCEPT;

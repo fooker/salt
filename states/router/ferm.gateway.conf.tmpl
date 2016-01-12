@@ -1,29 +1,23 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
+# Simple PNAT masquerading
 domain ip
 table nat
-chain POSTROUTING {
-  # Simple PNAT masquerading
-  out-interface ppp0 MASQUERADE;
-}
+chain POSTROUTING
+out-interface ppp0
+MASQUERADE;
 
 domain (ip ip6)
-table filter {
-  chain FORWARD {
-    # Allow forwarding between some networks
-    in-interface (int.mngt int.priv int.open) out-interface ppp0      ACCEPT;
-    in-interface (int.mngt int.priv int.open) out-interface ext.sixxs ACCEPT;
-    in-interface int.priv                     out-interface int.open  ACCEPT;
+table filter
+chain FORWARD {
+  # Allow forwarding between some networks
+  in-interface (int.mngt int.priv int.open) out-interface ppp0      ACCEPT;
+  in-interface (int.mngt int.priv int.open) out-interface ext.sixxs ACCEPT;
+  in-interface int.priv                     out-interface int.open  ACCEPT;
 
-    # Allow related connections to be forwarded back to originator
-    mod conntrack ctstate INVALID DROP;
-    mod conntrack ctstate (ESTABLISHED RELATED) ACCEPT;
-  }
-
-  chain INPUT {
-    # Allow access to all service from internal private and management
-    in-interface (int.priv int.mngt) ACCEPT;
-  }
+  # Allow related connections to be forwarded back to originator
+  mod conntrack ctstate INVALID DROP;
+  mod conntrack ctstate (ESTABLISHED RELATED) ACCEPT;
 }
 
 

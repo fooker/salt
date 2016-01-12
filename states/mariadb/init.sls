@@ -75,8 +75,3 @@ mariadb.auth.monitoring:
     - password: "{{ pillar['database']['accounts']['monitoring']['password'] }}"
     - host: {{ pillar['addresses'][pillar['database']['accounts']['monitoring']['host']]['int']['mngt']['ip4'] }}
 
-mariadb.iptables:
-  file.managed:
-    - name: /etc/ferm.d/mariadb.conf
-    - source: salt://mariadb/ferm.conf
-    - makedirs: True
