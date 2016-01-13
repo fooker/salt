@@ -1,5 +1,5 @@
 ddclient:
-  provider: dyn.c4fd.org
+  provider: ddserver.org
   username: fooker
   password: |
     -----BEGIN PGP MESSAGE-----
