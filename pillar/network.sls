@@ -119,6 +119,16 @@ addresses:
         mac: 00:05:cd:38:94:8a
         ip4: 10.0.23.67
         ip6: 2001:4dd0:ae46:23::43
+  scanner:
+    int:
+      mngt:
+        mac: 00:08:a2:09:bd:9e
+        ip4: 10.0.0.68
+        ip6: 2001:4dd0:ae46:1::44
+      priv:
+        mac: 00:08:a2:09:bd:9e
+        ip4: 10.0.23.68
+        ip6: 2001:4dd0:ae46:23::44
   mobile:
     int:
       priv:
