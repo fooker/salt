@@ -34,6 +34,7 @@ base:
     - router.netboot
     - router.vnstat
     - router.ddclient
+    - router.freifunk
 
   '* and not router':
     - match: compound

@@ -1,0 +1,14 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name=int.fffd.d
+
+
+[Address]
+Address=10.185.1.101/16
+
+
+[Network]
+IPForward=true
+
+IPv6AcceptRouterAdvertisements=no

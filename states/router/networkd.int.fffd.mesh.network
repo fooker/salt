@@ -1,4 +1,9 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-server=/fffd/10.185.0.1
-server=/fffd/10.185.0.2
+[Match]
+Name=int.fffd.m
+
+
+[Network]
+IPv6AcceptRouterAdvertisements=no
+

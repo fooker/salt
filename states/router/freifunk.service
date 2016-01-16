@@ -1,0 +1,29 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+# Use `socat STDIN,raw,echo=0 UNIX:/run/freifunk.tty,setsid` to connect to shell
+
+[Unit]
+Description=Freifunk Fulda Node
+
+
+[Service]
+ExecStart=/usr/bin/qemu-system-x86_64 \
+    -enable-kvm \
+    -runas nobody \
+    -nographic \
+    -m 128M \
+    -cpu host \
+    -drive file=/var/lib/machines/freifunk.img,if=virtio,media=disk,format=raw \
+    -netdev bridge,br=int.fffd.d,id=data \
+    -device virtio-net,netdev=data \
+    -netdev bridge,br=int.open,id=ulnk \
+    -device virtio-net,netdev=ulnk \
+    -netdev bridge,br=int.fffd.m,id=mesh \
+    -device virtio-net,netdev=mesh \
+    -display none \
+    -chardev socket,path=/run/freifunk.tty,server,nowait,id=console \
+    -device isa-serial,chardev=console \
+
+
+[Install]
+WantedBy=multi-user.target
+
