@@ -7,3 +7,5 @@ tools:
       - screen
       - less
       - vim
+      - rxvt-unicode-terminfo
+
