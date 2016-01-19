@@ -22,6 +22,7 @@ base:
     - match: grain
     - iptables
     - tinc
+    - mosh
 
   'router':
     - router.gateway
