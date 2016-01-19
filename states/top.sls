@@ -54,6 +54,7 @@ base:
   'brueckenkopf':
     - salt.master
     - opennms
+    - weechat
 
   'bunker':
     - mariadb
