@@ -15,7 +15,6 @@ weechat.user:
     - options:
       - no-port-forwarding
       - no-X11-forwarding
-      - command="screen -A -x weechat"
 
 weechat.service:
   file.managed:
