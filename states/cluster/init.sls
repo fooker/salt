@@ -1,3 +1,18 @@
+{% macro address_ip4(node) -%}
+{{ '%s.%d' | format(
+    pillar['cluster']['network']['prefix']['ip4'],
+    pillar['cluster']['nodes'].index(node)
+) }}
+{%- endmacro %}
+
+{% macro address_ip6(node) -%}
+{{ '%s::%x' | format(
+    pillar['cluster']['network']['prefix']['ip6'],
+    pillar['cluster']['nodes'].index(node)
+) }}
+{%- endmacro %}
+
+
 cluster.net.ipsec:
   pkg.installed:
     - name: strongswan
@@ -31,17 +46,16 @@ cluster.net.iptables:
     - name: nf_conntrack_proto_gre
   file.managed:
     - name: /etc/ferm.d/cluster.conf
-    - source: salt://cluster/ferm.conf.tmpl
+    - source: salt://cluster/ferm.conf
     - makedirs: True
-    - template: jinja
     - requires:
       - kmod: nf_conntrack_proto_gre
 
 {% for node in pillar['cluster']['nodes'] if node != grains['id'] %}
 cluster.net.tunnel.{{ node }}.netdev:
   file.managed:
-    - name: /etc/systemd/network/80-cluster-tunnel-{{ node }}.netdev
-    - source: salt://cluster/tunnel.netdev.tmpl
+    - name: /etc/systemd/network/80-cluster-{{ node }}.netdev
+    - source: salt://cluster/networkd.netdev.tmpl
     - makedirs: True
     - template: jinja
     - context:
@@ -58,20 +72,8 @@ cluster.net.tunnel.{{ node }}.hook:
 
 cluster.net.tunnel.network:
   file.managed:
-    - name: /etc/systemd/network/80-cluster-tunnel.network
-    - source: salt://cluster/tunnel.network
-    - makedirs: True
-
-cluster.net.access.netdev:
-  file.managed:
-    - name: /etc/systemd/network/80-cluster-access.netdev
-    - source: salt://cluster/access.netdev
-    - makedirs: True
-
-cluster.net.access.network:
-  file.managed:
-    - name: /etc/systemd/network/80-cluster-access.network
-    - source: salt://cluster/access.network.tmpl
+    - name: /etc/systemd/network/80-cluster.network
+    - source: salt://cluster/networkd.network.tmpl
     - makedirs: True
     - template: jinja
 
@@ -98,6 +100,7 @@ cluster.lookup.{{ node }}:
   host.present:
     - name: {{ node }}
     - ip:
-      - {{ pillar['addresses'][node]['int']['mngt']['ip4'] }}
+      - {{ address_ip4(node) }}
+      - {{ address_ip6(node) }}
 {%- endfor %}
 

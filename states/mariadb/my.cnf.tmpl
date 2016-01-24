@@ -1,5 +1,7 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
+{% import 'cluster/init.sls' as cluster with context -%}
+
 # Client configuration
 [client]
 port					= 3306
@@ -42,8 +44,10 @@ myisam_sort_buffer_size	= 8M
 wsrep_on				= on
 wsrep_provider			= /usr/lib/libgalera_smm.so
 wsrep_cluster_name		= open-desk
-wsrep_cluster_address	= gcomm://{{ pillar['cluster']['nodes']|reject('equalto', grains['id'])|sort()|join(',') }}?
-wsrep_node_address		= {{ pillar['addresses'][grains['id']]['int']['mngt']['ip4'] }}
+wsrep_cluster_address	= gcomm://{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
+  {{ cluster.address_ip4(node) }}{%- if not loop.last -%},{%- endif -%}
+{%- endfor %}
+wsrep_node_address		= {{ cluster.address_ip4(grains['id']) }}
 wsrep_node_name			= {{ grains['id'] }}
 wsrep_sst_method		= rsync
 

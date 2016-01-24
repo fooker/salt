@@ -13,8 +13,9 @@ cluster:
     -----END PGP MESSAGE-----
 
   network: 
-    prefix: 'fd13:bbfd:bcfc:0'
-    suffix: 64
+    prefix:
+      ip6: 'fd13:bbfd:bcfc:0'
+      ip4: 172.27.204
 
   nodes:
     - bunker

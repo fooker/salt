@@ -1,15 +1,27 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
+{% import 'cluster/init.sls' as cluster with context -%}
+
 [Match]
 Name=cluster-*
 
 
+[Address]
+Address={{ cluster.address_ip4(grains['id']) }}
+
+
+[Address]
+Address={{ cluster.address_ip6(grains['id']) }}
+
+
 [Network]
+Description=Cluster Link
+
 # This tunnel is hardly bound to the external interface
 BindCarrier=ext
 
-# Only use Link Local Addressing for v6
-LinkLocalAddressing=ipv6
+# No link lokal addressing
+LinkLocalAddressing=no
 
 # Forward to other cluster nodes
 IPForward=yes

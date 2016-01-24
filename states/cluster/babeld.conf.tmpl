@@ -1,19 +1,22 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
 # Skip sysctl configuration (it's to aggressive)
-skip-kernel-setup true
+#skip-kernel-setup true
 
 # Use native source-specific IPv6 forwarding rather
 #ipv6-subtrees true
 
-# Use diversity algorithm kind 3
-#diversity true
+# Use diversity algorithm
+diversity true
 
 # Choos a random router ID on each startup
 random-id true
 
 # Allow frontend connections
 local-port 33123
+
+# Use link detection
+link-detect true
 
 # Enable sending timestamps with each Hello
 default enable-timestamps true
@@ -32,6 +35,7 @@ interface cluster-{{ pillar['cluster']['nodes'].index(node) }} wired true
 #out deny
 #
 ## Forward all cluster IPs
-redistribute if cluster allow
-redistribute deny
+redistribute local ip {{ pillar['cluster']['network']['prefix']['ip4'] }}.0/24 allow
+redistribute local ip {{ pillar['cluster']['network']['prefix']['ip6'] }}::0/64 allow
+redistribute local deny
 
