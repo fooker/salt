@@ -41,22 +41,23 @@ base:
     - match: compound
     - common.ntp
 
+  '* and not *-zitadelle':
+    - match: compound
+    - common.ssmtp
+
   '*-zitadelle':
     - mariadb
     - glusterfs
     - web
     - web.apps.chez_janine
 
-  '* and not *-zitadelle':
-    - match: compound
-    - common.ssmtp
+  'bunker':
+    - mariadb
+    - glusterfs
+    - rsnapshot
 
   'brueckenkopf':
     - salt.master
     - opennms
     - weechat
 
-  'bunker':
-    - mariadb
-    - glusterfs
-    - rsnapshot
