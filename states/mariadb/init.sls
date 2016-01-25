@@ -6,6 +6,7 @@ mariadb.tools:
     - pkgs:
       - mysql-python  # Required to make mysql_* states work
       - lsof
+      - xtrabackup
 
 mariadb.server:
   pkg.installed:
@@ -74,4 +75,15 @@ mariadb.auth.monitoring:
     - name: monitoring
     - password: "{{ pillar['database']['accounts']['monitoring']['password'] }}"
     - host: {{ pillar['addresses'][pillar['database']['accounts']['monitoring']['host']]['int']['mngt']['ip4'] }}
+
+{% if grains['id'] == "bunker" -%}
+mariadb.rsnapshot:
+  file.accumulated:
+    - name: rsnapshot.backups
+    - filename: /etc/rsnapshot.conf.incl
+    - text: |
+        backup_script	/usr/bin/innobackupex --no-timestamp --backup .	{{ grains['id'] }}/mariadb
+    - require_in:
+      - file: rsnapshot.target.conf
+{%- endif %}
 

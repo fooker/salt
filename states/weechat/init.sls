@@ -1,3 +1,5 @@
+{% import 'rsnapshot/target/init.sls' as backup with context %}
+
 weechat:
   pkg.installed:
     - name: weechat
@@ -27,4 +29,6 @@ weechat.service:
     - require:
       - pkg: weechat
       - file: /etc/systemd/system/weechat.service
+
+{{ backup.target('weechat', '/var/lib/weechat') }}
 
