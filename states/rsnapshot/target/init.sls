@@ -7,6 +7,7 @@ rsnapshot.target.ssh:
   ssh_auth:
     - present
     - user: root
+    - enc: {{ pillar['backup']['ssh']['key']['type'] }}
     - name: {{ pillar['backup']['ssh']['key']['public'] }}
     - comment: rsnapshot
 
