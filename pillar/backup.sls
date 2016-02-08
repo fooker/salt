@@ -1,27 +1,21 @@
 backup:
   retentions:
     - id: hourly
-      count: 42
+      count: 64
       interval:
         minute: 0
         hour: '*/8'
     - id: daily
-      count: 28
+      count: 32
       interval:
         minute: 0
         hour: 4
     - id: weekly
-      count: 16
+      count: 128
       interval:
         minute: 0
         hour: 5
         dayweek: 0
-    - id: monthly
-      count: 24
-      interval:
-        minute: 0
-        hour: 6
-        daymonth: 1
 
   ssh:
     key:
