@@ -61,3 +61,9 @@ base:
     - opennms
     - weechat
 
+  'scanner':
+    - scanner
+
+  'cinema':
+    - cinema
+

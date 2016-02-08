@@ -109,26 +109,32 @@ addresses:
         mac: b8:27:eb:1c:32:39
         ip4: 10.0.23.66
         ip6: 2001:4dd0:ae46:23::42
-  cinema:
+  amp:
     int:
-      mngt:
-        mac: 7e:ac:2c:53:1f:03
-        ip4: 10.0.0.67
-        ip6: 2001:4dd0:ae46:1::43
       priv:
         mac: 00:05:cd:38:94:8a
         ip4: 10.0.23.67
         ip6: 2001:4dd0:ae46:23::43
+  cinema:
+    int:
+      mngt:
+        mac: b8:ae:ed:7d:69:ab
+        ip4: 10.0.0.68
+        ip6: 2001:4dd0:ae46:1::44
+      priv:
+        mac: b8:ae:ed:7d:69:ab
+        ip4: 10.0.23.68
+        ip6: 2001:4dd0:ae46:23::44
   scanner:
     int:
       mngt:
         mac: 00:08:a2:09:bd:9e
-        ip4: 10.0.0.68
-        ip6: 2001:4dd0:ae46:1::44
+        ip4: 10.0.0.69
+        ip6: 2001:4dd0:ae46:1::45
       priv:
         mac: 00:08:a2:09:bd:9e
-        ip4: 10.0.23.68
-        ip6: 2001:4dd0:ae46:23::44
+        ip4: 10.0.23.69
+        ip6: 2001:4dd0:ae46:23::45
   mobile:
     int:
       priv:
