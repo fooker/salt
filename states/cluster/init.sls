@@ -44,6 +44,7 @@ cluster.net.ipsec.secrets:
 cluster.net.iptables:
   kmod.present:
     - name: nf_conntrack_proto_gre
+    - persist: True
   file.managed:
     - name: /etc/ferm.d/cluster.conf
     - source: salt://cluster/ferm.conf

@@ -7,11 +7,11 @@ Name=cluster-*
 
 
 [Address]
-Address={{ cluster.address_ip4(grains['id']) }}
+Address={{ cluster.address_ip4(grains['id']) }}/32
 
 
 [Address]
-Address={{ cluster.address_ip6(grains['id']) }}
+Address={{ cluster.address_ip6(grains['id']) }}/128
 
 
 [Network]
