@@ -12,8 +12,9 @@ salt-master:
 salt-master.conf:
   file.managed:
     - name: /etc/salt/master
-    - source: salt://salt/master.conf
+    - source: salt://salt/master.conf.tmpl
     - makedirs: True
+    - template: jinja
 
 salt-master.iptables:
   file.managed:
