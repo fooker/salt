@@ -82,7 +82,7 @@ mariadb.rsnapshot:
     - name: rsnapshot.backups
     - filename: /etc/rsnapshot.conf.incl
     - text: |
-        backup_script	/usr/bin/innobackupex --no-timestamp --backup . > /dev/null	{{ grains['id'] }}/mariadb
+        backup_script	/usr/bin/innobackupex --no-timestamp --backup . &> /dev/null	{{ grains['id'] }}/mariadb
     - require_in:
       - file: rsnapshot.target.conf
 {%- endif %}
