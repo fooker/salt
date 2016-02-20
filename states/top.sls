@@ -5,6 +5,7 @@ base:
     - common.sysctl
     - common.tools
     - common.root
+    - common.pacman
 
     - network
 
