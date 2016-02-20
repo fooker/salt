@@ -3,7 +3,6 @@
 [Match]
 Name=int.priv
 
-
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip4'] }}/{{ pillar['networks']['priv']['ip4']['netmask'] }}
 
@@ -12,7 +11,7 @@ Address={{ pillar['addresses'][grains['id']]['int']['priv']['ip6'] }}/{{ pillar[
 
 {% if grains['role'] == 'gateway' -%}
 [Address]
-Address=fe80::1/64
+Address=fe80::/64
 {%- endif %}
 
 {% if grains['role'] != 'gateway' -%}
@@ -26,8 +25,7 @@ Metric=200
 {%- endif %}
 
 [Network]
-{% if grains['role'] == 'gateway' -%}
-IPForward=true
-{%- endif %}
+DNS={{ pillar['networks']['priv']['ip4']['gateway'] }}
+DNS={{ pillar['networks']['priv']['ip6']['gateway'] }}
 
 IPv6AcceptRouterAdvertisements=no

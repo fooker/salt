@@ -11,7 +11,7 @@ Address={{ pillar['addresses'][grains['id']]['int']['mngt']['ip6'] }}/{{ pillar[
 
 {% if grains['role'] == 'gateway' -%}
 [Address]
-Address=fe80::1/64
+Address=fe80::/64
 {%- endif %}
 
 {% if grains['role'] != 'gateway' -%}
@@ -25,10 +25,6 @@ Metric=300
 {%- endif %}
 
 [Network]
-{% if grains['role'] == 'gateway' -%}
-IPForward=true
-{%- endif %}
-
 DNS={{ pillar['networks']['mngt']['ip4']['gateway'] }}
 DNS={{ pillar['networks']['mngt']['ip6']['gateway'] }}
 

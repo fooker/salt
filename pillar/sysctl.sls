@@ -5,9 +5,6 @@ sysctl:
   # Enable IPv6 Privacy Extensions
   net.ipv6.conf.all.use_tempaddr: 2
 
-  # Enable source route verification
-  net.ipv4.conf.all.rp_filter: 1
-
   # Enable SYN cookies
   net.ipv4.tcp_syncookies: 1
 

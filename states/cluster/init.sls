@@ -96,6 +96,18 @@ cluster.net.routing:
     - makedirs: True
     - template: jinja
 
+clustern.net.forwarding.ipv4:
+  sysctl.present:
+    - name: net.ipv4.conf.all.forwarding
+    - value: 1
+    - config: /etc/sysctl.d/cluster.conf
+
+clustern.net.forwarding.ipv6:
+  sysctl.present:
+    - name: net.ipv6.conf.all.forwarding
+    - value: 1
+    - config: /etc/sysctl.d/cluster.conf
+
 {% for node in pillar['cluster']['nodes'] %}
 cluster.lookup.{{ node }}:
   host.present:
