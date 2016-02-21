@@ -19,6 +19,14 @@ base:
 
     - rsnapshot.target
 
+  '* and not router':
+    - match: compound
+    - common.ntp
+
+  '* and not *-zitadelle':
+    - match: compound
+    - common.ssmtp
+
   'public:True':
     - match: grain
     - iptables
@@ -38,26 +46,21 @@ base:
     - router.ddclient
     - router.freifunk
 
-  '* and not router':
-    - match: compound
-    - common.ntp
-
-  '* and not *-zitadelle':
-    - match: compound
-    - common.ssmtp
-
-  '*-zitadelle':
+  'cluster':
+    - match: nodegroup
     - mariadb
     - glusterfs
+
+  '*-zitadelle':
+    - letsencrypt
     - web
     - web.apps.chez_janine
 
   'bunker':
-    - mariadb
-    - glusterfs
     - rsnapshot
 
   'brueckenkopf':
+    - letsencrypt
     - salt.master
     - opennms
     - weechat

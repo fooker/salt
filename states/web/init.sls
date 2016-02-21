@@ -1,4 +1,5 @@
-
+include:
+  - cluster
 
 web.apache:
   pkg.installed:
@@ -20,22 +21,6 @@ web.apache.conf:
     - source: salt://web/apache.conf.tmpl
     - makedirs: True
     - template: jinja
-
-web.data:
-  glusterfs.created:
-    - name: web
-    - bricks: {% for node in pillar['cluster']['nodes'] %}
-      - {{ node }}:/srv/glusterfs/web
-      {%- endfor %}
-    - start: True
-    - require:
-      - service: glusterfs
-      - glusterfs: glusterfs.peers
-  mount.mounted:
-    - name: /srv/data/web
-    - fstype: glusterfs
-    - mkmnt: True
-    - device: localhost:/web
 
 web.iptables:
   file.managed:
