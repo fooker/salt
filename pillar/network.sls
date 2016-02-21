@@ -192,9 +192,4 @@ addresses:
 
 domain:
   name: open-desk.net
-  servers:
-    - 78.47.34.12
-    - 5.9.49.12
-    - 2a01:4f8:192:2393::f023:90af
-    - 2a01:6f0:ffff:42::53
 

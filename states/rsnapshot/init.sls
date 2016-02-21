@@ -1,13 +1,10 @@
+include:
+  - common.cron
+
 rsnapshot:
   pkg.installed:
     - pkgs:
       - rsnapshot
-      - cronie
-  service.running:
-    - enable: True
-    - name: cronie
-    - requires:
-      - pkg: cronie
 
 rsnapshot.conf:
   file.managed:

@@ -19,9 +19,6 @@ localise-queries
 dhcp-ignore-names
 dhcp-generate-names
 
-# Do not get upstream DNS servers from /etc/resolv.conf (and do not poll it)
-# but use servers definde below
-no-resolv
-{% for server in pillar['domain']['servers'] -%}
-server={{ server }}
-{% endfor %}
+# Use the generated list of nameservers
+resolv-file=/etc/dnsmasq.resolv
+
