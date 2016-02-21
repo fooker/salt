@@ -27,3 +27,9 @@ rsnapshot.ssh:
     - makedirs: True
     - mode: 600
 
+rsnpshot.snmpd.conf:
+  file.managed:
+    - name: /etc/snmp/snmpd.conf.d/rsnapshot.conf
+    - source: salt://rsnapshot/snmp.conf
+    - makedirs: True
+

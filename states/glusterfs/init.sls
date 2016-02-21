@@ -46,3 +46,9 @@ glusterfs.volume:
     - mkmnt: True
     - device: localhost:/data
 
+glusterfs.snmpd.conf:
+  file.managed:
+    - name: /etc/snmp/snmpd.conf.d/glusterfs.conf
+    - source: salt://glusterfs/snmp.conf
+    - makedirs: True
+
