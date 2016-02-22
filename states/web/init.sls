@@ -18,9 +18,15 @@ web.apache:
 web.apache.conf:
   file.managed:
     - name: /etc/httpd/conf/httpd.conf
-    - source: salt://web/apache.conf.tmpl
+    - source: salt://web/httpd.conf
     - makedirs: True
-    - template: jinja
+
+{% for conf in ('ssl', 'autoindex', 'info', 'php') %}
+web.apache.conf.{{ conf }}:
+  file.managed:
+    - name: /etc/httpd/conf/httpd.{{ conf }}.conf
+    - source: salt://web/httpd.{{ conf }}.conf
+{% endfor %}
 
 web.iptables:
   file.managed:

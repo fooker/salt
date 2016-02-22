@@ -18,3 +18,8 @@ base:
   '*-zitadelle or bunker':
     - match: compound
     - database
+
+  '*-zitadelle or bunker or brueckenkopf':
+    - match: compound
+    - letsencrypt
+

@@ -1,4 +1,4 @@
-
+{% from 'letsencrypt/init.sls' import certificate %}
 
 web.apps.chez_janine.mariadb:
   pkg.installed:
@@ -23,12 +23,13 @@ web.apps.chez_janine.mariadb:
       - mysql_database: chez_janine
       - mysql_user: chez_janine
 
-web.apps.chez_janine.apache:
+{{ certificate('chez_janine', 'chez-janine.de', 'www.chez-janine.de') }}
+
+web.apps.chez_janine.httpd:
   file.managed:
     - name: /etc/httpd/conf/vhosts/chez_janine.conf
-    - source: salt://web/apps/chez_janine/apache.conf.tmpl
+    - source: salt://web/apps/chez_janine/httpd.conf
     - makedirs: True
-    - template: jinja
 
 web.apps.chez_janine.site:
   archive.extracted:
