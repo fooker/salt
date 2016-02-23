@@ -21,7 +21,7 @@ web.apache.conf:
     - source: salt://web/httpd.conf
     - makedirs: True
 
-{% for conf in ('ssl', 'autoindex', 'info', 'php') %}
+{% for conf in ('ssl', 'autoindex', 'info', 'php', 'default') %}
 web.apache.conf.{{ conf }}:
   file.managed:
     - name: /etc/httpd/conf/httpd.{{ conf }}.conf

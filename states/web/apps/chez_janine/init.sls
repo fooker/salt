@@ -30,6 +30,8 @@ web.apps.chez_janine.httpd:
     - name: /etc/httpd/conf/vhosts/chez_janine.conf
     - source: salt://web/apps/chez_janine/httpd.conf
     - makedirs: True
+    - require:
+      - cmd: letsencrypt.domains.chez_janine.crt
 
 web.apps.chez_janine.site:
   archive.extracted:

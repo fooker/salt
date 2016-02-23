@@ -55,6 +55,7 @@ base:
     - letsencrypt
     - web
     - web.apps.chez_janine
+    - web.apps.open_desk
 
   'bunker':
     - rsnapshot
