@@ -165,6 +165,10 @@ addresses:
         address: 37.120.161.15
         netmask: 22
         gateway: 37.120.160.1
+      ip6:
+        address: 2a03:4000:6:30f2::0
+        netmask: 64
+        gateway: fe80::1
   north-zitadelle:
     int:
       mngt:
@@ -177,6 +181,10 @@ addresses:
         address: 37.120.172.185
         netmask: 22
         gateway: 37.120.172.1
+      ip6:
+        address: 2a03:4000:6:701e::0
+        netmask: 64
+        gateway: fe80::1
   south-zitadelle:
     int:
       mngt:
@@ -189,6 +197,10 @@ addresses:
         address: 37.120.172.177
         netmask: 22
         gateway: 37.120.172.1
+      ip6:
+        address: 2a03:4000:6:701d::0
+        netmask: 64
+        gateway: fe80::1
 
 domain:
   name: open-desk.net

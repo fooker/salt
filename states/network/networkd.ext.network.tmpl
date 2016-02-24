@@ -11,6 +11,13 @@ Address={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}/{{ pill
 Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
 Metric=100
 
+[Address]
+Address={{ pillar['addresses'][grains['id']]['ext']['ip6']['address'] }}/{{ pillar['addresses'][grains['id']]['ext']['ip6']['netmask'] }}
+
+[Route]
+Gateway={{ pillar['addresses'][grains['id']]['ext']['ip6']['gateway'] }}
+Metric=100
+
 [Network]
 {% if grains['role'] == 'gateway' -%}
 IPForward=true
@@ -26,4 +33,4 @@ Tunnel={{ tunnel }}
 {% endfor %}
 {%- endif %}
 
-IPv6AcceptRouterAdvertisements=yes
+IPv6AcceptRouterAdvertisements=no
