@@ -11,12 +11,14 @@ Address={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}/{{ pill
 Gateway={{ pillar['addresses'][grains['id']]['ext']['ip4']['gateway'] }}
 Metric=100
 
+{% if 'ip6' in pillar['addresses'][grains['id']]['ext'] -%}
 [Address]
 Address={{ pillar['addresses'][grains['id']]['ext']['ip6']['address'] }}/{{ pillar['addresses'][grains['id']]['ext']['ip6']['netmask'] }}
 
 [Route]
 Gateway={{ pillar['addresses'][grains['id']]['ext']['ip6']['gateway'] }}
 Metric=100
+{% endif -%}
 
 [Network]
 {% if grains['role'] == 'gateway' -%}
