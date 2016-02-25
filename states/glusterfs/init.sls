@@ -1,5 +1,9 @@
+{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+
+
 include:
   - cluster
+
 
 glusterfs.patch:
   # This is a patch for saltstack to make it work with glusterfs >= 3.7
@@ -33,9 +37,10 @@ glusterfs.peers:
 glusterfs.volume:
   glusterfs.created:
     - name: data
-    - bricks: {% for node in pillar['cluster']['nodes'] if node != grains['id'] %}
+    - bricks: {% for node in pillar['cluster']['nodes'] %}
       - {{ node }}:/srv/glusterfs/data
       {%- endfor %}
+    - replica: {{ pillar['cluster']['nodes']|count }}
     - start: True
     - require:
       - service: glusterfs
@@ -51,4 +56,8 @@ glusterfs.snmpd.conf:
     - name: /etc/snmp/snmpd.conf.d/glusterfs.conf
     - source: salt://glusterfs/snmp.conf
     - makedirs: True
+
+{% if grains['id'] == "bunker" -%}
+{{ rsnapshot.target('data', '/srv/data/') }}
+{%- endif %}
 
