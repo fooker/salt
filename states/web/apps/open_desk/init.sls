@@ -1,4 +1,4 @@
-{% from 'letsencrypt/init.sls' import certificate %}
+{% import 'letsencrypt/init.sls' as letsencrypt %}
 
 web.apps.open_desk.mariadb:
   pkg.installed:
@@ -23,7 +23,7 @@ web.apps.open_desk.mariadb:
       - mysql_database: open_desk
       - mysql_user: open_desk
 
-{{ certificate('open_desk', 'open-desk.org', 'www.open-desk.org') }}
+{{ letsencrypt.certificate('open_desk', 'open-desk.org', 'www.open-desk.org') }}
 
 web.apps.open_desk.httpd:
   file.managed:

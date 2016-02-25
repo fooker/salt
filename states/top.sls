@@ -52,7 +52,7 @@ base:
     - glusterfs
 
   '*-zitadelle':
-    - letsencrypt
+    - letsencrypt.httpd
     - web
     - web.apps.chez_janine
     - web.apps.open_desk

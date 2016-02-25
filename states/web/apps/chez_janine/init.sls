@@ -1,4 +1,4 @@
-{% from 'letsencrypt/init.sls' import certificate %}
+{% import 'letsencrypt/init.sls' as letsencrypt %}
 
 web.apps.chez_janine.mariadb:
   pkg.installed:
@@ -23,7 +23,7 @@ web.apps.chez_janine.mariadb:
       - mysql_database: chez_janine
       - mysql_user: chez_janine
 
-{{ certificate('chez_janine', 'chez-janine.de', 'www.chez-janine.de') }}
+{{ letsencrypt.certificate('chez_janine', 'chez-janine.de', 'www.chez-janine.de') }}
 
 web.apps.chez_janine.httpd:
   file.managed:
