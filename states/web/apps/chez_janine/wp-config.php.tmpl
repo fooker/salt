@@ -7,6 +7,10 @@ define('DB_HOST',     'localhost');
 define('DB_CHARSET',  'utf8mb4');
 define('DB_COLLATE',  '');
 
+/** Hack to allow multiple domain names for same instance **/
+define('WP_SITEURL', ($_SERVER['HTTPS'] ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST']);
+define('WP_HOME',    ($_SERVER['HTTPS'] ? 'https' : 'http' ) . '://' . $_SERVER['HTTP_HOST']);
+
 $table_prefix  = 'wp_';
 
 define('AUTH_KEY',         '{+dwX0|FNbm:=R>JT`)ue7@O3vq6R{<93enss{|Yx*;P,P<X{^,9@r/i]Aa:Ex1M');
