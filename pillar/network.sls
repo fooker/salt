@@ -141,6 +141,10 @@ addresses:
         mac: 68:f7:28:b4:43:61
         ip4: 10.0.23.127
         ip6: 2001:4dd0:ae46:23::7f
+      mngt:
+        mac: ~
+        ip4: 10.0.0.127
+        ip6: 2001:4dd0:ae46:1::7f
   brueckenkopf:
     int:
       mngt:

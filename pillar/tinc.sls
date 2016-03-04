@@ -2,7 +2,7 @@ tinc:
   port: 10000
   hosts:
     brueckenkopf:
-      priv    : |
+      priv: |
         -----BEGIN PGP MESSAGE-----
         hQEMA0EEvUwCdTjhAQf/WLKdkUaf8HmhuNlqYQYFiV93M45KzvJNu4mppTKPxoWk
         GDHm42X8Te0biSuVVN7DEkPrNSpG381+L1hJV6Z6rMdgzNnPl/ogCGoeOpCKGNOn
@@ -40,7 +40,7 @@ tinc:
         Y+dhz59QyRE8wsZGQyhNJTmQhVB1oQPGyNGhZTcL7DtHUsqNTcQcSbx0r4myVmK+
         =ID7D
         -----END PGP MESSAGE-----
-      pub     : |
+      pub: |
         -----BEGIN RSA PUBLIC KEY-----
         MIIBCgKCAQEAz1AW3DvLQf3SrJm8dego7hMO6kwX2s3w3syhm3vnBXLbEiifwiPx
         Wyu5o5Eq2Wuazr7JplBE0domZKbVifytelKH0e/9R6MwBqe/ViBxOaGM/2YyMiVp
@@ -52,7 +52,7 @@ tinc:
 
     router:
       bridged : True
-      priv    : |
+      priv: |
         -----BEGIN PGP MESSAGE-----
         hQEMA0EEvUwCdTjhAQf+K/8ur7RaBjdPZpPT6swX3CSHe8yB7wH7SxxITXiBr22o
         UJHypPuOIDLkusIusFRaOj4BLBM14qqF+YODAtUPqAQNNv/w4GP1Rmtcdz7GT1Ql
@@ -90,7 +90,7 @@ tinc:
         oFTE249dCQuhXucusQsR47aLDDswaQaKdJcuw6AIwY9wMU+mvRUW995XN3JtwHg=
         =sYXV
         -----END PGP MESSAGE-----
-      pub     : |
+      pub: |
         -----BEGIN RSA PUBLIC KEY-----
         MIIBCgKCAQEAyAY8KkQLm4I1zNBDVjAIGfBJ+ZfEa46WqDc72h+1U5qre2vUzIMV
         xDJLSreRpeEt32U6ypeQtSe6DMP9IahzpIpe1DGMFtTYlutL7dS1EcTe38xS1jCi
@@ -101,7 +101,7 @@ tinc:
         -----END RSA PUBLIC KEY-----
 
     bunker:
-      priv    : |
+      priv: |
         -----BEGIN PGP MESSAGE-----
         hQEMA0EEvUwCdTjhAQf/RCkAFTOTelmM/Zjfu6p5pb1jvFaZmJZ/QN2tm/TNVzUI
         v+5w0HCfVW5UIqie7ombUqgUPHQnuH4LrTjAoK1JHNalnJWyPGwBtzivVYWjct3h
@@ -139,7 +139,7 @@ tinc:
         t6Zl2zWeqTcICBo1/oiesdr3zFFt24Fg4971SDhwjWUBX3+azUvUM6sNtxDLalU=
         =n/al
         -----END PGP MESSAGE-----
-      pub     : |
+      pub: |
         -----BEGIN RSA PUBLIC KEY-----
         MIIBCgKCAQEAqGzjTnkSBeI1FW3DJ+qlnn47o4246uCXZbFTOBVeNeOrmIja9eS3
         Eiy+4HoSTA30DGcBHmI1OF+STKo0jnTMu4/yPYSDsLAmy7nI1XtSHF4EEdD0d+sW
@@ -150,7 +150,7 @@ tinc:
         -----END RSA PUBLIC KEY-----
 
     north-zitadelle:
-      priv    : |
+      priv: |
         -----BEGIN PGP MESSAGE-----
         hQEMA0EEvUwCdTjhAQf9F8ztzNYc3VzDTpUiUvcapPrBcQTJylAeMEpAQoHA5r64
         R0b0ItlvEi6CiJzq/saACX2Y+LgEa9e8+L1C7j+ASPIQ0jP+Sih7PH47NQ0SyDjH
@@ -188,7 +188,7 @@ tinc:
         urNJMyqJfBsaOQdXSlvEnSgls+fDla2YVd4k7PvLSR3IbL+8sd3cBL+Lpjc=
         =0xjr
         -----END PGP MESSAGE-----
-      pub     : |
+      pub: |
         -----BEGIN RSA PUBLIC KEY-----
         MIIBCgKCAQEA715zljZf8IGN+BF3maeIelKGypKy0e/xzM2a4t4tLRqbSNe/R9++
         /kWucpqsAfbmssPlhf3GkchDXopobIPJERQn8q9X426cGGGRpZHt2QqSTDtx3Uqs
@@ -199,7 +199,7 @@ tinc:
         -----END RSA PUBLIC KEY-----
 
     south-zitadelle:
-      priv    : |
+      priv: |
         -----BEGIN PGP MESSAGE-----
         hQEMA0EEvUwCdTjhAQf/WrVbaNm1MvNvLmZ+ht4LxJkzgmUfcMgQoK1XEtAWF048
         c6NYnyvwVINwISfclJ8WVNeptjSjChIkHV7MUejhFPNiRW5Z8OgfWYzdLMQTtmOI
@@ -237,7 +237,7 @@ tinc:
         FFyUvxYe9+zo4ieEZWL/SErswwlcF+UA3LHQuYtIhavSEVGAn7PbG0yy22vWa5Ka
         =PwgQ
         -----END PGP MESSAGE-----
-      pub     : |
+      pub: |
         -----BEGIN RSA PUBLIC KEY-----
         MIIBCgKCAQEAzS9+R+dUrDW40FA0F23Ong3rCmX0ZMmmb2zaHcf2FSQ7aocmfCCZ
         AzxKG5m2kB08DSEh1ZWIC+n3cIQpskXA7YIjFZqZoqN8rhbJmElXUhXkOXqKbUTP
@@ -245,5 +245,55 @@ tinc:
         jm4VNkvZTGobM6XVVrdjbhq4C11fXgfge/omG9c7DPCS8Tmi4iloBCw51JWf920z
         qhhGMT7xV+mgFluTrGhdg3g/xTdjIewUV1D3QjImBWb93sZHMdufjKCgbvYQzLoU
         4PNZajYYB+Yd7GW1SphvlGxJGE6noglRdwIDAQAB
+        -----END RSA PUBLIC KEY-----
+
+    mobile:
+      priv: |
+        -----BEGIN PGP MESSAGE-----
+        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
+        LhC6bA==
+        =RtoE
+        -----END PGP MESSAGE-----
+      pub: |
+        -----BEGIN RSA PUBLIC KEY-----
+        MIIBCgKCAQEA4idEkmyMJIwsyxTnUM25I8yzILDkzqf8NPXtaDph56HxiWOewk2H
+        p6xXodpUXWlBQVsq3ua6E5eaXcaMT7OIS70cbY+Z9xN4D3sk9Txbq3D4uveQQvV7
+        A8abT5aBrz9hOlfIGnYzjhZC/GkKtNmBCabKNyLXT30EWjy3yhTBCTQo8HZI0J6W
+        FJsfBpLR3UL3ZOpIY1BLyA7Q+xTWdzmX0rypx3Sotx7DCeqNwkFv59RBLUphfbJL
+        jb1spVA/yjmlVN0OGKEvcheRoYHlvQMvxuWAum57M94e9e3aAJF2kA/jPDdoitbO
+        IxiJb1J6oJHWs7CeUjIbN6or5cQP/V9UEwIDAQAB
         -----END RSA PUBLIC KEY-----
 
