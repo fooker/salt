@@ -1,9 +1,0 @@
-{% import 'cluster/init.sls' as cluster with context -%}
-
-[Service]
-ExecStart=
-ExecStart=/usr/bin/memcached \
-        -p 11211 \
-        -l {{ cluster.address_ip4(grains.id) }} \
-        -l {{ cluster.address_ip6(grains.id) }} \
-        -m 512
