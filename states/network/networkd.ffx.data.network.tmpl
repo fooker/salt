@@ -1,0 +1,23 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name=ffx.data
+
+
+[Network]
+DHCP=yes
+
+{% if grains['role'] == 'gateway' -%}
+IPForward=true
+{%- endif %}
+
+IPv6AcceptRouterAdvertisements=no
+
+
+[DHCP]
+UseDNS=false
+UseNTP=false
+UseHostname=false
+UseDomains=false
+UseRoutes=false
+UseTimezone=false
