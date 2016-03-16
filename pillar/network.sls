@@ -157,6 +157,10 @@ addresses:
         address: 193.174.29.6
         netmask: 27
         gateway: 193.174.29.1
+      ip6:
+        address: 2001:638:301:11a3::6
+        netmask: 64
+        gateway: fe80::0
   bunker:
     int:
       mngt:
