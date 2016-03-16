@@ -1,9 +1,6 @@
 {% import 'letsencrypt/init.sls' as letsencrypt %}
 
 web.apps.open_desk.mariadb:
-  pkg.installed:
-    - pkgs:
-      - php-gd
   mysql_database.present:
     - name: open_desk
     - require:
@@ -23,6 +20,16 @@ web.apps.open_desk.mariadb:
       - mysql_database: open_desk
       - mysql_user: open_desk
 
+web.apps.open_desk.site:
+  archive.extracted:
+    - name: /srv/http/open_desk
+    - source: http://wordpress.org/latest.tar.gz
+    - source_hash: sha512=dfced463ece13f266c15e1b45d8e7882e58ce9cd3b7146c81a4671bc51c58998ae318bd6e45b1f7bc657e2d49d7d39f971d814998e074375129c8dff7cfcac63
+    - archive_format: tar
+    - tar_options: --gzip --strip-components=1
+    - user: root
+    - group: http
+
 {{ letsencrypt.certificate('open_desk', 'open-desk.org', 'www.open-desk.org') }}
 
 web.apps.open_desk.httpd:
@@ -32,16 +39,7 @@ web.apps.open_desk.httpd:
     - makedirs: True
     - require:
       - cmd: letsencrypt.domains.open_desk.crt
-
-web.apps.open_desk.site:
-  archive.extracted:
-    - name: /srv/http/open_desk
-    - source: http://wordpress.org/latest.tar.gz
-    - source_hash: sha512=dfced463ece13f266c15e1b45d8e7882e58ce9cd3b7146c81a4671bc51c58998ae318bd6e45b1f7bc657e2d49d7d39f971d814998e074375129c8dff7cfcac63
-    - archive_format: tar
-    - tar_options: --gzip --strip-components=1
-    - user: http
-    - group: http
+      - archive: web.apps.open_desk.site
 
 web.apps.open_desk.conf:
   file.managed:
@@ -55,7 +53,7 @@ web.apps.open_desk.conf:
 web.apps.open_desk.data:
   file.symlink:
     - name: /srv/http/open_desk/wp-content
-    - target: /srv/data/web/open_desk
+    - target: /srv/data/open_desk
     - force: True
     - makedirs: True
     - user: http

@@ -43,3 +43,17 @@ database:
         =r0iz
         -----END PGP MESSAGE-----
 
+    wolke:
+      password: |
+        -----BEGIN PGP MESSAGE-----
+        hQEMA0EEvUwCdTjhAQf/RACAaOeLve0uqeKdadu+/GJRex6c0NPUb+zn04hEfMTC
+        nwp9urFiQr6cSSrCX8GHUFiqnplklEmSb6NLGPMexZxIgy98COJFh7Z8QzqxwkbO
+        zHMYhR2oh49ev2FrMTgB36qfIlJF2iPEsb480hXya3JAcgdsev0c3AcOVVAfSWsv
+        VAQoeVkki/fVD+lRo96kj2iGexLnKdXd8q1R+R6bwASOrIDW364vmWTMJjatl+U7
+        Fwfb670W17+2Lp+De192LDtJc5hr/dteOY1EBzh2bKc4fjxtI4Tph7IyROSmNkDP
+        ft0+0cdYy91kvj907be1oDT83zwru8CbZQmJeNMbitJLAcQS+QcCYAhq/uob+e/u
+        24J5NvBIngykPjDUaKGx8Xs6SncRRufKMze0HhRN+BQltJE5p+aivothA3H+QLq8
+        Nsq3opnUVa1uDHI8
+        =i6pJ
+        -----END PGP MESSAGE-----
+

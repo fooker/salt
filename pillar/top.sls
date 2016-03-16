@@ -15,6 +15,9 @@ base:
     - ddclient
     - locums
 
+  '*-zitadelle':
+    - wolke
+
   '*-zitadelle or bunker':
     - match: compound
     - database

@@ -1,6 +1,3 @@
-include:
-  - cluster
-
 web.apache:
   pkg.installed:
     - pkgs:
@@ -28,29 +25,15 @@ web.apache.conf.{{ conf }}:
     - source: salt://web/httpd.{{ conf }}.conf
 {% endfor %}
 
-web.iptables:
+web.apache.default:
+  file.managed:
+    - name: /srv/http/default/index.html
+    - source: salt://web/default.index.html
+    - makedirs: True
+
+web.apache.iptables:
   file.managed:
     - name: /etc/ferm.d/web.conf
     - source: salt://web/ferm.conf
     - makedirs: True
 
-web.php:
-  pkg.installed:
-    - pkgs:
-      - php
-      - php-apache
-
-web.php.mysql:
-  file.managed:
-    - name: /etc/php/conf.d/mysql.ini
-    - contents: |
-        [PHP]
-        extension=mysqli.so
-        extension=pdo_mysql.so
-
-web.php.gd:
-  file.managed:
-    - name: /etc/php/conf.d/gd.ini
-    - contents: |
-        [PHP]
-        extension=gd.so
