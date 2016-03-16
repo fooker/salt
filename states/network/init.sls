@@ -27,7 +27,7 @@ resolve.conf:
         LLMNR=no
     - makedirs: True
 
-
+{% if 'int' in pillar['addresses'][grains['id']] %}
 {% if 'mngt' in pillar['addresses'][grains['id']]['int'] %}
 network.int.mngt.network:
   file.managed:
@@ -55,6 +55,19 @@ network.int.open.network:
     - source: salt://network/networkd.int.open.network.tmpl
     - template: jinja
     - makedirs: True
+{% endif %}
+{% endif %}
+
+
+{% if 'ffx' in pillar['addresses'][grains['id']] %}
+{% if 'data' in pillar['addresses'][grains['id']]['ffx'] %}
+network.ffx.data.network:
+  file.managed:
+    - name: /etc/systemd/network/70-ffx.data.network
+    - source: salt://network/networkd.ffx.data.network.tmpl
+    - template: jinja
+    - makedirs: True
+{% endif %}
 {% endif %}
 
 

@@ -45,6 +45,11 @@ addresses:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.42.1
         ip6: 2001:4dd0:ae46:42::1
+    ffx:
+      data:
+        mac: 00:0d:b9:34:db:e4
+        ip4: 10.185.1.101
+        ip6: fd00:65a8:93a4::1:65
   modem:
     int:
       mngt:
@@ -135,6 +140,12 @@ addresses:
         mac: 00:08:a2:09:bd:9e
         ip4: 10.0.23.69
         ip6: 2001:4dd0:ae46:23::45
+  freifunk:
+    int:
+      open:
+        mac: 32:b6:c2:6e:a5:ed
+        ip4: 10.0.42.70
+        ip6: 2001:4dd0:ae46:42::46
   mobile:
     int:
       priv:

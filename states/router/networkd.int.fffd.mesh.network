@@ -1,9 +1,0 @@
-### This file is managed by saltstack - any changes will be overwritten ###
-
-[Match]
-Name=int.fffd.m
-
-
-[Network]
-IPv6AcceptRouterAdvertisements=no
-
