@@ -25,6 +25,9 @@ Metric=300
 {%- endif %}
 
 [Network]
+Domains=mngt.int.open-desk.net
+Domains=~mngt.int.open-desk.net
+
 DNS={{ pillar['networks']['mngt']['ip4']['gateway'] }}
 DNS={{ pillar['networks']['mngt']['ip6']['gateway'] }}
 

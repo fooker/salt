@@ -4,8 +4,15 @@ freifunk.dnsmasq:
     - source: salt://router/dnsmasq.freifunk.conf
     - makedirs: True
 
+freifunk.unbound:
+  file.managed:
+    - name: /ect/unbound/unbound.freifunk.conf
+    - source: salt://router/unbound.freifunk.conf
+    - makedirs: True
+
 freifunk.ferm:
   file.managed:
     - name: /etc/ferm.d/freifunk.conf
     - source: salt://router/ferm.freifunk.conf
     - makedirs: True
+

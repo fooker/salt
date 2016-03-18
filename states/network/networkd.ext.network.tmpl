@@ -26,7 +26,10 @@ IPForward=true
 {%- endif %}
 
 {% if grains['role'] != 'gateway' -%}
-DNS=8.8.8.8 8.8.4.4
+DNS=8.8.8.8
+DNS=8.8.4.4
+{%- else -%}
+DNS=127.0.0.1
 {%- endif %}
 
 {% if accumulator is defined and accumulator['tunnels'] is defined -%}

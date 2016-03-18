@@ -1,0 +1,38 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+server:
+	# Drop privilegues
+	username: unbound
+
+	# Logging
+	verbosity: 1
+	use-syslog: no
+
+	# Port and interfaces to listen on
+	port: 5003
+{% for network in pillar['addresses'][grains['id']]['int'] %}
+	interface: {{ pillar['addresses'][grains['id']]['int'][network]['ip4'] }}
+	interface: {{ pillar['addresses'][grains['id']]['int'][network]['ip6'] }}
+{%- endfor %}
+	
+	# Allow to bind on non-existing interfaces
+	ip-transparent: yes
+
+	# Use incoming interfaces for answers
+	interface-automatic: yes
+
+	# Allow queries from internal network
+{% for network in pillar['networks'] %}
+	access-control: {{ pillar['networks'][network]['ip4']['network'] }}/{{ pillar['networks'][network]['ip4']['netmask'] }} allow
+	access-control: {{ pillar['networks'][network]['ip6']['network'] }}/{{ pillar['networks'][network]['ip6']['netmask'] }} allow
+{%- endfor %}
+
+	# Root servers to use
+	root-hints: "/etc/unbound/named.cache"
+
+	# Trust anchor for DNSSEC
+	trust-anchor-file: "/etc/unbound/trusted-key.key"
+
+# Include other config files
+include: "/etc/unbound/unbound.*.conf"
+

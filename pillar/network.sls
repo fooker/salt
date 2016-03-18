@@ -223,4 +223,5 @@ addresses:
 
 domain:
   name: open-desk.net
+  ttl: 3600
 
