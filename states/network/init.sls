@@ -7,6 +7,7 @@ network:
 
 
 resolve:
+{% if grains['role'] != 'gateway' %}
   file.symlink:
     - name: /etc/resolv.conf
     - target: /run/systemd/resolve/resolv.conf
@@ -16,7 +17,14 @@ resolve:
     - name: systemd-resolved
     - watch:
       - file: /etc/systemd/resolved.conf
-      - file: /etc/systemd/network/*.network
+      - service: systemd-networkd
+{% else %}
+  file.managed:
+    - name: /etc/resolv.conf
+    - contents: |
+        nameserver 127.0.0.1
+        nameserver ::1
+{% endif %}
 
 
 resolve.conf:
@@ -25,7 +33,14 @@ resolve.conf:
     - contents: |
         [Resolve]
         LLMNR=no
+        FallbackDNS=
     - makedirs: True
+
+nsswitch.conf:
+  file.replace:
+    - name: /etc/nsswitch.conf
+    - pattern: '^hosts: .*$'
+    - repl: 'hosts: files mymachines resolve myhostname'
 
 {% if 'int' in pillar['addresses'][grains['id']] %}
 {% if 'mngt' in pillar['addresses'][grains['id']]['int'] %}
