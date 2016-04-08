@@ -1,4 +1,5 @@
 <VirtualHost *:80>
+    ServerName {{ grains.nodename }}
     DocumentRoot /srv/http/default
 </VirtualHost>
 

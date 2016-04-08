@@ -34,30 +34,39 @@ glusterfs.peers:
     - require:
       - service: glusterfs
 
-glusterfs.volume:
-  glusterfs.created:
-    - name: data
-    - bricks: {% for node in pillar['cluster']['nodes'] %}
-      - {{ node }}:/srv/glusterfs/data
-      {%- endfor %}
-    - replica: {{ pillar['cluster']['nodes']|count }}
-    - start: True
-    - require:
-      - service: glusterfs
-      - glusterfs: glusterfs.peers
-  mount.mounted:
-    - name: /srv/data
-    - fstype: glusterfs
-    - mkmnt: True
-    - device: localhost:/data
-
 glusterfs.snmpd.conf:
   file.managed:
     - name: /etc/snmp/snmpd.conf.d/glusterfs.conf
     - source: salt://glusterfs/snmp.conf
     - makedirs: True
 
-{% if grains['id'] == "bunker" -%}
-{{ rsnapshot.target('data', '/srv/data/') }}
-{%- endif %}
+{% macro volume(module, mount, backup=True) %}
+glusterfs.volume.{{ module }}:
+  glusterfs.created:
+    - name: {{ module }}
+    - bricks: {% for node in pillar['cluster']['nodes'] %}
+      - {{ node }}:/srv/glusterfs/{{ module }}
+      {%- endfor %}
+    - start: True
+    - force: True
+    - require:
+      - service: glusterfs
+      - glusterfs: glusterfs.peers
+glusterfs.volume.{{ module }}.mounted:
+  glusterfs.started:
+    - name: {{ module }}
+    - require:
+      - glusterfs: glusterfs.volume.{{ module }}
+  mount.mounted:
+    - name: {{ mount }}
+    - fstype: glusterfs
+    - mkmnt: True
+    - device: localhost:{{ module }}
+    - require:
+      - glusterfs: glusterfs.volume.{{ module }}.mounted
+
+{% if backup %}
+{{ rsnapshot.target('data.' + module, mount) }}
+{% endif %}
+{% endmacro %}
 

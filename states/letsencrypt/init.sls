@@ -1,3 +1,6 @@
+{% import 'glusterfs/init.sls' as glusterfs %}
+
+
 include:
   - common.cron
 
@@ -22,19 +25,13 @@ letsencrypt.domains.key:
 {% if grains['role'] != 'worker' %}
 letsencrypt.wellknown:
   file.directory:
-    - name: /var/run/letsencrypt
+    - name: /run/letsencrypt
 {% else %}
-letsencrypt.wellknown.data:
-  file.directory:
-    - name: /srv/data/letsencrypt
-letsencrypt.wellknown:
-  file.symlink:
-    - name:  /var/run/letsencrypt
-    - target: /srv/data/letsencrypt
+{{ glusterfs.volume('letsencrypt', '/run/letsencrypt', False) }}
 {% endif %}
 
 
-{% macro certificate(module) %}
+{% macro certificate(module, domains) %}
 letsencrypt.domains.{{ module }}.cfg:
   file.managed:
     - name: /etc/letsencrypt/domains/{{ module }}.cfg
@@ -42,7 +39,7 @@ letsencrypt.domains.{{ module }}.cfg:
     - makedirs: True
     - template: jinja
     - context:
-        domains: [{{ varargs | map('yaml_dquote') | join(',') }}]
+        domains: [{{ domains | map('yaml_dquote') | join(',') }}]
 
 letsencrypt.domains.{{ module }}.csr:
   cmd.wait:

@@ -52,13 +52,9 @@ base:
     - glusterfs
 
   '*-zitadelle':
-    - letsencrypt.httpd
     - web.apache
-    - web.memcached
     - web.php
-    - web.apps.chez_janine
-    - web.apps.open_desk
-    - web.apps.wolke
+    - web.apps
 
   'bunker':
     - rsnapshot

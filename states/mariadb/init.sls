@@ -87,3 +87,25 @@ mariadb.rsnapshot:
       - file: rsnapshot.target.conf
 {%- endif %}
 
+{% macro database(module) %}
+mariadb.database.{{ module }}:
+  mysql_database.present:
+    - name: {{ module }}
+    - require:
+      - service: mariadb
+  mysql_user.present:
+    - name: {{ module }}
+    - password: "{{ pillar['database']['accounts'][module]['password'] }}"
+    - host: localhost
+    - require:
+      - service: mariadb
+  mysql_grants.present:
+    - database: {{ module }}.*
+    - grant: all privileges
+    - user: {{ module }}
+    - host: localhost
+    - require:
+      - mysql_database: {{ module }}
+      - mysql_user: {{ module }}
+{% endmacro %}
+

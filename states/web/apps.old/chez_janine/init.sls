@@ -1,4 +1,5 @@
 {% import 'letsencrypt/init.sls' as letsencrypt %}
+{% import 'glusterfs/init.sls' as glusterfs %}
 
 web.apps.chez_janine.mariadb:
   mysql_database.present:

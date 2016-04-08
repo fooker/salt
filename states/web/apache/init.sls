@@ -1,3 +1,7 @@
+include:
+  - letsencrypt
+
+
 web.apache:
   pkg.installed:
     - pkgs:
@@ -15,25 +19,31 @@ web.apache:
 web.apache.conf:
   file.managed:
     - name: /etc/httpd/conf/httpd.conf
-    - source: salt://web/httpd.conf
+    - source: salt://web/apache/httpd.conf
     - makedirs: True
 
-{% for conf in ('ssl', 'autoindex', 'info', 'php', 'default') %}
+{% for conf in ('ssl', 'letsencrypt', 'autoindex', 'info', 'php') %}
 web.apache.conf.{{ conf }}:
   file.managed:
     - name: /etc/httpd/conf/httpd.{{ conf }}.conf
-    - source: salt://web/httpd.{{ conf }}.conf
+    - source: salt://web/apache/httpd.{{ conf }}.conf
 {% endfor %}
 
 web.apache.default:
   file.managed:
     - name: /srv/http/default/index.html
-    - source: salt://web/default.index.html
+    - source: salt://web/apache/default.index.html
     - makedirs: True
+
+web.apache.default.conf:
+  file.managed:
+    - name: /etc/httpd/conf/httpd.default.conf
+    - source: salt://web/apache/httpd.default.conf.tmpl
+    - template: jinja
 
 web.apache.iptables:
   file.managed:
-    - name: /etc/ferm.d/web.conf
-    - source: salt://web/ferm.conf
+    - name: /etc/ferm.d/apache.conf
+    - source: salt://web/apache/ferm.conf
     - makedirs: True
 

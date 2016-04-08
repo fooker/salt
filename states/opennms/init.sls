@@ -12,7 +12,7 @@ opennms.nginx:
     - watch:
       - file: /etc/nginx/*
 
-{{ certificate('opennms', 'opennms.open-desk.net') }}
+{{ certificate('opennms', ['opennms.open-desk.net']) }}
 
 opennms.nginx.conf:
   file.managed:

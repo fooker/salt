@@ -33,7 +33,7 @@ resolve.conf:
     - contents: |
         [Resolve]
         LLMNR=no
-        FallbackDNS=
+        #FallbackDNS=
     - makedirs: True
 
 nsswitch.conf:

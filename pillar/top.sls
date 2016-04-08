@@ -16,7 +16,7 @@ base:
     - locums
 
   '*-zitadelle':
-    - wolke
+    - web
 
   '*-zitadelle or bunker':
     - match: compound
