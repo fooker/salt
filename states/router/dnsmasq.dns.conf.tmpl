@@ -19,6 +19,7 @@ localise-queries
 dhcp-ignore-names
 dhcp-generate-names
 
-# Use the generated list of nameservers
-resolv-file=/etc/dnsmasq.resolv
+# Use unbound for upstream resolving by ignoring resolv.conf and specify local recursor directly
+no-resolve
+server=127.0.0.1#5353
 

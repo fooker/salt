@@ -9,7 +9,7 @@ server:
 	use-syslog: no
 
 	# Port and interfaces to listen on
-	port: 5003
+	port: 5353
 {% for network in pillar['addresses'][grains['id']]['int'] %}
 	interface: {{ pillar['addresses'][grains['id']]['int'][network]['ip4'] }}
 	interface: {{ pillar['addresses'][grains['id']]['int'][network]['ip6'] }}
@@ -32,7 +32,4 @@ server:
 
 	# Trust anchor for DNSSEC
 	trust-anchor-file: "/etc/unbound/trusted-key.key"
-
-# Include other config files
-include: "/etc/unbound/unbound.*.conf"
 
