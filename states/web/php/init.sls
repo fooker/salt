@@ -1,5 +1,6 @@
 include:
-  - cluster
+  - cluster/network
+  - cluster/storage
 
 
 web.php:

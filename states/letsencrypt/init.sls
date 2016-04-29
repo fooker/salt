@@ -1,4 +1,4 @@
-{% import 'glusterfs/init.sls' as glusterfs %}
+{% import 'cluster/storage/init.sls' as storage %}
 
 
 include:
@@ -27,7 +27,7 @@ letsencrypt.wellknown:
   file.directory:
     - name: /run/letsencrypt
 {% else %}
-{{ glusterfs.volume('letsencrypt', '/run/letsencrypt', False) }}
+{{ storage.volume('letsencrypt', '/run/letsencrypt', False) }}
 {% endif %}
 
 

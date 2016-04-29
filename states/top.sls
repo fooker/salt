@@ -48,8 +48,9 @@ base:
 
   'cluster':
     - match: nodegroup
+    - cluster/network
+    - cluster/storage
     - mariadb
-    - glusterfs
 
   '*-zitadelle':
     - web.apache

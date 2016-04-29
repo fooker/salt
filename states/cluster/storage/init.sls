@@ -1,11 +1,7 @@
 {% import 'rsnapshot/target/init.sls' as rsnapshot %}
 
 
-include:
-  - cluster
-
-
-glusterfs.patch:
+cluster.storage.patch:
   # This is a patch for saltstack to make it work with glusterfs >= 3.7
   # See https://github.com/saltstack/salt/issues/28193
   file.replace:
@@ -13,7 +9,7 @@ glusterfs.patch:
     - pattern: 'port, online'
     - repl: 'port, port_rdma, online'
 
-glusterfs:
+cluster.storage:
   pkg.installed:
     - pkgs:
       - rpcbind
@@ -22,48 +18,50 @@ glusterfs:
     - enable: True
     - name: glusterd
     - require:
-      - pkg: glusterfs
-    - watch:
-      - pkg: glusterfs
+      - pkg: cluster.storage
 
-glusterfs.peers:
+cluster.storage.storage:
+  mount.mounted:
+    - name: /srv/glusterfs
+    - fstype: ext4
+    - mkmnt: True
+    - device: /dev/mapper/data
+    - opts:
+      - rw
+      - noatime
+
+cluster.storage.peers:
   glusterfs.peered:
     - names: {% for node in pillar['cluster']['nodes'] if node != grains['id'] %}
       - {{ node }}
       {%- endfor %}
     - require:
-      - service: glusterfs
-
-glusterfs.snmpd.conf:
-  file.managed:
-    - name: /etc/snmp/snmpd.conf.d/glusterfs.conf
-    - source: salt://glusterfs/snmp.conf
-    - makedirs: True
+      - service: cluster.storage
 
 {% macro volume(module, mount, backup=True) %}
-glusterfs.volume.{{ module }}:
+cluster.storage.volume.{{ module }}:
   glusterfs.created:
     - name: {{ module }}
     - bricks: {% for node in pillar['cluster']['nodes'] %}
       - {{ node }}:/srv/glusterfs/{{ module }}
       {%- endfor %}
     - start: True
-    - force: True
+    - replica: {{ pillar['cluster']['nodes'] | length }}
     - require:
-      - service: glusterfs
-      - glusterfs: glusterfs.peers
-glusterfs.volume.{{ module }}.mounted:
+      - service: cluster.storage
+      - glusterfs: cluster.storage.peers
+cluster.storage.volume.{{ module }}.mounted:
   glusterfs.started:
     - name: {{ module }}
     - require:
-      - glusterfs: glusterfs.volume.{{ module }}
+      - glusterfs: cluster.storage.volume.{{ module }}
   mount.mounted:
     - name: {{ mount }}
     - fstype: glusterfs
     - mkmnt: True
     - device: localhost:{{ module }}
     - require:
-      - glusterfs: glusterfs.volume.{{ module }}.mounted
+      - glusterfs: cluster.storage.volume.{{ module }}.mounted
 
 {% if backup %}
 {{ rsnapshot.target('data.' + module, mount) }}

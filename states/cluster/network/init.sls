@@ -13,11 +13,11 @@
 {%- endmacro %}
 
 
-cluster.net.ipsec:
+cluster.network.ipsec:
   pkg.installed:
     - name: strongswan
     - sources:
-      - strongswan: salt://cluster/strongswan-5.3.5-1-x86_64.pkg.tar.xz
+      - strongswan: salt://cluster/network/strongswan-5.4.0-2-x86_64.pkg.tar.xz
   service.running:
     - enable: True
     - name: strongswan
@@ -27,89 +27,73 @@ cluster.net.ipsec:
       - file: /etc/ipsec.conf
       - file: /etc/ipsec.secrets
 
-cluster.net.ipsec.conf:
+cluster.network.ipsec.conf:
   file.managed:
     - name: /etc/ipsec.conf
-    - source: salt://cluster/ipsec.conf.tmpl
+    - source: salt://cluster/network/ipsec.conf.tmpl
     - makedirs: True
     - template: jinja
 
-cluster.net.ipsec.secrets:
+cluster.network.ipsec.secrets:
   file.managed:
     - name: /etc/ipsec.secrets
-    - source: salt://cluster/ipsec.secrets.tmpl
+    - source: salt://cluster/network/ipsec.secrets.tmpl
     - makedirs: True
     - template: jinja
 
-cluster.net.iptables:
+cluster.network.iptables:
   kmod.present:
     - name: nf_conntrack_proto_gre
     - persist: True
   file.managed:
     - name: /etc/ferm.d/cluster.conf
-    - source: salt://cluster/ferm.conf
+    - source: salt://cluster/network/ferm.conf
     - makedirs: True
     - requires:
       - kmod: nf_conntrack_proto_gre
 
 {% for node in pillar['cluster']['nodes'] if node != grains['id'] %}
-cluster.net.tunnel.{{ node }}.netdev:
+cluster.network.tunnel.{{ node }}.netdev:
   file.managed:
     - name: /etc/systemd/network/80-cluster-{{ node }}.netdev
-    - source: salt://cluster/networkd.netdev.tmpl
+    - source: salt://cluster/network/networkd.netdev.tmpl
     - makedirs: True
     - template: jinja
     - context:
         remote: {{ node }}
 
-cluster.net.tunnel.{{ node }}.hook:
+cluster.network.tunnel.{{ node }}.hook:
   file.accumulated:
     - name: tunnels
     - filename: /etc/systemd/network/70-ext.network
     - text: cluster-{{ pillar['cluster']['nodes'].index(node) }}
     - require_in:
       - file: network.ext.network
+
+cluster.network.tunnel.{{ node }}.network:
+  file.managed:
+    - name: /etc/systemd/network/80-cluster-{{ node }}.network
+    - source: salt://cluster/network/networkd.network.tmpl
+    - makedirs: True
+    - template: jinja
+    - context:
+        remote: {{ node }}
 {%- endfor %}
 
-cluster.net.tunnel.network:
-  file.managed:
-    - name: /etc/systemd/network/80-cluster.network
-    - source: salt://cluster/networkd.network.tmpl
-    - makedirs: True
-    - template: jinja
-
-cluster.net.routing:
-  pkg.installed:
-    - name: babeld
-    - sources:
-      - babeld: salt://cluster/babeld-1.6.3-1-x86_64.pkg.tar.xz
-  service.running:
-    - enable: True
-    - name: babeld
-    - require:
-      - pkg: babeld
-    - watch:
-      - file: /etc/babeld.conf
-  file.managed:
-    - name: /etc/babeld.conf
-    - source: salt://cluster/babeld.conf.tmpl
-    - makedirs: True
-    - template: jinja
-
-clustern.net.forwarding.ipv4:
+clustern.network.forwarding.ipv4:
   sysctl.present:
     - name: net.ipv4.conf.all.forwarding
     - value: 1
     - config: /etc/sysctl.d/cluster.conf
 
-clustern.net.forwarding.ipv6:
+clustern.network.forwarding.ipv6:
   sysctl.present:
     - name: net.ipv6.conf.all.forwarding
     - value: 1
     - config: /etc/sysctl.d/cluster.conf
 
 {% for node in pillar['cluster']['nodes'] %}
-cluster.lookup.{{ node }}:
+cluster.network.lookup.{{ node }}:
   host.present:
     - name: {{ node }}
     - ip:
