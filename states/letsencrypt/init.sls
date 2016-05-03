@@ -22,6 +22,12 @@ letsencrypt.domains.key:
     - contents_pillar: letsencrypt:domains:key
     - makedirs: True
 
+letsencrypt.root.crt:
+  file.managed:
+    - name: /etc/letsencrypt/root.crt
+    - source: https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem
+    - source_hash: sha512=a345f020969b9a1f60cede5873e282d238c2e8c5bfa0cf163518cee6d5fb78525158425ea64ca7b7fdec8db332000bb997a8b8863b0e31afab230a29da53bb76
+
 {% if grains['role'] != 'worker' %}
 letsencrypt.wellknown:
   file.directory:
@@ -55,19 +61,22 @@ letsencrypt.domains.{{ module }}.csr:
             -config /etc/letsencrypt/domains/{{ module }}.cfg \
     - watch:
       - file: /etc/letsencrypt/domains/{{ module }}.cfg
+      - file: /etc/letsencrypt/domains.key
 
 letsencrypt.domains.{{ module }}.crt:
   cmd.wait:
+    - creates: /etc/letsencrypt/domains/{{ module }}.crt
     - name: ( acme_tiny
-                  --account-key /etc/letsencrypt/account.key
-                  --csr /etc/letsencrypt/domains/{{ module }}.csr
-                  --acme-dir /var/run/letsencrypt
+                --account-key /etc/letsencrypt/account.key
+                --csr /etc/letsencrypt/domains/{{ module }}.csr
+                --acme-dir /var/run/letsencrypt
             &&
-              curl https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem
-                  --silent
-            ) > /etc/letsencrypt/domains/{{ module }}.crt
+              cat /etc/letsencrypt/root.crt
+            )> /etc/letsencrypt/domains/{{ module }}.crt
     - watch:
       - cmd: letsencrypt.domains.{{ module }}.csr
+    - require:
+      - file: /etc/letsencrypt/root.crt
 
 letsencrypt.domains.{{ module }}.cron:
   cron.present:
@@ -76,8 +85,7 @@ letsencrypt.domains.{{ module }}.cron:
                   --csr /etc/letsencrypt/domains/{{ module }}.csr
                   --acme-dir /var/run/letsencrypt
             &&
-              curl https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem
-                  --silent
+              cat /etc/letsencrypt/root.crt
             ) > /etc/letsencrypt/domains/{{ module }}.crt
     - minute: random
     - hour: random

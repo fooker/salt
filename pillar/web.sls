@@ -4,17 +4,29 @@ web:
       domains:
         - chez-janine.de
         - www.chez-janine.de
+      database: True
+      storage: True
 
     open_desk:
       domains:
         - open-desk.org
         - www.open-desk.org
+      database: True
+      storage: True
+
+    box:
+      domains:
+        - box.open-desk.net
+      database: False
+      storage: True
 
     wolke:
       domains:
         - wolke.kufuewg.de
         - cloud.kufuewg.de
         - cloud.open-desk.net
+      database: True
+      storage: True
       instanceid: oc39536e7ea1
       passwordsalt: |
         -----BEGIN PGP MESSAGE-----
