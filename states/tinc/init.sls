@@ -5,7 +5,7 @@ tinc:
     - name: tinc
   service.running:
     - enable: True
-    - name: 'tincd@{{ instance | replace('-', '\\\\x2d') }}'
+    - name: 'tinc@{{ instance | replace('-', '\\\\x2d') }}'
     - require:
       - pkg: tinc
     - watch:
