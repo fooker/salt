@@ -9,11 +9,11 @@ gateway.forwarding.ipv4:
   sysctl.present:
     - name: net.ipv4.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/cluster.conf
+    - config: /etc/sysctl.d/gateway.conf
 
 gateway.forwarding.ipv6:
   sysctl.present:
     - name: net.ipv6.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/cluster.conf
+    - config: /etc/sysctl.d/gateway.conf
 
