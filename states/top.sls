@@ -3,6 +3,7 @@ base:
     - salt.minion
 
     - common.sysctl
+    - common.logging
     - common.tools
     - common.root
     - common.pacman
