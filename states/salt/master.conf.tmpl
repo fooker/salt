@@ -33,7 +33,3 @@ hash_type: sha256
 # The renderer to use on the minions to render the state data allowing templates and enrypted data
 renderer: jinja | yaml | gpg
 
-# Define some groups
-nodegroups:
-  cluster: 'L@{{ pillar['cluster']['nodes']|join(',') }}'
-

@@ -1,6 +1,6 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-{% import 'cluster/init.sls' as cluster with context -%}
+{% import 'hive/init.sls' as hive with context -%}
 
 # Client configuration
 [client]
@@ -44,10 +44,10 @@ myisam_sort_buffer_size	= 8M
 wsrep_on				= on
 wsrep_provider			= /usr/lib/libgalera_smm.so
 wsrep_cluster_name		= open-desk
-wsrep_cluster_address	= gcomm://{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
-  {{ cluster.address_ip4(node) }}{%- if not loop.last -%},{%- endif -%}
+wsrep_cluster_address	= gcomm://{% for node in pillar['hive']['nodes'] if node != grains['id'] -%}
+  {{ hive.address_ip4(node) }}{%- if not loop.last -%},{%- endif -%}
 {%- endfor %}
-wsrep_node_address		= {{ cluster.address_ip4(grains['id']) }}
+wsrep_node_address		= {{ hive.address_ip4(grains['id']) }}
 wsrep_node_name			= {{ grains['id'] }}
 wsrep_sst_method		= rsync
 

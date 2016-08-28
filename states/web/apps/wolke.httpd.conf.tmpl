@@ -1,7 +1,7 @@
 <VirtualHost *:80>
-  ServerName cloud.open-desk.net
-  ServerAlias cloud.kufuewg.de
-  ServerAlias wolke.kufuewg.de
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
 
   RewriteEngine On
   RewriteCond %{HTTPS} !=on
@@ -9,9 +9,9 @@
 </VirtualHost>
 
 <VirtualHost *:443>
-  ServerName cloud.open-desk.net
-  ServerAlias cloud.kufuewg.de
-  ServerAlias wolke.kufuewg.de
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
 
   DocumentRoot /srv/http/wolke
 

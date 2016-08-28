@@ -9,5 +9,14 @@ salt-minion:
   service.running:
     - enable: True
     - name: salt-minion
-    - require:
+    - watch:
       - pkg: salt-zmq
+      - file: /etc/salt/minion.d/*
+
+salt-minion.hash_type:
+  file.managed:
+    - name: /etc/salt/minion.d/hash_type.conf
+    - contents: |
+        ### This file is managed by saltstack - any changes will be overwritten ###
+        hash_type: sha256
+

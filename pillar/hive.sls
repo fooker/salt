@@ -1,4 +1,4 @@
-cluster:
+hive:
   key: |
     -----BEGIN PGP MESSAGE-----
     hQEMA0EEvUwCdTjhAQgArszRU6CzJPPgUsrwGEmL+Yz1MrO8RcUQc0xKk4ZCLZWy
@@ -12,10 +12,9 @@ cluster:
     =0PXm
     -----END PGP MESSAGE-----
 
-  network: 
-    prefix:
-      ip6: 'fd13:bbfd:bcfc:0'
-      ip4: 172.27.204
+  prefix:
+    ip6: 'fd13:bbfd:bcfc:0'
+    ip4: 172.27.204
 
   nodes:
     - bunker

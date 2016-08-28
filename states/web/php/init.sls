@@ -1,6 +1,5 @@
 include:
-  - cluster/network
-  - cluster/storage
+  - hive
 
 
 web.php:
@@ -54,7 +53,7 @@ web.php.extensions.memcached:
     - pkgs:
       - php-memcached
   file.managed:
-    - name: /etc/php/conf.d/memcached.ini
+    - name: /etc/php/conf.d/memcachde.ini
     - source: salt://web/php/php.memcached.ini.tmpl
     - template: jinja
     - makedirs: True

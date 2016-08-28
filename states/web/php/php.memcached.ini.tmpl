@@ -1,13 +1,15 @@
-{% import 'cluster/init.sls' as cluster with context -%}
+### This file is managed by saltstack - any changes will be overwritten ###
+
+{% import 'hive/init.sls' as hive with context -%}
 
 [PHP]
 extension = memcached.so
 
 session.save_handler = memcached
-session.save_path = {{ cluster.address_ip4('north-zitadelle') }}:11211,{{ cluster.address_ip4('south-zitadelle') }}:11211
+session.save_path = {{ hive.address_ip4('north-zitadelle') }}:11211,{{ hive.address_ip4('south-zitadelle') }}:11211
 
-memcached.serializer = php
+#memcached.serializer = php
 
 memcached.sess_binary = 1
 memcached.sess_consistent_hash = 1
-memcached.sess_number_of_replicas = 1
+memcached.sess_number_of_replicas = 2

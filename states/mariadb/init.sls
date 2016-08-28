@@ -1,5 +1,5 @@
 include:
-  - cluster/network
+  - hive
 
 mariadb.tools:
   pkg.installed:
@@ -15,7 +15,7 @@ mariadb.server:
 mariadb.galera:
   pkg.installed:
     - sources:
-      - galera: 'salt://mariadb/galera-25.3.13-1-x86_64.pkg.tar.xz'
+      - galera: 'salt://mariadb/galera-25.3.16-1-x86_64.pkg.tar.xz'
 
 mariadb:
   service.running:

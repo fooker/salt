@@ -1,6 +1,3 @@
-{% import 'cluster/storage/init.sls' as storage %}
-
-
 include:
   - common.cron
 
@@ -33,7 +30,14 @@ letsencrypt.wellknown:
   file.directory:
     - name: /run/letsencrypt
 {% else %}
-{{ storage.volume('letsencrypt', '/run/letsencrypt', False) }}
+letsencrypt.wellknown:
+  mount.mounted:
+    - name: /run/letsencrypt
+    - device: /mnt/data/letsencrypt
+    - fstype: none
+    - mkmnt: True
+    - opts: bind
+    - persist: True
 {% endif %}
 
 
@@ -72,7 +76,7 @@ letsencrypt.domains.{{ module }}.crt:
                 --acme-dir /var/run/letsencrypt
             &&
               cat /etc/letsencrypt/root.crt
-            )> /etc/letsencrypt/domains/{{ module }}.crt
+            ) > /etc/letsencrypt/domains/{{ module }}.crt
     - watch:
       - cmd: letsencrypt.domains.{{ module }}.csr
     - require:

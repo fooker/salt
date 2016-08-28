@@ -33,7 +33,7 @@ DNS=127.0.0.1
 {%- endif %}
 
 {% if accumulator is defined and accumulator['tunnels'] is defined -%}
-{% for tunnel in accumulator['tunnels'] -%}
+{% for tunnel in accumulator['tunnels']|sort -%}
 Tunnel={{ tunnel }}
 {% endfor %}
 {%- endif %}

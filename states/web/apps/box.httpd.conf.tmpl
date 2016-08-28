@@ -1,0 +1,31 @@
+<VirtualHost *:80>
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
+
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
+
+  DocumentRoot /srv/http/box
+
+  DirectoryIndex index.php
+
+  <Directory /srv/http/box>
+    Require all granted
+    Options +Indexes
+  </Directory>
+
+  SSLEngine on
+  SSLCertificateFile /etc/letsencrypt/domains/box.crt
+  SSLCertificateKeyFile /etc/letsencrypt/domains.key
+
+  Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains; preload"
+</VirtualHost>
+

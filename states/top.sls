@@ -47,25 +47,25 @@ base:
     - router.ddclient
     - router.freifunk
 
-  'cluster':
-    - match: nodegroup
-    - cluster/network
-    - cluster/storage
-    - mariadb
-
   '*-zitadelle':
-    - web.apache
-    - web.php
+    - hive
+    - nfs/client
+    - mariadb
     - web.apps
 
   'bunker':
-    - rsnapshot
+    - hive
+    - nfs/server
+    - mariadb
 
   'brueckenkopf':
     - letsencrypt
     - salt.master
     - opennms
     - weechat
+
+  'nas':
+    - rsnapshot
 
   'scanner':
     - scanner

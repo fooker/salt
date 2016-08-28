@@ -1,9 +1,9 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
 [NetDev]
-Description=Cluster Link to {{ remote }}
+Description=Hive Link to {{ remote }}
 
-Name=cluster-{{ pillar['cluster']['nodes'].index(remote) }}
+Name=hive-{{ pillar['hive']['nodes'].index(remote) }}
 
 Kind=gre
 

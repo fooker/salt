@@ -1,23 +1,23 @@
 {% macro address_ip4(node) -%}
 {{ '%s.%d' | format(
-    pillar['cluster']['network']['prefix']['ip4'],
-    pillar['cluster']['nodes'].index(node)
+    pillar['hive']['prefix']['ip4'],
+    pillar['hive']['nodes'].index(node)
 ) }}
 {%- endmacro %}
 
 {% macro address_ip6(node) -%}
 {{ '%s::%x' | format(
-    pillar['cluster']['network']['prefix']['ip6'],
-    pillar['cluster']['nodes'].index(node)
+    pillar['hive']['prefix']['ip6'],
+    pillar['hive']['nodes'].index(node)
 ) }}
 {%- endmacro %}
 
 
-cluster.network.ipsec:
+hive.ipsec:
   pkg.installed:
     - name: strongswan
     - sources:
-      - strongswan: salt://cluster/network/strongswan-5.4.0-2-x86_64.pkg.tar.xz
+      - strongswan: salt://hive/strongswan-5.4.0-2-x86_64.pkg.tar.xz
   service.running:
     - enable: True
     - name: strongswan
@@ -27,73 +27,73 @@ cluster.network.ipsec:
       - file: /etc/ipsec.conf
       - file: /etc/ipsec.secrets
 
-cluster.network.ipsec.conf:
+hive.ipsec.conf:
   file.managed:
     - name: /etc/ipsec.conf
-    - source: salt://cluster/network/ipsec.conf.tmpl
+    - source: salt://hive/ipsec.conf.tmpl
     - makedirs: True
     - template: jinja
 
-cluster.network.ipsec.secrets:
+hive.ipsec.secrets:
   file.managed:
     - name: /etc/ipsec.secrets
-    - source: salt://cluster/network/ipsec.secrets.tmpl
+    - source: salt://hive/ipsec.secrets.tmpl
     - makedirs: True
     - template: jinja
 
-cluster.network.iptables:
+hive.iptables:
   kmod.present:
     - name: nf_conntrack_proto_gre
     - persist: True
   file.managed:
-    - name: /etc/ferm.d/cluster.conf
-    - source: salt://cluster/network/ferm.conf
+    - name: /etc/ferm.d/hive.conf
+    - source: salt://hive/ferm.conf
     - makedirs: True
     - requires:
       - kmod: nf_conntrack_proto_gre
 
-{% for node in pillar['cluster']['nodes'] if node != grains['id'] %}
-cluster.network.tunnel.{{ node }}.netdev:
+{% for node in pillar['hive']['nodes'] if node != grains['id'] %}
+hive.tunnel.{{ node }}.netdev:
   file.managed:
-    - name: /etc/systemd/network/80-cluster-{{ node }}.netdev
-    - source: salt://cluster/network/networkd.netdev.tmpl
+    - name: /etc/systemd/network/80-hive-{{ node }}.netdev
+    - source: salt://hive/networkd.netdev.tmpl
     - makedirs: True
     - template: jinja
     - context:
         remote: {{ node }}
 
-cluster.network.tunnel.{{ node }}.hook:
+hive.tunnel.{{ node }}.hook:
   file.accumulated:
     - name: tunnels
     - filename: /etc/systemd/network/70-ext.network
-    - text: cluster-{{ pillar['cluster']['nodes'].index(node) }}
+    - text: hive-{{ pillar['hive']['nodes'].index(node) }}
     - require_in:
       - file: network.ext.network
 
-cluster.network.tunnel.{{ node }}.network:
+hive.tunnel.{{ node }}.network:
   file.managed:
-    - name: /etc/systemd/network/80-cluster-{{ node }}.network
-    - source: salt://cluster/network/networkd.network.tmpl
+    - name: /etc/systemd/network/80-hive-{{ node }}.network
+    - source: salt://hive/networkd.network.tmpl
     - makedirs: True
     - template: jinja
     - context:
         remote: {{ node }}
 {%- endfor %}
 
-clustern.network.forwarding.ipv4:
+hive.forwarding.ipv4:
   sysctl.present:
     - name: net.ipv4.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/cluster.conf
+    - config: /etc/sysctl.d/hive.conf
 
-clustern.network.forwarding.ipv6:
+hive.forwarding.ipv6:
   sysctl.present:
     - name: net.ipv6.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/cluster.conf
+    - config: /etc/sysctl.d/hive.conf
 
-{% for node in pillar['cluster']['nodes'] %}
-cluster.network.lookup.{{ node }}:
+{% for node in pillar['hive']['nodes'] %}
+hive.lookup.{{ node }}:
   host.present:
     - name: {{ node }}
     - ip:

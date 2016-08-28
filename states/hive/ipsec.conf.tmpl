@@ -13,7 +13,7 @@ conn %default
 	mobike=no
 	auto=start
 
-{% for node in pillar['cluster']['nodes'] if node != grains['id'] -%}
+{% for node in pillar['hive']['nodes'] if node != grains['id'] -%}
 conn {{ node }}
 	leftid={{ grains['id'] }}
 	left={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}

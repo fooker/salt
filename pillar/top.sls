@@ -6,7 +6,6 @@ base:
     - tinc
     - opennms
     - backup
-    - cluster
 
   'router':
     - forwardings
@@ -21,6 +20,7 @@ base:
   '*-zitadelle or bunker':
     - match: compound
     - database
+    - hive
 
   '*-zitadelle or bunker or brueckenkopf':
     - match: compound

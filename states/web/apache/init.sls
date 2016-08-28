@@ -1,5 +1,6 @@
 include:
   - letsencrypt
+  - nfs/client
 
 
 web.apache:
@@ -28,6 +29,15 @@ web.apache.conf.{{ conf }}:
     - name: /etc/httpd/conf/httpd.{{ conf }}.conf
     - source: salt://web/apache/httpd.{{ conf }}.conf
 {% endfor %}
+
+web.apache.mount:
+  mount.mounted:
+    - name: /srv/http
+    - device: /mnt/data/http
+    - fstype: none
+    - mkmnt: True
+    - opts: bind
+    - persist: True
 
 web.apache.default:
   file.managed:

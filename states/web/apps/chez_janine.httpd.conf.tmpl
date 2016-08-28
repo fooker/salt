@@ -1,6 +1,7 @@
 <VirtualHost *:80>
-  ServerName chez-janine.de
-  ServerAlias www.chez-janine.de
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
 
   RewriteEngine On
   RewriteCond %{HTTPS} !=on
@@ -8,8 +9,9 @@
 </VirtualHost>
 
 <VirtualHost *:443>
-  ServerName chez-janine.de
-  ServerAlias www.chez-janine.de
+  {% for domain in pillar.web.apps[app].domains -%}
+  {% if loop.first -%} ServerName {%- else -%} ServerAlias {%- endif %} {{ domain }}
+  {% endfor %}
 
   DocumentRoot /srv/http/chez_janine
 
