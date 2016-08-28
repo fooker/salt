@@ -20,4 +20,5 @@ salt-master.iptables:
   file.managed:
     - name: /etc/ferm.d/salt-master.conf
     - source: salt://salt/master.ferm.conf
-    - makedirs: True
+    - require_in:
+      - file: ferm

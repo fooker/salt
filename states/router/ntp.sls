@@ -20,4 +20,5 @@ ntp.iptables:
   file.managed:
     - name: /etc/ferm.d/ntp.conf
     - source: salt://router/ferm.ntp.conf
-    - makedirs: True
+    - require_in:
+      - file: ferm

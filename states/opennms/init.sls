@@ -25,5 +25,5 @@ opennms.iptables:
   file.managed:
     - name: /etc/ferm.d/opennms.conf
     - source: salt://opennms/ferm.conf
-    - makedirs: True
-
+    - require_in:
+      - file: ferm

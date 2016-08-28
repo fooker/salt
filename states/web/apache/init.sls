@@ -55,5 +55,6 @@ web.apache.iptables:
   file.managed:
     - name: /etc/ferm.d/apache.conf
     - source: salt://web/apache/ferm.conf
-    - makedirs: True
+    - require_in:
+      - file: ferm
 

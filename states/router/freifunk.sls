@@ -8,5 +8,5 @@ freifunk.ferm:
   file.managed:
     - name: /etc/ferm.d/freifunk.conf
     - source: salt://router/ferm.freifunk.conf
-    - makedirs: True
-
+    - require_in:
+      - file: ferm

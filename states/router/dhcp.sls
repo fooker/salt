@@ -12,5 +12,5 @@ dhcp.ferm:
   file.managed:
     - name: /etc/ferm.d/dhcp.conf
     - source: salt://router/ferm.dhcp.conf
-    - makedirs: True
-
+    - require_in:
+      - file: ferm

@@ -11,5 +11,5 @@ tftp.ferm:
   file.managed:
     - name: /etc/ferm.d/tftp.conf
     - source: salt://router/ferm.tftp.conf
-    - makedirs: True
-
+    - require_in:
+      - file: ferm

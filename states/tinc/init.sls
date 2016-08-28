@@ -91,6 +91,7 @@ tinc.{{ instance }}.ferm:
     - name: /etc/ferm.d/tinc.{{ instance }}.conf
     - source: salt://tinc/ferm.conf.tmpl
     - template: jinja
-    - makedirs: True
+    - require_in:
+      - file: ferm
 
 {% endif -%}

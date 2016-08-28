@@ -48,9 +48,10 @@ hive.iptables:
   file.managed:
     - name: /etc/ferm.d/hive.conf
     - source: salt://hive/ferm.conf
-    - makedirs: True
     - requires:
       - kmod: nf_conntrack_proto_gre
+    - require_in:
+      - file: ferm
 
 {% for node in pillar['hive']['nodes'] if node != grains['id'] %}
 hive.tunnel.{{ node }}.netdev:

@@ -39,5 +39,5 @@ dns.ferm:
   file.managed:
     - name: /etc/ferm.d/dns.conf
     - source: salt://router/ferm.dns.conf
-    - makedirs: True
-
+    - require_in:
+      - file: ferm
