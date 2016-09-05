@@ -29,6 +29,22 @@ database:
         =ZeIu
         -----END PGP MESSAGE-----
 
+    ak36:
+      password: |
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v2
+        
+        hQEMA0EEvUwCdTjhAQgAkETx1Jhy1S3SRWBgElfd/pu+36t0mP0tfKAOIZAqNjo+
+        Fo+9MYmBC5DYwaG7pTqQMb6vNLziEYr/vRWL+Bo3DsB2v9NGdWRZEtD8WRDfTVIR
+        45Kw0UdgJZLS++IlfOG0m/EML0KWrFZNB13HPOEM7jDp0N9KQ8w9mxiA2Nz8alBF
+        xJlkYwAUWbu3ZfnFjzVy6WAnGn/m1fAlD6B0FkTMZZ/k4shGMyRayDr8MFOyoNqi
+        kbA/WpfSPvvGS5afcHylQYGIXXv2nv2XX2eLlJ8buOjCp+iThoKZXqCZncVeHXDo
+        RYvYrNxR2S0OWibIFePHtuc64pM0MonPDJw3VtXx3tJLAV2ConpHtXuXwRIbtIZx
+        VLXLQR4oxd1053N1OhlTOBjPsHRfXJxEw48ecTfHJ2aQTq8jRCuyLVz3eJNdMktx
+        WBAxxu6dfztCXgWP
+        =hNdu
+        -----END PGP MESSAGE-----
+
     open_desk:
       password: |
         -----BEGIN PGP MESSAGE-----

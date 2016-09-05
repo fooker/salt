@@ -39,8 +39,9 @@ web.php.memcached:
       - memcached
   file.managed:
     - name: /etc/systemd/system/memcached.service.d/service.conf
-    - source: salt://web/php/memcached.service.conf
+    - source: salt://web/php/memcached.service.conf.tmpl
     - makedirs: True
+    - template: jinja
   service.running:
     - enable: True
     - name: memcached
