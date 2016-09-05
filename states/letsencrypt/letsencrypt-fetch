@@ -1,0 +1,28 @@
+#! /bin/bash
+
+set -e
+set -u
+set -f
+
+
+if [[ "${#}" -ne 1 ]]; then
+	echo "Usage: ${0} <domain>"
+	exit 1
+fi
+
+DOMAIN="${1}"
+
+rm -f "/etc/letsencrypt/domains/${DOMAIN}.crt.new"
+
+acme_tiny \
+	--account-key "/etc/letsencrypt/account.key" \
+	--csr "/etc/letsencrypt/domains/${DOMAIN}.csr" \
+	--acme-dir "/var/run/letsencrypt" \
+	>> "/etc/letsencrypt/domains/${DOMAIN}.crt.new"
+
+cat "/etc/letsencrypt/root.crt" \
+	>> "/etc/letsencrypt/domains/${DOMAIN}.crt.new"
+
+mv "/etc/letsencrypt/domains/${DOMAIN}.crt.new" \
+	"/etc/letsencrypt/domains/${DOMAIN}.crt"
+

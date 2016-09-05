@@ -5,7 +5,13 @@ include:
 letsencrypt:
   pkg.installed:
     - sources:
-      - acme-tiny: salt://letsencrypt/acme-tiny-0.0.1.f61f72c-1-any.pkg.tar.xz
+      - acme-tiny: salt://letsencrypt/acme-tiny-0.0.1.daba51d-2-any.pkg.tar.xz
+
+letsencrypt.script:
+  file.managed:
+    - name: /usr/local/bin/letsencrypt-fetch
+    - source: salt://letsencrypt/letsencrypt-fetch
+    - mode: 755
 
 letsencrypt.account.key:
   file.managed:
@@ -70,13 +76,7 @@ letsencrypt.domains.{{ module }}.csr:
 letsencrypt.domains.{{ module }}.crt:
   cmd.wait:
     - creates: /etc/letsencrypt/domains/{{ module }}.crt
-    - name: ( acme_tiny
-                --account-key /etc/letsencrypt/account.key
-                --csr /etc/letsencrypt/domains/{{ module }}.csr
-                --acme-dir /var/run/letsencrypt
-            &&
-              cat /etc/letsencrypt/root.crt
-            ) > /etc/letsencrypt/domains/{{ module }}.crt
+    - name: /usr/local/bin/letsencrypt-fetch {{ module }}
     - watch:
       - cmd: letsencrypt.domains.{{ module }}.csr
     - require:
@@ -84,13 +84,7 @@ letsencrypt.domains.{{ module }}.crt:
 
 letsencrypt.domains.{{ module }}.cron:
   cron.present:
-    - name: ( acme_tiny
-                  --account-key /etc/letsencrypt/account.key
-                  --csr /etc/letsencrypt/domains/{{ module }}.csr
-                  --acme-dir /var/run/letsencrypt
-            &&
-              cat /etc/letsencrypt/root.crt
-            ) > /etc/letsencrypt/domains/{{ module }}.crt
+    - name: /usr/local/bin/letsencrypt-fetch {{ module }}
     - minute: random
     - hour: random
     - daymonth: random
