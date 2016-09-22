@@ -75,7 +75,7 @@ mariadb.rsnapshot:
     - name: rsnapshot.backups
     - filename: /etc/rsnapshot.conf.incl
     - text: |
-        backup_script	/usr/bin/innobackupex --no-timestamp --backup . &> /dev/null	{{ grains['id'] }}/mariadb
+        backup_script	/usr/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=no -a -i /etc/rsnapshot.id root@bunker.dev.open-desk.net '/usr/bin/innobackupex --stream=tar ./ 2> /dev/null' | tar -x	mariadb
     - require_in:
       - file: rsnapshot.target.conf
 {%- endif %}
