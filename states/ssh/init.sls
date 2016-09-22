@@ -24,9 +24,12 @@ sshd.root.authorized_keys.{{ owner }}:
     - comment: {{ owner }}
 {% endfor %}
 
+
+{% if grains['public'] %}
 sshd.iptables:
   file.managed:
     - name: /etc/ferm.d/sshd.conf
     - source: salt://ssh/ferm.conf
     - require_in:
       - file: ferm
+{% endif %}
