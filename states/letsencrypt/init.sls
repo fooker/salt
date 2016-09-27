@@ -58,7 +58,7 @@ letsencrypt.domains.{{ module }}.cfg:
         domains: [{{ domains | map('yaml_dquote') | join(',') }}]
 
 letsencrypt.domains.{{ module }}.csr:
-  cmd.wait:
+  cmd.run:
     - name: |
         openssl req \
             -batch \
@@ -74,7 +74,7 @@ letsencrypt.domains.{{ module }}.csr:
       - file: /etc/letsencrypt/domains.key
 
 letsencrypt.domains.{{ module }}.crt:
-  cmd.wait:
+  cmd.run:
     - creates: /etc/letsencrypt/domains/{{ module }}.crt
     - name: /usr/local/bin/letsencrypt-fetch {{ module }}
     - watch:
