@@ -25,11 +25,17 @@ letsencrypt.domains.key:
     - contents_pillar: letsencrypt:domains:key
     - makedirs: True
 
+#letsencrypt.root.crt:
+#  file.managed:
+#    - name: /etc/letsencrypt/root.crt
+#    - source: https://letsencrypt.org/certs/isrgrootx1.pem
+#    - source_hash: sha512=3032f6c4a2be35fb0d1d5a75447241d8f67b8d3175fdfee25bb98f5b43910447e4a0348e03768847259b140b948108b2d60a2eef64715a9db023bdb0c012d03c
+
 letsencrypt.root.crt:
   file.managed:
     - name: /etc/letsencrypt/root.crt
-    - source: https://letsencrypt.org/certs/lets-encrypt-x1-cross-signed.pem
-    - source_hash: sha512=a345f020969b9a1f60cede5873e282d238c2e8c5bfa0cf163518cee6d5fb78525158425ea64ca7b7fdec8db332000bb997a8b8863b0e31afab230a29da53bb76
+    - source: https://letsencrypt.org/certs/lets-encrypt-x3-cross-signed.pem
+    - source_hash: sha512=0fa893f751f0880c7d89c398cae9708f5ff04d466832fb6160a824395032259ac52e02a44da531d0f8bf7e310298b0067b1e8257f816d3223034f391ecba491d
 
 {% if grains['role'] != 'worker' %}
 letsencrypt.wellknown:
@@ -69,17 +75,15 @@ letsencrypt.domains.{{ module }}.csr:
             -sha256 \
             -subj '/' \
             -config /etc/letsencrypt/domains/{{ module }}.cfg \
-    - watch:
+    - onchanges:
       - file: /etc/letsencrypt/domains/{{ module }}.cfg
       - file: /etc/letsencrypt/domains.key
 
 letsencrypt.domains.{{ module }}.crt:
   cmd.run:
-    - creates: /etc/letsencrypt/domains/{{ module }}.crt
     - name: /usr/local/bin/letsencrypt-fetch {{ module }}
-    - watch:
+    - onchanges:
       - cmd: letsencrypt.domains.{{ module }}.csr
-    - require:
       - file: /etc/letsencrypt/root.crt
 
 letsencrypt.domains.{{ module }}.cron:
