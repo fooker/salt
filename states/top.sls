@@ -57,6 +57,7 @@ base:
     - hive
     - nfs/server
     - mariadb
+    - syncthing
 
   'brueckenkopf':
     - letsencrypt
@@ -66,6 +67,7 @@ base:
 
   'nas':
     - rsnapshot
+    - syncthing
 
   'scanner':
     - scanner
