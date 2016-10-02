@@ -18,11 +18,9 @@ DNS=10.185.0.2
 DNS=10.185.0.3
 DNS=10.185.0.4
 
-IPv6AcceptRouterAdvertisements=no
-
 
 [Address]
-Address={{ pillar['addresses'][grains['id']]['ffx']['data']['ip4'] }}/16
+Address={{ pillar['addresses'][grains['id']]['ffx']['data']['ip4'] }}/18
 
 [Address]
 Address={{ pillar['addresses'][grains['id']]['ffx']['data']['ip6'] }}/64
