@@ -1,6 +1,6 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
 [NetDev]
-Name=int.mngt{% if bridged %}.tinc{% endif %}
+Name={{ pillar.tinc[instance].interface }}{% if bridged %}.tinc{% endif %}
 
 Kind=tap

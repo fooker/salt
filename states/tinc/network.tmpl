@@ -1,10 +1,8 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
 [Match]
-Name=int.mngt.tinc
+Name={{ pillar.tinc[instance].interface }}.tinc
 
 
 [Network]
-Bridge=int.mngt
-
-IPv6AcceptRouterAdvertisements=no
+Bridge={{ pillar.tinc[instance].interface }}

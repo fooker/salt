@@ -1,14 +1,11 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-{% if 'ext' in pillar['addresses'][host] and 'hostname' in pillar['addresses'][host]['ext'] -%}
-Address={{ pillar['addresses'][host]['ext']['hostname'] }}
-Port={{ pillar['tinc']['port'] }}
-{%- endif %}
-
-{% if False and 'bridged' in pillar['tinc']['hosts'][host] and pillar['tinc']['hosts'][host]['bridged'] -%}
-Subnet={{ pillar['networks']['mngt']['network'] }}/{{ pillar['networks']['mngt']['netmask'] }}
+{% if 'port' in pillar.tinc[instance].hosts[host] -%}
+{% if 'host' in pillar.tinc[instance].hosts[host] -%}
+Address={{ pillar.tinc[instance].hosts[host].host }} {{ pillar.tinc[instance].hosts[host].port }}
 {%- else -%}
-Subnet={{ pillar['addresses'][host]['int']['mngt']['ip4'] }}
+Address={{ pillar.addresses[host].ext.hostname }} {{ pillar.tinc[instance].hosts[host].port }}
+{%- endif %}
 {%- endif %}
 
-{{ pillar['tinc']['hosts'][host]['pub'] }}
+{{ pillar.tinc[instance].hosts[host].public_key }}

@@ -1,13 +1,19 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-Name={{ grains['id'] | replace('-', '_') }}
+Name={{ pillar.tinc[instance].hosts[grains.id].identity | default(grains.id | replace('-', '_')) }}
 
 DeviceType=tap
-Interface=int.mngt{% if bridged %}.tinc{% endif %}
+Interface={{ pillar.tinc[instance].interface }}{% if bridged %}.tinc{% endif %}
+
+{% if 'port' in pillar.tinc[instance].hosts[grains.id] -%}
+Port={{ pillar.tinc[instance].hosts[grains.id].port }}
+{%- else -%}
+Port=0
+{%- endif %}
 
 Mode=switch
 ReplayWindow=512
 
-{% for host in pillar['tinc']['hosts'].keys() if host != grains['id'] and 'ext' in pillar['addresses'][host] and 'hostname' in pillar['addresses'][host]['ext'] -%}
-ConnectTo={{ host | replace('-', '_') }}
+{% for connect in accumulator['connects'] | sort -%}
+ConnectTo={{ connect }}
 {% endfor -%}

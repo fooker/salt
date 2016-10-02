@@ -5,5 +5,5 @@ table filter
 chain INPUT
 interface ext
 proto (tcp udp)
-dport {{ pillar['tinc']['port'] }}
+dport {{ port }}
 ACCEPT;
