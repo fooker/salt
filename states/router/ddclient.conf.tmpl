@@ -9,8 +9,8 @@ pid=/var/run/ddclient.pid
 # Use ssl-support.
 ssl=yes
 
-# Update via web
-use=web, web=https://{{ pillar['ddclient']['provider'] }}/nic/ip
+# Update via local interface
+use=if, if=ppp0
 
 # Define hostname
 protocol=noip, \
