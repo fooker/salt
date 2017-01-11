@@ -1,11 +1,11 @@
 salt-master:
   pkg.installed:
-    - name: salt-zmq
+    - name: salt
   service.running:
     - enable: True
     - name: salt-master
     - require:
-      - pkg: salt-zmq
+      - pkg: salt
     - watch:
       - file: /etc/salt/master
 

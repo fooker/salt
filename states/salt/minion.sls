@@ -5,12 +5,12 @@ salt-minion.gnupg:
 
 salt-minion:
   pkg.installed:
-    - name: salt-zmq
+    - name: salt
   service.running:
     - enable: True
     - name: salt-minion
     - watch:
-      - pkg: salt-zmq
+      - pkg: salt
       - file: /etc/salt/minion.d/*
 
 salt-minion.hash_type:
