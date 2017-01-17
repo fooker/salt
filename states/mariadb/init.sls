@@ -20,10 +20,10 @@ mariadb.galera:
 mariadb:
   service.running:
     - enable: True
-    - name: mysqld
+    - name: mariadb
     - require:
       - pkg: mariadb
-      - cmd: mariadb.init.pre
+      - cmd: mariadb.init
     - watch:
       - file: /etc/mysql/*
       - pkg: mariadb
@@ -35,7 +35,7 @@ mariadb.config:
     - makedirs: True
     - template: jinja
 
-mariadb.init.pre:
+mariadb.init:
   cmd.run:
     - name: mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
     - creates: /var/lib/mysql
@@ -62,12 +62,16 @@ mariadb.auth.local:
     - host: localhost
     - allow_passwordless: True
     - unix_socket: True
+    - require:
+      - service: mariadb
 
 mariadb.auth.monitoring:
   mysql_user.present:
     - name: monitoring
     - password: "{{ pillar['database']['accounts']['monitoring']['password'] }}"
     - host: {{ pillar['addresses'][pillar['database']['accounts']['monitoring']['host']]['int']['mngt']['ip4'] }}
+    - require:
+      - service: mariadb
 
 {% if grains['id'] == "bunker" -%}
 mariadb.rsnapshot:
