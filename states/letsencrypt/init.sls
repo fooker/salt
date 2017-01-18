@@ -1,3 +1,5 @@
+{% import 'nfs/client/init.sls' as nfs %}
+
 include:
   - common.cron
 
@@ -42,14 +44,7 @@ letsencrypt.wellknown:
   file.directory:
     - name: /run/letsencrypt
 {% else %}
-letsencrypt.wellknown:
-  mount.mounted:
-    - name: /run/letsencrypt
-    - device: /mnt/data/letsencrypt
-    - fstype: none
-    - mkmnt: True
-    - opts: bind
-    - persist: True
+{{ nfs.mount('letsencrypt', 'letsencrypt', '/run/letsencrypt') }}
 {% endif %}
 
 

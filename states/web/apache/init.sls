@@ -1,3 +1,5 @@
+{% import 'nfs/client/init.sls' as nfs %}
+
 include:
   - letsencrypt
   - nfs/client
@@ -9,6 +11,7 @@ web.apache:
     - pkgs:
       - apache
       - nghttp2
+      - php-apache
   service.running:
     - enable: True
     - name: httpd
@@ -31,20 +34,15 @@ web.apache.conf.{{ conf }}:
     - source: salt://web/apache/httpd.{{ conf }}.conf
 {% endfor %}
 
-web.apache.mount:
-  mount.mounted:
-    - name: /srv/http
-    - device: /mnt/data/http
-    - fstype: none
-    - mkmnt: True
-    - opts: bind
-    - persist: True
+{{ nfs.mount('apache', 'http', '/srv/http') }}
 
 web.apache.default:
   file.managed:
     - name: /srv/http/default/index.html
     - source: salt://web/apache/default.index.html
     - makedirs: True
+    - require:
+      - mount: nfs.client.mount.apache
 
 web.apache.default.conf:
   file.managed:
