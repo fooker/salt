@@ -1,4 +1,9 @@
 web:
+  php:
+    packages:
+      - memcache
+      - memcached
+
   apps:
     chez_janine:
       domains:

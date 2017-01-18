@@ -1,6 +1,7 @@
 include:
   - letsencrypt
   - nfs/client
+  - web/php
 
 
 web.apache:

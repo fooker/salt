@@ -6,7 +6,9 @@ web.php:
   pkg.installed:
     - pkgs:
       - php
-      - php-apache
+{%- for package in pillar.web.php.packages %}
+      - php-{{ package }}
+{%- endfor %}
 
 web.php.extensions:
   pkg.installed:
