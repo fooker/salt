@@ -46,6 +46,7 @@ base:
     - router.vnstat
     - router.ddclient
     - router.freifunk
+    - unifi
 
   '*-zitadelle':
     - hive
