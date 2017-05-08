@@ -30,5 +30,12 @@ weechat.service:
       - pkg: weechat
       - file: /etc/systemd/system/weechat.service
 
+weechat.iptables:
+  file.managed:
+    - name: /etc/ferm.d/weechat.conf
+    - source: salt://weechat/ferm.conf
+    - require_in:
+      - file: ferm
+
 {{ backup.target('weechat', '/var/lib/weechat') }}
 
