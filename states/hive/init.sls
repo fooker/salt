@@ -48,7 +48,7 @@ hive.iptables:
   file.managed:
     - name: /etc/ferm.d/hive.conf
     - source: salt://hive/ferm.conf
-    - requires:
+    - require:
       - kmod: nf_conntrack_proto_gre
     - require_in:
       - file: ferm

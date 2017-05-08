@@ -4,6 +4,6 @@ cron:
   service.running:
     - enable: True
     - name: cronie
-    - requires:
+    - require:
       - pkg: cronie
 
