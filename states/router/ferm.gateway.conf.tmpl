@@ -4,7 +4,7 @@
 domain ip
 table nat
 chain POSTROUTING
-out-interface ppp0
+out-interface (ppp0 maglab)
 MASQUERADE;
 
 domain (ip ip6)
@@ -17,6 +17,7 @@ chain FORWARD {
   in-interface (int.mngt int.priv int.open) out-interface ppp0      ACCEPT;
   in-interface (int.mngt int.priv int.open) out-interface ext.sixxs ACCEPT;
   in-interface int.priv                     out-interface int.open  ACCEPT;
+  in-interface (int.mngt int.priv int.open) out-interface maglab    ACCEPT;
 
   # Allow related connections to be forwarded back to originator
   mod conntrack ctstate INVALID DROP;

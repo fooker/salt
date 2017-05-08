@@ -307,7 +307,7 @@ tinc:
     interface: maglab
     hosts:
       router:
-        identity: kufuewg
+        identity: alien_kufuewg
         bridged: True
         private_key: |
           -----BEGIN PGP MESSAGE-----
@@ -358,7 +358,7 @@ tinc:
           -----END RSA PUBLIC KEY-----
 
       mobile:
-        identity: fooker
+        identity: alien_fooker
         private_key: |
           -----BEGIN PGP MESSAGE-----
           hQEMA0EEvUwCdTjhAQf/T5K3Ymak0nwwlVNlCakiYlf2p9Sh402gOoNvJyuMQLv1
@@ -412,12 +412,18 @@ tinc:
         host: marvin.maglab.space
         port: 6555
         public_key: |
-          -----BEGIN RSA PUBLIC KEY-----
-          MIIBCgKCAQEA2fRQ3Z44zUfcYulfFgcvFoHamCinzKecmeVKPSP23hqtUQJYjH2+
-          VjfqtC4y9slbvr5d+IxmhxginuC4/gVKmYZ+CGu54SdavnbPrCQ393IFQR5FNxLf
-          wYWtjv+H+krYd+rWpn1Je3m+cOwt4+Ayxz0VIxBg88LsV/QS7ckWdYp8a7FH+2i3
-          PUnn4o4T8RQ264PjV4iTtyi7RC1KhHRJ3qwdvdkh19rGR7JJbFIeBgMVg4MBwiZq
-          vb6VLH2nbog7CcAkLkkAVs+QszOvD2AAfWcGI7IO6gJMVAPx2iaTtB6aayq80e97
-          Imt4tVXva8taYwfeFtRHoCDbkkwcyLHUyQIDAQAB
-          -----END RSA PUBLIC KEY-----
+          -----BEGIN PUBLIC KEY-----
+          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAp1iiWPAccpkPp6CpgntH
+          vh+s8KmQB98aoScnOheQ5cTPb5BpGioq/n4K8rBBjNesfRygCU/KmZ8XZgrthNaY
+          zVy9Gp1Q/OE5/Moa1wgN681LDTWZRCvu6+qGTWUuWqKcxmc1Tv162+MAH8O8zRXb
+          dglpFKpk6UUyl5Ejzrj299Xftlg8YNmCWwW/YCvFXSXvWsP8bLWHIdT8NwtO1kHH
+          vCzcKGtsX2MgZGg0CxVnDMkJc6cFbOrB5yvkjWs4YOxxnGyhoMIeuTQrmZi1J/cp
+          SJpoKXsDO+RE42HEx/Mid1ceC6hJWlI04s3kjLOYt54Ik+zy7rNSy4GOnKY5+/Rc
+          HlHfCuEFS8ktrFE47hxWsNu8XuhQajJBrGTtTBorseXIO2+Ld0ULfWvfIn9gKDzK
+          kYO2IOKVPoNCs40ClKgApFOQYoF+VJMbArAEQHnZkt3Jjd1yTlNZATMEw9G+EiWQ
+          gbkf7TSC9783fOL7Mme0tbDjcS5zHzgS4FLfLUa1zVhWSV8wLkApej6Oq1+Pj78C
+          FAqE6D9HsZYmguhvshY73FzQWacSskAKKULjucnHk5BpTI4t0/KwTC+fo9NH3unJ
+          imBgVl/k6AFA5T05aIKqm3JXj2EtMJg1abP0wnPelBvSmyktSCOkLo11DnN4FQyN
+          PgWFFP0D3dQWiuGUuJMyYzECAwEAAQ==
+          -----END PUBLIC KEY-----
 

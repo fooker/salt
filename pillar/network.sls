@@ -50,6 +50,10 @@ addresses:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.185.1.101
         ip6: fd00:65a8:93a4::1:65
+    maglab:
+      ip4:
+        mac: ~
+        ip4: 172.23.172.63
   modem:
     int:
       mngt:
