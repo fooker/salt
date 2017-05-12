@@ -13,6 +13,7 @@ base:
     - aiccu
     - ddclient
     - locums
+    - peerings
 
   '*-zitadelle':
     - web
@@ -20,7 +21,7 @@ base:
   '*-zitadelle or bunker':
     - match: compound
     - database
-    - hive
+    - peerings
 
   '*-zitadelle or bunker or brueckenkopf':
     - match: compound

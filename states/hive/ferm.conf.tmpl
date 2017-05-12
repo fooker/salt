@@ -1,0 +1,13 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Allow all hive traffic
+domain (ip ip6)
+table filter
+chain INPUT
+source (
+  {%- for node in pillar.peering.interfaces if 'hive' in pillar.peering.interfaces[node] %}
+  {{ pillar.peering.interfaces[node].hive.ip4.address }}
+  {%- endfor %}
+)
+ACCEPT;
+

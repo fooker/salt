@@ -6,7 +6,10 @@
 extension = memcached.so
 
 session.save_handler = memcached
-session.save_path = {{ hive.address_ip4('north-zitadelle') }}:11211,{{ hive.address_ip4('south-zitadelle') }}:11211
+session.save_path = {% for node in pillar.peering.interfaces if node != grains.id and 'hive' in pillar.peering.interfaces[node] -%}
+{{ pillar.peering.interfaces[node].hive.ip4.address }}:11211
+{%- if not loop.last -%},{%- endif -%}
+{%- endfor %}
 
 #memcached.serializer = php
 

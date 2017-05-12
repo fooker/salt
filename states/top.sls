@@ -46,10 +46,12 @@ base:
     - router.vnstat
     - router.ddclient
     - router.freifunk
+    - peering
     - unifi
 
   '*-zitadelle':
     - hive
+    - peering
     - nfs/client
     - mariadb
     - web.apps

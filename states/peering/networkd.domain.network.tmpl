@@ -1,0 +1,15 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name={{ domain }}
+
+
+[Network]
+Description=Network {{ domain }}
+
+[Address]
+Address={{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}
+
+[Address]
+Address={{ pillar.peering.interfaces[grains.id][domain].ip6.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}
+

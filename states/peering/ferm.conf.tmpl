@@ -1,0 +1,50 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+domain (ip ip6)
+table filter {
+  chain INPUT {
+
+    # Allow IPSec
+    proto udp
+    dport (500 4500)
+    ACCEPT;
+
+    # Allow GRE only over IPSec
+    proto gre {
+      mod policy
+      dir in
+      pol ipsec
+      ACCEPT;
+
+      DROP;
+    }
+
+    # Allow routing protocols on peer links
+    {%- for peer in pillar.peering.transfers[grains.id] %}
+    {%- if pillar.peering.peers[peer].proto == 'ospf' %}
+    interface peer.{{ pillar.peering.peers[peer].netdev }} proto OSPFIGP ACCEPT;
+    {%- endif %}
+    {%- endfor %}
+  }
+
+  chain OUTPUT {
+    # Allow GRE only over IPSec
+    proto gre {
+      mod policy
+      dir out
+      pol ipsec
+      ACCEPT;
+
+      DROP;
+    }
+  }
+}
+
+# Allow forwarding between nodes
+domain (ip ip6)
+table filter
+chain FORWARD
+in-interface peer.+
+out-interface peer.+
+ACCEPT;
+

@@ -44,11 +44,12 @@ myisam_sort_buffer_size	= 8M
 wsrep_on				= on
 wsrep_provider			= /usr/lib/libgalera_smm.so
 wsrep_cluster_name		= open-desk
-wsrep_cluster_address	= gcomm://{% for node in pillar['hive']['nodes'] if node != grains['id'] -%}
-  {{ hive.address_ip4(node) }}{%- if not loop.last -%},{%- endif -%}
+wsrep_cluster_address	= gcomm://{% for node in pillar.peering.interfaces if node != grains.id and 'hive' in pillar.peering.interfaces[node] -%}
+{{ pillar.peering.interfaces[node].hive.ip4.address }}
+{%- if not loop.last -%},{%- endif -%}
 {%- endfor %}
-wsrep_node_address		= {{ hive.address_ip4(grains['id']) }}
-wsrep_node_name			= {{ grains['id'] }}
+wsrep_node_address		= {{ pillar.peering.interfaces[grains.id].hive.ip4.address }}
+wsrep_node_name			= {{ grains.id }}
 wsrep_sst_method		= rsync
 
 

@@ -5,12 +5,14 @@ salt-minion.gnupg:
 
 salt-minion:
   pkg.installed:
-    - name: salt
+    - pkgs:
+      - python2-psutil
+      - salt
   service.running:
     - enable: True
     - name: salt-minion
     - watch:
-      - pkg: salt
+      - pkg: salt-minion
       - file: /etc/salt/minion.d/*
 
 salt-minion.hash_type:

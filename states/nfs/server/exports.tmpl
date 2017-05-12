@@ -1,3 +1,3 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-/srv/data {{ pillar['hive']['prefix']['ip4'] }}.0/24(rw,fsid=root,no_subtree_check,no_root_squash)
+/srv/data{% for node in pillar.peering.interfaces if 'hive' in pillar.peering.interfaces[node] %} {{ pillar.peering.interfaces[node].hive.ip4.address }}(rw,fsid=root,no_subtree_check,no_root_squash){% endfor %}

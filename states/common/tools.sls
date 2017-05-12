@@ -8,4 +8,5 @@ tools:
       - less
       - vim
       - rxvt-unicode-terminfo
+      - psutils
 

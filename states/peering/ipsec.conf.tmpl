@@ -1,0 +1,25 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+config setup
+
+conn %default
+	type=tunnel
+	ikelifetime=60m
+	keylife=20m
+	rekeymargin=3m
+	keyingtries=1
+	authby=secret
+	keyexchange=ikev2
+	mobike=no
+	auto=start
+
+{% for peer in pillar.peering.transfers[grains.id] %}
+conn {{ peer }}
+	left={{ pillar.addresses[grains.id].ext.ip4.address }}
+	right={{ pillar.peering.peers[peer].remote }}
+	
+	authby=pubkey
+	leftsigkey=self.pem
+	rightsigkey={{ peer }}.pem
+{% endfor %}
+

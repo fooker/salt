@@ -33,7 +33,7 @@ database:
       password: |
         -----BEGIN PGP MESSAGE-----
         Version: GnuPG v2
-        
+
         hQEMA0EEvUwCdTjhAQgAkETx1Jhy1S3SRWBgElfd/pu+36t0mP0tfKAOIZAqNjo+
         Fo+9MYmBC5DYwaG7pTqQMb6vNLziEYr/vRWL+Bo3DsB2v9NGdWRZEtD8WRDfTVIR
         45Kw0UdgJZLS++IlfOG0m/EML0KWrFZNB13HPOEM7jDp0N9KQ8w9mxiA2Nz8alBF

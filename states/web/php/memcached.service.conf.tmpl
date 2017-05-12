@@ -6,6 +6,6 @@
 ExecStart=
 ExecStart=/usr/bin/memcached \
         -p 11211 \
-        -l {{ hive.address_ip4(grains['id']) }} \
+        -l {{ pillar.peering.interfaces[grains.id].hive.ip4.address }} \
         -m 512
 

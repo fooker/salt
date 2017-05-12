@@ -1,0 +1,49 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+protocol device {
+	scan time 10;
+}
+
+{% for domain in pillar.peering.domains -%}
+table {{ domain }};
+
+protocol direct {{ domain }}_direct {
+	interface "{{ domain }}";
+	check link yes;
+
+	table {{ domain }};
+	import all;
+	export none;
+}
+
+protocol ospf {{ domain }}_ospf {
+	router id {{ pillar.peering.interfaces[grains.id][domain].ip4.address }};
+
+	instance id {{ pillar.peering.domains[domain].ospf_id }};
+
+	area 0 {
+		{%- for peer in pillar.peering.transfers[grains.id] if domain in pillar.peering.peers[peer].domains %}
+		interface "peer.{{ pillar.peering.peers[peer].netdev }}" {
+			type pointopoint;
+		};
+		{%- endfor %}
+	};
+
+	table {{ domain }};
+	import all;
+	export all;
+}
+
+protocol kernel {{ domain }}_kernel {
+	persist;
+
+	table {{ domain }};
+	import none;
+	export filter {
+		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip4.address }};
+		accept;
+	};
+}
+
+{% endfor -%}
+
