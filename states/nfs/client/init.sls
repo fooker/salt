@@ -6,7 +6,7 @@ include:
 nfs.client.mount.{{ module }}:
   mount.mounted:
     - name: {{ target }}
-    - device: 'bunker://{{ source }}'
+    - device: 'bunker:/{{ source }}'
     - fstype: nfs4
     - mkmnt: True
     - opts: noatime
