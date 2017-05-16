@@ -11,15 +11,21 @@ conn %default
 	authby=secret
 	keyexchange=ikev2
 	mobike=no
+	type=transport
 	auto=start
+	leftsubnet=%dynamic[gre]
+	rightsubnet=%dynamic[gre]
 
 {% for peer in pillar.peering.transfers[grains.id] %}
 conn {{ peer }}
-	left={{ pillar.addresses[grains.id].ext.ip4.address }}
+	left=%any
 	right={{ pillar.peering.peers[peer].remote }}
 	
 	authby=pubkey
 	leftsigkey=self.pem
 	rightsigkey={{ peer }}.pem
+
+	ike={{ pillar.peering.peers[peer].ike }}
+	esp={{ pillar.peering.peers[peer].esp }}
 {% endfor %}
 

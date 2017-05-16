@@ -7,9 +7,6 @@ Name=peer.{{ pillar.peering.peers[peer].netdev }}
 [Network]
 Description=Peering with {{ peer }}
 
-# This tunnel is hardly bound to the external interface
-BindCarrier=ext
-
 # No link lokal addressing
 LinkLocalAddressing=no
 
@@ -23,6 +20,6 @@ Peer={{ pillar.peering.transfers[grains.id][peer].ip4.remote }}/32
 
 
 [Address]
-Address={{ pillar.peering.transfers[grains.id][peer].ip6.local }}/128
-Peer={{ pillar.peering.transfers[grains.id][peer].ip6.remote }}/128
+Address={{ pillar.peering.transfers[grains.id][peer].ip6.local }}/64
+Peer={{ pillar.peering.transfers[grains.id][peer].ip6.remote }}/64
 

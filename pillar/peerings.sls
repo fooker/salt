@@ -5,17 +5,53 @@
 peering:
   domains:
     hive:
-      ospf_id: 23
+      ospf:
+        instance_id: 23
+      exports:
+        ip4:
+          - 192.168.33.0/24
+        ip6:
+          - fd4c:8f0:aff2::/64
+      filters:
+        ip4:
+          - 192.168.33.1/32
+          - 192.168.33.2/32
+          - 192.168.33.3/32
+        ip6:
+          - fd4c:8f0:aff2::1/128
+          - fd4c:8f0:aff2::2/128
+          - fd4c:8f0:aff2::3/128
+    dn42:
+      ospf:
+        instance_id: 42
+      bgp:
+        as: 4242421271
+      exports:
+        ip4:
+          - 172.23.200.0/24
+        ip6:
+          - fd79:300d:6056::/48
+      filters:
+        ip4:
+          - 172.20.0.0/14{21,29} # dn42
+          #          - 172.20.0.0/24{28,32} # ..
+          #          - 172.21.0.0/24{28,32} # ..
+          #          - 172.22.0.0/24{28,32} # ..
+          #          - 172.23.0.0/24{28,32} # ..
+          - 172.31.0.0/16+       # ChaosVPN
+          #          - 10.4.0.0/16+         # ..
+          #          - 10.9.0.0/16+         # ..
+          #          - 10.32.0.0/16+        # ..
+          #          - 10.42.0.0/16+        # ..
+          #          - 10.96.0.0/16+        # ..
+          #          - 10.100.0.0/14+       # ..
+          #          - 10.104.0.0/14        # ..
+          - 10.0.0.0/8+          # Freifunk
+        ip6:
+          - fc00::/7{44,64}      # ULAs
 
   interfaces:
     north-zitadelle:
-      dn42:
-        ip4:
-          address: 172.23.200.1
-          netmask: 32
-        ip6:
-          address: fd79:300d:6056::1
-          netmask: 128
       hive:
         ip4:
           address: 192.168.33.1
@@ -23,20 +59,27 @@ peering:
         ip6:
           address: fd4c:8f0:aff2::1
           netmask: 128
-    south-zitadelle:
       dn42:
         ip4:
-          address: 172.23.200.2
+          address: 172.23.200.1
           netmask: 32
         ip6:
-          address: fd79:300d:6056::2
+          address: fd79:300d:6056::1
           netmask: 128
+    south-zitadelle:
       hive:
         ip4:
           address: 192.168.33.2
           netmask: 32
         ip6:
           address: fd4c:8f0:aff2::2
+          netmask: 128
+      dn42:
+        ip4:
+          address: 172.23.200.2
+          netmask: 32
+        ip6:
+          address: fd79:300d:6056::2
           netmask: 128
     bunker:
       hive:
@@ -46,69 +89,115 @@ peering:
         ip6:
           address: fd4c:8f0:aff2::3
           netmask: 128
+      dn42:
+        ip4:
+          address: 172.23.200.2
+          netmask: 32
+        ip6:
+          address: fd79:300d:6056::2
+          netmask: 128
 
   peers:
     major:
-      type: gre
+      type: gre6
       proto: bgp
+      as: 4242422600
       domains:
         - dn42
       netdev: major
-      remote: '1.2.3.0'
+      remote: '2a02:c205:3000:5324::42'
       pubkey: |
         -----BEGIN PUBLIC KEY-----
+        MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAyNsW6I5uAzxjt8E10x1c
+        b59AtEeU4SC+FZyu1CKoRyVVsQkdLL42JZlpoSF99B740Z2KWWxaMY0cg9oSy1d1
+        T6XQ92Exm01aEqrxys0mF7i+rkmjFGuXdoOANb3bAlJy1N84aD8z+crxzH0nwHCi
+        rcKHCAOUSv40dmRZW6FJlh/+R1xBVSp7CPUfSeferTyeZ+JswawTT7r2ZTNnMka+
+        8IjBRiEFRVq7D0kF7prBuaWXWl1iSB1UiUdh/SVtX8MC/BASkgcFT+g+Z5yn8LkO
+        yOZ1CVIF6+AoW94E+65SK7WSJShIlzWsc1Uh5nw0F9a1Mo29ToeV2GRfT6q/pDT/
+        oqpXB8NhrIMlNLIK6rDEmBW/VCUij/vaGWsEe/f1uFX5h9SvFCYPRdWw0JntqgwR
+        eagKwIX+4lEXHChb3FkEfPNIAiRr2rRxDxBGyM8kxPBNfIVdAkTqqNEPPacdI27I
+        oC6klzpOsNojD5oThYfagAp2dAZc2K8cZ2fB1UFDGrcVi6krP3MTwVbVOt62a0n0
+        kAQJhJWPsxBvhSbCehkiWLdLRUIWdUCZfOFeADA5+QNIvmf2vpWiiiXD9Xdd+4bu
+        cPjFuUwmI2Wo2D1VYUXkoYOkeOlPfv2YiPzBPoBw2vGUXRlNI4/z0HgJnAj1/ULz
+        lXi8ZcGYXA1j9+zgkwVT7F8CAwEAAQ==
         -----END PUBLIC KEY-----
+      ike: aes128-sha256-modp2048!
+      esp: aes128-sha1-modp2048!
 
-    andi:
-      type: gre
-      proto: bgp
-      domains:
-        - dn42
-      netdev: andi
-      remote: '1.2.3.1'
-      pubkey: |
-        -----BEGIN PUBLIC KEY-----
-        -----END PUBLIC KEY-----
+#    andi:
+#      type: gre
+#      proto: bgp
+#      as: 424240000
+#      domains:
+#        - dn42
+#      netdev: andi
+#      remote: '1.2.3.1'
+#      pubkey: |
+#        -----BEGIN PUBLIC KEY-----
+#        -----END PUBLIC KEY-----
+#      ike: aes128-sha256-modp2048!
+#      esp: aes128-sha1-modp2048!
 
-    hexa:
-      type: gre
-      proto: bgp
-      domains:
-        - dn42
-      netdev: hexa
-      remote: '1.2.3.2'
-      pubkey: |
-        -----BEGIN PUBLIC KEY-----
-        -----END PUBLIC KEY-----
+#    hexa:
+#      type: gre
+#      proto: bgp
+#      as: 424240000
+#      domains:
+#        - dn42
+#      netdev: hexa
+#      remote: '1.2.3.2'
+#      pubkey: |
+#        -----BEGIN PUBLIC KEY-----
+#        -----END PUBLIC KEY-----
+#      ike: aes128-sha256-modp2048!
+#      esp: aes128-sha1-modp2048!
 
     jojo:
-      type: gre
+      type: gre6
       proto: bgp
+      as: 4242423942
       domains:
         - dn42
       netdev: jojo
-      remote: '1.2.3.3'
+      remote: '2a03:4000:f:8::1'
       pubkey: |
         -----BEGIN PUBLIC KEY-----
+        MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuVGnuqKpJjJTfBlUpmET
+        X4behRlb5xLQbF0/5wNPMQtDztgepPyQXXUfPW2nj/WvpD07zQelQJuJyVQxAwD9
+        kWbILPC5NApECw7LKqrcEfGoCxVeTdNKx5VORhKhn5+QDf5gSkZisHzTyYX/briI
+        GLwSF/IMKMrd4NTK11aeDVKORa5mbNh3XoOJC1wpzRvxIahk9CgtI7Sgu2mBSHOX
+        D1KgJAzwc57VfWI9GxaMh9E/9Yx2hpkz/r7EOg9lQXOEV9yd/KTrErjiBVELeBdm
+        /D2AD79EAyIYR9QUIfPO8G+kHky0rUeUmdJ15i3OjlPGjxDuS1uN6DC57HHSuc2E
+        ZRvIO20xv+6UZc1esjK6T0P0IN+/M4BvL7GQTwKEUDOWpNCH7LIhH7S0RH/8dcgF
+        TWeBRTlLFkPRGti0Fl9O3uZ21XoL0VrybW1v4Maui+jHdOaFEucE/taCVJnwMOy5
+        YFvFearXjHZK8Y0iXut8HWFAaUZSUdNM1AIw5W/yccaz/cJK8x89YtlL/1J9LPHa
+        IJlc/e5D1Id/i2Y4hecuHIdzI/ijE71VRRvUXYW61/KRauG46M/mTq/tn41FtZFF
+        upZ9UJqZwSIzsl/sV1YKYowJ1TVemE5GgzVBiYF06kLi7BgmQxLfU19F+PxlNFeJ
+        8hTuXGN/PTVGNRrBCiQTS4cCAwEAAQ==
         -----END PUBLIC KEY-----
+      ike: aes256-sha512-curve25519!
+      esp: aes256-sha512-curve25519!
 
-    maglab:
-      type: gre
-      proto: bgp
-      domains:
-        - dn42
-      netdev: maglab
-      remote: '1.2.3.4'
-      pubkey: |
-        -----BEGIN PUBLIC KEY-----
-        -----END PUBLIC KEY-----
+#    maglab:
+#      type: gre
+#      proto: bgp
+#      as: 424240000
+#      domains:
+#        - dn42
+#      netdev: maglab
+#      remote: '1.2.3.4'
+#      pubkey: |
+#        -----BEGIN PUBLIC KEY-----
+#        -----END PUBLIC KEY-----
+#      ike: aes128-sha256-modp2048!
+#      esp: aes128-sha1-modp2048!
 
     north-zitadelle:
       type: gre
       proto: ospf
       domains:
-        - dn42
         - hive
+        - dn42
       netdev: alpha
       remote: '37.120.172.185'
       pubkey: |
@@ -126,13 +215,15 @@ peering:
         +680sv2rtGxQK6fNLTZPjjQHvVvfZJ27R2T9J+8nqXJqD/KTfCVkNz8exHU8d5Or
         EH3jrhl4TejAb1oOPZa2zMECAwEAAQ==
         -----END PUBLIC KEY-----
+      ike: aes256-sha512-curve25519!
+      esp: aes256-sha512-curve25519!
 
     south-zitadelle:
       type: gre
       proto: ospf
       domains:
-        - dn42
         - hive
+        - dn42
       netdev: beta
       remote: '37.120.172.177'
       pubkey: |
@@ -150,13 +241,15 @@ peering:
         7F+OehKtHOhdHJd3rJmjaDKKQXSc4ywwOCYcf0fKYvFUTN3Lo0eiUnfr4Gbo4i+H
         +p4kiM8V0NHFkTwuyXQNNJ0CAwEAAQ==
         -----END PUBLIC KEY-----
+      ike: aes256-sha512-curve25519!
+      esp: aes256-sha512-curve25519!
 
     bunker:
       type: gre
       proto: ospf
       domains:
-        - dn42
         - hive
+        - dn42
       netdev: gamma
       remote: '37.120.161.15'
       pubkey: |
@@ -174,45 +267,47 @@ peering:
         2BJdJf6oyFXlQbSZgd4eX+8AJcPGub0B2ZC9WOdk8EyioikhoWJHSQP8diPBzLUn
         GlXY4FK3RV5o+0ycVmOiYRMCAwEAAQ==
         -----END PUBLIC KEY-----
+      ike: aes256-sha512-curve25519!
+      esp: aes256-sha512-curve25519!
 
 
   transfers:
     north-zitadelle:
       major:
         ip4:
-          local: '1.2.3.4'
-          remote: ''
+          local: '172.20.240.150'
+          remote: '172.20.240.149'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
-      andi:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
-      hexa:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
+#      andi:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
+#      hexa:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
       jojo:
         ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
+          local: '172.20.193.21'
+          remote: '172.20.193.20'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
-      maglab:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
+#      maglab:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
       south-zitadelle:
         ip4:
           local: '192.168.67.0'
@@ -235,41 +330,41 @@ peering:
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
-      andi:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
-      hexa:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+#      andi:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
+#      hexa:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
       jojo:
         ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
+          local: '172.20.193.23'
+          remote: '172.20.193.22'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
-      maglab:
-        ip4:
-          local: '1.2.3.4'
-          remote: '1.2.3.5'
-        ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
+#      maglab:
+#        ip4:
+#          local: '1.2.3.4'
+#          remote: '1.2.3.5'
+#        ip6:
+#          local: 'fe80::1'
+#          remote: 'fe80::2'
       north-zitadelle:
         ip4:
           local: '192.168.67.1'
           remote: '192.168.67.0'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
       bunker:
         ip4:
           local: '192.168.67.2'
@@ -283,13 +378,13 @@ peering:
           local: '192.168.67.5'
           remote: '192.168.67.4'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
       south-zitadelle:
         ip4:
           local: '192.168.67.3'
           remote: '192.168.67.2'
         ip6:
-          local: 'fe80::1'
-          remote: 'fe80::2'
+          local: 'fe80::2'
+          remote: 'fe80::1'
 

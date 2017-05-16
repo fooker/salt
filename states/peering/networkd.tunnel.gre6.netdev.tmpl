@@ -5,11 +5,11 @@ Description=Peering with {{ peer }}
 
 Name=peer.{{ pillar.peering.peers[peer].netdev }}
 
-Kind=gre
+Kind=ip6gre
 
 
 [Tunnel]
-Local={{ pillar.addresses[grains.id].ext.ip4.address }}
+Local={{ pillar.addresses[grains.id].ext.ip6.address }}
 Remote={{ pillar.peering.peers[peer].remote }}
 
 TTL=64

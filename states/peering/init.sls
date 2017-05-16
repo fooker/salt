@@ -2,7 +2,7 @@ peering.ipsec:
   pkg.installed:
     - name: strongswan
     - sources:
-      - strongswan: salt://peering/strongswan-5.4.0-2-x86_64.pkg.tar.xz
+      - strongswan: salt://peering/strongswan-5.5.2-1-x86_64.pkg.tar.xz
   service.running:
     - enable: True
     - name: strongswan
@@ -126,6 +126,23 @@ peering.bird:
   file.managed:
     - name: /etc/bird.conf
     - source: salt://peering/bird.conf.tmpl
+    - makedirs: True
+    - template: jinja
+
+peering.bird6:
+  pkg.installed:
+    - name: bird6
+  service.running:
+    - name: bird6
+    - enable: True
+    - reload: True
+    - require:
+      - pkg: peering.bird6
+    - watch:
+      - file: /etc/bird6.conf
+  file.managed:
+    - name: /etc/bird6.conf
+    - source: salt://peering/bird6.conf.tmpl
     - makedirs: True
     - template: jinja
 

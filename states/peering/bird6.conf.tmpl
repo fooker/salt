@@ -46,16 +46,16 @@ protocol ospf {{ domain }}_ospf {
 	table {{ domain }};
 	import keep filtered;
 	import filter {
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
 
 		if net ~ [
-			{%- for export in pillar.peering.domains[domain].exports.ip4 %}
+			{%- for export in pillar.peering.domains[domain].exports.ip6 %}
 			{{ export }}+
 			{%- endfor %}
 		] then accept;
 
 		if net ~ [
-			{%- for filter in pillar.peering.domains[domain].filters.ip4 %}
+			{%- for filter in pillar.peering.domains[domain].filters.ip6 %}
 			{{ filter }}
 			{%- if not loop.last -%},{%- endif %}
 			{%- endfor %}
@@ -65,13 +65,13 @@ protocol ospf {{ domain }}_ospf {
 	};
 	export filter {
 		if net ~ [
-			{%- for export in pillar.peering.domains[domain].exports.ip4 %}
+			{%- for export in pillar.peering.domains[domain].exports.ip6 %}
 			{{ export }}+
 			{%- endfor %}
 		] then accept;
 
 		if net ~ [
-			{%- for filter in pillar.peering.domains[domain].filters.ip4 %}
+			{%- for filter in pillar.peering.domains[domain].filters.ip6 %}
 			{{ filter }}
 			{%- if not loop.last -%},{%- endif %}
 			{%- endfor %}
@@ -84,7 +84,7 @@ protocol ospf {{ domain }}_ospf {
 
 {% if 'bgp' in pillar.peering.domains[domain] %}
 protocol static {{ domain }}_static {
-	{%- for export in pillar.peering.domains[domain].exports.ip4 %}
+	{%- for export in pillar.peering.domains[domain].exports.ip6 %}
 	route {{ export }} via "{{ domain }}";
 	{%- endfor %}
 
@@ -107,16 +107,16 @@ template bgp {{ domain }}_bgp {
 	import keep filtered;
 	import limit 1000 action block;
 	import filter {
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
 
 		if net ~ [
-			{%- for export in pillar.peering.domains[domain].exports.ip4 %}
+			{%- for export in pillar.peering.domains[domain].exports.ip6 %}
 			{{ export }}+
 			{%- endfor %}
 		] then reject;
 
 		if net ~ [
-			{%- for filter in pillar.peering.domains[domain].filters.ip4 %}
+			{%- for filter in pillar.peering.domains[domain].filters.ip6 %}
 			{{ filter }}
 			{%- if not loop.last -%},{%- endif %}
 			{%- endfor %}
@@ -126,13 +126,13 @@ template bgp {{ domain }}_bgp {
 	};
 	export filter {
 		if net ~ [
-			{%- for export in pillar.peering.domains[domain].exports.ip4 %}
+			{%- for export in pillar.peering.domains[domain].exports.ip6 %}
 			{{ export }}+
 			{%- endfor %}
 		] then accept;
 
 		if net ~ [
-			{%- for filter in pillar.peering.domains[domain].filters.ip4 %}
+			{%- for filter in pillar.peering.domains[domain].filters.ip6 %}
 			{{ filter }}
 			{%- if not loop.last -%},{%- endif %}
 			{%- endfor %}
@@ -144,7 +144,7 @@ template bgp {{ domain }}_bgp {
 
 {% for peer in pillar.peering.transfers[grains.id] if pillar.peering.peers[peer].proto == 'bgp' and domain in pillar.peering.peers[peer].domains %}
 protocol bgp {{ domain }}_bgp_{{ peer }} from {{ domain }}_bgp {
-	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.peers[peer].as }};
+	neighbor {{ pillar.peering.transfers[grains.id][peer].ip6.remote }} % 'peer.{{ pillar.peering.peers[peer].netdev }}' as {{ pillar.peering.peers[peer].as }};
 }
 {% endfor %}
 {% endif %}
@@ -153,8 +153,8 @@ protocol pipe {{ domain }}_pipe {
 	table {{ domain }};
 	import none;
 	export filter {
-		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip4.address }};
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip6.address }};
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
 
 		accept;
 	};
