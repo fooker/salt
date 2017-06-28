@@ -39,13 +39,6 @@ peering:
           #          - 172.22.0.0/24{28,32} # ..
           #          - 172.23.0.0/24{28,32} # ..
           - 172.31.0.0/16+       # ChaosVPN
-          #          - 10.4.0.0/16+         # ..
-          #          - 10.9.0.0/16+         # ..
-          #          - 10.32.0.0/16+        # ..
-          #          - 10.42.0.0/16+        # ..
-          #          - 10.96.0.0/16+        # ..
-          #          - 10.100.0.0/14+       # ..
-          #          - 10.104.0.0/14        # ..
           - 10.0.0.0/8+          # Freifunk
         ip6:
           - fc00::/7{44,64}      # ULAs
@@ -100,7 +93,8 @@ peering:
   peers:
     major:
       type: gre6
-      proto: bgp
+      protos:
+        - bgp
       as: 4242422600
       domains:
         - dn42
@@ -126,7 +120,8 @@ peering:
 
 #    andi:
 #      type: gre
-#      proto: bgp
+#      protos:
+#        - bgp
 #      as: 424240000
 #      domains:
 #        - dn42
@@ -140,7 +135,8 @@ peering:
 
 #    hexa:
 #      type: gre
-#      proto: bgp
+#      protos:
+#        - bgp
 #      as: 424240000
 #      domains:
 #        - dn42
@@ -154,7 +150,8 @@ peering:
 
     jojo:
       type: gre6
-      proto: bgp
+      protos:
+        - bgp
       as: 4242423942
       domains:
         - dn42
@@ -180,7 +177,8 @@ peering:
 
 #    maglab:
 #      type: gre
-#      proto: bgp
+#      protos:
+#        - bgp
 #      as: 424240000
 #      domains:
 #        - dn42
@@ -194,7 +192,9 @@ peering:
 
     north-zitadelle:
       type: gre
-      proto: ospf
+      protos:
+        - ibgp
+        - ospf
       domains:
         - hive
         - dn42
@@ -220,7 +220,9 @@ peering:
 
     south-zitadelle:
       type: gre
-      proto: ospf
+      protos:
+        - ibgp
+        - ospf
       domains:
         - hive
         - dn42
@@ -246,7 +248,8 @@ peering:
 
     bunker:
       type: gre
-      proto: ospf
+      protos:
+        - ospf
       domains:
         - hive
         - dn42

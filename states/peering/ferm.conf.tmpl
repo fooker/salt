@@ -23,10 +23,10 @@ table filter {
 
     # Allow routing protocols on peer links
     {%- for peer in pillar.peering.transfers[grains.id] %}
-    {%- if  pillar.peering.peers[peer].proto == 'ospf' %}
+    {%- if  'ospf' in pillar.peering.peers[peer].protos %}
     interface peer.{{ pillar.peering.peers[peer].netdev }} proto OSPFIGP ACCEPT;
     {%- endif %}
-    {%- if  pillar.peering.peers[peer].proto == 'bgp' %}
+    {%- if  'bgp' in pillar.peering.peers[peer].protos %}
     interface peer.{{ pillar.peering.peers[peer].netdev }} proto (tcp udp) dport bgp ACCEPT;
     {%- endif %}
     {%- endfor %}
