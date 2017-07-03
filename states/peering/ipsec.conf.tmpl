@@ -25,7 +25,7 @@ conn {{ peer }}
 	leftsigkey=self.pem
 	rightsigkey={{ peer }}.pem
 
-	ike={{ pillar.peering.peers[peer].ike }}
-	esp={{ pillar.peering.peers[peer].esp }}
+	ike={{ pillar.peering.peers[peer].ipsec.ike }}
+	esp={{ pillar.peering.peers[peer].ipsec.esp }}
 {% endfor %}
 

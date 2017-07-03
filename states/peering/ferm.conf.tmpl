@@ -4,6 +4,7 @@ domain (ip ip6)
 table filter {
   chain INPUT {
 
+{% if  pillar.peering.peers[grains.id].type in ('gre', 'gre6') %}
     # Allow IPSec
     proto (ESP AH) ACCEPT;
 
@@ -20,19 +21,21 @@ table filter {
 
       DROP;
     }
+{% endif %}
 
     # Allow routing protocols on peer links
     {%- for peer in pillar.peering.transfers[grains.id] %}
-    {%- if  'ospf' in pillar.peering.peers[peer].protos %}
+    {%- if 'ospf' in pillar.peering.peers[peer].protos %}
     interface peer.{{ pillar.peering.peers[peer].netdev }} proto OSPFIGP ACCEPT;
     {%- endif %}
-    {%- if  'bgp' in pillar.peering.peers[peer].protos %}
+    {%- if 'bgp' in pillar.peering.peers[peer].protos or 'ibgp' in pillar.peering.peers[peer].protos %}
     interface peer.{{ pillar.peering.peers[peer].netdev }} proto (tcp udp) dport bgp ACCEPT;
     {%- endif %}
     {%- endfor %}
   }
 
   chain OUTPUT {
+{% if  pillar.peering.peers[grains.id].type in ('gre', 'gre6') %}
     # Allow GRE only over IPSec
     proto gre {
       mod policy
@@ -42,6 +45,7 @@ table filter {
 
       DROP;
     }
+{% endif %}
   }
 }
 

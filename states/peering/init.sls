@@ -1,3 +1,4 @@
+{% if  pillar.peering.peers[grains.id].type in ('gre', 'gre6') %}
 peering.ipsec:
   pkg.installed:
     - name: strongswan
@@ -25,6 +26,7 @@ peering.ipsec.secrets:
     - source: salt://peering/ipsec.secrets.tmpl
     - makedirs: True
     - template: jinja
+{% endif %}
 
 peering.iptables:
   kmod.present:
@@ -87,12 +89,14 @@ peering.tunnel.{{ peer }}.hook:
     - require_in:
       - file: network.ext.network
 
+{% if  pillar.peering.peers[peer].type in ('gre', 'gre6') %}
 peering.ipsec.certs.{{ peer }}:
   file.managed:
     - name: /etc/ipsec.d/certs/{{ peer }}.pem
-    - contents_pillar: peering:peers:{{ peer }}:pubkey
+    - contents_pillar: peering:peers:{{ peer }}:ipsec:pubkey
     - makedirs: True
-{%- endfor %}
+{% endif %}
+{% endfor %}
 
 peering.sysctl.forwarding.ipv4:
   sysctl.present:

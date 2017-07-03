@@ -145,13 +145,13 @@ template bgp {{ domain }}_bgp {
 }
 
 {% for peer in pillar.peering.transfers[grains.id]|sort if 'bgp' in pillar.peering.peers[peer].protos and domain in pillar.peering.peers[peer].domains %}
-protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev }} from {{ domain }}_bgp {
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }} from {{ domain }}_bgp {
 	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.peers[peer].as }};
 }
 {% endfor %}
 
 {% for peer in pillar.peering.transfers[grains.id]|sort if 'ibgp' in pillar.peering.peers[peer].protos and domain in pillar.peering.peers[peer].domains %}
-protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev }} from {{ domain }}_bgp {
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }} from {{ domain }}_bgp {
 	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.domains[domain].bgp.as }};
 }
 {% endfor %}
