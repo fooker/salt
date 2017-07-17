@@ -1,152 +1,183 @@
-{% if  pillar.peering.peers[grains.id].type in ('gre', 'gre6') %}
-peering.ipsec:
-  pkg.installed:
-    - name: strongswan
-    - sources:
-      - strongswan: salt://peering/strongswan-5.5.2-1-x86_64.pkg.tar.xz
-  service.running:
-    - enable: True
-    - name: strongswan
-    - require:
-      - pkg: strongswan
-    - watch:
-      - file: /etc/ipsec.conf
-      - file: /etc/ipsec.secrets
+#!pyobjects
 
-peering.ipsec.conf:
-  file.managed:
-    - name: /etc/ipsec.conf
-    - source: salt://peering/ipsec.conf.tmpl
-    - makedirs: True
-    - template: jinja
+# Get the set of all protos required by the host
+protos = {
+  peer['proto']
+  for peer
+  in pillar('peering:transfers:' + grains('id')).values()
+}
 
-peering.ipsec.secrets:
-  file.managed:
-    - name: /etc/ipsec.secrets
-    - source: salt://peering/ipsec.secrets.tmpl
-    - makedirs: True
-    - template: jinja
-{% endif %}
 
-peering.iptables:
-  kmod.present:
-    - name: nf_conntrack_proto_gre
-    - persist: True
-  file.managed:
-    - name: /etc/ferm.d/peering.conf
-    - source: salt://peering/ferm.conf.tmpl
-    - makedirs: True
-    - template: jinja
-    - require:
-      - kmod: nf_conntrack_proto_gre
-    - require_in:
-      - file: ferm
+# Install IPSEC for GRE
+if 'gre' in protos or 'gre6' in protos:
+    Pkg.installed('peering.gre.ipsec',
+                  name='strongswan',
+                  sources=[{'strongswan': 'salt://peering/strongswan-5.5.2-1-x86_64.pkg.tar.xz'}])
+    Service.running('peering.gre.ipsec',
+                    name='strongswan',
+                    enable=True,
+                    require=[Pkg('peering.gre.ipsec'),
+                             File('peering.gre.ipsec.conf'),
+                             File('peering.gre.ipsec.secrets')])
 
-{% for domain in pillar.peering.interfaces[grains.id] %}
-peering.domain.{{ domain }}.netdev:
-  file.managed:
-    - name: /etc/systemd/network/90-peering-{{ domain }}.netdev
-    - source: salt://peering/networkd.domain.netdev.tmpl
-    - makedirs: True
-    - template: jinja
-    - context:
-        domain: {{ domain }}
+    File.managed('peering.gre.ipsec.conf',
+                 name='/etc/ipsec.conf',
+                 source='salt://peering/ipsec.conf.tmpl',
+                 makedirs=True,
+                 template='jinja')
 
-peering.domain.{{ domain }}.network:
-  file.managed:
-    - name: /etc/systemd/network/90-peering-{{ domain }}.network
-    - source: salt://peering/networkd.domain.network.tmpl
-    - makedirs: True
-    - template: jinja
-    - context:
-        domain: {{ domain }}
-{% endfor %}
+    File.managed('peering.gre.ipsec.secrets',
+                 name='/etc/ipsec.secrets',
+                 source='salt://peering/ipsec.secrets.tmpl',
+                 makedirs=True,
+                 template='jinja')
 
-{% for peer in pillar.peering.transfers[grains.id] %}
-peering.tunnel.{{ peer }}.netdev:
-  file.managed:
-    - name: /etc/systemd/network/80-peering-{{ peer }}.netdev
-    - source: salt://peering/networkd.tunnel.{{ pillar.peering.peers[peer].type }}.netdev.tmpl
-    - makedirs: True
-    - template: jinja
-    - context:
-        peer: {{ peer }}
+    Kmod.present('peering.gre.iptables',
+                 name='nf_conntrack_proto_gre',
+                 persist=True)
+    File.managed('peering.gre.iptables',
+                 name='/etc/ferm.d/peering-gre.conf',
+                 source='salt://peering/ferm.gre.conf.tmpl',
+                 makedirs=True,
+                 template='jinja',
+                 require=Kmod('peering.gre.iptables'),
+                 require_in=File('ferm'))
 
-peering.tunnel.{{ peer }}.network:
-  file.managed:
-    - name: /etc/systemd/network/80-peering-{{ peer }}.network
-    - source: salt://peering/networkd.tunnel.network.tmpl
-    - makedirs: True
-    - template: jinja
-    - context:
-        peer: {{ peer }}
 
-peering.tunnel.{{ peer }}.hook:
-  file.accumulated:
-    - name: tunnels
-    - filename: /etc/systemd/network/70-ext.network
-    - text: peer.{{ pillar.peering.peers[peer].netdev }}
-    - require_in:
-      - file: network.ext.network
+# Install wireguard
+if 'wireguard' in protos:
+    Pkg.installed('peering.wireguard',
+                  pkgs=['linux-headers', 'wireguard-dkms', 'wireguard-tools'])
+    File.directory('peering.wireguard',
+                   name='/etc/wireguard',
+                   makedirs=True,
+                   clean=True)
 
-{% if  pillar.peering.peers[peer].type in ('gre', 'gre6') %}
-peering.ipsec.certs.{{ peer }}:
-  file.managed:
-    - name: /etc/ipsec.d/certs/{{ peer }}.pem
-    - contents_pillar: peering:peers:{{ peer }}:ipsec:pubkey
-    - makedirs: True
-{% endif %}
-{% endfor %}
+    File.managed('peering.wireguard.service',
+                 name='/etc/systemd/system/wireguard@.service',
+                 source='salt://peering/wireguard@.service',
+                 makedirs=True)
 
-peering.sysctl.forwarding.ipv4:
-  sysctl.present:
-    - name: net.ipv4.conf.all.forwarding
-    - value: 1
-    - config: /etc/sysctl.d/peering.conf
+    File.managed('peering.wireguard.iptables',
+                 name='/etc/ferm.d/peering-wireguard.conf',
+                 source='salt://peering/ferm.wireguard.conf.tmpl',
+                 makedirs=True,
+                 template='jinja',
+                 require_in=File('ferm'))
 
-peering.sysctl.forwarding.ipv6:
-  sysctl.present:
-    - name: net.ipv6.conf.all.forwarding
-    - value: 1
-    - config: /etc/sysctl.d/peering.conf
 
-peering.sysctl.rp_filter:
-  sysctl.present:
-    - name: net.ipv4.conf.all.rp_filter
-    - value: 0
-    - config: /etc/sysctl.d/peering.conf
+# Firewall for peerings
+File.managed('peering.iptables',
+             name='/etc/ferm.d/peering-peers.conf',
+             source='salt://peering/ferm.peers.conf.tmpl',
+             makedirs=True,
+             template='jinja',
+             require_in=File('ferm'))
 
-peering.bird:
-  pkg.installed:
-    - name: bird
-  service.running:
-    - name: bird
-    - enable: True
-    - reload: True
-    - require:
-      - pkg: peering.bird
-    - watch:
-      - file: /etc/bird.conf
-  file.managed:
-    - name: /etc/bird.conf
-    - source: salt://peering/bird.conf.tmpl
-    - makedirs: True
-    - template: jinja
+# Domain dummy interfaces
+for domain in pillar('peering:interfaces:' + grains('id')):
+    File.managed('peering.domain.' + domain + '.netdev',
+                 name='/etc/systemd/network/90-peering-' + domain + '.netdev',
+                 source='salt://peering/networkd.domain.netdev.tmpl',
+                 makedirs=True,
+                 template='jinja',
+                 context={'domain': domain})
 
-peering.bird6:
-  pkg.installed:
-    - name: bird6
-  service.running:
-    - name: bird6
-    - enable: True
-    - reload: True
-    - require:
-      - pkg: peering.bird6
-    - watch:
-      - file: /etc/bird6.conf
-  file.managed:
-    - name: /etc/bird6.conf
-    - source: salt://peering/bird6.conf.tmpl
-    - makedirs: True
-    - template: jinja
+    File.managed('peering.domain.' + domain + '.network',
+                 name='/etc/systemd/network/90-peering-' + domain + '.network',
+                 source='salt://peering/networkd.domain.network.tmpl',
+                 makedirs=True,
+                 template='jinja',
+                 context={'domain': domain})
+
+# Per tunnel interface and configuration
+for peer in pillar('peering:transfers:' + grains('id')):
+    proto = pillar('peering:transfers:' + grains('id') + ':' + peer + ':proto')
+    netdev = pillar('peering:peers:' + peer + ':netdev')
+
+    if proto in ('gre', 'gre6'):
+        File.managed('peering.tunnel.' + peer + '.gre.netdev',
+                     name='/etc/systemd/network/80-peering-' + peer + '.netdev',
+                     source='salt://peering/networkd.tunnel.' + proto + '.netdev.tmpl',
+                     makedirs=True,
+                     template='jinja',
+                     context={'peer': peer})
+
+        File.accumulated('peering.tunnel.' + peer + '.gre.netdev.hook',
+                         name='tunnels',
+                         filename='/etc/systemd/network/70-ext.network',
+                         text='peer.' + netdev,
+                         require_in=File('network.ext.network'))
+
+        File.managed('peering.tunnel.' + peer + '.gre.ipsec.cert',
+                     name='/etc/ipsec.d/certs/' + peer + '.pem',
+                     content_pillar='peering:peers:' + peer + ':ipsec:pubkey',
+                     makedirs=True)
+
+    if proto == 'wireguard':
+        File.managed('peering.tunnel.' + peer + '.wireguard',
+                     name='/etc/wireguard/peer.' + netdev + '.conf',
+                     source='salt://peering/wireguard.conf.tmpl',
+                     makedirs=True,
+                     template='jinja',
+                     mode=600,
+                     context={'peer': peer},
+                     require_in=File('peering.wireguard'))
+        Service.running('peering.tunnel.' + peer + '.wireguard',
+                        name='wireguard@peer.' + netdev,
+                        enable=True,
+                        reload=True,
+                        require=Pkg('peering.wireguard'),
+                        watch=[File('peering.tunnel.' + peer + '.wireguard'),
+                               File('peering.wireguard.service')])
+
+    File.managed('peering.tunnel.' + peer + '.network',
+                 name='/etc/systemd/network/80-peering-' + peer + '.network',
+                 source='salt://peering/networkd.tunnel.network.tmpl',
+                 makedirs=True,
+                 template='jinja',
+                 context={'peer': peer})
+
+# Kernel configuration
+Sysctl.present('peering.sysctl.forwarding.ipv4',
+               name='net.ipv4.conf.all.forwarding',
+               value=1,
+               config='/etc/sysctl.d/peering.conf')
+Sysctl.present('peering.sysctl.forwarding.ipv6',
+               name='net.ipv6.conf.all.forwarding',
+               value=1,
+               config='/etc/sysctl.d/peering.conf')
+Sysctl.present('peering.sysctl.rp_filter',
+               name='net.ipv4.conf.all.rp_filter',
+               value=1,
+               config='/etc/sysctl.d/peering.conf')
+
+# BIRD config
+Pkg.installed('peering.bird',
+              name='bird')
+Service.running('peering.bird',
+                name='bird',
+                enable=True,
+                reload=True,
+                require=Pkg('peering.bird'),
+                watch=File('peering.bird'))
+File.managed('peering.bird',
+             name='/etc/bird.conf',
+             source='salt://peering/bird.conf.tmpl',
+             makedirs=True,
+             template='jinja')
+
+Pkg.installed('peering.bird6',
+              name='bird6')
+Service.running('peering.bird6',
+                name='bird6',
+                enable=True,
+                reload=True,
+                require=Pkg('peering.bird6'),
+                watch=File('peering.bird6'))
+File.managed('peering.bird6',
+             name='/etc/bird6.conf',
+             source='salt://peering/bird6.conf.tmpl',
+             makedirs=True,
+             template='jinja')
 

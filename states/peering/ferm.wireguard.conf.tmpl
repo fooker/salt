@@ -1,0 +1,14 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+domain (ip ip6)
+table filter
+chain INPUT
+interface ext
+proto udp
+dport (
+{% for peer in pillar.peering.transfers[grains.id] if pillar.peering.transfers[grains.id][peer].proto == 'wireguard' and 'local' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
+{{ pillar.peering.transfers[grains.id][peer].wireguard.port.local }}
+{% endfor %}
+)
+ACCEPT;
+

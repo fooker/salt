@@ -48,51 +48,63 @@ peering:
       hive:
         ip4:
           address: 192.168.33.1
+          network: 192.168.33.1
           netmask: 32
         ip6:
           address: fd4c:8f0:aff2::1
+          network: fd4c:8f0:aff2::1
           netmask: 128
       dn42:
         ip4:
           address: 172.23.200.1
+          network: 172.23.200.1
           netmask: 32
         ip6:
           address: fd79:300d:6056::1
+          network: fd79:300d:6056::1
           netmask: 128
     south-zitadelle:
       hive:
         ip4:
           address: 192.168.33.2
+          network: 192.168.33.2
           netmask: 32
         ip6:
           address: fd4c:8f0:aff2::2
+          network: fd4c:8f0:aff2::2
           netmask: 128
       dn42:
         ip4:
           address: 172.23.200.2
+          network: 172.23.200.2
           netmask: 32
         ip6:
           address: fd79:300d:6056::2
+          network: fd79:300d:6056::2
           netmask: 128
     bunker:
       hive:
         ip4:
           address: 192.168.33.3
+          network: 192.168.33.3
           netmask: 32
         ip6:
           address: fd4c:8f0:aff2::3
+          network: fd4c:8f0:aff2::3
           netmask: 128
+    router:
       dn42:
         ip4:
-          address: 172.23.200.2
-          netmask: 32
+          address: 172.23.200.129
+          network: 172.23.200.128
+          netmask: 25
         ip6:
-          address: fd79:300d:6056::2
-          netmask: 128
+          address: fd79:300d:6056:1::0
+          network: fd79:300d:6056:1::0
+          netmask: 64
 
   peers:
     major:
-      type: gre6
       protos:
         - bgp
       as: 4242422600
@@ -120,7 +132,6 @@ peering:
         esp: aes128-sha1-modp2048!
 
 #    andi:
-#      type: gre
 #      protos:
 #        - bgp
 #      as: 424240000
@@ -136,7 +147,6 @@ peering:
 #        esp: aes128-sha1-modp2048!
 
 #    hexa:
-#      type: gre
 #      protos:
 #        - bgp
 #      as: 424240000
@@ -152,7 +162,6 @@ peering:
 #        esp: aes128-sha1-modp2048!
 
     jojo:
-      type: gre6
       protos:
         - bgp
       as: 4242423942
@@ -180,7 +189,6 @@ peering:
         esp: aes256-sha512-curve25519!
 
 #    maglab:
-#      type: gre
 #      protos:
 #        - bgp
 #      as: 424240000
@@ -196,7 +204,7 @@ peering:
 #        esp: aes128-sha1-modp2048!
 
     north-zitadelle:
-      type: gre
+      router_id: 0x8133feaa
       protos:
         - ibgp
         - ospf
@@ -223,9 +231,23 @@ peering:
           -----END PUBLIC KEY-----
         ike: aes256-sha512-curve25519!
         esp: aes256-sha512-curve25519!
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQgAhFBmoT8DLWcZMCmSrGY31Qak2WyKzZYKY7Slsb0MdoV8
+          5WCkzB4/nPFKzin73X4WT/aOPYmBcZxqYfFicxtGGAlh3pMhfnp1D49WnCRFwfUX
+          T+19J4MDfS9/VqIVafMG3eHSewmvZkwH1qCiyp+FFia1Tz0d6rF8qa6cwHi7tsv9
+          2hSCbiEwcAjWD6N2hmpJ86n3JHFQ0K65Xa+N2UQJmJ2gBwpd5j8X8WTdKp39Uho6
+          jLRo9hsdF4xF543A8itX7PS7CK+2SnVOfamxp143KZNgK+FwOG4EI+k3uLTgoNfl
+          DEuoSFkDPGClbKOtC+QzGy+eN0mG55Ol7xtMQ/4bfdJnAS4MZBV/KZwq07zjtSTp
+          b0o4lVx6I1wKwApteHVgOB03xR59i5fG/jFeA5KieuqkS3zVU9wd/k+49/A1fhVJ
+          +hWqPAzni5OI8jr0zB8ctRPNAGkVmdeApFyMOcjFdPW6ygb0uJfnDg==
+          =Kyqn
+          -----END PGP MESSAGE-----
+        pubkey: WF0uVUhK4FDw8+PkdQMoi9V+UdnZcgE6Ejcpuh042Vk=
 
     south-zitadelle:
-      type: gre
+      router_id: 0x99bf501b
       protos:
         - ibgp
         - ospf
@@ -252,9 +274,23 @@ peering:
           -----END PUBLIC KEY-----
         ike: aes256-sha512-curve25519!
         esp: aes256-sha512-curve25519!
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQf+Ps2YZbkPBBib0kdOzaOvt+9f5+y8OIXvIKyWhpm25qaa
+          KioWQEnQkMtNmHbZihAD3PROMc+jtgwO34rlEo8hboaPJadSZqOjWe/yhwqFzDqo
+          F+VhCWIRynP4431vrlexxGBkOAju9NGLl8dL7caxekUp/0myF/1CJN/GjgErr3nF
+          MaTbxKh5gj/zS0t5BGd++OXcn72Eu42LrxCDDX6uoPkO9WrcY7Ra6KineYUkXSFd
+          RxHwIyiJo8wZEcFrezRHDFBYGGa7sg8R6y5x1wm5dnJVh0LK6JS4N/5c5YlmztNq
+          gY1NYcTvdfFXonOyn3W1dAol9M7LGVVOiiuYj18yFtJnAW+9qPHhT6DTD5obVWAs
+          maolm0xoM6ztZKlEGPc8s8PliIJLV+gSi6Zz9IVvVNpQslvqmFA7w6dc/j5TWPkl
+          j/Ey/iQvn8ZAF809UhNJ5T4t0G5w3K0/cJSSr9PxCSnd6IlJQeOixg==
+          =hm7P
+          -----END PGP MESSAGE-----
+        pubkey: iRKAhmid+N4FQjhUAhDxTiXdo7x3p71ymQBWa1JDAn0=
 
     bunker:
-      type: gre
+      router_id: 0x3d44ba3c
       protos:
         - ospf
       domains:
@@ -279,11 +315,47 @@ peering:
           -----END PUBLIC KEY-----
         ike: aes256-sha512-curve25519!
         esp: aes256-sha512-curve25519!
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQf+LSfeE9/PZYGAdZ9+NA5LFrtyk9hgm3MSfSppegsvEXtP
+          N420xal0CZ3VYQsdP7oUch/hdOrNfVNlDvrLyCIRUn2wIdLv1CR8TdSaEoyvV2X6
+          yUBnYiAyCFV4HuZHOdU8Pp4d6PBHbQL/5MoQgMwQbbSl3zzXPUFwuhm8xIsFqUjN
+          t+k09Jkj0Ug43xQfH76HWOjal8PvD92kcB7JiQdlM6XRjOsaUqMiVD3Mclvb73u6
+          nUl728i+hmlkpzRC5i+yO5/zZ1EuryJpx1tXJQroaWiT7W8bLCtCwmPP/0VnHVxn
+          tRIo+/PuyYMTu86js3KFIEpkO1jmegF3jIoBV2cm/tJnATIXvKzcbfgO2WDMtBtO
+          OdCgsjgh+v6NDf4hdwqhRsWo80mhIrJJIcV3Gp4YFGu0Nd8iOQkDnvDpSxiiVhDm
+          9jvovRmZ3pAwIiIHSxQDeyngxixvHKW4G8tiAvPqgkEvM7feK029iw==
+          =O2+W
+          -----END PGP MESSAGE-----
+        pubkey: Nx1+nNpAExDXuRBabZpPsDOErSyTB1Nd2UUkvI98Gy0=
 
+    router:
+      router_id: 0x4364370d
+      protos:
+        - ospf
+      domains:
+        - dn42
+      netdev: x.router
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQf+MjBissQvBqcihqqT57lXxw6txI6r8rdA9bh+urY4aPZM
+          jTkEQYzOiv/20OKM1BF9jE14xrXTLIc+880WTBvu1YP15DYogTVtxfHyjaX1mdAK
+          metPJBoyVS9Tqsu4XDd+Zz9m5vIX+X73dsoaPN4gx67I3nUj3soaEsEfmlNKyYzN
+          Zxdhq5Y22NS2b6c4WrMhDhC7hqf08thERAWC+dOgrwnv4DzcKIo0aWP5mEf5YtBe
+          QgWZ/IQQrnmrFx3bnSH+pEHRw66URN2TsEc5Lb9KHGhYoEi5S+J5H6E7UMyOxIIo
+          iqYpsWKL/+hgfbi1aQCTJdQhZVWX6Irm3WfD6ULgUdJnAXqbaBJCZGHroukBc9in
+          zrbNHkhxMkDte353j9lUssne+lRL7ZeMLDi9NJx5QezotorXEGsL1br0IvB6VbNj
+          /NfC79NQpjLQiejuhbI0JX+SUGkV0WDBVf4FI2BY1lEFO/8up//rrg==
+          =yY6d
+          -----END PGP MESSAGE-----
+        pubkey: A8U8GemRw8rorCWl51RWUU7F5zwHtzPuqB4JBSF+/EE=
 
   transfers:
     north-zitadelle:
       major:
+        proto: gre6
         ip4:
           local: '172.20.240.150'
           remote: '172.20.240.149'
@@ -291,6 +363,7 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
 #      andi:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -298,6 +371,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
 #      hexa:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -305,6 +379,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       jojo:
+        proto: gre6
         ip4:
           local: '172.20.193.21'
           remote: '172.20.193.20'
@@ -312,6 +387,7 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
 #      maglab:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -319,6 +395,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       south-zitadelle:
+        proto: gre
         ip4:
           local: '192.168.67.0'
           remote: '192.168.67.1'
@@ -326,14 +403,39 @@ peering:
           local: 'fe80::1'
           remote: 'fe80::2'
       bunker:
+        proto: gre
         ip4:
           local: '192.168.67.4'
           remote: '192.168.67.5'
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
+      router:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf+JWnBRLs1GsRaGroCEroeh6KfdnlyfbbFog3uS5rwu2yL
+            PPQOJ4VtIzPeomRj9omI2rdihoA436S742T6DFRQt6/J5XYqHbeZFRWziQIP+Dnq
+            GAloTOc8Rf4KX9GKXhcmkntjvktPJE9DQ2j2GIhyA2TGwxR8foqpdl/BV1XQMyVm
+            8awhnNNRidJDSrFg2USsjGTWkcLp/IKupvHuIpLMS8HcrWaHMC2CAPSJWAs31BVd
+            Ld2w76xh6vmyerGyyAEwlY704ME5+ddBeGS8Iy93dj6u3RViaFIzmoaybovFVlaY
+            hnWyPx/YHV/WyExRJgv3gjPff9XUkJ8Vqr6xKfhBnNJnAf/QK9A755Me4EA3lGPC
+            GeM5/t26QluM887/5RF9DBUcd75bvSg/iswyWkoEUq2qRGQcffzYwd3q6yr8hnDZ
+            R/LZvO0iPqz6WsboTM1yh3wRdlErOwab/ufx5ThOMGQGQD18iclFAQ==
+            =BC6u
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.6'
+          remote: '192.168.67.7'
+        ip6:
+          local: 'fe80::1'
+          remote: 'fe80::2'
     south-zitadelle:
       major:
+        proto: gre6
         ip4:
           local: '1.2.3.4'
           remote: '1.2.3.5'
@@ -341,6 +443,7 @@ peering:
           local: 'fe80::1'
           remote: 'fe80::2'
 #      andi:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -348,6 +451,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
 #      hexa:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -355,6 +459,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       jojo:
+        proto: gre6
         ip4:
           local: '172.20.193.23'
           remote: '172.20.193.22'
@@ -362,6 +467,7 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
 #      maglab:
+#        proto: gre6
 #        ip4:
 #          local: '1.2.3.4'
 #          remote: '1.2.3.5'
@@ -369,6 +475,7 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       north-zitadelle:
+        proto: gre
         ip4:
           local: '192.168.67.1'
           remote: '192.168.67.0'
@@ -376,14 +483,39 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
       bunker:
+        proto: gre
         ip4:
           local: '192.168.67.2'
           remote: '192.168.67.3'
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
+      router:
+        proto: wireguard
+        wireguard:
+          port: 
+            local: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAq1AHHiisiNOI8lvfT8XvwyeZ49mb1Ug7S63GU7HJCCy+
+            3ajqHgoRgLfSPizEDcfGPilILEo72RuOtpKDvaDvSRXTa61PfBQxo+wn3o0/ukp6
+            8OFexXsDgUssBgGVCJt49JtxfdtqRma60cEQi1IOqjJMU4U9ZaogpR4ZEXjbWXHp
+            hf1w/OSE/uOdBSFPHxzOrpd5ABpAE6pvRj2QvuJZ703N1dm1rlyAgX2k5k6fsqyh
+            4NVpdVNEtBxlCpfSKzVvy+5qLbVHGwJ0EUnNf0CLQTTUgWq0zp9YH//UZm1XvF0p
+            J6BMealX3WGFSeh3PM8UQVqliQWfvFrSPolDfvoFHNJnASZq1OO0ei9jh+0dUzB4
+            01viYTlZBz/DupAAcwMQx3D31/QVFt5cgLcKA6Xdo667uRhKYwZHNUpzAhckcb94
+            QNvYK69kSy4+0iQ4SQ/2By1wPcGdkwuCcqwg7sKrhsJn9XVXFftzsA==
+            =H8CA
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.8'
+          remote: '192.168.67.9'
+        ip6:
+          local: 'fe80::1'
+          remote: 'fe80::2'
     bunker:
       north-zitadelle:
+        proto: gre
         ip4:
           local: '192.168.67.5'
           remote: '192.168.67.4'
@@ -391,9 +523,106 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
       south-zitadelle:
+        proto: gre
         ip4:
           local: '192.168.67.3'
           remote: '192.168.67.2'
+        ip6:
+          local: 'fe80::2'
+          remote: 'fe80::1'
+      router:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAz8tssmmRbq1I6Gjo3LmD25T1bwvAmSxfGIGDrzsWMuus
+            7meHHGYqFeWErXOunYq7BJA2VSC5VBhE3+YBq+LdPYfaAGNKXolyrbJmbcQVser4
+            d0DTq5IaYz5M05TEE7plYltaqQsdXpG+g+RA43pAno1EIkH9X3E9qgUsCju9Ezry
+            LeywW0ePeJaV6uJpSLTso1DFGebyYff6a0eNXD3/kzIZoPmmVLGe1WTSqK7ztF0h
+            fduWrUkpi/dvZa1eHE4H/Zqwy+LmcRoRU57BcmNsq87qKv64iOkwWqR5DTDVqPR9
+            g1idulz7KwFI8aeaM/xz9quD1aQAaGewQFTOkeQY5NJnAb+nVnC8h9g+toG/Mq4b
+            xFvvtzWdChSLtIdF1YRbN2MJzQ4SrQA0SQdufM9JVq/nMOnjVyMmfMS8fUorwiAV
+            abhFl5bvXNzTonPa9kcxL+mdlC+3r/EogSPKrUQHuJkRbD6BsEkFtA==
+            =cIU2
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.10'
+          remote: '192.168.67.11'
+        ip6:
+          local: 'fe80::1'
+          remote: 'fe80::2'
+    router:
+      north-zitadelle:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23230
+            remote: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf+JWnBRLs1GsRaGroCEroeh6KfdnlyfbbFog3uS5rwu2yL
+            PPQOJ4VtIzPeomRj9omI2rdihoA436S742T6DFRQt6/J5XYqHbeZFRWziQIP+Dnq
+            GAloTOc8Rf4KX9GKXhcmkntjvktPJE9DQ2j2GIhyA2TGwxR8foqpdl/BV1XQMyVm
+            8awhnNNRidJDSrFg2USsjGTWkcLp/IKupvHuIpLMS8HcrWaHMC2CAPSJWAs31BVd
+            Ld2w76xh6vmyerGyyAEwlY704ME5+ddBeGS8Iy93dj6u3RViaFIzmoaybovFVlaY
+            hnWyPx/YHV/WyExRJgv3gjPff9XUkJ8Vqr6xKfhBnNJnAf/QK9A755Me4EA3lGPC
+            GeM5/t26QluM887/5RF9DBUcd75bvSg/iswyWkoEUq2qRGQcffzYwd3q6yr8hnDZ
+            R/LZvO0iPqz6WsboTM1yh3wRdlErOwab/ufx5ThOMGQGQD18iclFAQ==
+            =BC6u
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.7'
+          remote: '192.168.67.6'
+        ip6:
+          local: 'fe80::2'
+          remote: 'fe80::1'
+      south-zitadelle:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23231
+            remote: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAq1AHHiisiNOI8lvfT8XvwyeZ49mb1Ug7S63GU7HJCCy+
+            3ajqHgoRgLfSPizEDcfGPilILEo72RuOtpKDvaDvSRXTa61PfBQxo+wn3o0/ukp6
+            8OFexXsDgUssBgGVCJt49JtxfdtqRma60cEQi1IOqjJMU4U9ZaogpR4ZEXjbWXHp
+            hf1w/OSE/uOdBSFPHxzOrpd5ABpAE6pvRj2QvuJZ703N1dm1rlyAgX2k5k6fsqyh
+            4NVpdVNEtBxlCpfSKzVvy+5qLbVHGwJ0EUnNf0CLQTTUgWq0zp9YH//UZm1XvF0p
+            J6BMealX3WGFSeh3PM8UQVqliQWfvFrSPolDfvoFHNJnASZq1OO0ei9jh+0dUzB4
+            01viYTlZBz/DupAAcwMQx3D31/QVFt5cgLcKA6Xdo667uRhKYwZHNUpzAhckcb94
+            QNvYK69kSy4+0iQ4SQ/2By1wPcGdkwuCcqwg7sKrhsJn9XVXFftzsA==
+            =H8CA
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.9'
+          remote: '192.168.67.8'
+        ip6:
+          local: 'fe80::2'
+          remote: 'fe80::1'
+      bunker:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23232
+            remote: 23230
+          psk: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAz8tssmmRbq1I6Gjo3LmD25T1bwvAmSxfGIGDrzsWMuus
+            7meHHGYqFeWErXOunYq7BJA2VSC5VBhE3+YBq+LdPYfaAGNKXolyrbJmbcQVser4
+            d0DTq5IaYz5M05TEE7plYltaqQsdXpG+g+RA43pAno1EIkH9X3E9qgUsCju9Ezry
+            LeywW0ePeJaV6uJpSLTso1DFGebyYff6a0eNXD3/kzIZoPmmVLGe1WTSqK7ztF0h
+            fduWrUkpi/dvZa1eHE4H/Zqwy+LmcRoRU57BcmNsq87qKv64iOkwWqR5DTDVqPR9
+            g1idulz7KwFI8aeaM/xz9quD1aQAaGewQFTOkeQY5NJnAb+nVnC8h9g+toG/Mq4b
+            xFvvtzWdChSLtIdF1YRbN2MJzQ4SrQA0SQdufM9JVq/nMOnjVyMmfMS8fUorwiAV
+            abhFl5bvXNzTonPa9kcxL+mdlC+3r/EogSPKrUQHuJkRbD6BsEkFtA==
+            =cIU2
+            -----END PGP MESSAGE-----
+        ip4:
+          local: '192.168.67.11'
+          remote: '192.168.67.10'
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'

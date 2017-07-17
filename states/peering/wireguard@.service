@@ -1,0 +1,23 @@
+[Unit]
+Description=WireGuard connection to %i
+
+PartOf=wireguard.service
+ReloadPropagatedFrom=wireguard.service
+
+After=network.target
+
+
+[Service]
+Type=oneshot
+
+ExecStart=/usr/bin/ip link add dev %i type wireguard
+ExecStart=/usr/bin/wg setconf %i /etc/wireguard/%i.conf
+
+ExecStop=/usr/bin/ip link delete dev %i
+
+RemainAfterExit=yes
+
+
+[Install]
+WantedBy=multi-user.target
+

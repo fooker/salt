@@ -1,0 +1,29 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Allow routing protocols on peer links
+domain (ip ip6)
+table filter
+chain INPUT {
+{% for peer in pillar.peering.transfers[grains.id] %}
+{% if 'ospf' in pillar.peering.peers[peer].protos %}
+    interface peer.{{ pillar.peering.peers[peer].netdev }}
+    proto OSPFIGP
+    ACCEPT;
+{% endif %}
+{% if 'bgp' in pillar.peering.peers[peer].protos or 'ibgp' in pillar.peering.peers[peer].protos %}
+    interface peer.{{ pillar.peering.peers[peer].netdev }}
+    proto (tcp udp)
+    dport bgp
+    ACCEPT;
+{% endif %}
+{% endfor %}
+}
+
+# Allow forwarding between nodes
+domain (ip ip6)
+table filter
+chain FORWARD
+in-interface peer.+
+out-interface peer.+
+ACCEPT;
+

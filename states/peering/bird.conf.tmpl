@@ -1,6 +1,6 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-router id {{ pillar.addresses[grains.id].ext.ip4.address }};
+router id {{ pillar.peering.peers[grains.id].router_id }};
 
 protocol device {
 	scan time 10;
@@ -46,7 +46,7 @@ protocol ospf {{ domain }}_ospf {
 	table {{ domain }};
 	import keep filtered;
 	import filter {
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
 
 		if net ~ [
 			{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
@@ -109,7 +109,7 @@ template bgp {{ domain }}_bgp {
 	import keep filtered;
 	import limit 1000 action block;
 	import filter {
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
 
 		if net ~ [
 			{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
@@ -155,6 +155,15 @@ protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.'
 	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.domains[domain].bgp.as }};
 }
 {% endfor %}
+
+protocol pipe {{ domain }}_egp_pipe {
+	table {{ domain }}_egp;
+
+	import none;
+	export all;
+
+	peer table {{ domain }};
+}
 {% endif %}
 
 protocol pipe {{ domain }}_pipe {
@@ -162,7 +171,7 @@ protocol pipe {{ domain }}_pipe {
 	import none;
 	export filter {
 		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip4.address }};
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
 
 		accept;
 	};

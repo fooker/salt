@@ -3,7 +3,6 @@
 config setup
 
 conn %default
-	type=tunnel
 	ikelifetime=60m
 	keylife=20m
 	rekeymargin=3m
@@ -16,7 +15,7 @@ conn %default
 	leftsubnet=%dynamic[gre]
 	rightsubnet=%dynamic[gre]
 
-{% for peer in pillar.peering.transfers[grains.id] %}
+{% for peer in pillar.peering.transfers[grains.id] if pillar.peering.transfers[grains.id][peer].proto in ('gre', 'gre6') %}
 conn {{ peer }}
 	left=%any
 	right={{ pillar.peering.peers[peer].remote }}

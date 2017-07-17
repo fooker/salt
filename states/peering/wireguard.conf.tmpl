@@ -1,0 +1,18 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Interface]
+PrivateKey = {{ pillar.peering.peers[grains.id].wireguard.privkey }}
+{% if 'local' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
+ListenPort = {{ pillar.peering.transfers[grains.id][peer].wireguard.port.local }}
+{% endif %}
+
+[Peer]
+PublicKey = {{ pillar.peering.peers[peer].wireguard.pubkey }}
+PresharedKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.psk }}
+
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 10
+
+{% if 'remote' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
+Endpoint = {{ pillar.peering.peers[peer].remote }}:{{ pillar.peering.transfers[grains.id][peer].wireguard.port.remote }}
+{% endif %}

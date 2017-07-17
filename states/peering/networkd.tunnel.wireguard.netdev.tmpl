@@ -1,0 +1,16 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[NetDev]
+Description=Peering with {{ peer }}
+
+Name=peer.{{ pillar.peering.peers[peer].netdev }}
+
+Kind=gre
+
+
+[Tunnel]
+Local={{ pillar.addresses[grains.id].ext.ip4.address }}
+Remote={{ pillar.peering.peers[peer].remote }}
+
+TTL=64
+
