@@ -8,7 +8,9 @@ ListenPort = {{ pillar.peering.transfers[grains.id][peer].wireguard.port.local }
 
 [Peer]
 PublicKey = {{ pillar.peering.peers[peer].wireguard.pubkey }}
+{% if 'psk' in pillar.peering.transfers[grains.id][peer].wireguard %}
 PresharedKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.psk }}
+{% endif %}
 
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 10
