@@ -112,10 +112,10 @@ addresses:
         mac: 00:d9:d1:09:19:fb
         ip4: 10.0.23.65
         ip6: 2001:4dd0:ae46:23::41
-  foopi:
+  blaster:
     int:
       priv:
-        mac: b8:27:eb:1c:32:39
+        mac: b8:27:eb:cb:20:ed
         ip4: 10.0.23.66
         ip6: 2001:4dd0:ae46:23::42
   amp:
@@ -173,9 +173,9 @@ addresses:
         netmask: 27
         gateway: 193.174.29.1
       ip6:
-        address: 2001:638:301:11a3::6
+        address: '2001:638:301:11a3::6'
         netmask: 64
-        gateway: fe80::0
+        gateway: '2001:638:301:11a3::'
   bunker:
     int:
       mngt:
