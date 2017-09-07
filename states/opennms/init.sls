@@ -1,4 +1,5 @@
 {% from 'letsencrypt/init.sls' import certificate %}
+{% import 'rsnapshot/target/init.sls' as rsnapshot %}
 
 
 opennms.nginx:
@@ -27,3 +28,26 @@ opennms.iptables:
     - source: salt://opennms/ferm.conf
     - require_in:
       - file: ferm
+
+opennms.grafana:
+  pkg.installed:
+    - name: grafana
+
+opennms.grafana.conf:
+  file.managed:
+    - name: /etc/grafana.ini
+    - source: salt://opennms/grafana.ini
+    - makedirs: True
+
+opennms.grafana.service:
+  service.running:
+    - name: grafana
+    - enable: True
+    - watch:
+      - file: /etc/grafana.ini
+      - pkg: grafana
+
+
+{{ rsnapshot.target('opennms', '/opt/opennms/etc') }}
+{{ rsnapshot.target('grafana', '/var/lib/grafana') }}
+
