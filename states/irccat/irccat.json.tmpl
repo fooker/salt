@@ -1,0 +1,16 @@
+{
+    "tcp": {
+        "listen": ":12345"
+    },
+
+    "irc": {
+        "server": "{{ pillar.irccat.host }}:{{ pillar.irccat.port }}",
+        "tls": true,
+        "tls_skip_verify": false,
+        "nick": "{{ pillar.irccat.username }}",
+        "realname": "open-desk.net bot",
+        "identify_pass": "{{ pillar.irccat.password }}",
+        "channels": ["{{ pillar.irccat.channel }}"]
+    }
+}
+

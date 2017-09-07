@@ -27,3 +27,6 @@ base:
     - match: compound
     - letsencrypt
 
+  'brueckenkopf':
+    - irccat
+

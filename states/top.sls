@@ -66,6 +66,7 @@ base:
     - letsencrypt
     - salt.master
     - opennms
+    - irccat
     - weechat
 
   'nas':
