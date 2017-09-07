@@ -10,8 +10,11 @@ After=network.target
 [Service]
 Type=oneshot
 
+ExecStartPre=-/usr/bin/ip link delete dev %i
 ExecStart=/usr/bin/ip link add dev %i type wireguard
 ExecStart=/usr/bin/wg setconf %i /etc/wireguard/%i.conf
+
+ExecReload=/usr/bin/wg setconf %i /etc/wireguard/%i.conf
 
 ExecStop=/usr/bin/ip link delete dev %i
 
