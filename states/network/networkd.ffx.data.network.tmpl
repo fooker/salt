@@ -3,8 +3,9 @@
 [Match]
 Name=ffx.data
 
-
 [Network]
+IPv6AcceptRA=no
+
 {% if grains['role'] == 'gateway' -%}
 IPForward=true
 {%- endif %}

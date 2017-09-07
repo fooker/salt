@@ -3,6 +3,8 @@
 [Match]
 Name=ext
 
+[Network]
+IPv6AcceptRA=no
 
 [Address]
 Address={{ pillar['addresses'][grains['id']]['ext']['ip4']['address'] }}/{{ pillar['addresses'][grains['id']]['ext']['ip4']['netmask'] }}

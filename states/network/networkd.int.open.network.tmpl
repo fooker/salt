@@ -3,6 +3,9 @@
 [Match]
 Name=int.open
 
+[Network]
+IPv6AcceptRA=no
+
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['open']['ip4'] }}/{{ pillar['networks']['open']['ip4']['netmask'] }}
 

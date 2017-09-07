@@ -3,6 +3,9 @@
 [Match]
 Name=int.mngt
 
+[Network]
+IPv6AcceptRA=no
+
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['mngt']['ip4'] }}/{{ pillar['networks']['mngt']['ip4']['netmask'] }}
 
