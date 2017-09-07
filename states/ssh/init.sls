@@ -30,6 +30,7 @@ sshd.iptables:
   file.managed:
     - name: /etc/ferm.d/sshd.conf
     - source: salt://ssh/ferm.conf
+    - makedirs: True
     - require_in:
       - file: ferm
 {% endif %}

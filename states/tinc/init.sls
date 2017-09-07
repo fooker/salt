@@ -1,10 +1,13 @@
 tinc:
   pkg.installed:
     - name: tinc
+  file.directory:
+    - name: /etc/tinc
   service.running:
     - enable: True
     - name: tinc
     - require:
+      - file: tinc
       - pkg: tinc
 
 
@@ -65,6 +68,7 @@ tinc.{{ instance }}.key:
     - contents: |
         {{ config.hosts[grains.id].private_key | indent(8) }}
     - mode: 600
+    - makedirs: True
 
 
 tinc.{{ instance }}.hosts:
@@ -81,6 +85,7 @@ tinc.{{ instance }}.hosts.{{ host }}:
   file.managed:
     - name: /etc/tinc/{{ instance }}/hosts/{{ identity }}
     - source: salt://tinc/host.tmpl
+    - makedirs: True
     - template: jinja
     - context:
         instance: {{ instance }}
@@ -119,6 +124,7 @@ tinc.{{ instance }}.ferm:
   file.managed:
     - name: /etc/ferm.d/tinc.{{ instance }}.conf
     - source: salt://tinc/ferm.conf.tmpl
+    - makedirs: True
     - template: jinja
     - context:
         instance: {{ instance }}

@@ -8,6 +8,7 @@ ferm:
       - pkg: ferm
     - watch:
       - file: /etc/ferm.conf
+      - file: /etc/ferm.conf.custom
       - file: /etc/ferm.d/*
   file.directory:
     - name: /etc/ferm.d
@@ -19,4 +20,8 @@ ferm.conf:
     - name: /etc/ferm.conf
     - source: salt://iptables/ferm.conf
     - makedirs: True
+
+ferm.conf.custom:
+  file.managed:
+    - name: /etc/ferm.conf.custom
 
