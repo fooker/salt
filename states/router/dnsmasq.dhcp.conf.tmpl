@@ -2,6 +2,8 @@
 
 # This is the one and only
 dhcp-authoritative
+dhcp-fqdn
+domain={{ pillar['domain']['name'] }}
 
 # Provide DHCP ranges for each network
 {%- for network in pillar['networks'].values() %}

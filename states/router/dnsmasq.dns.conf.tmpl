@@ -2,6 +2,7 @@
 
 # Specify internal domain
 local=/int.{{ pillar['domain']['name'] }}/
+expand-hosts
 
 # Do not read /etc/hosts but read hosts from /etc/dnsmasq.hosts
 no-hosts
