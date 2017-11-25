@@ -1,7 +1,6 @@
 salt-minion.gnupg:
   pkg.installed:
-    - sources:
-      - python2-gnupg: salt://salt/python2-gnupg-0.3.7-1-any.pkg.tar.xz
+    - name: python2-gnupg
 
 salt-minion:
   pkg.installed:
