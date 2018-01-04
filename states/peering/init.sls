@@ -167,17 +167,3 @@ File.managed('peering.bird',
              makedirs=True,
              template='jinja')
 
-Pkg.installed('peering.bird6',
-              name='bird6')
-Service.running('peering.bird6',
-                name='bird6',
-                enable=True,
-                reload=True,
-                require=Pkg('peering.bird6'),
-                watch=File('peering.bird6'))
-File.managed('peering.bird6',
-             name='/etc/bird6.conf',
-             source='salt://peering/bird6.conf.tmpl',
-             makedirs=True,
-             template='jinja')
-
