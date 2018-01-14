@@ -22,7 +22,7 @@ base:
 
   '* and not router':
     - match: compound
-    - common.ntp
+    - common.timesyncd
 
   '* and not *-zitadelle':
     - match: compound
