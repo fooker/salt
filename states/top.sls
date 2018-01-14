@@ -37,7 +37,6 @@ base:
   'router':
     - router.gateway
     - router.dsl
-    - router.aiccu
     - router.dns
     - router.dhcp
     - router.radvd
