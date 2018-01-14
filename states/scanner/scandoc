@@ -1,0 +1,70 @@
+# /bin/bash
+
+# Config
+DEVICE="${1}"
+TARGET="/var/spool/scanner"
+
+# Generate a document ID
+DID="$(uuidgen)"
+
+# Generate the target document directory
+mkdir -p "${TARGET}/${DID}"
+
+# Redirect all output to the log file
+exec &> "${TARGET}/${DID}/scan.log"
+
+# Change working directory to document dir
+pushd "${TARGET}/${DID}"
+
+# Scan the document
+scanadf \
+	--verbose \
+	--device "${DEVICE}" \
+	--output-file 'scan-%03d.ppm' \
+	--resolution 300 \
+	--mode '24bit Color' \
+	--source 'Automatic Document Feeder(left aligned,Duplex)'
+
+# Enhance the pages for OCR
+unpaper \
+	'scan-%03d.ppm' \
+	'enhanced-%03d.ppm'
+
+# OCR each page
+for ((I=1; 1; I++)); do
+	SOURCE="$(printf 'enhanced-%03d.ppm' "${I}")"
+	TARGET="$(printf 'ocr-%03d' "${I}")"
+
+	# Break on first non-existing file
+	if [[ ! -e "${SOURCE}" ]]; then
+		break
+	fi
+
+	# Skip page if blank
+	MEAN="$(convert \
+		"${SOURCE}" \
+		-shave "1%x1%" \
+		-format "%[fx:round(standard_deviation*100)]" \
+		"info:")"
+	if [[ "${MEAN}" -le "1" ]]; then
+		continue
+	fi
+
+	# OCR the page
+	tesseract \
+		"${SOURCE}" \
+		"${TARGET}" \
+		-l deu \
+		pdf
+done
+
+# Combine per page pdf files to a single one
+pdfunite \
+	ocr-???.pdf \
+	final.pdf
+
+# Restore working directory
+popd
+
+# Exit gracefully
+exit 0
