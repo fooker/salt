@@ -39,7 +39,7 @@ base:
     - router.dsl
     - router.dns
     - router.dhcp
-    - router.radvd
+    #    - router.radvd
     - router.ntp
     - router.netboot
     - router.vnstat

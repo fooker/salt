@@ -9,6 +9,7 @@ IPv6AcceptRA=no
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['open']['ip4'] }}/{{ pillar['networks']['open']['ip4']['netmask'] }}
 
+{#
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['open']['ip6'] }}/{{ pillar['networks']['open']['ip6']['netmask'] }}
 
@@ -16,15 +17,18 @@ Address={{ pillar['addresses'][grains['id']]['int']['open']['ip6'] }}/{{ pillar[
 [Address]
 Address=fe80::/64
 {%- endif %}
+#}
 
 {% if grains['role'] != 'gateway' -%}
 [Route]
 Gateway={{ pillar['networks']['open']['ip4']['gateway'] }}
 Metric=400
 
+{#
 [Route]
 Gateway={{ pillar['networks']['open']['ip6']['gateway'] }}
 Metric=400
+#}
 {%- endif %}
 
 [Network]
@@ -33,6 +37,8 @@ Domains=open.int.open-desk.net
 DNS={{ pillar['networks']['open']['ip4']['gateway'] }}
 NTP={{ pillar['networks']['open']['ip4']['gateway'] }}
 
+{#
 DNS={{ pillar['networks']['open']['ip6']['gateway'] }}
 NTP={{ pillar['networks']['open']['ip6']['gateway'] }}
+#}
 
