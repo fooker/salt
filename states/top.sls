@@ -76,5 +76,8 @@ base:
     - scanner
 
   'cinema':
-    - cinema
+    - cinema/kodi
+
+  'blaster':
+    - blaster
 

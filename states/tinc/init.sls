@@ -27,17 +27,6 @@ tinc.{{ instance }}:
 
 {% if bridged %}
 
-tinc.{{ instance }}.netdev:
-  file.managed:
-    - name: /etc/systemd/network/40-{{ config.interface }}.tinc.netdev
-    - source: salt://tinc/netdev.tmpl
-    - context:
-        instance: {{ instance }}
-        bridged: True
-    - template: jinja
-    - makedirs: True
-
-
 tinc.{{ instance }}.network:
   file.managed:
     - name: /etc/systemd/network/40-{{ config.interface }}.tinc.network
@@ -45,18 +34,6 @@ tinc.{{ instance }}.network:
     - template: jinja
     - context:
         instance: {{ instance }}
-    - makedirs: True
-
-{% else %}
-
-tinc.{{ instance }}.netdev:
-  file.managed:
-    - name: /etc/systemd/network/70-{{ config.interface }}.netdev
-    - source: salt://tinc/netdev.tmpl
-    - context:
-        instance: {{ instance }}
-        bridged: False
-    - template: jinja
     - makedirs: True
 
 {% endif %}
