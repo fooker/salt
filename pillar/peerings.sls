@@ -441,7 +441,11 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       south-zitadelle:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23231
+            remote: 23231
         ip4:
           local: '192.168.67.0'
           remote: '192.168.67.1'
@@ -449,7 +453,11 @@ peering:
           local: 'fe80::1'
           remote: 'fe80::2'
       bunker:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23232
+            remote: 23232
         ip4:
           local: '192.168.67.4'
           remote: '192.168.67.5'
@@ -525,7 +533,11 @@ peering:
 #          local: 'fe80::1'
 #          remote: 'fe80::2'
       north-zitadelle:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23231
+            remote: 23231
         ip4:
           local: '192.168.67.1'
           remote: '192.168.67.0'
@@ -533,7 +545,11 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
       bunker:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23233
+            remote: 23233
         ip4:
           local: '192.168.67.2'
           remote: '192.168.67.3'
@@ -565,7 +581,11 @@ peering:
           remote: 'fe80::2'
     bunker:
       north-zitadelle:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23232
+            remote: 23232
         ip4:
           local: '192.168.67.5'
           remote: '192.168.67.4'
@@ -573,7 +593,11 @@ peering:
           local: 'fe80::2'
           remote: 'fe80::1'
       south-zitadelle:
-        proto: gre
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23233
+            remote: 23233
         ip4:
           local: '192.168.67.3'
           remote: '192.168.67.2'
