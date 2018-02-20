@@ -29,6 +29,20 @@ database:
         =ZeIu
         -----END PGP MESSAGE-----
 
+    born1958:
+      password: |
+        -----BEGIN PGP MESSAGE-----
+        hQEMA0EEvUwCdTjhAQgAqFE/3Tct8G88yKag8CM1KAu9MES7w3Zt3WZH3nIrN5Y/
+        HCrUS0Rl7ADRrkPkpCVJLOXO7GnLMYcoqHF6RHwEf+5YMGT9xrGt/KbuB/4S7ouw
+        J8xJpw+wUkYCzklUHMlyjl+W59alXktK/1NcvLqokYdD+O0UEB03e4Xtv7RITdVG
+        boWkZS3EDdmK6EHFWDuMvvAmTNcpqNsq0Y96gzZ9PSzQTPBiBSyfxBf2UWsbDhNr
+        HY9DDBpli5yp7tqtVhqFfMrCKW7l1JSiXYXLTr2ytH507o8vhmfnCn+k9oc3cMFh
+        DkNvxpx1DOyGnvSjAyArjvRR2xrcdmysGjIlBfr2h9JcAX4BNTDu2NtzistgDHOq
+        24fm6iYDpMgu7E4auvI1+jD/nelFf+lHf38goWba1GyWrIGYLljD6H/oUEMRDIBN
+        IHHrjC3gEysQKSsIWj1jJGxgQihi9/661lsypUw=
+        =x1P4
+        -----END PGP MESSAGE-----
+
     ak36:
       password: |
         -----BEGIN PGP MESSAGE-----
