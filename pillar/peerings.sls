@@ -134,52 +134,6 @@ peering:
         ike: aes128-sha256-modp2048!
         esp: aes128-sha1-modp2048!
 
-#    fleaz1:
-#      protos:
-#        - bgp
-#      as: 4242421010
-#      domains:
-#        - dn42
-#      netdev: fleaz1
-#      remote: ''
-#      wireguard:
-#        privkey: |
-#          -----BEGIN PGP MESSAGE-----
-#          hQEMA0EEvUwCdTjhAQf9E3zCGkIWghrerqf/KSQHycpuoIjy2y2eDXVyu+SxEUYK
-#          bLgRQmFt+aJ/zGbt530Q6rgEV1x5bgfOaggYU9GnuT7HBrdvIGcSERbQxGfLbCb3
-#          osux0kJXs+NFdGr0cN715RPZKwMRHRb/cQlXOwVrJbismL/duM9MT9MEmtxTZLfO
-#          RuvIjrOp/FqMybc2EoGArHT5gl5xYxXtQoABz9gTLiZugOpVYj/RUowxSDcnzDo/
-#          FS+ndgTTvaQA0JjVr7RZQQ0cQm8c7RmWaIRQ/u39WlJlebzuL0K90BXP43q+P3ck
-#          dMInE/lg4Kumsim4Y0sMl2TjCDL9jyNgPnT5lSA5MNJnAVIsBNT5abN/jjzE+zHv
-#          /bzvmJaG6fehdBON/DrXLox/CTZmFFicmeWyu55VdsPDwidlPuGv0Gwa1WJmn7GQ
-#          N95P/0WNkBvVR8u1FTF0dU1qr5doTO2RbutlCBErv/xeFkcLscgRDA==
-#          =Zet3
-#          -----END PGP MESSAGE-----
-#        pubkey: xYb8xvrErFYe2bLxn6VrZZ3H6830rSJtz1aIPN4M3jo=
-#
-#    fleaz2:
-#      protos:
-#        - bgp
-#      as: 4242421010
-#      domains:
-#        - dn42
-#      netdev: fleaz2
-#      remote: ''
-#      wireguard:
-#        privkey: |
-#          -----BEGIN PGP MESSAGE-----
-#          hQEMA0EEvUwCdTjhAQf/UeKDch1ZpYqwak2QtoHtKaYv3V9y9VRW6C+Oo7c2G3Mu
-#          znBAkFdcynxiJpPMcnPI1Eu+JaiBYNh7UU6fvG4U+arBPNwTmPH2hb4vt0ojA8SF
-#          lFH1eKEWDvmPLMz9SwRyjLhpE6r7CgzcGuTq52s4jgph7pVlZsvJUfIZaCriPW5b
-#          bv7XQ6y6iBXWf9jF5Y4fDwy61Qd8k2NoYZGfH2y7Bby3LHbITCo9FexI+5y0nxzY
-#          /LbZgOqLw5HA8Lf4P6Dtm5RhJV7DuO4ngMFYFnEjkWWFk0WotPSdD1TRB0fjq/F3
-#          tLkFew39ynsjFxXoSQmSZSqqVWpzYZNDm+q75Jo7SdJnATAYYA0dHVWPCLDwuqGh
-#          JrbyGorbHnMM5nlcPaDnMuqZJBcnsXajr9hhhUf8cmvmBVzjmTFCrtC6KKY/4ceu
-#          Xda4LUtdmnf2UchrtDfT/snKC6+vLiapyEzYi35nreljYHEyr/1MKQ==
-#          =q7h9
-#          -----END PGP MESSAGE-----
-#        pubkey: V5khNIw0fhKF5yJU0XUHwOML5Vwwqdvttn5BHll0FE0=
-
     cccda:
       protos:
         - bgp
@@ -230,20 +184,28 @@ peering:
         ike: aes256-sha512-curve25519!
         esp: aes256-sha512-curve25519!
 
-#    maglab:
-#      protos:
-#        - bgp
-#      as: 424240000
-#      domains:
-#        - dn42
-#      netdev: maglab
-#      remote: '1.2.3.4'
-#      ipsec:
-#        pubkey: |
-#          -----BEGIN PUBLIC KEY-----
-#          -----END PUBLIC KEY-----
-#        ike: aes128-sha256-modp2048!
-#        esp: aes128-sha1-modp2048!
+    maglab:
+      protos:
+        - bgp
+      as: 4242422800
+      domains:
+        - dn42
+      netdev: maglab
+      remote: 'marvin.maglab.space'
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQgAseaowIrCzWf77oYJoNWqkTVfM2t4eHHWXC4aIG0YTOtB
+          XUIdB5eyOt+Kgm2TrBZBf7HP+bXTuh8ZZUCGReMF7lOOPu54OQqPGUXQK4f1SCOJ
+          D/lXw2Ek4SEVuva5Qj/j97nlYblfjF4s7Dzs06HuEED+Yk9Ny0l06RlUGJSXsH4z
+          W1vT20ORMSS9VitT0FojaVZ0ghXNOnU7NS5tCszky5vlyxg81ZWN8UsOKfyDH48S
+          8qhJjJv6nQWjGai7qFmL2fadjPDpo7kzBYnCQxmZpbSImshY+JzEpi3bqbMl+Z8c
+          nMeDEf12FPzlkUYqBGC7WZh/JYpOfzXRojrIIW9oKtJnAcrB++i2DqI6eGxQuZ31
+          tmEDdJghuhV/M0nXtiP/5R08ECb3xQCfZ3olYtVi3nx4l9LL3mKx+ZytyGZ1L6j5
+          757RBv/GuJwv5YaVinqUck+8sYalFx84ZJW3XfJsDenjZKIbSbYgVg==
+          =bFiR
+          -----END PGP MESSAGE-----
+        pubkey: 1Dv0Nkr51AQu+InNvVbbpUgJtyQMsIbWilAlz3JHPTc=
 
     north-zitadelle:
       router_id: 0x8133feaa
@@ -339,24 +301,6 @@ peering:
         - hive
       netdev: x.bunker
       remote: '37.120.161.15'
-      ipsec:
-        pubkey: |
-          -----BEGIN PUBLIC KEY-----
-          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAvEdSeO26zc7UBbUR5mh2
-          L2zh1yfIjs+0KBFT1nK1tTnhDIQLbXsPoh2kJ7VQvIzEnDOh35Zih+ok80t5VNAa
-          I0nzmLbTF5pw3fREgdII6P3TT497IDhS9pYlnRBgacj4vKmTL9fQZ0A9E38bSd1W
-          oLcB7P/KhTDcm0moo2AIyCi1Azcafj2wnpCeQioDSSHbbR02vwOJhcUi9fBZKObV
-          z+DnfOcnsGjZBIGRIxwiNFy9Lqz+DalaE/IC3Af4J+q67VghD/J+03UFtxn1ORuR
-          DO/9nd/Wx/FN/NaeWeGqqMzf93ZKbbETfXPolZUN3IgUiVKyeBiuqpzook7HndC+
-          RbKCaw2m4F12si2jUJICVDUFk4EYJL4O7UYKr9X9Vo/IFng61yCpZwVtSI954Qg1
-          h/ahQF6BM1ysxvd7/eN/Zg6Aj/JwSb6g7m8rL82NsVX+09KB/p6xZ/Hta2uZjS5Z
-          iybzCRAvnsBU0diUf0NcT7UxASpN7SNv7uC58gVjnEqy2LHvQ5Pa53POp06PwTDC
-          9LFQmE2YB9JPenjfGCDm8XdXZ7M7dpbcrUEiwhmyZVwYO1S5c3J7YpxwSZyry70x
-          2BJdJf6oyFXlQbSZgd4eX+8AJcPGub0B2ZC9WOdk8EyioikhoWJHSQP8diPBzLUn
-          GlXY4FK3RV5o+0ycVmOiYRMCAwEAAQ==
-          -----END PUBLIC KEY-----
-        ike: aes256-sha512-curve25519!
-        esp: aes256-sha512-curve25519!
       wireguard:
         privkey: |
           -----BEGIN PGP MESSAGE-----
@@ -404,14 +348,6 @@ peering:
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'
-#      andi:
-#        proto: gre6
-#        ip4:
-#          local: '1.2.3.4'
-#          remote: '1.2.3.5'
-#        ip6:
-#          local: 'fe80::1'
-#          remote: 'fe80::2'
       cccda:
         proto: wireguard
         wireguard:
@@ -432,14 +368,18 @@ peering:
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'
-#      maglab:
-#        proto: gre6
-#        ip4:
-#          local: '1.2.3.4'
-#          remote: '1.2.3.5'
-#        ip6:
-#          local: 'fe80::1'
-#          remote: 'fe80::2'
+      maglab:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23421
+            remote: 42001
+        ip4:
+          local: '192.168.234.1'
+          remote: '192.168.234.0'
+        ip6:
+          local: 'fe80:42::2'
+          remote: 'fe80:42::1'
       south-zitadelle:
         proto: wireguard
         wireguard:
@@ -496,14 +436,6 @@ peering:
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
-#      andi:
-#        proto: gre6
-#        ip4:
-#          local: '1.2.3.4'
-#          remote: '1.2.3.5'
-#        ip6:
-#          local: 'fe80::1'
-#          remote: 'fe80::2'
       cccda:
         proto: wireguard
         wireguard:
@@ -524,14 +456,18 @@ peering:
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'
-#      maglab:
-#        proto: gre6
-#        ip4:
-#          local: '1.2.3.4'
-#          remote: '1.2.3.5'
-#        ip6:
-#          local: 'fe80::1'
-#          remote: 'fe80::2'
+      maglab:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23421
+            remote: 42002
+        ip4:
+          local: '192.168.234.3'
+          remote: '192.168.234.2'
+        ip6:
+          local: 'fe80:42::2'
+          remote: 'fe80:42::1'
       north-zitadelle:
         proto: wireguard
         wireguard:
