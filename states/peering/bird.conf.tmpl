@@ -68,6 +68,8 @@ protocol ospf v2 {{ domain }}_ospf_4 {
 
 	ipv4 {
 		table {{ domain }}_4;
+		preference {{ pillar.peering.domains[domain].ospf.preference }};
+
 		import keep filtered;
 		import filter {
 			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
@@ -122,6 +124,8 @@ protocol ospf v3 {{ domain }}_ospf_6 {
 
 	ipv6 {
 		table {{ domain }}_6;
+		preference {{ pillar.peering.domains[domain].ospf.preference }};
+
 		import keep filtered;
 		import filter {
 			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
@@ -192,14 +196,17 @@ protocol static {{ domain }}_static_6 {
 template bgp {{ domain }}_bgp {
 	local as {{ pillar.peering.domains[domain].bgp.as }};
 
-	path metric 1;
+	path metric on;
 
 	check link on;
 	direct;
 
 	ipv4 {
 		table {{ domain }}_egp_4;
+		preference {{ pillar.peering.domains[domain].bgp.preference }};
+
 		next hop self;
+
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {
@@ -240,7 +247,10 @@ template bgp {{ domain }}_bgp {
 
 	ipv6 {
 		table {{ domain }}_egp_6;
+		preference {{ pillar.peering.domains[domain].bgp.preference }};
+
 		next hop self;
+
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {

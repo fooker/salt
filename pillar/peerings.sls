@@ -10,6 +10,7 @@ peering:
     hive:
       ospf:
         instance_id: 23
+        preference: 1000
       exports:
         ip4:
           - 192.168.33.0/24
@@ -27,8 +28,10 @@ peering:
     dn42:
       ospf:
         instance_id: 42
+        preference: 100
       bgp:
         as: 4242421271
+        preference: 200
       exports:
         ip4:
           - 172.23.200.0/24
