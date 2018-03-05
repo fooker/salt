@@ -1,0 +1,44 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name=int.major
+
+[Network]
+IPv6AcceptRA=no
+
+[Address]
+Address={{ pillar['addresses'][grains['id']]['int']['major']['ip4'] }}/{{ pillar['networks']['major']['ip4']['netmask'] }}
+
+{#
+[Address]
+Address={{ pillar['addresses'][grains['id']]['int']['major']['ip6'] }}/{{ pillar['networks']['major']['ip6']['netmask'] }}
+
+{% if grains['role'] == 'gateway' -%}
+[Address]
+Address=fe80::/64
+{%- endif %}
+#}
+
+{% if grains['role'] != 'gateway' -%}
+[Route]
+Gateway={{ pillar['networks']['major']['ip4']['gateway'] }}
+Metric=400
+
+{#
+[Route]
+Gateway={{ pillar['networks']['major']['ip6']['gateway'] }}
+Metric=400
+#}
+{%- endif %}
+
+[Network]
+Domains=major.int.open-desk.net
+
+DNS={{ pillar['networks']['major']['ip4']['gateway'] }}
+NTP={{ pillar['networks']['major']['ip4']['gateway'] }}
+
+{#
+DNS={{ pillar['networks']['major']['ip6']['gateway'] }}
+NTP={{ pillar['networks']['major']['ip6']['gateway'] }}
+#}
+

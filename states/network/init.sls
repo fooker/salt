@@ -69,6 +69,16 @@ network.int.open.network:
     - template: jinja
     - makedirs: True
 {% endif %}
+
+
+{% if 'major' in pillar['addresses'][grains['id']]['int'] %}
+network.int.major.network:
+  file.managed:
+    - name: /etc/systemd/network/60-int.major.network
+    - source: salt://network/networkd.int.major.network.tmpl
+    - template: jinja
+    - makedirs: True
+{% endif %}
 {% endif %}
 
 

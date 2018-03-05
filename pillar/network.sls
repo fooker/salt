@@ -29,6 +29,17 @@ networks:
       network: '2001:4dd0:ae46:42::'
       netmask: 64
       gateway: '2001:4dd0:ae46:42::1'
+  major:
+    ip4:
+      network: 10.10.10.0
+      netmask: 24
+      gateway: 10.10.10.1
+      dynamic: [10.10.10.100, 10.10.10.250]
+    ip6:
+      network: '2001:4dd0:ae46:64::'
+      netmask: 64
+      gateway: '2001:4dd0:ae46:64::1'
+
 
 addresses:
   router:
@@ -45,6 +56,10 @@ addresses:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.42.1
         ip6: 2001:4dd0:ae46:42::1
+      major:
+        mac: 00:0d:b9:34:db:e4
+        ip4: 10.10.10.1
+        ip6: 2001:4dd0:ae46:64::1
     ffx:
       data:
         mac: 00:0d:b9:34:db:e4

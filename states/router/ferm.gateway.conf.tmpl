@@ -14,10 +14,10 @@ chain FORWARD {
   proto tcp tcp-flags (SYN RST) SYN TCPMSS clamp-mss-to-pmtu;
 
   # Allow forwarding between some networks
-  in-interface (int.mngt int.priv int.open) out-interface ppp0      ACCEPT;
-  in-interface (int.mngt int.priv int.open) out-interface ext.sixxs ACCEPT;
-  in-interface int.priv                     out-interface int.open  ACCEPT;
-  in-interface (int.mngt int.priv int.open) out-interface maglab    ACCEPT;
+  in-interface (int.mngt int.priv int.open int.major) out-interface ppp0      ACCEPT;
+  in-interface (int.mngt int.priv int.open int.major) out-interface ext.sixxs ACCEPT;
+  in-interface (int.priv int.major)                   out-interface int.open  ACCEPT;
+  in-interface (int.mngt int.priv int.open int.major) out-interface maglab    ACCEPT;
 
   # Allow related connections to be forwarded back to originator
   mod conntrack ctstate INVALID DROP;
