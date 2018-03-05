@@ -200,7 +200,9 @@ template bgp {{ domain }}_bgp {
 
 	check link on;
 	direct;
+}
 
+template bgp {{ domain }}_bgp_4 from {{ domain }}_bgp {
 	ipv4 {
 		table {{ domain }}_egp_4;
 		preference {{ pillar.peering.domains[domain].bgp.preference }};
@@ -244,7 +246,9 @@ template bgp {{ domain }}_bgp {
 			reject;
 		};
 	};
+}
 
+template bgp {{ domain }}_bgp_6 from {{ domain }}_bgp {
 	ipv6 {
 		table {{ domain }}_egp_6;
 		preference {{ pillar.peering.domains[domain].bgp.preference }};
@@ -291,14 +295,22 @@ template bgp {{ domain }}_bgp {
 }
 
 {% for peer in pillar.peering.transfers[grains.id]|sort if 'bgp' in pillar.peering.peers[peer].protos and domain in pillar.peering.peers[peer].domains %}
-protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }} from {{ domain }}_bgp {
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }}_4 from {{ domain }}_bgp_4 {
 	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.peers[peer].as }};
+}
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }}_6 from {{ domain }}_bgp_6 {
+	neighbor {{ pillar.peering.transfers[grains.id][peer].ip6.remote }} as {{ pillar.peering.peers[peer].as }};
+	interface "peer.{{ pillar.peering.peers[peer].netdev }}";
 }
 {% endfor %}
 
 {% for peer in pillar.peering.transfers[grains.id]|sort if 'ibgp' in pillar.peering.peers[peer].protos and domain in pillar.peering.peers[peer].domains %}
-protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }} from {{ domain }}_bgp {
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }}_4 from {{ domain }}_bgp_4 {
 	neighbor {{ pillar.peering.transfers[grains.id][peer].ip4.remote }} as {{ pillar.peering.domains[domain].bgp.as }};
+}
+protocol bgp {{ domain }}_bgp_{{ pillar.peering.peers[peer].netdev | replace('.', '_') }}_6 from {{ domain }}_bgp_6 {
+	neighbor {{ pillar.peering.transfers[grains.id][peer].ip6.remote }} as {{ pillar.peering.domains[domain].bgp.as }};
+	interface "peer.{{ pillar.peering.peers[peer].netdev }}";
 }
 {% endfor %}
 
