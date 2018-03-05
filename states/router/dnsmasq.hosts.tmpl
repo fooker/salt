@@ -1,7 +1,7 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-{%- for hostname, host in pillar['addresses'].items() %}
-{%- for netname, net in host['int'].items() %}
-{{ net['ip4'] }}	{{ hostname }}	{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }}
+{%- for hostname, host in pillar['addresses'] | dictsort() %}
+{%- for netname, net in host['int'] | dictsort() %}
+{{ net['ip4'] }}	{{ hostname }}	{{ hostname }}.{{ netname }}.int.{{ pillar['domain']['name'] }}	{{ host.get('aliases', []) | join(' ') }}
 {%- endfor %}
 {%- endfor %}
