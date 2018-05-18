@@ -10,6 +10,12 @@ chain INPUT {
     proto OSPFIGP
     ACCEPT;
 {% endif %}
+{% if 'babel' in pillar.peering.peers[peer].protos %}
+    interface peer.{{ pillar.peering.peers[peer].netdev }}
+    proto udp
+    dport babel
+    ACCEPT;
+{% endif %}
 {% if 'bgp' in pillar.peering.peers[peer].protos or 'ibgp' in pillar.peering.peers[peer].protos %}
     interface peer.{{ pillar.peering.peers[peer].netdev }}
     proto (tcp udp)

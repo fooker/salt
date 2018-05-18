@@ -15,6 +15,7 @@ PresharedKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.psk }}
 AllowedIPs = 0.0.0.0/0, ::/0
 PersistentKeepalive = 10
 
-{% if 'remote' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
+{% if 'remote' in pillar.peering.peers[peer] and
+      'remote' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
 Endpoint = {{ pillar.peering.peers[peer].remote }}:{{ pillar.peering.transfers[grains.id][peer].wireguard.port.remote }}
 {% endif %}

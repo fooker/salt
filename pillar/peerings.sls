@@ -2,8 +2,6 @@
 ##  ipsec pki --gen --type rsa --outform pem --size 4096 > /etc/ipsec.d/private/self.pem
 ##  ipsec pki --pub --in /etc/ipsec.d/private/self.pem --outform pem > /etc/ipsec.d/certs/self.pem
 ##
-##  
-##
 
 peering:
   domains:
@@ -26,12 +24,10 @@ peering:
           - fd4c:8f0:aff2::2/128
           - fd4c:8f0:aff2::3/128
     dn42:
-      ospf:
-        instance_id: 42
-        preference: 100
       bgp:
         as: 4242421271
         preference: 200
+      babel:
       exports:
         ip4:
           - 172.23.200.0/24
@@ -215,6 +211,7 @@ peering:
       protos:
         - ibgp
         - ospf
+        - babel
       domains:
         - hive
         - dn42
@@ -258,6 +255,7 @@ peering:
       protos:
         - ibgp
         - ospf
+        - babel
       domains:
         - hive
         - dn42
@@ -322,7 +320,7 @@ peering:
     router:
       router_id: 0x4364370d
       protos:
-        - ospf
+        - babel
       domains:
         - dn42
       netdev: x.router
@@ -340,6 +338,28 @@ peering:
           =yY6d
           -----END PGP MESSAGE-----
         pubkey: A8U8GemRw8rorCWl51RWUU7F5zwHtzPuqB4JBSF+/EE=
+
+    mobile:
+      protos:
+        - babel
+      as: 4242420101
+      domains:
+        - dn42
+      netdev: x.mobile
+      wireguard:
+        privkey: |
+          -----BEGIN PGP MESSAGE-----
+          hQEMA0EEvUwCdTjhAQf+NAQxvhgiJLQgXbtHUaQuT3DZbFz66Zx6I00rM6TosW4H
+          nsxRP4a3X8SI0CUcwaKrgZd449t7jcofanHBZTld3uENJClPvbTB1fNfzZ/esDiy
+          cP1XJZQxH94shyFfzoc3uxuxMquEehh4wGZZNMzLGef3vQtRdhE6kr7X8xtNriyW
+          lUUjkBKVFRriv45xV+V5tRBHZHXpd978kzdRKoSFbgRyk7EQFrWQdqyuKKhyA8D/
+          nUgCml1fFOvrv7uhr8vD8Di5UqR2ox3pWZnz/krUGV/s+wmC452q1iKOk4CAI6rZ
+          Q2MnYLVoRUqJJAcxTXSnNOKTEu7eqOPLl02yfyeTzdJnAVde8V3gVXOuf1mEf28X
+          X+oOH8VOdbGenwWHPO6fZDWBTr+2ENG8f2Rck2nyEjnoGMkZA0JyPpSoeb2zrl36
+          5epW3Lg9kH1U0p6a4aYTU2zSr9r0sSEkiL/DOb2c6X5tepXtiRYHWA==
+          =/JBC
+          -----END PGP MESSAGE-----
+        pubkey: WfD2PN1bicE/OsK+jzHSxePvRW0zYKAH4WDYUBiEUhM=
 
   transfers:
     north-zitadelle:
@@ -430,6 +450,17 @@ peering:
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
+      mobile:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23422
+        ip4:
+          local: 192.168.67.254
+          remote: 192.168.67.255
+        ip6:
+          local: 'fe80::2'
+          remote: 'fe80::1'
     south-zitadelle:
       major:
         proto: gre6
@@ -518,6 +549,17 @@ peering:
         ip6:
           local: 'fe80::1'
           remote: 'fe80::2'
+      mobile:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23422
+        ip4:
+          local: 192.168.67.252
+          remote: 192.168.67.253
+        ip6:
+          local: 'fe80::2'
+          remote: 'fe80::1'
     bunker:
       north-zitadelle:
         proto: wireguard

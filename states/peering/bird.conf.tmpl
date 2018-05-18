@@ -165,6 +165,100 @@ protocol ospf v3 {{ domain }}_ospf_6 {
 }
 {% endif %}
 
+{% if 'babel' in pillar.peering.domains[domain] and 'babel' in pillar.peering.peers[grains.id].protos %}
+protocol babel {{ domain }}_babel {
+	ipv4 {
+		table {{ domain }}_4;
+
+		import keep filtered;
+		import filter {
+			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+
+			if net ~ [
+				{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
+				{{ export }}+
+				{%- endfor %}
+			] then accept;
+
+			if net ~ [
+				{%- for filter in pillar.peering.domains[domain].filters.ip4|sort %}
+				{{ filter }}
+				{%- if not loop.last -%},{%- endif %}
+				{%- endfor %}
+			] then accept;
+
+			reject;
+		};
+		export filter {
+			if net ~ [
+				{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
+				{{ export }}+
+				{%- endfor %}
+			] then accept;
+
+			if net ~ [
+				{%- for filter in pillar.peering.domains[domain].filters.ip4|sort %}
+				{{ filter }}
+				{%- if not loop.last -%},{%- endif %}
+				{%- endfor %}
+			] then accept;
+
+			reject;
+		};
+	};
+
+	ipv6 {
+		table {{ domain }}_6;
+
+		import keep filtered;
+		import filter {
+			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
+
+			if net ~ [
+				{%- for export in pillar.peering.domains[domain].exports.ip6|sort %}
+				{{ export }}+
+				{%- endfor %}
+			] then accept;
+
+			if net ~ [
+				{%- for filter in pillar.peering.domains[domain].filters.ip6|sort %}
+				{{ filter }}
+				{%- if not loop.last -%},{%- endif %}
+				{%- endfor %}
+			] then accept;
+
+			reject;
+		};
+		export filter {
+			if net ~ [
+				{%- for export in pillar.peering.domains[domain].exports.ip6|sort %}
+				{{ export }}+
+				{%- endfor %}
+			] then accept;
+
+			if net ~ [
+				{%- for filter in pillar.peering.domains[domain].filters.ip6|sort %}
+				{{ filter }}
+				{%- if not loop.last -%},{%- endif %}
+				{%- endfor %}
+			] then accept;
+
+			reject;
+		};
+	};
+
+	{% for peer in pillar.peering.transfers[grains.id]|sort if 'babel' in pillar.peering.peers[peer].protos and domain in pillar.peering.peers[peer].domains %}
+	interface "peer.{{ pillar.peering.peers[peer].netdev }}" {
+		type wired;
+		check link on;
+
+		next hop ipv4 {{pillar.peering.transfers[grains.id][peer].ip4.remote  }};
+		next hop ipv6 {{pillar.peering.transfers[grains.id][peer].ip6.remote  }};
+	};
+	{% endfor %}
+}
+{% endif %}
+
 {% if 'bgp' in pillar.peering.domains[domain] and ('bgp' in pillar.peering.peers[grains.id].protos or 'ibgp' in pillar.peering.peers[grains.id].protos) %}
 ipv4 table {{ domain }}_egp_4;
 ipv6 table {{ domain }}_egp_6;

@@ -18,7 +18,8 @@ if 'gre' in protos or 'gre6' in protos:
                     enable=True,
                     require=[Pkg('peering.gre.ipsec'),
                              File('peering.gre.ipsec.conf'),
-                             File('peering.gre.ipsec.secrets')])
+                             File('peering.gre.ipsec.secrets'),
+                             File('peering.gre.strongswan.charon.conf')])
 
     File.managed('peering.gre.ipsec.conf',
                  name='/etc/ipsec.conf',
@@ -42,6 +43,12 @@ if 'gre' in protos or 'gre6' in protos:
                  template='jinja',
                  require=Kmod('peering.gre.iptables'),
                  require_in=File('ferm'))
+
+    File.managed('peering.gre.strongswan.charon.conf',
+                 name='/etc/strongswan.d/charon.conf',
+                 source='salt://peering/strongswan.charon.conf',
+                 makedirs=True,
+                 template='jinja')
 
 
 # Install wireguard
