@@ -18,7 +18,7 @@ ferm:
 ferm.conf:
   file.managed:
     - name: /etc/ferm.conf
-    - source: salt://iptables/ferm.conf
+    - source: salt://iptables/files/ferm.conf
     - makedirs: True
 
 ferm.conf.custom:

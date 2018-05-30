@@ -1,0 +1,21 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+plugin rp-pppoe.so ext.raw
+
+unit 0
+linkname uplink
+
+name {{ pillar.dsl.username }}
+password {{ pillar.dsl.password }}
+
+maxfail 0
+
+defaultroute
+
+hide-password
+
+noproxyarp
+noauth
+
++ipv6
+

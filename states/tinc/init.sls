@@ -11,7 +11,7 @@ tinc:
       - pkg: tinc
 
 
-{% for instance, config in pillar['tinc'].items() if grains.id in config.hosts %}
+{% for instance, config in pillar.tinc.items() if grains.id in config.hosts %}
 
 tinc.{{ instance }}:
   service.running:
@@ -30,7 +30,7 @@ tinc.{{ instance }}:
 tinc.{{ instance }}.network:
   file.managed:
     - name: /etc/systemd/network/40-{{ config.interface }}.tinc.network
-    - source: salt://tinc/network.tmpl
+    - source: salt://tinc/files/network.j2
     - template: jinja
     - context:
         instance: {{ instance }}
@@ -61,7 +61,7 @@ tinc.{{ instance }}.hosts:
 tinc.{{ instance }}.hosts.{{ host }}:
   file.managed:
     - name: /etc/tinc/{{ instance }}/hosts/{{ identity }}
-    - source: salt://tinc/host.tmpl
+    - source: salt://tinc/files/host.j2
     - makedirs: True
     - template: jinja
     - context:
@@ -87,7 +87,7 @@ tinc.{{ instance }}.hosts.{{ host }}.connect:
 tinc.{{ instance }}.conf:
   file.managed:
     - name: /etc/tinc/{{ instance }}/tinc.conf
-    - source: salt://tinc/tinc.conf.tmpl
+    - source: salt://tinc/files/tinc.conf.j2
     - context:
         instance: {{ instance }}
         bridged: {{ bridged }}
@@ -100,7 +100,7 @@ tinc.{{ instance }}.conf:
 tinc.{{ instance }}.ferm:
   file.managed:
     - name: /etc/ferm.d/tinc.{{ instance }}.conf
-    - source: salt://tinc/ferm.conf.tmpl
+    - source: salt://tinc/files/ferm.conf.j2
     - makedirs: True
     - template: jinja
     - context:

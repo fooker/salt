@@ -1,11 +1,8 @@
-salt-minion.gnupg:
-  pkg.installed:
-    - name: python2-gnupg
-
 salt-minion:
   pkg.installed:
     - pkgs:
       - python2-psutil
+      - python2-gnupg
       - salt
   service.running:
     - enable: True

@@ -14,12 +14,12 @@ include:
 {{ mariadb.database(app) }}
 {% endif %}
 
-{{ letsencrypt.certificate(app, pillar['web']['apps'][app]['domains']) }}
+{{ letsencrypt.certificate(app, pillar.web.apps[app].domains) }}
 
 web.apps.{{ app }}.httpd.conf:
   file.managed:
     - name: /etc/httpd/conf/vhosts/{{ app }}.conf
-    - source: salt://web/apps/{{ app }}.httpd.conf.tmpl
+    - source: salt://web/apps/files/{{ app }}.httpd.conf.j2
     - makedirs: True
     - template: jinja
     - context:

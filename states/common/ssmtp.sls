@@ -3,6 +3,6 @@ ssmtp:
     - name: ssmtp
   file.managed:
     - name: /etc/ssmtp/ssmtp.conf
-    - source: salt://common/ssmtp.conf.tmpl
+    - source: salt://common/files/ssmtp.conf.j2
     - makedirs: True
     - template: jinja

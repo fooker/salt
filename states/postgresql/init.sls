@@ -15,4 +15,3 @@ postgresql.init:
     - creates: /var/lib/postgres/data
     - watch:
       - pkg: postgresql
-

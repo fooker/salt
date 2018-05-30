@@ -40,65 +40,65 @@ nsswitch.conf:
     - pattern: '^hosts: .*$'
     - repl: 'hosts: files mymachines resolve myhostname'
 
-{% if 'int' in pillar['addresses'][grains['id']] %}
-{% if 'mngt' in pillar['addresses'][grains['id']]['int'] %}
+{% if 'int' in pillar.addresses[grains.id] %}
+{% if 'mngt' in pillar.addresses[grains.id].int %}
 network.int.mngt.network:
   file.managed:
     - name: /etc/systemd/network/60-int.mngt.network
-    - source: salt://network/networkd.int.mngt.network.tmpl
+    - source: salt://network/files/networkd.int.mngt.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}
 
 
-{% if 'priv' in pillar['addresses'][grains['id']]['int'] %}
+{% if 'priv' in pillar.addresses[grains.id].int %}
 network.int.priv.network:
   file.managed:
     - name: /etc/systemd/network/60-int.priv.network
-    - source: salt://network/networkd.int.priv.network.tmpl
+    - source: salt://network/files/networkd.int.priv.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}
 
 
-{% if 'open' in pillar['addresses'][grains['id']]['int'] %}
+{% if 'open' in pillar.addresses[grains.id].int %}
 network.int.open.network:
   file.managed:
     - name: /etc/systemd/network/60-int.open.network
-    - source: salt://network/networkd.int.open.network.tmpl
+    - source: salt://network/files/networkd.int.open.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}
 
 
-{% if 'major' in pillar['addresses'][grains['id']]['int'] %}
+{% if 'major' in pillar.addresses[grains.id].int %}
 network.int.major.network:
   file.managed:
     - name: /etc/systemd/network/60-int.major.network
-    - source: salt://network/networkd.int.major.network.tmpl
+    - source: salt://network/files/networkd.int.major.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}
 {% endif %}
 
 
-{% if 'ffx' in pillar['addresses'][grains['id']] %}
-{% if 'data' in pillar['addresses'][grains['id']]['ffx'] %}
+{% if 'ffx' in pillar.addresses[grains.id] %}
+{% if 'data' in pillar.addresses[grains.id].ffx %}
 network.ffx.data.network:
   file.managed:
     - name: /etc/systemd/network/70-ffx.data.network
-    - source: salt://network/networkd.ffx.data.network.tmpl
+    - source: salt://network/files/networkd.ffx.data.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}
 {% endif %}
 
 
-{% if 'ext' in pillar['addresses'][grains['id']] %}
+{% if 'ext' in pillar.addresses[grains.id] %}
 network.ext.network:
   file.managed:
     - name: /etc/systemd/network/70-ext.network
-    - source: salt://network/networkd.ext.network.tmpl
+    - source: salt://network/files/networkd.ext.network.j2
     - template: jinja
     - makedirs: True
 {% endif %}

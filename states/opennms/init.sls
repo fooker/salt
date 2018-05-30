@@ -18,14 +18,14 @@ opennms.nginx:
 opennms.nginx.conf:
   file.managed:
     - name: /etc/nginx/nginx.conf
-    - source: salt://opennms/nginx.conf
+    - source: salt://opennms/files/nginx.conf
     - require:
       - cmd: letsencrypt.domains.opennms.crt
 
 opennms.iptables:
   file.managed:
     - name: /etc/ferm.d/opennms.conf
-    - source: salt://opennms/ferm.conf
+    - source: salt://opennms/files/ferm.conf
     - require_in:
       - file: ferm
 
@@ -36,7 +36,7 @@ opennms.grafana:
 opennms.grafana.conf:
   file.managed:
     - name: /etc/grafana.ini
-    - source: salt://opennms/grafana.ini
+    - source: salt://opennms/files/grafana.ini
     - makedirs: True
 
 opennms.grafana.service:

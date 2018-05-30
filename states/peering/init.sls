@@ -11,8 +11,7 @@ protos = {
 # Install IPSEC for GRE
 if 'gre' in protos or 'gre6' in protos:
     Pkg.installed('peering.gre.ipsec',
-                  name='strongswan',
-                  sources=[{'strongswan': 'salt://peering/strongswan-5.5.2-1-x86_64.pkg.tar.xz'}])
+                  name='strongswan')
     Service.running('peering.gre.ipsec',
                     name='strongswan',
                     enable=True,
@@ -23,13 +22,13 @@ if 'gre' in protos or 'gre6' in protos:
 
     File.managed('peering.gre.ipsec.conf',
                  name='/etc/ipsec.conf',
-                 source='salt://peering/ipsec.conf.tmpl',
+                 source='salt://peering/files/ipsec.conf.j2',
                  makedirs=True,
                  template='jinja')
 
     File.managed('peering.gre.ipsec.secrets',
                  name='/etc/ipsec.secrets',
-                 source='salt://peering/ipsec.secrets.tmpl',
+                 source='salt://peering/files/ipsec.secrets.j2',
                  makedirs=True,
                  template='jinja')
 
@@ -38,7 +37,7 @@ if 'gre' in protos or 'gre6' in protos:
                  persist=True)
     File.managed('peering.gre.iptables',
                  name='/etc/ferm.d/peering-gre.conf',
-                 source='salt://peering/ferm.gre.conf.tmpl',
+                 source='salt://peering/files/ferm.gre.conf.j2',
                  makedirs=True,
                  template='jinja',
                  require=Kmod('peering.gre.iptables'),
@@ -46,7 +45,7 @@ if 'gre' in protos or 'gre6' in protos:
 
     File.managed('peering.gre.strongswan.charon.conf',
                  name='/etc/strongswan.d/charon.conf',
-                 source='salt://peering/strongswan.charon.conf',
+                 source='salt://peering/files/strongswan.charon.conf',
                  makedirs=True,
                  template='jinja')
 
@@ -62,12 +61,12 @@ if 'wireguard' in protos:
 
     File.managed('peering.wireguard.service',
                  name='/etc/systemd/system/wireguard@.service',
-                 source='salt://peering/wireguard@.service',
+                 source='salt://peering/files/wireguard@.service',
                  makedirs=True)
 
     File.managed('peering.wireguard.iptables',
                  name='/etc/ferm.d/peering-wireguard.conf',
-                 source='salt://peering/ferm.wireguard.conf.tmpl',
+                 source='salt://peering/files/ferm.wireguard.conf.j2',
                  makedirs=True,
                  template='jinja',
                  require_in=File('ferm'))
@@ -76,7 +75,7 @@ if 'wireguard' in protos:
 # Firewall for peerings
 File.managed('peering.iptables',
              name='/etc/ferm.d/peering-peers.conf',
-             source='salt://peering/ferm.peers.conf.tmpl',
+             source='salt://peering/files/ferm.peers.conf.j2',
              makedirs=True,
              template='jinja',
              require_in=File('ferm'))
@@ -85,14 +84,14 @@ File.managed('peering.iptables',
 for domain in pillar('peering:interfaces:' + grains('id')):
     File.managed('peering.domain.' + domain + '.netdev',
                  name='/etc/systemd/network/90-peering-' + domain + '.netdev',
-                 source='salt://peering/networkd.domain.netdev.tmpl',
+                 source='salt://peering/files/networkd.domain.netdev.j2',
                  makedirs=True,
                  template='jinja',
                  context={'domain': domain})
 
     File.managed('peering.domain.' + domain + '.network',
                  name='/etc/systemd/network/90-peering-' + domain + '.network',
-                 source='salt://peering/networkd.domain.network.tmpl',
+                 source='salt://peering/files/networkd.domain.network.j2',
                  makedirs=True,
                  template='jinja',
                  context={'domain': domain})
@@ -105,7 +104,7 @@ for peer in pillar('peering:transfers:' + grains('id')):
     if proto in ('gre', 'gre6'):
         File.managed('peering.tunnel.' + peer + '.gre.netdev',
                      name='/etc/systemd/network/80-peering-' + peer + '.netdev',
-                     source='salt://peering/networkd.tunnel.' + proto + '.netdev.tmpl',
+                     source='salt://peering/files/networkd.tunnel.' + proto + '.netdev.j2',
                      makedirs=True,
                      template='jinja',
                      context={'peer': peer})
@@ -124,7 +123,7 @@ for peer in pillar('peering:transfers:' + grains('id')):
     if proto == 'wireguard':
         File.managed('peering.tunnel.' + peer + '.wireguard',
                      name='/etc/wireguard/peer.' + netdev + '.conf',
-                     source='salt://peering/wireguard.conf.tmpl',
+                     source='salt://peering/files/wireguard.conf.j2',
                      makedirs=True,
                      template='jinja',
                      mode=600,
@@ -140,7 +139,7 @@ for peer in pillar('peering:transfers:' + grains('id')):
 
     File.managed('peering.tunnel.' + peer + '.network',
                  name='/etc/systemd/network/80-peering-' + peer + '.network',
-                 source='salt://peering/networkd.tunnel.network.tmpl',
+                 source='salt://peering/files/networkd.tunnel.network.j2',
                  makedirs=True,
                  template='jinja',
                  context={'peer': peer})
@@ -170,7 +169,7 @@ Service.running('peering.bird',
                 watch=File('peering.bird'))
 File.managed('peering.bird',
              name='/etc/bird.conf',
-             source='salt://peering/bird.conf.tmpl',
+             source='salt://peering/files/bird.conf.j2',
              makedirs=True,
              template='jinja')
 

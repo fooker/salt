@@ -17,7 +17,7 @@ syncthing:
 syncthing.iptables:
   file.managed:
     - name: /etc/ferm.d/syncthing.conf
-    - source: salt://syncthing/ferm.conf
+    - source: salt://syncthing/files/ferm.conf
     - require_in:
       - file: ferm
 {% endif %}

@@ -14,9 +14,8 @@ ntp.legacy.conf:
 timesyncd:
   file.managed:
     - name: /etc/systemd/timesyncd.conf
-    - source: salt://common/timesyncd.conf.tmpl
+    - source: salt://common/files/timesyncd.conf
     - makedirs: True
-    - template: jinja
 
   service.running:
     - name: systemd-timesyncd.service

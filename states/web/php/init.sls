@@ -16,13 +16,13 @@ web.php.extensions:
       - php-gd
   file.managed:
     - name: /etc/php/conf.d/extensions.ini
-    - source: salt://web/php/php.extensions.ini
+    - source: salt://web/php/files/php.extensions.ini
     - makedirs: True
 
 web.php.extensions.mysql:
   file.managed:
     - name: /etc/php/conf.d/mysql.ini
-    - source: salt://web/php/php.mysql.ini
+    - source: salt://web/php/files/php.mysql.ini
     - makedirs: True
 
 web.php.extensions.apcu:
@@ -32,7 +32,7 @@ web.php.extensions.apcu:
       - php-apcu-bc
   file.managed:
     - name: /etc/php/conf.d/apcu.ini
-    - source: salt://web/php/php.apcu.ini
+    - source: salt://web/php/files/php.apcu.ini
     - makedirs: True
 
 web.php.memcached:
@@ -41,7 +41,7 @@ web.php.memcached:
       - memcached
   file.managed:
     - name: /etc/systemd/system/memcached.service.d/service.conf
-    - source: salt://web/php/memcached.service.conf.tmpl
+    - source: salt://web/php/files/memcached.service.conf.j2
     - makedirs: True
     - template: jinja
   service.running:
@@ -57,7 +57,7 @@ web.php.extensions.memcached:
       - php-memcached
   file.managed:
     - name: /etc/php/conf.d/memcachde.ini
-    - source: salt://web/php/php.memcached.ini.tmpl
+    - source: salt://web/php/files/php.memcached.ini.j2
     - template: jinja
     - makedirs: True
 

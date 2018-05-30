@@ -12,7 +12,7 @@ sshd:
 sshd.conf:
   file.managed:
     - name: /etc/ssh/sshd_config
-    - source: salt://ssh/sshd.conf.tmpl
+    - source: salt://ssh/files/sshd.conf.j2
     - makedirs: True
     - template: jinja
 
@@ -29,7 +29,7 @@ sshd.root.authorized_keys.{{ owner }}:
 sshd.iptables:
   file.managed:
     - name: /etc/ferm.d/sshd.conf
-    - source: salt://ssh/ferm.conf
+    - source: salt://ssh/files/ferm.conf
     - makedirs: True
     - require_in:
       - file: ferm

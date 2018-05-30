@@ -21,7 +21,7 @@ weechat.user:
 weechat.service:
   file.managed:
     - name: /etc/systemd/system/weechat.service
-    - source: salt://weechat/service
+    - source: salt://weechat/files/service
     - makedirs: True
   service.running:
     - name: weechat
@@ -33,7 +33,7 @@ weechat.service:
 weechat.iptables:
   file.managed:
     - name: /etc/ferm.d/weechat.conf
-    - source: salt://weechat/ferm.conf
+    - source: salt://weechat/files/ferm.conf
     - require_in:
       - file: ferm
 

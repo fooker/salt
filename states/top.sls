@@ -5,16 +5,14 @@ base:
     - common.sysctl
     - common.logging
     - common.tools
-    - common.root
     - common.pacman
 
     - network
 
-    - snmp
-    - snmp.sys
-    - snmp.os
-    - snmp.opennms
-#    - snmp.lldp
+    - snmpd
+    - snmpd.sys
+    - snmpd.os
+    - snmpd.opennms
 
     - ssh
 
@@ -35,16 +33,14 @@ base:
     - mosh
 
   'router':
+    - dsl
     - router.gateway
-    - router.dsl
     - router.dns
     - router.dhcp
-    #    - router.radvd
+#    - router.radvd
     - router.ntp
-    - router.netboot
     - router.vnstat
-    - router.ddclient
-    - router.freifunk
+    - ddclient
     - peering
     - unifi
 
@@ -69,15 +65,5 @@ base:
     - weechat
 
   'nas':
-    - rsnapshot
+    - rsnapshot.server
     - syncthing
-
-  'scanner':
-    - scanner
-
-  'cinema':
-    - cinema/kodi
-
-  'blaster':
-    - blaster
-

@@ -7,12 +7,12 @@ include:
 letsencrypt:
   pkg.installed:
     - sources:
-      - acme-tiny: salt://letsencrypt/acme-tiny-0.0.1.daba51d-2-any.pkg.tar.xz
+      - acme-tiny: salt://letsencrypt/files/acme-tiny-0.0.1.daba51d-2-any.pkg.tar.xz
 
 letsencrypt.script:
   file.managed:
     - name: /usr/local/bin/letsencrypt-fetch
-    - source: salt://letsencrypt/letsencrypt-fetch
+    - source: salt://letsencrypt/files/letsencrypt-fetch
     - mode: 755
 
 letsencrypt.account.key:
@@ -26,12 +26,6 @@ letsencrypt.domains.key:
     - name: /etc/letsencrypt/domains.key
     - contents_pillar: letsencrypt:domains:key
     - makedirs: True
-
-#letsencrypt.root.crt:
-#  file.managed:
-#    - name: /etc/letsencrypt/root.crt
-#    - source: https://letsencrypt.org/certs/isrgrootx1.pem
-#    - source_hash: sha512=3032f6c4a2be35fb0d1d5a75447241d8f67b8d3175fdfee25bb98f5b43910447e4a0348e03768847259b140b948108b2d60a2eef64715a9db023bdb0c012d03c
 
 letsencrypt.root.crt:
   file.managed:
@@ -52,7 +46,7 @@ letsencrypt.wellknown:
 letsencrypt.domains.{{ module }}.cfg:
   file.managed:
     - name: /etc/letsencrypt/domains/{{ module }}.cfg
-    - source: salt://letsencrypt/domain.cfg.tmpl
+    - source: salt://letsencrypt/files/domain.cfg.j2
     - makedirs: True
     - template: jinja
     - context:

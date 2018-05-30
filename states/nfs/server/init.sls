@@ -8,7 +8,7 @@ include:
 nfs.service.exports:
   file.managed:
     - name: /etc/exports.d/data.exports
-    - source: salt://nfs/server/exports.tmpl
+    - source: salt://nfs/server/files/exports.j2
     - makedirs: True
     - template: jinja
   cmd.wait:

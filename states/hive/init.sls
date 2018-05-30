@@ -15,7 +15,7 @@ hive.lookup.{{ node }}:
 hive.iptables:
   file.managed:
     - name: /etc/ferm.d/hive.conf
-    - source: salt://hive/ferm.conf.tmpl
+    - source: salt://hive/files/ferm.conf.j2
     - makedirs: True
     - template: jinja
     - require_in:

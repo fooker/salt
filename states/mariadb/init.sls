@@ -15,7 +15,7 @@ mariadb.server:
 mariadb.galera:
   pkg.installed:
     - sources:
-      - galera: 'salt://mariadb/galera-25.3.16-1-x86_64.pkg.tar.xz'
+      - galera: 'salt://mariadb/files/galera-25.3.16-1-x86_64.pkg.tar.xz'
 
 mariadb:
   service.running:
@@ -31,7 +31,7 @@ mariadb:
 mariadb.config:
   file.managed:
     - name: /etc/mysql/my.cnf
-    - source: salt://mariadb/my.cnf.tmpl
+    - source: salt://mariadb/files/my.cnf.tmpl
     - makedirs: True
     - template: jinja
 

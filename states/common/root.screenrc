@@ -1,8 +1,0 @@
-### This file is managed by saltstack - any changes will be overwritten ###
-
-startup_message off
-vbell on
-defscrollback 5000
-
-hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'

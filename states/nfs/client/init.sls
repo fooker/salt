@@ -1,7 +1,6 @@
 include:
   - nfs
 
-
 {% macro mount(module, source, target) %}
 nfs.client.mount.{{ module }}:
   mount.mounted:
@@ -12,4 +11,3 @@ nfs.client.mount.{{ module }}:
     - opts: noatime
     - persist: True
 {% endmacro %}
-

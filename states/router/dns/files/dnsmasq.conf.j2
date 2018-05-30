@@ -1,0 +1,26 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Specify internal domain
+local=/int.{{ pillar.domain.name }}/
+expand-hosts
+
+# Do not read /etc/hosts but read hosts from /etc/dnsmasq.hosts
+no-hosts
+addn-hosts=/etc/dnsmasq.hosts
+
+# Do not forward reverse lookups and local requests for private networks to
+# upstream DNS servers
+bogus-priv
+domain-needed
+
+# Returns answers depending on interface
+localise-queries
+
+# Don't resolve DHCP provided hostnames but generate a unique one per host
+dhcp-ignore-names
+dhcp-generate-names
+
+# Use unbound for upstream resolving by ignoring resolv.conf and specify local recursor directly
+no-resolv
+server=127.0.0.1#5353
+
