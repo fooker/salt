@@ -1,0 +1,6 @@
+{% extends "nginx/files/vhost/base.conf.j2" %}
+
+{% block default %}
+	root /srv/http/aurblobs;
+	autoindex on;
+{% endblock %}
