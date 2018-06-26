@@ -67,6 +67,7 @@ base:
     - grafana
     - irccat
     - weechat
+    - aurblobs
 
   'nas':
     - rsnapshot.server
