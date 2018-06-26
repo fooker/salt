@@ -21,7 +21,6 @@ aurblobs:
     - name: 'git+https://github.com/aurblobs/aurblobs.git@develop'
     - user: aurblobs
     - bin_env: '/usr/bin/pip3'
-    - use_wheel: True
     - install_options:
       - --user
     - require:
