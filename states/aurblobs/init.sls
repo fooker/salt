@@ -21,6 +21,10 @@ aurblobs:
     - name: 'git+https://github.com/aurblobs/aurblobs.git@develop'
     - user: aurblobs
     - bin_env: '/usr/bin/pip3'
+    - upgrade: True
+    - use_wheel: True
+    - install_options:
+      - --user
     - require:
       - pkg: aurblobs
       - user: aurblobs
