@@ -8,5 +8,5 @@
   backup['interval']['month']|default('*'),
   backup['interval']['dayweek']|default('*')
 ) -}}
-{% if loop.first %}/usr/bin/rsnapshot sync && {% endif %}/usr/bin/rsnapshot {{ backup['id'] }}
+{% if loop.first %}/usr/bin/rsnapshot sync; {% endif %}/usr/bin/rsnapshot {{ backup['id'] }}
 {% endfor %}
