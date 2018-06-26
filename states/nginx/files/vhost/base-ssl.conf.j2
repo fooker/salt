@@ -1,0 +1,27 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+server {
+	listen			443 ssl;
+	listen			[::]:443 ssl;
+
+	server_name		{{ domains | join(' ') }};
+
+	ssl_certificate		/etc/letsencrypt/domains/{{ name }}.crt;
+	ssl_certificate_key	/etc/letsencrypt/domains.key;
+
+	ssl_session_cache	shared:SSL:1m;
+	ssl_session_timeout	5m;
+
+	location / {
+		{% block default %}{% endblock %}
+	}
+
+	{% block other %}{% endblock %}
+
+	location /.well-known/acme-challenge/ {
+		root			/var/run/letsencrypt;
+		autoindex		off;
+		rewrite			^/.well-known/acme-challenge/(.*)$ /$1 break;
+
+	}
+}

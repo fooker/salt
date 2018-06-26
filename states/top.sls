@@ -28,9 +28,12 @@ base:
 
   'public:True':
     - match: grain
-    - iptables
     - tinc
     - mosh
+
+  '* and not nas':
+    - match: compound
+    - iptables
 
   'router':
     - dsl
@@ -68,3 +71,7 @@ base:
   'nas':
     - rsnapshot.server
     - syncthing
+
+  'blaster':
+    - mopidy
+    - pulseaudio

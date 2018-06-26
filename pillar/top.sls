@@ -12,7 +12,6 @@ base:
     - dsl
     - aiccu
     - ddclient
-    - locums
     - peerings
 
   '*-zitadelle':

@@ -30,8 +30,10 @@ nginx.iptables:
       - file: ferm
 
 
-{% macro vhost(module, source, domains) %}
+{% macro vhost(module, source, domains, ssl=True) %}
+{% if ssl %}
 {{ certificate(module, domains) }}
+{% endif %}
 
 nginx.conf.vhosts.{{ module }}:
   file.managed:
@@ -42,10 +44,13 @@ nginx.conf.vhosts.{{ module }}:
     - defaults:
         name: {{ module }}
         domains: {{ domains | yaml() }}
+        ssl: {{ ssl }}
     - context:
         {{ kwargs | yaml() }}
     - require_in:
       - file: nginx
+{% if ssl %}
     - require:
       - cmd: letsencrypt.domains.{{ module }}.crt
+{% endif %}
 {% endmacro %}

@@ -1,0 +1,13 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=PulseAudio system server
+After=avahi-daemon.service network.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/pulseaudio --daemonize=no --system --realtime --log-target=journal --disallow-exit --no-cpu-limit
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

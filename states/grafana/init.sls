@@ -24,7 +24,8 @@ grafana.service:
       - file: /etc/grafana.ini
       - pkg: grafana
 
-{{ nginx.vhost('grafana', 'salt://nginx/files/vhost/proxy.conf.j2', ['grafana.open-desk.net'], target='127.0.0.1:6000') }}
+{{ nginx.vhost('grafana', source='salt://nginx/files/vhost/proxy.conf.j2', domains=['grafana.open-desk.net'], target='127.0.0.1:6000') }}
+{{ nginx.vhost('grafana.to_ssl', source='salt://nginx/files/vhost/redirect-ssl.conf.j2', ssl=False, domains=['grafana.open-desk.net']) }}
 
 
 {{ rsnapshot.target('grafana', '/var/lib/grafana') }}

@@ -1,0 +1,7 @@
+- Build missing states for NAS
+- Deploy firewall of internal systems, too (edge case for SSH)
+- Rework SSH config
+- Use salt mine to configure backups
+- Make NFS server / client more generic (used by nas, mopidy and hive)
+- Get rid of tinc and use routing backhaul
+- Only one managed network per host except routers

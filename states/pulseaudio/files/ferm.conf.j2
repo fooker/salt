@@ -1,0 +1,14 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+domain (ip ip6)
+table filter
+chain INPUT {
+
+  saddr (
+    {{ pillar.addresses[grains.id].int.priv.ip4 }}
+    {{ pillar.addresses[grains.id].int.priv.ip6 }}
+  )
+  proto tcp
+  dport 4713
+  ACCEPT;
+}

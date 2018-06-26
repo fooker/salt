@@ -128,7 +128,14 @@ addresses:
         ip4: 10.0.23.65
         ip6: 2001:4dd0:ae46:23::41
   blaster:
+    aliases:
+      - music
+      - hass
     int:
+      mngt:
+        mac: b8:27:eb:cb:20:ed
+        ip4: 10.0.0.66
+        ip6: 2001:4dd0:ae46:23::42
       priv:
         mac: b8:27:eb:cb:20:ed
         ip4: 10.0.23.66

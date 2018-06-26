@@ -1,0 +1,21 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+server {
+	listen			80;
+	listen			[::]:80;
+
+	server_name		{{ domains | join(' ') }};
+
+	location / {
+		{% block default %}{% endblock %}
+	}
+
+	{% block others %}{% endblock %}
+
+	location /.well-known/acme-challenge/ {
+		root			/var/run/letsencrypt;
+		autoindex		off;
+		rewrite			^/.well-known/acme-challenge/(.*)$ /$1 break;
+
+	}
+}

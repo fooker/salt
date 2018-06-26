@@ -1,0 +1,5 @@
+{% extends "nginx/files/vhost/base-plain.conf.j2" %}
+
+{% block default %}
+	return 301 https://$host$request_uri;
+{% endblock %}
