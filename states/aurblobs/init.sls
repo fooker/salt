@@ -29,5 +29,4 @@ aurblobs:
 {{ nginx.vhost('aurblobs', source='salt://aurblobs/files/nginx.conf.j2', domains=['aurblobs.open-desk.net']) }}
 {{ nginx.vhost('aurblobs.to_ssl', source='salt://nginx/files/vhost/redirect-ssl.conf.j2', ssl=False, domains=['aurblobs.open-desk.net']) }}
 
-{{ rsnapshot.target('aurblobs.config', '/var/lib/aurblobs/.config/aurblobs') }}
-{{ rsnapshot.target('aurblobs.gnupg', '/var/lib/aurblobs/.gnupg') }}
+{{ rsnapshot.target('aurblobs', '/var/lib/aurblobs/.config/aurblobs', '/var/lib/aurblobs/.gnupg') }}
