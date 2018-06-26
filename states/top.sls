@@ -61,6 +61,7 @@ base:
     - letsencrypt
     - salt.master
     - opennms
+    - grafana
     - irccat
     - weechat
 
