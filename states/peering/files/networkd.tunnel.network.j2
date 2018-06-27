@@ -17,9 +17,10 @@ IPv6AcceptRA=no
 [Address]
 Address={{ pillar.peering.transfers[grains.id][peer].ip4.local }}/32
 Peer={{ pillar.peering.transfers[grains.id][peer].ip4.remote }}/32
+Scope=link
 
 
 [Address]
 Address={{ pillar.peering.transfers[grains.id][peer].ip6.local }}/64
 Peer={{ pillar.peering.transfers[grains.id][peer].ip6.remote }}/64
-
+Scope=link

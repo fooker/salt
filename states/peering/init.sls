@@ -155,7 +155,7 @@ Sysctl.present('peering.sysctl.forwarding.ipv6',
                config='/etc/sysctl.d/peering.conf')
 Sysctl.present('peering.sysctl.rp_filter',
                name='net.ipv4.conf.all.rp_filter',
-               value=1,
+               value=0,
                config='/etc/sysctl.d/peering.conf')
 
 # BIRD config
