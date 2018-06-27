@@ -27,6 +27,17 @@ web.apache.conf:
     - source: salt://web/apache/files/httpd.conf
     - makedirs: True
 
+web.apache.service.mounts:
+  file.managed:
+    - name: /etc/systemd/system/httpd.service.d/mounts.conf
+    - contents: |
+        ### This file is managed by saltstack - any changes will be overwritten ###
+        [Unit]
+        RequiresMountsFor=/srv/http
+    - makedirs: True
+    - watch_in:
+      - service: web.apache
+
 {% for conf in ('ssl', 'letsencrypt', 'autoindex', 'info', 'php') %}
 web.apache.conf.{{ conf }}:
   file.managed:
