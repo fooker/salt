@@ -252,8 +252,8 @@ protocol babel {{ domain }}_babel {
 		type wired;
 		check link on;
 
-		next hop ipv4 {{pillar.peering.transfers[grains.id][peer].ip4.remote  }};
-		next hop ipv6 {{pillar.peering.transfers[grains.id][peer].ip6.remote  }};
+		next hop ipv4 {{pillar.peering.transfers[grains.id][peer].ip4.local  }};
+		next hop ipv6 {{pillar.peering.transfers[grains.id][peer].ip6.local  }};
 	};
 	{% endfor %}
 }
