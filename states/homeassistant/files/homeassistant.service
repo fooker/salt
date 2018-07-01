@@ -1,0 +1,14 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Home Assistant
+
+[Service]
+Type=simple
+User=homeassistant
+ExecStart=/var/lib/homeassistant/.local/bin/hass --config /var/lib/homeassistant/config
+WorkingDirectory=/var/lib/homeassistant/
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

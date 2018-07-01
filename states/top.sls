@@ -76,3 +76,6 @@ base:
   'blaster':
     - mopidy
     - pulseaudio
+    - mosquitto
+    - homeassistant
+    - pad

@@ -1,0 +1,49 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+homeassistant:
+  name: kufuewg
+
+  latitude: 50.558158
+  longitude: 9.678392
+  elevation: 250
+
+  unit_system: metric
+
+  time_zone: Europe/Berlin
+
+recorder:
+  db_url: sqlite:///var/lib/homeassistant/homeassistant.db
+
+frontend:
+
+http:
+#  api_password: !secret http_password
+  server_host: localhost
+  server_port: 8123
+
+updater:
+
+conversation:
+
+history:
+
+logbook:
+
+sun:
+
+mqtt:
+  broker: 127.0.0.1
+  client_id: hass
+
+weblink:
+  entities:
+  - name: Music Player
+    url: http://music/
+
+#light: !include include/lights.yaml
+#sensor: !include include/sensors.yaml
+#switch: !include include/switches.yaml
+#media_player: !include include/media_players.yaml
+#binary_sensor: !include include/binary_sensors.yaml
+#group: !include include/groups.yaml
+#automation: !include_dir_list automations/
