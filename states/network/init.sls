@@ -1,4 +1,9 @@
 network:
+  file.directory:
+    - name: /etc/systemd/network
+    - makedirs: True
+    - clean: True
+    - exclude_pat: 'E@([0-3][0-9]-.*)'
   service.running:
     - enable: True
     - name: systemd-networkd
@@ -48,6 +53,8 @@ network.int.mngt.network:
     - source: salt://network/files/networkd.int.mngt.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}
 
 
@@ -58,6 +65,8 @@ network.int.priv.network:
     - source: salt://network/files/networkd.int.priv.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}
 
 
@@ -68,6 +77,8 @@ network.int.open.network:
     - source: salt://network/files/networkd.int.open.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}
 
 
@@ -78,6 +89,8 @@ network.int.major.network:
     - source: salt://network/files/networkd.int.major.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}
 {% endif %}
 
@@ -90,6 +103,8 @@ network.ffx.data.network:
     - source: salt://network/files/networkd.ffx.data.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}
 {% endif %}
 
@@ -101,4 +116,6 @@ network.ext.network:
     - source: salt://network/files/networkd.ext.network.j2
     - template: jinja
     - makedirs: True
+    - require_in:
+      - file: network
 {% endif %}

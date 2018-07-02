@@ -35,6 +35,8 @@ tinc.{{ instance }}.network:
     - context:
         instance: {{ instance }}
     - makedirs: True
+    - require_in:
+      - file: network
 
 {% endif %}
 

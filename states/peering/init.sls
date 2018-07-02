@@ -87,14 +87,16 @@ for domain in pillar('peering:interfaces:' + grains('id')):
                  source='salt://peering/files/networkd.domain.netdev.j2',
                  makedirs=True,
                  template='jinja',
-                 context={'domain': domain})
+                 context={'domain': domain},
+                 require_in=File('network'))
 
     File.managed('peering.domain.' + domain + '.network',
                  name='/etc/systemd/network/90-peering-' + domain + '.network',
                  source='salt://peering/files/networkd.domain.network.j2',
                  makedirs=True,
                  template='jinja',
-                 context={'domain': domain})
+                 context={'domain': domain},
+                 require_in=File('network'))
 
 # Per tunnel interface and configuration
 for peer in pillar('peering:transfers:' + grains('id')):
@@ -107,13 +109,15 @@ for peer in pillar('peering:transfers:' + grains('id')):
                      source='salt://peering/files/networkd.tunnel.' + proto + '.netdev.j2',
                      makedirs=True,
                      template='jinja',
-                     context={'peer': peer})
+                     context={'peer': peer},
+                 require_in=File('network'))
 
         File.accumulated('peering.tunnel.' + peer + '.gre.netdev.hook',
                          name='tunnels',
                          filename='/etc/systemd/network/70-ext.network',
                          text='peer.' + netdev,
-                         require_in=File('network.ext.network'))
+                         require_in=[File('network.ext.network'),
+                                     File('network')])
 
         File.managed('peering.tunnel.' + peer + '.gre.ipsec.cert',
                      name='/etc/ipsec.d/certs/' + peer + '.pem',
@@ -142,7 +146,8 @@ for peer in pillar('peering:transfers:' + grains('id')):
                  source='salt://peering/files/networkd.tunnel.network.j2',
                  makedirs=True,
                  template='jinja',
-                 context={'peer': peer})
+                 context={'peer': peer},
+                 require_in=File('network'))
 
 # Kernel configuration
 Sysctl.present('peering.sysctl.forwarding.ipv4',
