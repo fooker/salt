@@ -49,6 +49,7 @@ base:
 
   '*-zitadelle':
     - hive
+    - dn42.roa
     - peering
     - nfs/client
     - mariadb

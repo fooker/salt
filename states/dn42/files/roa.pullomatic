@@ -1,0 +1,15 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+path: /var/lib/dn42
+
+remote_url: 'http://git.dn42.us/dn42/registry.git'
+remote_branch: master
+
+interval:
+  interval: '5m'
+
+on_change: |
+  /usr/bin/mkdir -p -v /var/lib/bird/
+  /usr/local/lib/dn42/mkroa-bird2 route  32 > /var/lib/bird/roa_dn42_4.conf
+  /usr/local/lib/dn42/mkroa-bird2 route6 64 > /var/lib/bird/roa_dn42_6.conf
+  /usr/bin/birdc configure

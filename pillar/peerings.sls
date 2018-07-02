@@ -27,6 +27,9 @@ peering:
       bgp:
         as: 4242421271
         preference: 200
+        roa:
+          ip4: '/var/lib/bird/roa_dn42_4.conf'
+          ip6: '/var/lib/bird/roa_dn42_6.conf'
       babel:
       exports:
         ip4:
@@ -36,11 +39,12 @@ peering:
       filters:
         ip4:
           - 172.20.0.0/14{21,29} # dn42
-          #          - 172.20.0.0/24{28,32} # ..
-          #          - 172.21.0.0/24{28,32} # ..
-          #          - 172.22.0.0/24{28,32} # ..
-          #          - 172.23.0.0/24{28,32} # ..
+          - 172.20.0.0/24{28,32} # dn42 Anycast
+          - 172.21.0.0/24{28,32} # dn42 Anycast
+          - 172.22.0.0/24{28,32} # dn42 Anycast
+          - 172.23.0.0/24{28,32} # dn42 Anycast
           - 172.31.0.0/16+       # ChaosVPN
+          - 10.100.0.0/14+       # ChaosVPN
           - 10.0.0.0/8+          # Freifunk
         ip6:
           - fc00::/7{44,64}      # ULAs

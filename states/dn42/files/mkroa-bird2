@@ -1,0 +1,21 @@
+#!/bin/bash
+
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Inspired by mkroa by mic92 and hexa-
+
+ls -1 "data/${1}/" | while read -r FILE; do
+	FILE="data/${1}/${FILE}"
+
+	ROUTE="$(grep "${1}:" "${FILE}" | tr -d '[:blank:]' | cut -d ':' -f2-)"
+	ORIGIN="$(grep "origin:" "${FILE}" | tr -d '[:blank:][:alpha:]' | cut -d ':' -f2)"
+
+	PREFIXLEN="$(echo "${ROUTE}" | cut -d '/' -f2)"
+    if [ "${2}" -gt "${PREFIXLEN}" ]; then
+			PREFIXLEN="${2}"
+    fi
+
+	while read -r ASN; do
+		echo "route ${ROUTE} max ${PREFIXLEN} as ${ASN};"
+	done <<< "${ORIGIN}"
+done

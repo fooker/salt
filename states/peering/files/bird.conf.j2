@@ -287,6 +287,31 @@ protocol static {{ domain }}_static_6 {
 	};
 }
 
+{% if 'roa' in pillar.peering.domains[domain].bgp %}
+roa4 table {{ domain }}_roa_4;
+roa6 table {{ domain }}_roa_6;
+
+protocol static {{ domain }}_roa_static_4 {
+	include "{{ pillar.peering.domains[domain].bgp.roa.ip4 }}";
+
+	roa4 {
+		table {{ domain }}_roa_4;
+		import all;
+		export none;
+	};
+}
+
+protocol static {{ domain }}_roa_static_6 {
+	include "{{ pillar.peering.domains[domain].bgp.roa.ip6 }}";
+
+	roa6 {
+		table {{ domain }}_roa_6;
+		import all;
+		export none;
+	};
+}
+{% endif %}
+
 template bgp {{ domain }}_bgp {
 	local as {{ pillar.peering.domains[domain].bgp.as }};
 
@@ -306,22 +331,38 @@ template bgp {{ domain }}_bgp_4 from {{ domain }}_bgp {
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then {
+				print "[{{ domain }}] Received local network from external: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
 				{{ export }}+
 				{%- endfor %}
-			] then reject;
+			] then {
+				print "[{{ domain }}] Received own prefix from external: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
-			if net ~ [
+{% if 'roa' in pillar.peering.domains[domain].bgp %}
+			if (roa_check({{ domain }}_roa_4, net, bgp_path.last) != ROA_VALID) then {
+				print "[{{ domain }}] ROA check failed: ", net, " from ", bgp_path.last;
+				reject;
+			}
+{% endif %}
+
+			if net !~ [
 				{%- for filter in pillar.peering.domains[domain].filters.ip4|sort %}
 				{{ filter }}
 				{%- if not loop.last -%},{%- endif %}
 				{%- endfor %}
-			] then accept;
+			] then {
+				print "[{{ domain }}] Network not allowed: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
-			reject;
+			accept;
 		};
 		export filter {
 			if net ~ [
@@ -337,6 +378,7 @@ template bgp {{ domain }}_bgp_4 from {{ domain }}_bgp {
 				{%- endfor %}
 			] then accept;
 
+			print "[{{ domain }}] Illegal export: ", net, " from ", bgp_path.last;
 			reject;
 		};
 	};
@@ -352,22 +394,38 @@ template bgp {{ domain }}_bgp_6 from {{ domain }}_bgp {
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
+			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then {
+				print "[{{ domain }}] Received local network from external: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip6|sort %}
 				{{ export }}+
 				{%- endfor %}
-			] then reject;
+			] then {
+				print "[{{ domain }}] Received own prefix from external: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
-			if net ~ [
+{% if 'roa' in pillar.peering.domains[domain].bgp %}
+			if (roa_check({{ domain }}_roa_6, net, bgp_path.last) != ROA_VALID) then {
+				print "[{{ domain }}] ROA check failed: ", net, " from ", bgp_path.last;
+				reject;
+			}
+{% endif %}
+
+			if net !~ [
 				{%- for filter in pillar.peering.domains[domain].filters.ip6|sort %}
 				{{ filter }}
 				{%- if not loop.last -%},{%- endif %}
 				{%- endfor %}
-			] then accept;
+			] then {
+				print "[{{ domain }}] Network not allowed: ", net, " from ", bgp_path.last;
+				reject;
+			}
 
-			reject;
+			accept;
 		};
 		export filter {
 			if net ~ [
@@ -383,6 +441,7 @@ template bgp {{ domain }}_bgp_6 from {{ domain }}_bgp {
 				{%- endfor %}
 			] then accept;
 
+			print "[{{ domain }}] Illegal export: ", net, " from ", bgp_path.last;
 			reject;
 		};
 	};
