@@ -12,7 +12,7 @@ homeassistant:
   time_zone: Europe/Berlin
 
 recorder:
-  db_url: sqlite:///var/lib/homeassistant/homeassistant.db
+  db_url: sqlite:////var/lib/homeassistant/homeassistant.db
 
 frontend:
 
