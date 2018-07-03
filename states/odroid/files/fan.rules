@@ -1,0 +1,3 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+SUBSYSTEM=="hwmon", ACTION=="add", ATTR{fan_speed}="48 112 176 240"

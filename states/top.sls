@@ -75,6 +75,7 @@ base:
     - syncthing
 
   'blaster':
+    - odroid
     - mopidy
     - pulseaudio
     - mosquitto
