@@ -145,20 +145,6 @@ peering:
         - dn42
       netdev: cccda
       remote: 'core1.darmstadt.ccc.de'
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQf/bzOSoNdj5u3Am3cnBlnUIkFmHF5T1emWviIy8Auf1K2F
-          4sy/0/+eqzPZefHjzTZdfvF04kjRnSlsmx8Fmq1E5/VlWVWH1wubkA2ml8Akp8K5
-          i/Em3NYSe87WrF0J8Ku6B+JVUk182edwjli5kpcCcITK4pgtVt4L3c7dYLb+/UZ1
-          taIq3VzSn/ClwlZqdQh1C2w9qWwvwVQqT1GreXL8ElMhk9tdQeADeBfGinqmZR7H
-          CTS16sHdqvi0aNq0l2RnckLGXGRMgxGHM2Vbf+mUL6UrOHdIwHDBkgEdaq8u8d8K
-          blhY+kFz4PEqdmfUg6UOPR0TDKdpZri7+CeOjJa5NdJnAVVa8MsuHajxZjY7sgKa
-          AYSkbyWNdK38bKAjDmdlZStc3AZdcz4i9RJKtcksgkJxygr0vbMfwMrBrziuXDef
-          qVKYQzgqnJAtmgm/3PjKVEd9Elo9SgV4TgHxhB++fDq+F8hik8hDwg==
-          =oMa1
-          -----END PGP MESSAGE-----
-        pubkey: B9v1EHhXAoCNbF8WZQe3Tdrm2GhvHZi6b59a/xlpESA=
 
     jojo:
       protos:
@@ -187,6 +173,15 @@ peering:
         ike: aes256-sha512-curve25519!
         esp: aes256-sha512-curve25519!
 
+    ffffm:
+      protos:
+        - bgp
+      as: 65026
+      domains:
+        - dn42
+      netdev: ffffm
+      remote: 'icvpn2.aixit.off.de.ffffm.net'
+
     maglab:
       protos:
         - bgp
@@ -195,20 +190,6 @@ peering:
         - dn42
       netdev: maglab
       remote: 'marvin.maglab.space'
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQgAseaowIrCzWf77oYJoNWqkTVfM2t4eHHWXC4aIG0YTOtB
-          XUIdB5eyOt+Kgm2TrBZBf7HP+bXTuh8ZZUCGReMF7lOOPu54OQqPGUXQK4f1SCOJ
-          D/lXw2Ek4SEVuva5Qj/j97nlYblfjF4s7Dzs06HuEED+Yk9Ny0l06RlUGJSXsH4z
-          W1vT20ORMSS9VitT0FojaVZ0ghXNOnU7NS5tCszky5vlyxg81ZWN8UsOKfyDH48S
-          8qhJjJv6nQWjGai7qFmL2fadjPDpo7kzBYnCQxmZpbSImshY+JzEpi3bqbMl+Z8c
-          nMeDEf12FPzlkUYqBGC7WZh/JYpOfzXRojrIIW9oKtJnAcrB++i2DqI6eGxQuZ31
-          tmEDdJghuhV/M0nXtiP/5R08ECb3xQCfZ3olYtVi3nx4l9LL3mKx+ZytyGZ1L6j5
-          757RBv/GuJwv5YaVinqUck+8sYalFx84ZJW3XfJsDenjZKIbSbYgVg==
-          =bFiR
-          -----END PGP MESSAGE-----
-        pubkey: 1Dv0Nkr51AQu+InNvVbbpUgJtyQMsIbWilAlz3JHPTc=
 
     north-zitadelle:
       router_id: 0x8133feaa
@@ -221,38 +202,6 @@ peering:
         - dn42
       netdev: x.znorth
       remote: '37.120.172.185'
-      ipsec:
-        pubkey: |
-          -----BEGIN PUBLIC KEY-----
-          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAx4en2WDLO+F/L9NzwFFy
-          5sCQCK9dQ/9+rFmTUPgnIet6oeDqvhAvXfnf/fN35a7rGfoduM5r9542Z1/JDKgU
-          pTgyfx3MLNGbKu8UCLVobG1JOgUNsOFnlHmNMx+QxUTEZ+BgueSk9oRNMmyQHitm
-          VLu7vSV5+dYIPi8Muh6wlAyYLavIZ0aH1mdURyV6YkHw4FwwC/ZwIRSFz2KLm1de
-          P6TMhmIOYmJhlVTkczB54i0O6qud39ohuf3FkRd44rcFkTf26FMZuWg6OBLWBfw+
-          plI7uMXG4JtMMJ73xqbADRS17Pzk6Hfz1LBuf77PaE4tmmM1W2L9KOO5wSTttU0q
-          ijm/NNoasCi5cv5RX/SOAWYzV+yfv9OGowrZL4wfVvBH9ewDCVTZAcIABV9PfOcw
-          B8zviCljQuMym4ttsZKcOpdltHAJE/A8G2eyQ9S7mDwC7J2EwzDqCZuRjSXex9Xz
-          JxvDEXJJJmLQXicZRcCYJ2iUnzNg7YvtSVX2SCfpw7NCAsP8OPjZjrAIbSnbX4WT
-          WoeAsKgibAOSWtzrdt8c1oXzX1lCa0LQNpqRF94ol9qV0junYBxuTQf898ng8CZ4
-          +680sv2rtGxQK6fNLTZPjjQHvVvfZJ27R2T9J+8nqXJqD/KTfCVkNz8exHU8d5Or
-          EH3jrhl4TejAb1oOPZa2zMECAwEAAQ==
-          -----END PUBLIC KEY-----
-        ike: aes256-sha512-curve25519!
-        esp: aes256-sha512-curve25519!
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQgAhFBmoT8DLWcZMCmSrGY31Qak2WyKzZYKY7Slsb0MdoV8
-          5WCkzB4/nPFKzin73X4WT/aOPYmBcZxqYfFicxtGGAlh3pMhfnp1D49WnCRFwfUX
-          T+19J4MDfS9/VqIVafMG3eHSewmvZkwH1qCiyp+FFia1Tz0d6rF8qa6cwHi7tsv9
-          2hSCbiEwcAjWD6N2hmpJ86n3JHFQ0K65Xa+N2UQJmJ2gBwpd5j8X8WTdKp39Uho6
-          jLRo9hsdF4xF543A8itX7PS7CK+2SnVOfamxp143KZNgK+FwOG4EI+k3uLTgoNfl
-          DEuoSFkDPGClbKOtC+QzGy+eN0mG55Ol7xtMQ/4bfdJnAS4MZBV/KZwq07zjtSTp
-          b0o4lVx6I1wKwApteHVgOB03xR59i5fG/jFeA5KieuqkS3zVU9wd/k+49/A1fhVJ
-          +hWqPAzni5OI8jr0zB8ctRPNAGkVmdeApFyMOcjFdPW6ygb0uJfnDg==
-          =Kyqn
-          -----END PGP MESSAGE-----
-        pubkey: WF0uVUhK4FDw8+PkdQMoi9V+UdnZcgE6Ejcpuh042Vk=
 
     south-zitadelle:
       router_id: 0x99bf501b
@@ -265,38 +214,6 @@ peering:
         - dn42
       netdev: x.zsouth
       remote: '37.120.172.177'
-      ipsec:
-        pubkey: |
-          -----BEGIN PUBLIC KEY-----
-          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEArbH1ALjvuPLCtnh7eWGg
-          32xzudZJMIOr//8ctMs4xK6402u3ygyTEanvuZDPd3H2TQvKGu2lxjIZmUSD1Hyn
-          SlKnLHY9jKLJT12GwgfZXKBIRVDpp/ekBLFVItA2zdPXdYCUrlBK+rmw2/rUAfuu
-          z/xgAksYpyl5pwzJ6kgKU4baxR9aHUwtjDA9AeTLxzIL2oKdz3lUiJVUsEQCj2Vg
-          Crbnr0YyF7KNgxiIMnVeF9Nm60VGZjJySvSiPtBoof+ISRSw1x3ktZPTSDdsli5h
-          luz7nWiWLDy9DrF/gvK87y/S1TsSG7NHnsuCj/2HnwsIhAwAxq3qOxlXJTfHNpkj
-          N1ynu/ydCTpAJmSAdGjAckcNCQXTQNBjVVRwXF7uYr+mz9F+HA0e5BO50TulJPfX
-          +2RtqVa+b8tFau3m82VCgjYzszt6sxT6GaBxA4V+pbZlui7Qss1bv2RZATn5xk1n
-          BSmJzmcuGZ4eihS219GSP3EsSl2Hg1S10+THPmkFX6HgT0lGBEj/lpvlaxhdnR0z
-          Ub4tTlnZtINg18BGTqjLr7v9EFv69B2CjSzQGPDz9oXv2CXuJCKD55VfCFUXMisc
-          7F+OehKtHOhdHJd3rJmjaDKKQXSc4ywwOCYcf0fKYvFUTN3Lo0eiUnfr4Gbo4i+H
-          +p4kiM8V0NHFkTwuyXQNNJ0CAwEAAQ==
-          -----END PUBLIC KEY-----
-        ike: aes256-sha512-curve25519!
-        esp: aes256-sha512-curve25519!
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQf+Ps2YZbkPBBib0kdOzaOvt+9f5+y8OIXvIKyWhpm25qaa
-          KioWQEnQkMtNmHbZihAD3PROMc+jtgwO34rlEo8hboaPJadSZqOjWe/yhwqFzDqo
-          F+VhCWIRynP4431vrlexxGBkOAju9NGLl8dL7caxekUp/0myF/1CJN/GjgErr3nF
-          MaTbxKh5gj/zS0t5BGd++OXcn72Eu42LrxCDDX6uoPkO9WrcY7Ra6KineYUkXSFd
-          RxHwIyiJo8wZEcFrezRHDFBYGGa7sg8R6y5x1wm5dnJVh0LK6JS4N/5c5YlmztNq
-          gY1NYcTvdfFXonOyn3W1dAol9M7LGVVOiiuYj18yFtJnAW+9qPHhT6DTD5obVWAs
-          maolm0xoM6ztZKlEGPc8s8PliIJLV+gSi6Zz9IVvVNpQslvqmFA7w6dc/j5TWPkl
-          j/Ey/iQvn8ZAF809UhNJ5T4t0G5w3K0/cJSSr9PxCSnd6IlJQeOixg==
-          =hm7P
-          -----END PGP MESSAGE-----
-        pubkey: iRKAhmid+N4FQjhUAhDxTiXdo7x3p71ymQBWa1JDAn0=
 
     bunker:
       router_id: 0x3d44ba3c
@@ -306,20 +223,6 @@ peering:
         - hive
       netdev: x.bunker
       remote: '37.120.161.15'
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQf+LSfeE9/PZYGAdZ9+NA5LFrtyk9hgm3MSfSppegsvEXtP
-          N420xal0CZ3VYQsdP7oUch/hdOrNfVNlDvrLyCIRUn2wIdLv1CR8TdSaEoyvV2X6
-          yUBnYiAyCFV4HuZHOdU8Pp4d6PBHbQL/5MoQgMwQbbSl3zzXPUFwuhm8xIsFqUjN
-          t+k09Jkj0Ug43xQfH76HWOjal8PvD92kcB7JiQdlM6XRjOsaUqMiVD3Mclvb73u6
-          nUl728i+hmlkpzRC5i+yO5/zZ1EuryJpx1tXJQroaWiT7W8bLCtCwmPP/0VnHVxn
-          tRIo+/PuyYMTu86js3KFIEpkO1jmegF3jIoBV2cm/tJnATIXvKzcbfgO2WDMtBtO
-          OdCgsjgh+v6NDf4hdwqhRsWo80mhIrJJIcV3Gp4YFGu0Nd8iOQkDnvDpSxiiVhDm
-          9jvovRmZ3pAwIiIHSxQDeyngxixvHKW4G8tiAvPqgkEvM7feK029iw==
-          =O2+W
-          -----END PGP MESSAGE-----
-        pubkey: Nx1+nNpAExDXuRBabZpPsDOErSyTB1Nd2UUkvI98Gy0=
 
     router:
       router_id: 0x4364370d
@@ -328,20 +231,6 @@ peering:
       domains:
         - dn42
       netdev: x.router
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQf+MjBissQvBqcihqqT57lXxw6txI6r8rdA9bh+urY4aPZM
-          jTkEQYzOiv/20OKM1BF9jE14xrXTLIc+880WTBvu1YP15DYogTVtxfHyjaX1mdAK
-          metPJBoyVS9Tqsu4XDd+Zz9m5vIX+X73dsoaPN4gx67I3nUj3soaEsEfmlNKyYzN
-          Zxdhq5Y22NS2b6c4WrMhDhC7hqf08thERAWC+dOgrwnv4DzcKIo0aWP5mEf5YtBe
-          QgWZ/IQQrnmrFx3bnSH+pEHRw66URN2TsEc5Lb9KHGhYoEi5S+J5H6E7UMyOxIIo
-          iqYpsWKL/+hgfbi1aQCTJdQhZVWX6Irm3WfD6ULgUdJnAXqbaBJCZGHroukBc9in
-          zrbNHkhxMkDte353j9lUssne+lRL7ZeMLDi9NJx5QezotorXEGsL1br0IvB6VbNj
-          /NfC79NQpjLQiejuhbI0JX+SUGkV0WDBVf4FI2BY1lEFO/8up//rrg==
-          =yY6d
-          -----END PGP MESSAGE-----
-        pubkey: A8U8GemRw8rorCWl51RWUU7F5zwHtzPuqB4JBSF+/EE=
 
     mobile:
       protos:
@@ -350,20 +239,6 @@ peering:
       domains:
         - dn42
       netdev: x.mobile
-      wireguard:
-        privkey: |
-          -----BEGIN PGP MESSAGE-----
-          hQEMA0EEvUwCdTjhAQf+NAQxvhgiJLQgXbtHUaQuT3DZbFz66Zx6I00rM6TosW4H
-          nsxRP4a3X8SI0CUcwaKrgZd449t7jcofanHBZTld3uENJClPvbTB1fNfzZ/esDiy
-          cP1XJZQxH94shyFfzoc3uxuxMquEehh4wGZZNMzLGef3vQtRdhE6kr7X8xtNriyW
-          lUUjkBKVFRriv45xV+V5tRBHZHXpd978kzdRKoSFbgRyk7EQFrWQdqyuKKhyA8D/
-          nUgCml1fFOvrv7uhr8vD8Di5UqR2ox3pWZnz/krUGV/s+wmC452q1iKOk4CAI6rZ
-          Q2MnYLVoRUqJJAcxTXSnNOKTEu7eqOPLl02yfyeTzdJnAVde8V3gVXOuf1mEf28X
-          X+oOH8VOdbGenwWHPO6fZDWBTr+2ENG8f2Rck2nyEjnoGMkZA0JyPpSoeb2zrl36
-          5epW3Lg9kH1U0p6a4aYTU2zSr9r0sSEkiL/DOb2c6X5tepXtiRYHWA==
-          =/JBC
-          -----END PGP MESSAGE-----
-        pubkey: WfD2PN1bicE/OsK+jzHSxePvRW0zYKAH4WDYUBiEUhM=
 
   transfers:
     north-zitadelle:
@@ -381,6 +256,19 @@ peering:
           port:
             local: 23420
             remote: 43007
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAhFBmoT8DLWcZMCmSrGY31Qak2WyKzZYKY7Slsb0MdoV8
+            5WCkzB4/nPFKzin73X4WT/aOPYmBcZxqYfFicxtGGAlh3pMhfnp1D49WnCRFwfUX
+            T+19J4MDfS9/VqIVafMG3eHSewmvZkwH1qCiyp+FFia1Tz0d6rF8qa6cwHi7tsv9
+            2hSCbiEwcAjWD6N2hmpJ86n3JHFQ0K65Xa+N2UQJmJ2gBwpd5j8X8WTdKp39Uho6
+            jLRo9hsdF4xF543A8itX7PS7CK+2SnVOfamxp143KZNgK+FwOG4EI+k3uLTgoNfl
+            DEuoSFkDPGClbKOtC+QzGy+eN0mG55Ol7xtMQ/4bfdJnAS4MZBV/KZwq07zjtSTp
+            b0o4lVx6I1wKwApteHVgOB03xR59i5fG/jFeA5KieuqkS3zVU9wd/k+49/A1fhVJ
+            +hWqPAzni5OI8jr0zB8ctRPNAGkVmdeApFyMOcjFdPW6ygb0uJfnDg==
+            =Kyqn
+            -----END PGP MESSAGE-----
+          pubkey: B9v1EHhXAoCNbF8WZQe3Tdrm2GhvHZi6b59a/xlpESA=
         ip4:
           local: '172.20.253.25'
           remote: '172.20.253.24'
@@ -395,12 +283,50 @@ peering:
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'
+      ffffm:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23422
+            remote: 40106
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAnfC2A8IN3zCevX0FKrdQsTB64CtIIXQi7GguWejrCeH5
+            HTwHPVmoqFt3mlZ2v22JN846V7IrPsdcuTjv/fpkmlEAzSt9R2Hfo5uuM3HA/JgJ
+            29zmZvQhzPQmtLhm85IuxqpGKBZHGRLACh1skpgRANSp54/XkMqDJkd0etg4Dm1z
+            f8EZ4THAYfpRD+GdD4vkTbkjOxmErCX+ao4JYPQOUNpoyVpG5xL2id+tQUBBxC7J
+            g2DcQJAWkfDMKSyxMMLq2hpvbX4S8B12cfsCKnHXlHk9fCCQPwwqFPaLz5ccBTbn
+            Bn8UwYjvQ1qLRN93PTEzlRIMq6t0Go1fm2XXL3c649JnAZmKAhgBxhVmsDpptmjx
+            kKHHhUa2BQ2p974ANFFqbE5Yc0Tg7/dp0dIAjSKQD0JdyMA3WJNgCeAqhNCVPuaW
+            TPta1vNJW8l6iqNy3oxTBTFr11Qfl+x14Zk0cNd+AEL+Pw/H1Z1pxA==
+            =3FEz
+            -----END PGP MESSAGE-----
+          pubkey: W7M6vBlS7yCaV6q1Z951ebAnb1POzFOZth2Ryr8qZxw=
+        ip4:
+          local: '192.168.237.1'
+          remote: '192.168.237.0'
+        ip6:
+          local: 'fd74:f175:7a21:4f22::1'
+          remote: 'fd74:f175:7a21:4f22::0'
       maglab:
         proto: wireguard
         wireguard:
           port:
             local: 23421
             remote: 42001
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgApwsd20W4rSAP8aY3ZCDd9FLv15tMGp3krlTuK/zXydLL
+            aI3YPPL3AHS17U5X+YxC0Fw0jrC3E0PDcPxYNtm2JC50qFhCGmF6n6enR45SCxct
+            faaYhuOZMgBQpN54R+5WVpYmtYylh4H+FLCIt/nky99CM25nkclyKH9q68XYzcbX
+            nLC6P6Fj8Xt2UrQ7qjBJio4G7Apj4AAL2AXVcrDRBY3TgWCBKFHWvNeHpuBXMcwq
+            pY+bKnE5+QhKLsPfksBCJxXXEI1fQPvx+NrA9RzAPv0rSyQDw9fO98b9r6bUZ+ED
+            R7ECi/kXUac33zIZIQHG/HxA00RMlBzxOt+HF+81eNJnAVoUbdOh/Il1q0P2u5iJ
+            OTL9Vkn96MuOJBXgkLyYHndzsLUBwptAkmZwPrxFkA0WfpPZiFwokE1S06nFFYO2
+            2YU3w56K3y41KU9wGAcQzqBqAhBlIvBLhM1yMCO5p2DBQLc5ww2qGA==
+            =dl10
+            -----END PGP MESSAGE-----
+          pubkey: icxW7cv/oNXnJK6NgmSqpW8tkYnLLe3UmOx47egD1ng=
         ip4:
           local: '192.168.234.1'
           remote: '192.168.234.0'
@@ -413,6 +339,19 @@ peering:
           port:
             local: 23231
             remote: 23231
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf/SfO1ImkB7VKsLzhZ9YT5oAKFopeErPJU7TJZ/1g+PmCB
+            VGLqvk+/NsDORHJx/KjGvBbvYOEEbEZ5QwKG3ABIK5wSrJnQj8eQ4BeH+dEP80D2
+            7PBR9kZquXUzDtRmPV40Qj2qkrMimI5KH36wTXENMSLvx7UzWBTIvhq/pBQS+kzJ
+            dlzTvoQvOTETW26qHfxER6XE1WMuAPcTOGF0Jg4ynDWpID5aOYJ4IvaYrqDXbeAL
+            rCHOgc0mEEjr2tVeO//Z49597uYcRBaOUuNfAvLd7Hgjl/078lTmFRcjHbfcJKKo
+            s2oQRa8I7mabUGbNgTEQ6WeAX3byx8nhcyH4qfZWlNJoAVenJPz2oYfNI2YVf0S2
+            ikfB099rD2EhURhEDTTGbbmGcs/ddj64VWhnXFRQTMjbEskK+pW04bfJYayVvplG
+            13g4D8nXsDYpJI0/oFsUSx0riAKXcf5oZOK3sTKr66pN8syjr4CyI3M=
+            =uR8b
+            -----END PGP MESSAGE-----
+          pubkey: hHHLKncOmCt4yC6k4Aemr9myDy0wex5pwPUyDS76Xxc=
         ip4:
           local: '192.168.67.0'
           remote: '192.168.67.1'
@@ -425,6 +364,19 @@ peering:
           port:
             local: 23232
             remote: 23232
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQELA0EEvUwCdTjhAQf4zYNHd3p7O/wRruB2smTZXWoFd6G7VE3OTSRfwsi0QyIR
+            AVBPGktvo5U9VkGtNveqJXMbuzeDZQGj7JEZFJDNyAPKkSCKkfBViZTsWxsP861E
+            xTG6N3YhiA73sSYd29BNQHeX1JK+eCUKys63BC+ZMgxNG81A5cXD0694zAsFrqxD
+            fAswR/N9Ar+hovjk3XyakTkp42xjKZAXHxbtBurTbxkVKxk+G7gk7Tgn+FFCRXBJ
+            kil4fQGJZsRS5SKZ4Z6Lj4pfntg8q8iblhbH3lJ5UIpGUQYxriNwE2E4c1V27PQU
+            G/EaQ5yarc0+lms7xk87LfrR6dGcvK6MLxEFHFxR0mgBopkBbPKwXvM2ouRMDa4y
+            4WboMvaVFhAdNyvPP0muTxRFPuH2IBdRmqx4So9dukxIQeKWuxzDD1w72uTa6GOj
+            1mVaQBDdjVGm77EcnIpD0mEhrs5di5t5ebcDbf/IcqoHOG2wLcm3ug==
+            =Al7Y
+            -----END PGP MESSAGE-----
+          pubkey: aQItCAPkPHpJ7QOINT1pGt7pM6/5BsyhclYdzjRhiCM=
         ip4:
           local: '192.168.67.4'
           remote: '192.168.67.5'
@@ -436,18 +388,19 @@ peering:
         wireguard:
           port:
             local: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQf+JWnBRLs1GsRaGroCEroeh6KfdnlyfbbFog3uS5rwu2yL
-            PPQOJ4VtIzPeomRj9omI2rdihoA436S742T6DFRQt6/J5XYqHbeZFRWziQIP+Dnq
-            GAloTOc8Rf4KX9GKXhcmkntjvktPJE9DQ2j2GIhyA2TGwxR8foqpdl/BV1XQMyVm
-            8awhnNNRidJDSrFg2USsjGTWkcLp/IKupvHuIpLMS8HcrWaHMC2CAPSJWAs31BVd
-            Ld2w76xh6vmyerGyyAEwlY704ME5+ddBeGS8Iy93dj6u3RViaFIzmoaybovFVlaY
-            hnWyPx/YHV/WyExRJgv3gjPff9XUkJ8Vqr6xKfhBnNJnAf/QK9A755Me4EA3lGPC
-            GeM5/t26QluM887/5RF9DBUcd75bvSg/iswyWkoEUq2qRGQcffzYwd3q6yr8hnDZ
-            R/LZvO0iPqz6WsboTM1yh3wRdlErOwab/ufx5ThOMGQGQD18iclFAQ==
-            =BC6u
+            hQEMA0EEvUwCdTjhAQf/XYlYv0PUG8XEMRxtbQJNpn7m3z9Jm4KCsLivS8YINPHg
+            7XLJlW1MtXDjhGE+yr5mvvrqIq0IXAXJ7qoH4ODxZecNpVif67REYLZjgaC6/RY7
+            Of+lDVxzIsoMSvbRwkcSwp8KHKI4oad5e3ViPkDSNLwqm+xo7YJuk9dUQAJrzw53
+            1yf3yeZpX6LG+IHj0HMMKkxa9J4yrT+QWA19IfPVi1kTeocY58+jOqwmcfth4LYQ
+            epjJNcpg14G/AeNj7YMihne5WDBWzW4QH5zemZwdD9ylUSkSmRczAIzS+Spf7H/c
+            cqOr+aOgMKTvEesSr820hlB3hLasm4hxWm18Dd6v1tJoAdrHHEmUPW1omy7PWwQp
+            YY5a2D7wtMtAZ0Ra8or775pQQwGwrcj4QLj1jJ9YPuK7IEAIdNmbeJfspEicQR3W
+            Vn5T2E3Vg1Tx+vb2LAtdMhT1q6U2sCgt/g9yRcg0XlOw/X9r0nEh6oY=
+            =qep1
             -----END PGP MESSAGE-----
+          pubkey: PPtiPKtaC17nzlKX78xJ6NJvRGucD26HsTtsnZlerRQ=
         ip4:
           local: '192.168.67.6'
           remote: '192.168.67.7'
@@ -458,7 +411,20 @@ peering:
         proto: wireguard
         wireguard:
           port:
-            local: 23422
+            local: 23239
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf/cOkBqELrAoZiEX+5OpN5OLvzVeO/ng+j4tHZEEhg5e29
+            EP1zqKV3BfJ+cmgNJXuq+PgUpkrAhs+ShVTyQWTarSK+C8QS+nGrruxnbPDWfnt7
+            mS5V9ZrKq1n2JMQrIKpmhfa7vz6HKoTg58onMwk13XqFuLBciC9VZT8h9BR6lHIk
+            IqDE8EKCG3AEZQwvZN0P+my0L7HoD4ERVEaBmtwWcEQDIyDbwGu1V6KBqzEShD00
+            bDO4Xl987CROQvN+pREUr0lQNP5EMpFqQSEvNsXPyc8O4InrM94SnP7QZYsK2jBM
+            idUauG9uQIop/3Gb1txRQv3oRoxGM+O255TX7zTdLtJoAXpdWRjEPHCyXpJnVFfm
+            6JrNPUnKFsq5zEjCNnC2fUYOV/oHp7XZU/LjyjcHRN25fwkfCLJVzceWDSookn5O
+            aIBKHP6b9gLt9y5I8KsqwlYWarJzE/RazNr7OIOj8gj/8P10sgi6URs=
+            =B1Nv
+            -----END PGP MESSAGE-----
+          pubkey: dj9ooKzq0dFJIxnt6BKJ5Qz0akg0E44BXVbrQL0GHCs=
         ip4:
           local: 192.168.67.254
           remote: 192.168.67.255
@@ -480,6 +446,19 @@ peering:
           port:
             local: 23420
             remote: 43009
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf+Ps2YZbkPBBib0kdOzaOvt+9f5+y8OIXvIKyWhpm25qaa
+            KioWQEnQkMtNmHbZihAD3PROMc+jtgwO34rlEo8hboaPJadSZqOjWe/yhwqFzDqo
+            F+VhCWIRynP4431vrlexxGBkOAju9NGLl8dL7caxekUp/0myF/1CJN/GjgErr3nF
+            MaTbxKh5gj/zS0t5BGd++OXcn72Eu42LrxCDDX6uoPkO9WrcY7Ra6KineYUkXSFd
+            RxHwIyiJo8wZEcFrezRHDFBYGGa7sg8R6y5x1wm5dnJVh0LK6JS4N/5c5YlmztNq
+            gY1NYcTvdfFXonOyn3W1dAol9M7LGVVOiiuYj18yFtJnAW+9qPHhT6DTD5obVWAs
+            maolm0xoM6ztZKlEGPc8s8PliIJLV+gSi6Zz9IVvVNpQslvqmFA7w6dc/j5TWPkl
+            j/Ey/iQvn8ZAF809UhNJ5T4t0G5w3K0/cJSSr9PxCSnd6IlJQeOixg==
+            =hm7P
+            -----END PGP MESSAGE-----
+          pubkey: B9v1EHhXAoCNbF8WZQe3Tdrm2GhvHZi6b59a/xlpESA=
         ip4:
           local: '172.20.253.29'
           remote: '172.20.253.28'
@@ -494,12 +473,50 @@ peering:
         ip6:
           local: 'fe80::2'
           remote: 'fe80::1'
+      ffffm:
+        proto: wireguard
+        wireguard:
+          port:
+            local: 23422
+            remote: 40107
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAnfC2A8IN3zCevX0FKrdQsTB64CtIIXQi7GguWejrCeH5
+            HTwHPVmoqFt3mlZ2v22JN846V7IrPsdcuTjv/fpkmlEAzSt9R2Hfo5uuM3HA/JgJ
+            29zmZvQhzPQmtLhm85IuxqpGKBZHGRLACh1skpgRANSp54/XkMqDJkd0etg4Dm1z
+            f8EZ4THAYfpRD+GdD4vkTbkjOxmErCX+ao4JYPQOUNpoyVpG5xL2id+tQUBBxC7J
+            g2DcQJAWkfDMKSyxMMLq2hpvbX4S8B12cfsCKnHXlHk9fCCQPwwqFPaLz5ccBTbn
+            Bn8UwYjvQ1qLRN93PTEzlRIMq6t0Go1fm2XXL3c649JnAZmKAhgBxhVmsDpptmjx
+            kKHHhUa2BQ2p974ANFFqbE5Yc0Tg7/dp0dIAjSKQD0JdyMA3WJNgCeAqhNCVPuaW
+            TPta1vNJW8l6iqNy3oxTBTFr11Qfl+x14Zk0cNd+AEL+Pw/H1Z1pxA==
+            =3FEz
+            -----END PGP MESSAGE-----
+          pubkey: e8z+pYfwLdj3yEThh7etkOnkwRu/4HOmKNoT0GAVZjg=
+        ip4:
+          local: '192.168.237.3'
+          remote: '192.168.237.2'
+        ip6:
+          local: 'fd74:f175:7a21:4f22::3'
+          remote: 'fd74:f175:7a21:4f22::2'
       maglab:
         proto: wireguard
         wireguard:
           port:
             local: 23421
             remote: 42002
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf/TuuCLiKp+8LLiHrOxRmt2OpSJbZSlhI0ZP3ejjpNESOK
+            RUf9PkvcT5DvnL0GCDFWwzxXuQN1CsjAUwDYu7aoHA1BRezZgaawt+SpIaIkgy4m
+            6/tYnRiidcnHbdQiGuNiPB0Jeg13W8JRtJfSX+2g/6l6YnQb7f48ssx6Ppbu9OGp
+            s1pcX4gSub5fYh5APUSa1CzJCE44/kLGModwyNLoykAoWxjUgtx3ei0qlldm20oW
+            ZOsqlQKzRY+92ukuLS5Z0xRyVo4zB0osnAidPZXYkctQbmrkWcRBZXZqlnzR3lRv
+            1IdAb5ISe5SqnryyxyzOrB8lfalleU4IEvx90PKjWdJnAaIvqgGPWHPpPnsNvQah
+            evsevV6YPVg5X+1dnum1qWipptvVi1l5SidrhdDBou+UpS8r+JJLNtNHmMTdDhFU
+            5CYUbdTSukWUPgBxjzIEGcTilJ7JcV8+m8xpvgPxw48n3kgRaTS5NQ==
+            =fFkP
+            -----END PGP MESSAGE-----
+          pubkey: ot1mVRa1tgfMk9JSxo7XaOcQHi/51BEmpnD0XspnRQk=
         ip4:
           local: '192.168.234.3'
           remote: '192.168.234.2'
@@ -512,6 +529,19 @@ peering:
           port:
             local: 23231
             remote: 23231
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf/T2VKR+83CGRezBezva5buns5/18kXvD5961UNwm9MZXB
+            X2m3Ms+mHIppqXnsWxzLZDvHrcfYVjLkoIYz5Hi6pRJEs1ITrM69VYswGw8TTaSg
+            uA39EICCOzMdFUbgg8vleuvdRsVNU0CEsY4iywQk9kAIwc1H60RP4Q8nQYYWfsU3
+            M5W3UdrCwenQh3HURnCCtFN5pDiawRrBKfbfHO2nYzMw8qbaYIJTL9O7cA+lDE/g
+            h70vwfr0u/P3x2Y8pNSKP531CL1FEM/T+beEc+H+qGIc8euqC4hbvCR45TOuMrcO
+            wA7gAoU8bcXjPa8OUx7OAhTabPECqh4AqjocRNE+UdJoASpmN/0nT/gVaT6PelTA
+            NOX6rQri/bMnPkRqOGT3isPKDak0gwP6e/sLWOP8ASy5Ta9rhoMOI5P8C8X0u5rh
+            E+BnN1I+azC/SClk4bby50MfLxhSr/t/jZ4sEWYhPPXTXy1j8sotTLQ=
+            =8Pi9
+            -----END PGP MESSAGE-----
+          pubkey: D2Bk4/meVaDz9q/ks775s0Fbqb0ky35auPMVT1r2Rk4=
         ip4:
           local: '192.168.67.1'
           remote: '192.168.67.0'
@@ -524,6 +554,19 @@ peering:
           port:
             local: 23233
             remote: 23233
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAthLPxAVcNB+vrR3qYKbz5EnmdrFyt+yOlV5+qnkmo05C
+            +wjWJv8ZmtNInfqtaCbyYNiWq1gjsSQ7bZN1BJmkexWcD5pa0zxKQLCVLlYBwoZg
+            axsynPVCLXa01XSF1fz/C72BYKv3BgaC6poM4qcx97Wb3phXdT1Kgw31P1YJbgr3
+            BwbUNNBzRu6zh9XdH1nQqKp8ccOD8fpsFu9UXTya7pJwwcWMFDDs/Z+lpENSAGNC
+            v7/Z6lGqOccqBQVc7NUKQO4rFQq2GCAr5QhUiKp8Qw/QxrnnlL1E9I/NdGXMsqFf
+            4HS8+2zuLRAPOKu0uh2sdcFA9XAPHMtYtV0szGWhm9JoAZSejz+gMfhOj8muWM8K
+            d+iWKHwokKHJDbhOKsVMKVwOuMEuN8GmIXOZZHVzBwopyOiGjnhFttKJt4wExt30
+            49b0IIhiTLlUKYaNVJBIbFKNw5CIEiMcvXYCHrRRK5DBgaVerTA+oEk=
+            =y/xm
+            -----END PGP MESSAGE-----
+          pubkey: HAJYxD3QNWcSelGaT/H3vssR5wAB1WZlU5rhi7Y/kjU=
         ip4:
           local: '192.168.67.2'
           remote: '192.168.67.3'
@@ -535,18 +578,19 @@ peering:
         wireguard:
           port: 
             local: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQgAq1AHHiisiNOI8lvfT8XvwyeZ49mb1Ug7S63GU7HJCCy+
-            3ajqHgoRgLfSPizEDcfGPilILEo72RuOtpKDvaDvSRXTa61PfBQxo+wn3o0/ukp6
-            8OFexXsDgUssBgGVCJt49JtxfdtqRma60cEQi1IOqjJMU4U9ZaogpR4ZEXjbWXHp
-            hf1w/OSE/uOdBSFPHxzOrpd5ABpAE6pvRj2QvuJZ703N1dm1rlyAgX2k5k6fsqyh
-            4NVpdVNEtBxlCpfSKzVvy+5qLbVHGwJ0EUnNf0CLQTTUgWq0zp9YH//UZm1XvF0p
-            J6BMealX3WGFSeh3PM8UQVqliQWfvFrSPolDfvoFHNJnASZq1OO0ei9jh+0dUzB4
-            01viYTlZBz/DupAAcwMQx3D31/QVFt5cgLcKA6Xdo667uRhKYwZHNUpzAhckcb94
-            QNvYK69kSy4+0iQ4SQ/2By1wPcGdkwuCcqwg7sKrhsJn9XVXFftzsA==
-            =H8CA
+            hQEMA0EEvUwCdTjhAQf6ArVP7O8kNmdQuomtH+iHG9quVz/6UV9XpogmEAAp3t2x
+            3fNcpHPh9Zh8R3HEUDI1rILlLkRLqW8f3e8/bWWFXcwursjCBVpZTagfJkun2q68
+            Qf3EhQrU06D+MAj+rp/SY/gMp4R8NxAXkbPThx/IovxF02ij8DP3zUb/CwC34Gkp
+            X431DcwXvaTMOKS75zcYbtATQD3U+J+gK3MUAuOkJPzqF4gJ3/Dsm2AlL5cii/Kw
+            UuBJdl3Hdw+PmkOP/mImgo97nLg2v4O7FSF7fz1EDViuGGgscflcanF9XaNYIpwC
+            89sh+1Ycbp5vc8UQ+JnqA0W97JCXIECO4Xrn3ujSt9JoAUZYMyZRCMqUTUlw3J09
+            OMZA6Co3IWEPmn7u2Kw9mIozLkojM7KG1Y2yAd+aHCMg4CmRuPZK6YCIRNFQuT2/
+            gb1+z50DvTpQtCJshpGi0+uSyI0Myu7YLLVfFx+foXjt7dqcZAKjqMc=
+            =hCBA
             -----END PGP MESSAGE-----
+          pubkey: ejIBvDNi/obUXRABQmQ2INdpFD1+ML4qSmseON4KCVw=
         ip4:
           local: '192.168.67.8'
           remote: '192.168.67.9'
@@ -557,7 +601,20 @@ peering:
         proto: wireguard
         wireguard:
           port:
-            local: 23422
+            local: 23239
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQgAh0Ta2OyjCPWPtZ14qRn97/+y0so2EqUuNVtbg7/+hPC6
+            UhRTfJZIdMzPyoc8ZZ1E9B9NOGZMr8zowzxPB+Y+HJK1yRZNxaeCnB74P4cwLNVa
+            tHGNSOq2l1uiNrM2Z7exIwIatKlhfaBqJOn/Y9LeNE7o9ogc58OMBk5Pasj9wDUR
+            ZX9UHTRvNpndoJHubdvFCjPrMiyFafaWriGoq5GbjKLPK+g+rDdp7DKFkhhc5yYp
+            hRFcDRar+5/ljf9x7OzmidXEqoxPRH3fRsKArh+g8Feq2QzWNxvd1ZEZhankdReH
+            1LgOx0IxG5LgNd22L+FTvBNtCEA8OsKPBVFoacWn4tJoAWpByuNa689lzYriUaxu
+            Zow+TAcQA46UcNZtDlh+ovbYgQtzSnu3OtF17lhIpuP7MLcv8/VO/dkVpEKKRy5a
+            G7Tk3w/IYTRX0LxrvtjF9exNTXRUX9v2Da10L/6AujeabI0zWqDMH5I=
+            =/i9M
+            -----END PGP MESSAGE-----
+          pubkey: iocF4MZa3Q44wxq8ollp4/3Ni+OX0oSLqz+xfAUmly8=
         ip4:
           local: 192.168.67.252
           remote: 192.168.67.253
@@ -571,6 +628,19 @@ peering:
           port:
             local: 23232
             remote: 23232
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf9EiM+/ifuuD4KTzkDlPPDeCjmaqjb2E7eO2MueK+hfgZS
+            fBCWQ65lW5t3rZbEPJGg+4SxajKnQjs7heTORQO6flpYdmf/TCWZm1V2qHKoHtrk
+            Glky43knv3ODCbqrny2bhi4o/KTk3NKMTVmewNs3WO8IHWxaKCQ8fNGBubcB2p1H
+            YtLsPIUrS6yWqNIZWVkomJ9/1xoF3hkIMqFGufQZDs0/yjYrc0WgSAaE7PPaS9JR
+            dwD6avG0YAKNeeo9hpKkBeHMZAgvaCrVBBPTGZflzQPJseKb9e6mXIqd8EgUAZLM
+            FL75r7qxcMc4n+9WVFT2uGLBsv6U54Us8rMdgetFOtJoAXWs1V2w+VUkf5v8nZMv
+            MEVUE8HgnepFUYW+SI2upHbqvbYDmKsTMiE65SR+yL7ZlHh49zcw8VWCIhGZ/txF
+            T/bQ0ZEliqIHEQoxiAA9nEaR/pw8IBSRsH0u2fhg5+CW/lf46x3a1b8=
+            =twvD
+            -----END PGP MESSAGE-----
+          pubkey: RMqnHRdIdLU8sfeh/8Rb2aenclhYjyFwlCGcKkL28gw=
         ip4:
           local: '192.168.67.5'
           remote: '192.168.67.4'
@@ -583,6 +653,19 @@ peering:
           port:
             local: 23233
             remote: 23233
+          privkey: |
+            -----BEGIN PGP MESSAGE-----
+            hQEMA0EEvUwCdTjhAQf/dR+Drhu/5N4Y8QQjfHU6E2vmykYVtWvsiZNLLRSW1e91
+            maCAWPbsJ/Q4oZ8Dn5+26B2vvAh5Hhgg2gfx5I7C7KHJde212uJsUQybz3qamUdt
+            jlYGFBUbkInW9izGuR7VwRTmQmwLlgRS/HPN3sSaaG0o2xZDI/cRxySj80iL2cFR
+            sSyLB32a3DLldZbnjktYSqJ3WOtTv3FoJ2L8BSsMVnQv8Qc26pwM9p3nW3iXZ3ZQ
+            KzKTAXSsgbOMtprfwSoDQ5WCZxzVE3wNYGJgCouWKmje8Dfe5nm8rUH9MtivLzpv
+            NeCQGxXS88yqJIzF3CAoWx9F1+v5pZk0UPGTdegMmNJoAen9FXnymt3pq6AiQAHv
+            TIiagD4bKE+vaSpgfaehTnPYPpgQMTyBU7buQ6vYrC0BpQwUInng06TTvUjJr1+k
+            iZulirRTkaN4Jz8mLH90RUSINtNRRjcRzHqGeEYUv4dNJkPW98Zrox0=
+            =zmWd
+            -----END PGP MESSAGE-----
+          pubkey: 8SFQts6atZ4GKLuEFKYuwqjKFqkx1UzVCk74iB9htG8=
         ip4:
           local: '192.168.67.3'
           remote: '192.168.67.2'
@@ -594,18 +677,19 @@ peering:
         wireguard:
           port:
             local: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQgAz8tssmmRbq1I6Gjo3LmD25T1bwvAmSxfGIGDrzsWMuus
-            7meHHGYqFeWErXOunYq7BJA2VSC5VBhE3+YBq+LdPYfaAGNKXolyrbJmbcQVser4
-            d0DTq5IaYz5M05TEE7plYltaqQsdXpG+g+RA43pAno1EIkH9X3E9qgUsCju9Ezry
-            LeywW0ePeJaV6uJpSLTso1DFGebyYff6a0eNXD3/kzIZoPmmVLGe1WTSqK7ztF0h
-            fduWrUkpi/dvZa1eHE4H/Zqwy+LmcRoRU57BcmNsq87qKv64iOkwWqR5DTDVqPR9
-            g1idulz7KwFI8aeaM/xz9quD1aQAaGewQFTOkeQY5NJnAb+nVnC8h9g+toG/Mq4b
-            xFvvtzWdChSLtIdF1YRbN2MJzQ4SrQA0SQdufM9JVq/nMOnjVyMmfMS8fUorwiAV
-            abhFl5bvXNzTonPa9kcxL+mdlC+3r/EogSPKrUQHuJkRbD6BsEkFtA==
-            =cIU2
+            hQEMA0EEvUwCdTjhAQf+J6q+8G3wY6oxNmlVzg32qQg7FRGR4yqD1v2C52sK5enh
+            N3314BWZFRhAp3YmgoPX+8NV/gS8RhD+decJ6GCEguokXFUuDoMhRn0XKRyHm022
+            fyk54ogq3TNxXiA9gSsAgs6dEHI8wvUtKL5X2EZU2XJ4I/ERRVO2+KFN7EmkoooQ
+            GUD5eWsT/lJ+CSEKD1YxmPAknRaKCmRGqGLokZ1uJdDkYmA9X4oeaDjHHA27Vvg5
+            KDcK0KuaIoaENo6lDSmZezE2HQW2WgwiRYUac2NI34YuuqLMt93x7x3ZcKGwN71G
+            Ak3kdEMUmZpCwF++6gTNUZi7B6HDUB+D8iUFqnA2BtJoAV7Qg1MfuYe4Sq3AbqJp
+            CYL4UfD9EXvcwUYkMAiNiRWwDhwuiuigqfiN8NcYISWdlSIbI2DKfw0dLqjtShis
+            /lMHMGp85IphHGgQhCrC67nbGR1b3AhEuKfvY1qBd3+5K92ddNUkh1s=
+            =3g+r
             -----END PGP MESSAGE-----
+          pubkey: Jsuc9FIBnumQnkP2ipjynBEjmzNZz844CE1BQnUpoQE=
         ip4:
           local: '192.168.67.10'
           remote: '192.168.67.11'
@@ -619,18 +703,19 @@ peering:
           port:
             local: 23230
             remote: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQf+JWnBRLs1GsRaGroCEroeh6KfdnlyfbbFog3uS5rwu2yL
-            PPQOJ4VtIzPeomRj9omI2rdihoA436S742T6DFRQt6/J5XYqHbeZFRWziQIP+Dnq
-            GAloTOc8Rf4KX9GKXhcmkntjvktPJE9DQ2j2GIhyA2TGwxR8foqpdl/BV1XQMyVm
-            8awhnNNRidJDSrFg2USsjGTWkcLp/IKupvHuIpLMS8HcrWaHMC2CAPSJWAs31BVd
-            Ld2w76xh6vmyerGyyAEwlY704ME5+ddBeGS8Iy93dj6u3RViaFIzmoaybovFVlaY
-            hnWyPx/YHV/WyExRJgv3gjPff9XUkJ8Vqr6xKfhBnNJnAf/QK9A755Me4EA3lGPC
-            GeM5/t26QluM887/5RF9DBUcd75bvSg/iswyWkoEUq2qRGQcffzYwd3q6yr8hnDZ
-            R/LZvO0iPqz6WsboTM1yh3wRdlErOwab/ufx5ThOMGQGQD18iclFAQ==
-            =BC6u
+            hQEMA0EEvUwCdTjhAQf/UBMqrvZCz1wHpJr2D7NDMWE2SH1xVjSFs8+/Qr8R3fvT
+            bGSUgn7UxbgXo9/qjeY1eaRCOK2AhatA1BejrXj8Lhd2IeI5rsN84xPUoVHzJgmW
+            I5JBolv0wZi0/DnqkQTXFEVRAfK6GjLThs4TBFN0/3BLRsUyhozgkigj2A8BCXEk
+            GKHuJAyizHChDSxbS6/uOUV23Rkr1KRY2LsnAu/NMhGD5jJd7cYZg6P7zmAN1uf0
+            /xDiU2PmQ/K08ua5snxG98wGio6QtrXUgPJvCi6xYc5FX8FktIPa67Ry1FgS+5tM
+            TbpoPz/5/PT3WV0MSg6mH4X6KAnKY4LEUDdKcQeQD9JoAUTRuTKIi+oMXBrIg9Nk
+            94KdGYztRTVoIZPCPMDsWyGyCRYY3XMFBMB93ZZ/93jghw0r5T0HjNUiuSb/wAD+
+            g7Qnv3Zx4TrideXtOimNQAUVaIkF+FVvgcVHGGiZVJRZn4xS5tq3iSk=
+            =FCJp
             -----END PGP MESSAGE-----
+          pubkey: T9YqMKM8Jp+sFvwJN5Y2MV2aWQdIVJ7WhEsKMm9NUmI=
         ip4:
           local: '192.168.67.7'
           remote: '192.168.67.6'
@@ -643,18 +728,19 @@ peering:
           port:
             local: 23231
             remote: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQgAq1AHHiisiNOI8lvfT8XvwyeZ49mb1Ug7S63GU7HJCCy+
-            3ajqHgoRgLfSPizEDcfGPilILEo72RuOtpKDvaDvSRXTa61PfBQxo+wn3o0/ukp6
-            8OFexXsDgUssBgGVCJt49JtxfdtqRma60cEQi1IOqjJMU4U9ZaogpR4ZEXjbWXHp
-            hf1w/OSE/uOdBSFPHxzOrpd5ABpAE6pvRj2QvuJZ703N1dm1rlyAgX2k5k6fsqyh
-            4NVpdVNEtBxlCpfSKzVvy+5qLbVHGwJ0EUnNf0CLQTTUgWq0zp9YH//UZm1XvF0p
-            J6BMealX3WGFSeh3PM8UQVqliQWfvFrSPolDfvoFHNJnASZq1OO0ei9jh+0dUzB4
-            01viYTlZBz/DupAAcwMQx3D31/QVFt5cgLcKA6Xdo667uRhKYwZHNUpzAhckcb94
-            QNvYK69kSy4+0iQ4SQ/2By1wPcGdkwuCcqwg7sKrhsJn9XVXFftzsA==
-            =H8CA
+            hQEMA0EEvUwCdTjhAQf9F6xYAWcLxmKyjZrdhsUOqw1Twb0rEznYbVAiSZEuD9oS
+            VUF2hkz8oJ68IGso0clqB0nuUdoS0hZyN25gEjttlSJr0FjBm0TQXEai4ymTT1H0
+            EoyduJcH2RQs8ZJf4KVBpj27hHOaPuSFHhhIqSFNdCzVCaYoeDhObQyFBpO3NB2A
+            T1B0XWQXifHWxsVE8DFXAHtnEFhpsgT4x5KFNxPC78QhaT386LkcKsQ3sawvpXsF
+            dqqezXojmqziSIXZzpESknvMCY7Hs51JRTxhQ6XKwrXqqYQp0XcosEhf/F6e1+nS
+            Eh7rbDEyoiry+dVYBWZ2Hzwml4eiBLKxzpvvjJTDPdJoAatnah8L1h29qjWVw+cH
+            IUMx07nbTP5szUQUlhy3Te3pjK8JlESti1UPddYqyDgRiCxksD2H9ObcnQOk52Bp
+            NYsjxhlokD7qK/uAWBkJvm6nsKNrueOeKygIn0jH/HUF4ZQU+JuOWvc=
+            =AZ56
             -----END PGP MESSAGE-----
+          pubkey: nLwhi0ikvoZ6kze+m+CP5wP0hsP4NgigHMMMiGrXung=
         ip4:
           local: '192.168.67.9'
           remote: '192.168.67.8'
@@ -667,18 +753,19 @@ peering:
           port:
             local: 23232
             remote: 23230
-          psk: |
+          privkey: |
             -----BEGIN PGP MESSAGE-----
-            hQEMA0EEvUwCdTjhAQgAz8tssmmRbq1I6Gjo3LmD25T1bwvAmSxfGIGDrzsWMuus
-            7meHHGYqFeWErXOunYq7BJA2VSC5VBhE3+YBq+LdPYfaAGNKXolyrbJmbcQVser4
-            d0DTq5IaYz5M05TEE7plYltaqQsdXpG+g+RA43pAno1EIkH9X3E9qgUsCju9Ezry
-            LeywW0ePeJaV6uJpSLTso1DFGebyYff6a0eNXD3/kzIZoPmmVLGe1WTSqK7ztF0h
-            fduWrUkpi/dvZa1eHE4H/Zqwy+LmcRoRU57BcmNsq87qKv64iOkwWqR5DTDVqPR9
-            g1idulz7KwFI8aeaM/xz9quD1aQAaGewQFTOkeQY5NJnAb+nVnC8h9g+toG/Mq4b
-            xFvvtzWdChSLtIdF1YRbN2MJzQ4SrQA0SQdufM9JVq/nMOnjVyMmfMS8fUorwiAV
-            abhFl5bvXNzTonPa9kcxL+mdlC+3r/EogSPKrUQHuJkRbD6BsEkFtA==
-            =cIU2
+            hQEMA0EEvUwCdTjhAQf/TftwB+67lMqAJ2kgj5LWSbkzbtryhNofAIUAztAh61Cp
+            8kR1FGoIz74MhivNyUfglGf6ZAf8ly+1hWybS8GMfMFRTbBdR/uReitRAoXFbh9r
+            XPojZ6bW0m+0TsmbyEuPvwQnf1dV9SoQYnwXAe1qF68Mwz5EAQ3dx0avST6pERNt
+            t6HggHLqBsX7OvS2WEMqqodA9WVmNrBqPitzzkpPK53PFZDA9TWNGpgF08RgXneJ
+            ktRpNPhPkBIct84BZqYInIeQBbSIFhi6hDqTeLIvmLlfgiw708WwT2jMK7ZQ4WS0
+            QyWuEO0e19Xb9dpSD/2IUnRQMlVvWW2yasB067h2I9JoAW8rf5FTrj8WpMgS4GoS
+            aKXk7++gV9R3q+D9XeGrSvR9yv4ktk+uJkCF8uj+7Lc7OX6IcHYc7CphQ9iI4R8x
+            NIHUkUhJNsSA4a2e1AKUDQdwhr42HA8VLe7cB1L/uyEATARxALQq0MI=
+            =6Fd7
             -----END PGP MESSAGE-----
+          pubkey: 1eNW010lxDeySM09zOHOiZ+BoWx0vIywIlnJkD1hGRo=
         ip4:
           local: '192.168.67.11'
           remote: '192.168.67.10'

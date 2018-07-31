@@ -1,7 +1,13 @@
 - Build missing states for NAS
+- Fix shutdown delay in \*-zitadelle cause by httpd
+- Error messages for filters in bird
 - Deploy firewall of internal systems, too (edge case for SSH)
 - Rework SSH config
 - Use salt mine to configure backups
 - Make NFS server / client more generic (used by nas, mopidy and hive)
 - Get rid of tinc and use routing backhaul
 - Only one managed network per host except routers
+- Use the wireguard support from systemd-networkd instead of the custom service
+- Monitor number of failed states on systems
+- Use certbot instead of acme-tool
+- Use glusterfs instead of NFS share

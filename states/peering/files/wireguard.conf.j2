@@ -1,15 +1,15 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
 [Interface]
-PrivateKey = {{ pillar.peering.peers[grains.id].wireguard.privkey }}
+PrivateKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.privkey | trim() }}
 {% if 'local' in pillar.peering.transfers[grains.id][peer].wireguard.port %}
 ListenPort = {{ pillar.peering.transfers[grains.id][peer].wireguard.port.local }}
 {% endif %}
 
 [Peer]
-PublicKey = {{ pillar.peering.peers[peer].wireguard.pubkey }}
+PublicKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.pubkey | trim() }}
 {% if 'psk' in pillar.peering.transfers[grains.id][peer].wireguard %}
-PresharedKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.psk }}
+PresharedKey = {{ pillar.peering.transfers[grains.id][peer].wireguard.psk | trim() }}
 {% endif %}
 
 AllowedIPs = 0.0.0.0/0, ::/0
