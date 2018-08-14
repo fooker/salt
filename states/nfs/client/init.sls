@@ -8,6 +8,6 @@ nfs.client.mount.{{ module }}:
     - device: 'bunker:/{{ source }}'
     - fstype: nfs4
     - mkmnt: True
-    - opts: noatime
+    - opts: noatime,clientaddr={{ pillar.peering.interfaces[grains.id].hive.ip4.address }}
     - persist: True
 {% endmacro %}
