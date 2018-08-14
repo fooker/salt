@@ -7,3 +7,10 @@ pacman.hooks.dir:
   file.directory:
     - name: '/etc/pacman.d/hooks'
 
+pacman.stuff:
+  file.append:
+    - name: '/etc/pacman.conf'
+    - text: |
+        
+        [stuff]
+        Server = https://aurblobs.open-desk.net/stuff
