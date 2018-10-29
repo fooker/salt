@@ -6,9 +6,10 @@ networks:
       gateway: 10.0.0.1
       dynamic: [10.0.0.128, 10.0.0.253]
     ip6:
-      network: '2001:4dd0:ae46:1::'
+      sla: 0
+      network: 'fd79:300d:6056:0100::'
       netmask: 64
-      gateway: '2001:4dd0:ae46:1::1'
+      gateway: 'fd79:300d:6056:0100::1'
   priv:
     ip4:
       network: 10.0.23.0
@@ -16,9 +17,10 @@ networks:
       gateway: 10.0.23.1
       dynamic: [10.0.23.128, 10.0.23.253]
     ip6:
-      network: '2001:4dd0:ae46:23::'
+      sla: 23
+      network: 'fd79:300d:6056:0123::'
       netmask: 64
-      gateway: '2001:4dd0:ae46:23::1'
+      gateway: 'fd79:300d:6056:0123::1'
   open:
     ip4:
       network: 10.0.42.0
@@ -26,9 +28,10 @@ networks:
       gateway: 10.0.42.1
       dynamic: [10.0.42.128, 10.0.42.253]
     ip6:
-      network: '2001:4dd0:ae46:42::'
+      sla: 42
+      network: 'fd79:300d:6056:0142::'
       netmask: 64
-      gateway: '2001:4dd0:ae46:42::1'
+      gateway: 'fd79:300d:6056:0142::1'
   major:
     ip4:
       network: 10.10.10.0
@@ -36,9 +39,10 @@ networks:
       gateway: 10.10.10.1
       dynamic: [10.10.10.100, 10.10.10.250]
     ip6:
-      network: '2001:4dd0:ae46:64::'
-      netmask: 64
-      gateway: '2001:4dd0:ae46:64::1'
+      sla: 64
+    #   network: '2001:4dd0:ae46:64::'
+    #   netmask: 64
+    #   gateway: '2001:4dd0:ae46:64::1'
 
 
 addresses:
@@ -47,19 +51,19 @@ addresses:
       mngt:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.0.1
-        ip6: 2001:4dd0:ae46:0::1
+        ip6: fd79:300d:6056:0100::1
       priv:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.23.1
-        ip6: 2001:4dd0:ae46:23::1
+        ip6: fd79:300d:6056:0123::1
       open:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.0.42.1
-        ip6: 2001:4dd0:ae46:42::1
+        ip6: fd79:300d:6056:0142::1
       major:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.10.10.1
-        ip6: 2001:4dd0:ae46:64::1
+      #  ip6: 2001:4dd0:ae46:64::1
     ffx:
       data:
         mac: 00:0d:b9:34:db:e4
@@ -74,59 +78,59 @@ addresses:
       mngt:
         mac: 00:1d:aa:87:58:ac
         ip4: 10.0.0.2
-        ip6: 2001:4dd0:ae46:1::2
+        ip6: fd79:300d:6056:0100::2
   phone:
     int:
       mngt:
         mac: 00:e1:6d:b8:3c:53
         ip4: 10.0.0.3
-        ip6: 2001:4dd0:ae46:1::3
+        ip6: fd79:300d:6056:0100::3
   br1:
     int:
       mngt:
         mac: 58:0a:20:9a:11:72
         ip4: 10.0.0.16
-        ip6: 2001:4dd0:ae46:1::10
+        ip6: fd79:300d:6056:0100::a
   br2:
     int:
       mngt:
         mac: 08:cc:68:43:35:a2
         ip4: 10.0.0.17
-        ip6: 2001:4dd0:ae46:1::11
+        ip6: fd79:300d:6056:0100::b
   br3:
     int:
       mngt:
         mac: 9c:57:ad:a0:ad:67
         ip4: 10.0.0.18
-        ip6: 2001:4dd0:ae46:1::12
+        ip6: fd79:300d:6056:0100::c
   ap1:
     int:
       mngt:
         mac: 04:18:d6:80:2d:b7
         ip4: 10.0.0.32
-        ip6: 2001:4dd0:ae46:1::20
+        ip6: fd79:300d:6056:0100::14
   ap2:
     int:
       mngt:
         mac: 04:18:d6:80:2c:ff
         ip4: 10.0.0.33
-        ip6: 2001:4dd0:ae46:1::21
+        ip6: fd79:300d:6056:0100::15
   nas:
     int:
       mngt:
         mac: 00:d0:b8:1e:cd:00
         ip4: 10.0.0.64
-        ip6: 2001:4dd0:ae46:1::40
+        ip6: fd79:300d:6056:0100::28
       priv:
         mac: 00:d0:b8:1e:cd:00
         ip4: 10.0.23.64
-        ip6: 2001:4dd0:ae46:23::40
+        ip6: fd79:300d:6056:0123::28
   ps4:
     int:
       priv:
         mac: 00:d9:d1:09:19:fb
         ip4: 10.0.23.65
-        ip6: 2001:4dd0:ae46:23::41
+        ip6: fd79:300d:6056:0123::29
   blaster:
     aliases:
       - music
@@ -135,59 +139,59 @@ addresses:
       mngt:
         mac: b8:27:eb:cb:20:ed
         ip4: 10.0.0.66
-        ip6: 2001:4dd0:ae46:23::42
+        ip6: fd79:300d:6056:0100::2a
       priv:
         mac: b8:27:eb:cb:20:ed
         ip4: 10.0.23.66
-        ip6: 2001:4dd0:ae46:23::42
+        ip6: fd79:300d:6056:0123::2a
   amp:
     int:
       priv:
         mac: 00:05:cd:38:94:8a
         ip4: 10.0.23.67
-        ip6: 2001:4dd0:ae46:23::43
+        ip6: fd79:300d:6056:0123::2b
   cinema:
     int:
       mngt:
         mac: b8:ae:ed:7d:69:ab
         ip4: 10.0.0.68
-        ip6: 2001:4dd0:ae46:1::44
+        ip6: fd79:300d:6056:0100::2c
       priv:
         mac: b8:ae:ed:7d:69:ab
         ip4: 10.0.23.68
-        ip6: 2001:4dd0:ae46:23::44
+        ip6: fd79:300d:6056:0123::2c
   scanner:
     int:
       mngt:
         mac: 00:08:a2:09:bd:9e
         ip4: 10.0.0.69
-        ip6: 2001:4dd0:ae46:1::45
+        ip6: fd79:300d:6056:0100::2d
       priv:
         mac: 00:08:a2:09:bd:9e
         ip4: 10.0.23.69
-        ip6: 2001:4dd0:ae46:23::45
+        ip6: fd79:300d:6056:0123::2d
   freifunk:
     int:
       open:
         mac: 32:b6:c2:6e:a5:ed
         ip4: 10.0.42.70
-        ip6: 2001:4dd0:ae46:42::46
+        ip6: fd79:300d:6056:0142::2e
   mobile:
     int:
       priv:
         mac: 68:f7:28:b4:43:61
         ip4: 10.0.23.127
-        ip6: 2001:4dd0:ae46:23::7f
+        ip6: fd79:300d:6056:0123::ffff
       mngt:
         mac: ~
         ip4: 10.0.0.127
-        ip6: 2001:4dd0:ae46:1::7f
+        ip6: fd79:300d:6056:0100::ffff
   brueckenkopf:
     int:
       mngt:
         mac: 00:50:56:b3:4b:d0
         ip4: 10.0.0.254
-        ip6: 2001:4dd0:ae46:1::fe
+        ip6: fd79:300d:6056:0100::fe
     ext:
       hostname: brueckenkopf.dev.open-desk.net
       ip4:
@@ -203,7 +207,7 @@ addresses:
       mngt:
         mac: ~
         ip4: 10.0.0.94
-        ip6: 2001:4dd0:ae46:1::5e
+        ip6: fd79:300d:6056:0100::5e
     ext:
       hostname: bunker.dev.open-desk.net
       ip4:
@@ -219,7 +223,7 @@ addresses:
       mngt:
         mac: ~
         ip4: 10.0.0.95
-        ip6: 2001:4dd0:ae46:1::5f
+        ip6: fd79:300d:6056:0100::5f
     ext:
       hostname: north.zitadelle.dev.open-desk.net
       ip4:
@@ -235,7 +239,7 @@ addresses:
       mngt:
         mac: ~
         ip4: 10.0.0.96
-        ip6: 2001:4dd0:ae46:1::60
+        ip6: fd79:300d:6056:0100::0
     ext:
       hostname: south.zitadelle.dev.open-desk.net
       ip4:

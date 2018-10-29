@@ -5,8 +5,8 @@ plugin rp-pppoe.so ext.raw
 unit 0
 linkname uplink
 
-name {{ pillar.dsl.username }}
-password {{ pillar.dsl.password }}
+name {{ pillar.dsl.ppp.username }}
+password {{ pillar.dsl.ppp.password }}
 
 maxfail 0
 
@@ -18,4 +18,3 @@ noproxyarp
 noauth
 
 +ipv6
-

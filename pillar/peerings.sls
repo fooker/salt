@@ -105,9 +105,9 @@ peering:
           network: 172.23.200.128
           netmask: 25
         ip6:
-          address: fd79:300d:6056:1::0
-          network: fd79:300d:6056:1::0
-          netmask: 64
+          address: fd79:300d:6056:0100::0
+          network: fd79:300d:6056:0100::0
+          netmask: 56
 
   peers:
     major:

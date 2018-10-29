@@ -1,16 +1,15 @@
 ### This file is managed by saltstack - any changes will be overwritten ###
 
-{% for net, cfg in pillar['networks'].items() %}
+{% for net in pillar.networks %}
 interface int.{{ net }} {
 	AdvSendAdvert on;
 
 	MinRtrAdvInterval 3;
 	MaxRtrAdvInterval 10;
 
-	prefix {{ cfg['ip6']['network'] }}/{{ cfg['ip6']['netmask'] }} {
+	prefix ::/64 {
 		AdvOnLink on;
 		AdvAutonomous on;
 	};
 };
 {% endfor %}
-

@@ -3,16 +3,18 @@
 [Match]
 Name=int.mngt
 
+{#
 [Network]
 IPv6AcceptRA=no
+#}
 
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['mngt']['ip4'] }}/{{ pillar['networks']['mngt']['ip4']['netmask'] }}
 
-{#
 [Address]
 Address={{ pillar['addresses'][grains['id']]['int']['mngt']['ip6'] }}/{{ pillar['networks']['mngt']['ip6']['netmask'] }}
 
+{#
 {% if grains['role'] == 'gateway' -%}
 [Address]
 Address=fe80::/64
@@ -24,11 +26,9 @@ Address=fe80::/64
 Gateway={{ pillar['networks']['mngt']['ip4']['gateway'] }}
 Metric=300
 
-{#
 [Route]
 Gateway={{ pillar['networks']['mngt']['ip6']['gateway'] }}
 Metric=300
-#}
 {%- endif %}
 
 [Network]

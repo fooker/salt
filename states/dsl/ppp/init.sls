@@ -22,14 +22,14 @@ dsl.ppp:
 dsl.ppp.options:
   file.managed:
     - name: /etc/ppp/options
-    - source: salt://dsl/files/ppp.options
+    - source: salt://dsl/ppp/files/ppp.options
     - makedirs: True
 
 
 dsl.ppp.peer:
   file.managed:
     - name: /etc/ppp/peers/uplink
-    - source: salt://dsl/files/ppp.peer.j2
+    - source: salt://dsl/ppp/files/ppp.peer.j2
     - template: jinja
     - makedirs: True
 
@@ -49,12 +49,12 @@ dsl.ppp-redail:
 dsl.ppp-redail.service:
   file.managed:
     - name: /etc/systemd/system/ppp-redail@.service
-    - source: salt://dsl/files/ppp-redail@.service
+    - source: salt://dsl/ppp/files/ppp-redail@.service
     - makedirs: True
 
 
 dsl.ppp-redail.timer:
   file.managed:
     - name: /etc/systemd/system/ppp-redail@.timer
-    - source: salt://dsl/files/ppp-redail@.timer
+    - source: salt://dsl/ppp/files/ppp-redail@.timer
     - makedirs: True
