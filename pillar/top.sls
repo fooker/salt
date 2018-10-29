@@ -1,32 +1,49 @@
 base:
   '*':
-    - sysctl
-    - network
-    - ssh
-    - tinc
-    - opennms
-    - backup
+    - common.*
+    - hosts.*.public.*
+    - hosts.{{ grains.id }}.private.*
+  
+  # 'hive':
+  #   - match: nodegroup
+  #   - groups.hive.*
 
-  'router':
-    - forwardings
-    - dsl
-    - aiccu
-    - ddclient
-    - peerings
+  # 'frontend':
+  #   - match: nodegroup
+  #   - groups.frontend.*
 
-  '*-zitadelle':
-    - web
+  # 'router':
+  #   - match: nodegroup
+  #   - groups.router.*
 
-  '*-zitadelle or bunker':
-    - match: compound
-    - database
-    - peerings
+  # '*':frontend
+  #   #- sysctl
+  #   #- network
+  #   #- ssh
+  #   - tinc
+  #   #- opennms
+  #   #- backup
 
-  '*-zitadelle or bunker or brueckenkopf':
-    - match: compound
-    - letsencrypt
+  # 'router':
+  #   #- forwardings
+  #   #- dsl
+  #   #- aiccu
+  #   #- ddclient
+  #   - peerings
 
-  'brueckenkopf':
-    - irccat
-    - hive
+  # '*-zitadelle':
+  #   - web
+
+  # '*-zitadelle or bunker':
+  #   - match: compound
+  #   - database
+  #   - peerings
+
+  # '*-zitadelle or bunker or brueckenkopf':
+  #   - match: compound
+  #   - letsencrypt
+
+  # 'brueckenkopf':
+  #   - irccat
+  #   - hive
 
