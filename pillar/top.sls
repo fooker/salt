@@ -28,4 +28,5 @@ base:
 
   'brueckenkopf':
     - irccat
+    - hive
 

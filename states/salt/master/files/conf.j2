@@ -37,3 +37,7 @@ renderer: jinja | yaml | gpg
 trim_blocks: True
 lstrip_blocks: True
 
+# Define some node groups
+nodegroups:
+  hive:
+    'L@{{ pillar.hive.nodes|join(',') }}'
