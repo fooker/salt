@@ -2,15 +2,14 @@ include:
   - peering
 
 
-{% for node in pillar.peering.interfaces if 'hive' in pillar.peering.interfaces[node] %}
+{% for node in pillar.hive.nodes %}
 hive.lookup.{{ node }}:
   host.present:
     - name: {{ node }}
     - ip:
-      - {{ pillar.peering.interfaces[node].hive.ip4.address }}
-      - {{ pillar.peering.interfaces[node].hive.ip6.address }}
+      - {{ pillar.addresses[node].hive.ip4.address }}
+      - {{ pillar.addresses[node].hive.ip6.address }}
 {%- endfor %}
-
 
 hive.iptables:
   file.managed:

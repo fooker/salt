@@ -50,6 +50,8 @@ base:
 
   '*-zitadelle':
     - hive
+    - glusterfs
+    - glusterfs.mount
     - dn42.roa
     - peering
     - nfs/client
@@ -58,6 +60,7 @@ base:
 
   'bunker':
     - hive
+    - glusterfs
     - nfs/server
     - mariadb
     - syncthing

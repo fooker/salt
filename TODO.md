@@ -1,8 +1,19 @@
+- Rework firewall roules for hive
+- Use IP functions to simplify network config
+- Split public and private config even more
+- Install aurblobs from aurblobs (welcome to bootstrapping madness)
+- IPv6 prefix delegation at home
 - Build missing states for NAS
+- Use systemd-timers instead of cron (and remove cron completely)
 - Fix shutdown delay in \*-zitadelle cause by httpd
 - Error messages for filters in bird
 - Deploy firewall of internal systems, too (edge case for SSH)
+- Rework SSL config
+  - Use more templates in web configuration
+  - Use certbot or dehydrated with DNS challenge for SSL certificates
+  - Reload services after renew
 - Rework SSH config
+- Switch to borg backup
 - Use salt mine to configure backups
 - Make NFS server / client more generic (used by nas, mopidy and hive)
 - Get rid of tinc and use routing backhaul
@@ -11,3 +22,5 @@
 - Monitor number of failed states on systems
 - Use certbot instead of acme-tool
 - Use glusterfs instead of NFS share
+- Do not store binaries in salt repo but use aurblobs instead
+- Use Bird for RAdv

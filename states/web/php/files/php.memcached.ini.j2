@@ -6,8 +6,8 @@
 extension = memcached.so
 
 session.save_handler = memcached
-session.save_path = {% for node in pillar.peering.interfaces if node != grains.id and 'hive' in pillar.peering.interfaces[node] -%}
-{{ pillar.peering.interfaces[node].hive.ip4.address }}:11211
+session.save_path = {% for node in pillar.hive.nodes if node != grains.id  -%}
+{{ pillar.addresses[node].hive.ip4.address }}:11211
 {%- if not loop.last -%},{%- endif -%}
 {%- endfor %}
 

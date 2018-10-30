@@ -8,8 +8,8 @@ Name={{ domain }}
 Description=Network {{ domain }}
 
 [Address]
-Address={{ pillar.peering.interfaces[grains.id][domain].ip4.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}
+Address={{ pillar.addresses[grains.id][domain].ip4.address }}/{{ pillar.addresses[grains.id][domain].ip4.netmask }}
 
 [Address]
-Address={{ pillar.peering.interfaces[grains.id][domain].ip6.address }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}
+Address={{ pillar.addresses[grains.id][domain].ip6.address }}/{{ pillar.addresses[grains.id][domain].ip6.netmask }}
 

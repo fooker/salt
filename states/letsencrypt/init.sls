@@ -33,6 +33,7 @@ letsencrypt.root.crt:
     - source: https://letsencrypt.org/certs/letsencryptauthorityx3.pem.txt
     - source_hash: sha512=0f93f0a2149732815d6a6948d738c718c384f0bede321d1a7e92ab397aba7a5a1724b2357b2f3c4cbb46fb16d0ea67cae1e7f249b79ba4227df774f1e9de37fe
 
+{#
 {% if grains['role'] != 'worker' %}
 letsencrypt.wellknown:
   file.directory:
@@ -40,7 +41,7 @@ letsencrypt.wellknown:
 {% else %}
 {{ nfs.mount('letsencrypt', 'letsencrypt', '/run/letsencrypt') }}
 {% endif %}
-
+#}
 
 {% macro certificate(module, domains) %}
 letsencrypt.domains.{{ module }}.cfg:

@@ -72,7 +72,7 @@ protocol ospf v2 {{ domain }}_ospf_4 {
 
 		import keep filtered;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip4.network }}/{{ pillar.addresses[grains.id][domain].ip4.netmask }}+] then reject;
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
@@ -128,7 +128,7 @@ protocol ospf v3 {{ domain }}_ospf_6 {
 
 		import keep filtered;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip6.network }}/{{ pillar.addresses[grains.id][domain].ip6.netmask }}+] then reject;
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip6|sort %}
@@ -172,7 +172,7 @@ protocol babel {{ domain }}_babel {
 
 		import keep filtered;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip4.network }}/{{ pillar.addresses[grains.id][domain].ip4.netmask }}+] then reject;
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip4|sort %}
@@ -212,7 +212,7 @@ protocol babel {{ domain }}_babel {
 
 		import keep filtered;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip6.network }}/{{ pillar.addresses[grains.id][domain].ip6.netmask }}+] then reject;
 
 			if net ~ [
 				{%- for export in pillar.peering.domains[domain].exports.ip6|sort %}
@@ -331,7 +331,7 @@ template bgp {{ domain }}_bgp_4 from {{ domain }}_bgp {
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then {
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip4.network }}/{{ pillar.addresses[grains.id][domain].ip4.netmask }}+] then {
 				print "[{{ domain }}] Received local network from external: ", net, " from ", bgp_path.last;
 				reject;
 			}
@@ -394,7 +394,7 @@ template bgp {{ domain }}_bgp_6 from {{ domain }}_bgp {
 		import keep filtered;
 		import limit 1000 action block;
 		import filter {
-			if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then {
+			if net ~ [{{ pillar.addresses[grains.id][domain].ip6.network }}/{{ pillar.addresses[grains.id][domain].ip6.netmask }}+] then {
 				print "[{{ domain }}] Received local network from external: ", net, " from ", bgp_path.last;
 				reject;
 			}
@@ -490,8 +490,8 @@ protocol pipe {{ domain }}_pipe_4 {
 
 	import none;
 	export filter {
-		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip4.address }};
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip4.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip4.netmask }}+] then reject;
+		krt_prefsrc = {{ pillar.addresses[grains.id][domain].ip4.address }};
+		if net ~ [{{ pillar.addresses[grains.id][domain].ip4.network }}/{{ pillar.addresses[grains.id][domain].ip4.netmask }}+] then reject;
 
 		accept;
 	};
@@ -503,8 +503,8 @@ protocol pipe {{ domain }}_pipe_6 {
 
 	import none;
 	export filter {
-		krt_prefsrc = {{ pillar.peering.interfaces[grains.id][domain].ip6.address }};
-		if net ~ [{{ pillar.peering.interfaces[grains.id][domain].ip6.network }}/{{ pillar.peering.interfaces[grains.id][domain].ip6.netmask }}+] then reject;
+		krt_prefsrc = {{ pillar.addresses[grains.id][domain].ip6.address }};
+		if net ~ [{{ pillar.addresses[grains.id][domain].ip6.network }}/{{ pillar.addresses[grains.id][domain].ip6.netmask }}+] then reject;
 
 		accept;
 	};

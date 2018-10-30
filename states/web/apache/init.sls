@@ -45,7 +45,7 @@ web.apache.conf.{{ conf }}:
     - source: salt://web/apache/files/httpd.{{ conf }}.conf
 {% endfor %}
 
-{{ nfs.mount('apache', 'http', '/srv/http') }}
+{# nfs.mount('apache', 'http', '/srv/http') #}
 
 web.apache.default:
   file.managed:

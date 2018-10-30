@@ -73,6 +73,15 @@ addresses:
       ip4:
         mac: ~
         ip4: 172.23.172.63
+    dn42:
+      ip4:
+        address: 172.23.200.129
+        network: 172.23.200.128
+        netmask: 25
+      ip6:
+        address: fd79:300d:6056:0100::0
+        network: fd79:300d:6056:0100::0
+        netmask: 56
   modem:
     int:
       mngt:
@@ -218,6 +227,15 @@ addresses:
         address: 2a03:4000:6:30f2::0
         netmask: 64
         gateway: fe80::1
+    hive:
+      ip4:
+        address: 192.168.33.3
+        network: 192.168.33.3
+        netmask: 32
+      ip6:
+        address: fd4c:8f0:aff2::3
+        network: fd4c:8f0:aff2::3
+        netmask: 128
   north-zitadelle:
     int:
       mngt:
@@ -234,6 +252,24 @@ addresses:
         address: 2a03:4000:6:701e::0
         netmask: 64
         gateway: fe80::1
+    hive:
+      ip4:
+        address: 192.168.33.1
+        network: 192.168.33.1
+        netmask: 32
+      ip6:
+        address: fd4c:8f0:aff2::1
+        network: fd4c:8f0:aff2::1
+        netmask: 128
+    dn42:
+      ip4:
+        address: 172.23.200.1
+        network: 172.23.200.1
+        netmask: 32
+      ip6:
+        address: fd79:300d:6056::1
+        network: fd79:300d:6056::1
+        netmask: 128
   south-zitadelle:
     int:
       mngt:
@@ -250,8 +286,25 @@ addresses:
         address: 2a03:4000:6:701d::0
         netmask: 64
         gateway: fe80::1
+    hive:
+      ip4:
+        address: 192.168.33.2
+        network: 192.168.33.2
+        netmask: 32
+      ip6:
+        address: fd4c:8f0:aff2::2
+        network: fd4c:8f0:aff2::2
+        netmask: 128
+    dn42:
+      ip4:
+        address: 172.23.200.2
+        network: 172.23.200.2
+        netmask: 32
+      ip6:
+        address: fd79:300d:6056::2
+        network: fd79:300d:6056::2
+        netmask: 128
 
 domain:
   name: open-desk.net
   ttl: 3600
-

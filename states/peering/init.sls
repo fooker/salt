@@ -81,22 +81,23 @@ File.managed('peering.iptables',
              require_in=File('ferm'))
 
 # Domain dummy interfaces
-for domain in pillar('peering:interfaces:' + grains('id')):
-    File.managed('peering.domain.' + domain + '.netdev',
-                 name='/etc/systemd/network/90-peering-' + domain + '.netdev',
-                 source='salt://peering/files/networkd.domain.netdev.j2',
-                 makedirs=True,
-                 template='jinja',
-                 context={'domain': domain},
-                 require_in=File('network'))
+for domain in pillar('peering:domains'):
+    if domain in pillar('addresses:' + grains('id')):
+        File.managed('peering.domain.' + domain + '.netdev',
+                    name='/etc/systemd/network/90-peering-' + domain + '.netdev',
+                    source='salt://peering/files/networkd.domain.netdev.j2',
+                    makedirs=True,
+                    template='jinja',
+                    context={'domain': domain},
+                    require_in=File('network'))
 
-    File.managed('peering.domain.' + domain + '.network',
-                 name='/etc/systemd/network/90-peering-' + domain + '.network',
-                 source='salt://peering/files/networkd.domain.network.j2',
-                 makedirs=True,
-                 template='jinja',
-                 context={'domain': domain},
-                 require_in=File('network'))
+        File.managed('peering.domain.' + domain + '.network',
+                    name='/etc/systemd/network/90-peering-' + domain + '.network',
+                    source='salt://peering/files/networkd.domain.network.j2',
+                    makedirs=True,
+                    template='jinja',
+                    context={'domain': domain},
+                    require_in=File('network'))
 
 # Per tunnel interface and configuration
 for peer in pillar('peering:transfers:' + grains('id')):

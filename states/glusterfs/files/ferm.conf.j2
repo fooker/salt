@@ -9,5 +9,6 @@ source (
   {{ pillar.addresses[node].hive.ip4.address }} {{ pillar.addresses[node].hive.ip6.address }}
 {% endfor %}
 )
+proto tcp dport (24007:24011 49152:49155)
 ACCEPT;
 

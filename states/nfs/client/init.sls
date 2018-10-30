@@ -5,9 +5,9 @@ include:
 nfs.client.mount.{{ module }}:
   mount.mounted:
     - name: {{ target }}
-    - device: 'bunker:/{{ source }}'
+    - device: '{{ pillar.addresses.bunker.hive.ip4.address }}:/{{ source }}'
     - fstype: nfs4
     - mkmnt: True
-    - opts: noatime,clientaddr={{ pillar.peering.interfaces[grains.id].hive.ip4.address }}
+    - opts: noatime,clientaddr={{ pillar.addresses[grains.id].hive.ip4.address }}
     - persist: True
 {% endmacro %}

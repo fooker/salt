@@ -34,10 +34,22 @@ hash_type: sha256
 renderer: jinja | yaml | gpg
 
 # Make template rendering more usefull
-trim_blocks: True
-lstrip_blocks: True
+jinja_trim_blocks: True
+jinja_lstrip_blocks: False
+
+# Allow for merging of lists
+pillar_merge_lists: True
 
 # Define some node groups
 nodegroups:
   hive:
-    'L@{{ pillar.hive.nodes|join(',') }}'
+    - south-zitadelle
+    - north-zitadelle
+    - bunker
+  frontend:
+    - south-zitadelle
+    - north-zitadelle
+  routers:
+    - south-zitadelle
+    - north-zitadelle
+    - router
