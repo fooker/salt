@@ -1,0 +1,34 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+domain (ip)
+table filter
+chain FORWARD
+proto (tcp udp)
+dport {{ pillar.rdp_proxy.port }}
+in-interface ext
+out-interface hs
+ACCEPT;
+
+domain (ip)
+table filter
+chain FORWARD
+proto (tcp udp)
+sport {{ pillar.rdp_proxy.port }}
+in-interface hs
+out-interface ext
+ACCEPT;
+
+domain (ip)
+table nat
+chain PREROUTING
+proto (tcp udp)
+dport {{ pillar.rdp_proxy.port }}
+DNAT to {{ pillar.rdp_proxy.host }}:{{ pillar.rdp_proxy.port }};
+
+domain (ip)
+table nat
+chain POSTROUTING
+proto (tcp udp)
+destination {{ pillar.rdp_proxy.host }}
+dport {{ pillar.rdp_proxy.port }}
+MASQUERADE;

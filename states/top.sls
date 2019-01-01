@@ -70,7 +70,7 @@ base:
     - salt.master
     - opennms
     - grafana
-    - irccat
+    - rdp-proxy
     - weechat
     - aurblobs
 
