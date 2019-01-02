@@ -3,6 +3,7 @@
 
 
 include:
+  - docker
   - nginx
 
 
@@ -13,12 +14,13 @@ aurblobs:
     - home: /var/lib/aurblobs
     - createhome: True
     - system: True
+    - groups:
+      - docker
   pkg.installed:
     - pkgs:
       - python-pip
-      - python2-pip
   pip.installed:
-    - name: 'git+https://github.com/aurblobs/aurblobs.git@develop'
+    - name: 'git+https://github.com/aurblobs/aurblobs.git@master'
     - user: aurblobs
     - bin_env: '/usr/bin/pip3'
     - install_options:
