@@ -66,7 +66,6 @@ base:
     - syncthing
 
   'brueckenkopf':
-    - letsencrypt
     - salt.master
     - opennms
     - grafana

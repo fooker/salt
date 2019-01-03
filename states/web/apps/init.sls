@@ -25,7 +25,7 @@ web.apps.{{ app }}.httpd.conf:
     - context:
         app: {{ app }}
     - require:
-      - cmd: letsencrypt.domains.{{ app }}.crt
+      - letsencrypt.domains.{{ app }}
 
 {% endfor %}
 

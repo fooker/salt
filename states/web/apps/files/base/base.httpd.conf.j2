@@ -16,8 +16,8 @@
   DocumentRoot /srv/http/{{ app }}
   {% endblock %}
   SSLEngine on
-  SSLCertificateFile /etc/letsencrypt/domains/{{ app }}.crt
-  SSLCertificateKeyFile /etc/letsencrypt/domains.key
+  SSLCertificateFile /etc/dehydrated/certs/{{ app }}/fullchain.pem
+  SSLCertificateKeyFile /etc/dehydrated/certs/{{ app }}/privkey.pem
 
   Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains; preload"
 </VirtualHost>

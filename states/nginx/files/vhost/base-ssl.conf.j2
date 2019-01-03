@@ -6,8 +6,8 @@ server {
 
 	server_name		{{ domains | join(' ') }};
 
-	ssl_certificate		/etc/letsencrypt/domains/{{ name }}.crt;
-	ssl_certificate_key	/etc/letsencrypt/domains.key;
+	ssl_certificate		/etc/dehydrated/certs/{{ name }}/fullchain.pem;
+	ssl_certificate_key	/etc/dehydrated/certs/{{ name }}/privkey.pem;
 
 	ssl_session_cache	shared:SSL:1m;
 	ssl_session_timeout	5m;

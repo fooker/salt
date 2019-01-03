@@ -1,5 +1,8 @@
 {% from 'letsencrypt/init.sls' import certificate %}
 
+include:
+  - letsencrypt
+
 
 nginx:
   pkg.installed:
@@ -51,6 +54,6 @@ nginx.conf.vhosts.{{ module }}:
       - file: nginx
 {% if ssl %}
     - require:
-      - cmd: letsencrypt.domains.{{ module }}.crt
+      - letsencrypt.domains.{{ module }}
 {% endif %}
 {% endmacro %}
