@@ -14,8 +14,7 @@ mariadb.server:
 
 mariadb.galera:
   pkg.installed:
-    - sources:
-      - galera: 'salt://mariadb/files/galera-25.3.16-1-x86_64.pkg.tar.xz'
+    - name: galera
 
 mariadb:
   service.running:
