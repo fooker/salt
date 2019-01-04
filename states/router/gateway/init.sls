@@ -10,11 +10,11 @@ gateway.forwarding.ipv4:
   sysctl.present:
     - name: net.ipv4.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/gateway.conf
+    - config: /etc/sysctl.d/80-gateway.conf
 
 gateway.forwarding.ipv6:
   sysctl.present:
     - name: net.ipv6.conf.all.forwarding
     - value: 1
-    - config: /etc/sysctl.d/gateway.conf
+    - config: /etc/sysctl.d/80-gateway.conf
 

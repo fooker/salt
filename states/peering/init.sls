@@ -154,11 +154,16 @@ for peer in pillar('peering:transfers:' + grains('id')):
 Sysctl.present('peering.sysctl.forwarding.ipv4',
                name='net.ipv4.conf.all.forwarding',
                value=1,
-               config='/etc/sysctl.d/peering.conf')
+               config='/etc/sysctl.d/80-peering.conf')
 Sysctl.present('peering.sysctl.forwarding.ipv6',
                name='net.ipv6.conf.all.forwarding',
                value=1,
-               config='/etc/sysctl.d/peering.conf')
+               config='/etc/sysctl.d/80-peering.conf')
+
+Sysctl.present('peering.sysctl.rp_filter.all',
+                   name='net.ipv4.conf.all.rp_filter',
+                   value=0,
+                   config='/etc/sysctl.d/80-peering.conf')
 
 for peer in pillar('peering:transfers:' + grains('id')):
     netdev = pillar('peering:peers:' + peer + ':netdev')
@@ -166,7 +171,7 @@ for peer in pillar('peering:transfers:' + grains('id')):
     Sysctl.present('peering.sysctl.rp_filter.' + netdev,
                    name='net.ipv4.conf.peer/' + netdev.replace('.', '/') + '.rp_filter',
                    value=0,
-                   config='/etc/sysctl.d/peering.conf')
+                   config='/etc/sysctl.d/80-peering.conf')
 
 # BIRD config
 Pkg.installed('peering.bird',
