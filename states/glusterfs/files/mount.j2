@@ -1,0 +1,13 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Before=remote-fs.target
+
+[Mount]
+Where={{ pillar.hive.volumes[volume].mountpoint }}
+What={{ pillar.hive.nodes|join(',') }}:/{{ volume }}
+Type=glusterfs
+Options=rw,defaults,direct-io-mode=disable
+
+[Install]
+WantedBy=remote-fs.target

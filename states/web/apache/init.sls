@@ -45,15 +45,11 @@ web.apache.conf.{{ conf }}:
     - source: salt://web/apache/files/httpd.{{ conf }}.conf
 {% endfor %}
 
-{# nfs.mount('apache', 'http', '/srv/http') #}
-
 web.apache.default:
   file.managed:
     - name: /srv/http/default/index.html
     - source: salt://web/apache/files/default.index.html
     - makedirs: True
-    - require:
-      - mount: nfs.client.mount.apache
 
 web.apache.default.conf:
   file.managed:
