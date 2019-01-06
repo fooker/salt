@@ -29,7 +29,7 @@ web.apache.conf:
 
 web.apache.service.mounts:
   file.managed:
-    - name: /etc/systemd/system/httpd.service.d/mounts.conf
+    - name: /usr/local/systemd/system/httpd.service.d/mounts.conf
     - contents: |
         ### This file is managed by saltstack - any changes will be overwritten ###
         [Unit]
@@ -37,6 +37,8 @@ web.apache.service.mounts:
     - makedirs: True
     - watch_in:
       - service: web.apache
+    - require_in:
+      - file: systemd.system
 
 {% for conf in ('ssl', 'letsencrypt', 'autoindex', 'info', 'php') %}
 web.apache.conf.{{ conf }}:

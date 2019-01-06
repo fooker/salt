@@ -40,10 +40,12 @@ web.php.memcached:
     - pkgs:
       - memcached
   file.managed:
-    - name: /etc/systemd/system/memcached.service.d/service.conf
+    - name: /usr/local/systemd/system/memcached.service.d/service.conf
     - source: salt://web/php/files/memcached.service.conf.j2
     - makedirs: True
     - template: jinja
+    - require_in:
+      - file: systemd.system
   service.running:
     - enable: True
     - name: memcached

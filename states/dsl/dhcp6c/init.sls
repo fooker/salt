@@ -17,11 +17,13 @@ dhcp6c.service:
 
 dhcp6c.service.dependencies:
   file.managed:
-    - name: /etc/systemd/system/dhcp6c@ppp0.service.d/dependencies.conf
+    - name: /usr/local/systemd/system/dhcp6c@ppp0.service.d/dependencies.conf
     - source: salt://dsl/dhcp6c/files/dhcp6c.service.dependencies
     - makedirs: True
     - watch_in:
       - service: dhcp6c.service
+    - require_in:
+      - file: systemd.system
 
 dhcp6c.ferm:
   file.managed:

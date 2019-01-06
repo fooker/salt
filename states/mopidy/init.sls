@@ -39,7 +39,7 @@ mopidy.media:
     - opts:
       - ro,noatime,_netdev
   file.managed:
-    - name: /etc/systemd/system/mopidy.service.d/mount.conf
+    - name: /usr/local/systemd/system/mopidy.service.d/mount.conf
     - makedirs: True
     - contents: |
         ### This file is managed by saltstack - any changes will be overwritten ###
@@ -47,5 +47,7 @@ mopidy.media:
         RequiresMountsFor=/media/music
     - watch_in:
       - service: mopidy
+    - require_in:
+      - file: systemd.system
 
 {{ nginx.vhost('mopidy', source='salt://mopidy/files/nginx.conf.j2', domains=['music'], ssl=False, target='127.0.0.1:6680') }}

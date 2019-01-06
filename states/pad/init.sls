@@ -16,8 +16,11 @@ pad.config:
 
 pad.service:
   file.managed:
-    - name: /etc/systemd/system/pinup.service
+    - name: /usr/local/systemd/system/pinup.service
     - source: salt://pad/files/pinup.service
+    - makedirs: True
+    - require_in:
+      - file: systemd.system
   service.running:
     - name: pinup
     - enable: True

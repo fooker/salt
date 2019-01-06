@@ -60,7 +60,7 @@ if 'wireguard' in protos:
                    clean=True)
 
     File.managed('peering.wireguard.service',
-                 name='/etc/systemd/system/wireguard@.service',
+                 name='/usr/local/systemd/system/wireguard@.service',
                  source='salt://peering/files/wireguard@.service',
                  makedirs=True)
 

@@ -27,8 +27,11 @@ homeassistant:
       - pkg: homeassistant
       - user: homeassistant
   file.managed:
-    - name: /etc/systemd/system/homeassistant.service
+    - name: /usr/local/systemd/system/homeassistant.service
     - source: salt://homeassistant/files/homeassistant.service
+    - makedirs: True
+    - require_in:
+      - file: systemd.system
   service.running:
     - enable: True
     - require:

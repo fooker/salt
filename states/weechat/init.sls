@@ -20,15 +20,17 @@ weechat.user:
 
 weechat.service:
   file.managed:
-    - name: /etc/systemd/system/weechat.service
+    - name: /usr/local/systemd/system/weechat.service
     - source: salt://weechat/files/service
     - makedirs: True
+    - require_in:
+      - file: systemd.system
   service.running:
     - name: weechat
     - enable: True
     - require:
       - pkg: weechat
-      - file: /etc/systemd/system/weechat.service
+      - file: /usr/local/systemd/system/weechat.service
 
 weechat.iptables:
   file.managed:

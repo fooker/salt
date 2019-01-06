@@ -2,6 +2,7 @@ base:
   '*':
     - salt.minion
 
+    - common.systemd
     - common.sysctl
     - common.logging
     - common.tools

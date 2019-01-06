@@ -3,7 +3,7 @@
 {%- set unit_name = salt['cmd.run']('systemd-escape -p --suffix=mount ' + mountpoint)  %}
 glusterfs.mount.{{ volume }}:
   file.managed:
-    - name: /etc/systemd/system/{{ unit_name }}
+    - name: /usr/local/systemd/system/{{ unit_name }}
     - source: salt://glusterfs/files/mount.j2
     - mkdirs: True
     - template: jinja

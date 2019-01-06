@@ -48,9 +48,11 @@ cinema.kodi:
       - optical
 
   file.managed:
-    - name: /etc/systemd/system/kodi.service
-    - source: salt://cinema/kodi.service
+    - name: /usr/local/systemd/system/kodi.service
+    - source: salt://cinema/files/kodi.service
     - makedirs: True
+    - require_in:
+      - file: systemd.system
 
   service.running:
     - enable: True

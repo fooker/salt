@@ -10,9 +10,11 @@ pullomatic.bin:
 
 pullomatic.service:
   file.managed:
-    - name: /etc/systemd/system/pullomatic.service
+    - name: /usr/local/systemd/system/pullomatic.service
     - source: salt://pullomatic/files/pullomatic.service
     - makedirs: True
+    - require_in:
+      - file: systemd.system
 
   service.running:
     - name: pullomatic
