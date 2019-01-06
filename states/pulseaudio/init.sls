@@ -15,7 +15,7 @@ pulseaudio:
 
 pulseaudio.service:
   file.managed:
-    - name: /usr/local/systemd/system/pulseaudio.service
+    - name: /usr/local/lib/systemd/system/pulseaudio.service
     - source: salt://pulseaudio/files/pulseaudio.service
     - makedirs: True
     - require_in:

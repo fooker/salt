@@ -14,7 +14,7 @@ irccat.conf:
 
 irccat.service:
   file.managed:
-    - name: /usr/local/systemd/system/irccat.service
+    - name: /usr/local/lib/systemd/system/irccat.service
     - source: salt://irccat/files/irccat.service
     - makedirs: True
     - require_in:

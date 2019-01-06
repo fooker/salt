@@ -2,7 +2,7 @@ dsl.ppp:
   pkg.installed:
     - name: ppp
   file.managed:
-    - name: /usr/local/systemd/system/ppp@uplink.service.d/restart.conf
+    - name: /usr/local/lib/systemd/system/ppp@uplink.service.d/restart.conf
     - contents: |
         [Service]
         Restart=on-failure
@@ -18,7 +18,7 @@ dsl.ppp:
     - watch:
       - file: /etc/ppp/options
       - file: /etc/ppp/peers/uplink
-      - file: /usr/local/systemd/system/ppp@uplink.service.d/restart.conf
+      - file: /usr/local/lib/systemd/system/ppp@uplink.service.d/restart.conf
 
 
 dsl.ppp.options:
@@ -41,16 +41,16 @@ dsl.ppp-redail:
     - enable: True
     - name: ppp-redail@uplink.timer
     - require:
-      - file: /usr/local/systemd/system/ppp-redail@.timer
-      - file: /usr/local/systemd/system/ppp-redail@.service
+      - file: /usr/local/lib/systemd/system/ppp-redail@.timer
+      - file: /usr/local/lib/systemd/system/ppp-redail@.service
     - watch:
-      - file: /usr/local/systemd/system/ppp-redail@.timer
-      - file: /usr/local/systemd/system/ppp-redail@.service
+      - file: /usr/local/lib/systemd/system/ppp-redail@.timer
+      - file: /usr/local/lib/systemd/system/ppp-redail@.service
 
 
 dsl.ppp-redail.service:
   file.managed:
-    - name: /usr/local/systemd/system/ppp-redail@.service
+    - name: /usr/local/lib/systemd/system/ppp-redail@.service
     - source: salt://dsl/ppp/files/ppp-redail@.service
     - makedirs: True
     - require_in:
@@ -59,7 +59,7 @@ dsl.ppp-redail.service:
 
 dsl.ppp-redail.timer:
   file.managed:
-    - name: /usr/local/systemd/system/ppp-redail@.timer
+    - name: /usr/local/lib/systemd/system/ppp-redail@.timer
     - source: salt://dsl/ppp/files/ppp-redail@.timer
     - makedirs: True
     - require_in:

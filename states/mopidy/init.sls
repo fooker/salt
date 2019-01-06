@@ -39,7 +39,7 @@ mopidy.media:
     - opts:
       - ro,noatime,_netdev
   file.managed:
-    - name: /usr/local/systemd/system/mopidy.service.d/mount.conf
+    - name: /usr/local/lib/systemd/system/mopidy.service.d/mount.conf
     - makedirs: True
     - contents: |
         ### This file is managed by saltstack - any changes will be overwritten ###

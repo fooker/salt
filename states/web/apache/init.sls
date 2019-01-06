@@ -29,7 +29,7 @@ web.apache.conf:
 
 web.apache.service.mounts:
   file.managed:
-    - name: /usr/local/systemd/system/httpd.service.d/mounts.conf
+    - name: /usr/local/lib/systemd/system/httpd.service.d/mounts.conf
     - contents: |
         ### This file is managed by saltstack - any changes will be overwritten ###
         [Unit]
