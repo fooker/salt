@@ -77,6 +77,7 @@ base:
   'nas':
     - rsnapshot.server
     - syncthing
+    - deluge
 
   'blaster':
     - odroid
