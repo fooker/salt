@@ -4,7 +4,7 @@ tools:
       - htop
       - iotop
       - vnstat
-      - screen
+      - tmux
       - less
       - vim
       - rxvt-unicode-terminfo
