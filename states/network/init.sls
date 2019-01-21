@@ -43,7 +43,7 @@ nsswitch.conf:
   file.replace:
     - name: /etc/nsswitch.conf
     - pattern: '^hosts: .*$'
-    - repl: 'hosts: files mymachines resolve myhostname'
+    - repl: 'files mymachines myhostname resolve [!UNAVAIL=return] dns'
 
 {% if 'int' in pillar.addresses[grains.id] %}
 {% if 'mngt' in pillar.addresses[grains.id].int %}
