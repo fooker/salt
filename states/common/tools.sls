@@ -9,4 +9,4 @@ tools:
       - vim
       - rxvt-unicode-terminfo
       - psutils
-
+      - magic-wormhole
