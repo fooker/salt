@@ -1,19 +1,15 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
-
-
 include:
   - nfs
 
 
-nfs.service.exports:
-  file.managed:
-    - name: /etc/exports.d/data.exports
-    - source: salt://nfs/server/files/exports.j2
+nfs.server:
+  file.directory:
+    - name: /etc/exports.d/
     - makedirs: True
-    - template: jinja
-  cmd.wait:
+    - clean: True
+  cmd.run:
     - name: /usr/bin/exportfs -rav
-    - watch:
+    - onchanges:
       - file: /etc/exports.d/*
 
 nfs.server.service:
@@ -29,7 +25,3 @@ nfs.server.service:
       - pkg: nfs-utils
     - watch:
       - file: /etc/conf.d/nfs-server.conf
-
-
-{{ rsnapshot.target('data', '/srv/data') }}
-

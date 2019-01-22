@@ -55,14 +55,12 @@ base:
     - glusterfs.mount
     - dn42.roa
     - peering
-    - nfs/client
     - mariadb
     - web.apps
 
   'bunker':
     - hive
     - glusterfs
-    - nfs/server
     - mariadb
     - syncthing
 
@@ -79,6 +77,7 @@ base:
     - rsnapshot.server
     - syncthing
     - deluge
+    - nfs/server
 
   'blaster':
     - odroid

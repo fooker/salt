@@ -1,0 +1,5 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+/mnt            *(rw,fsid=root,no_subtree_check,root_squash)
+/mnt/downloads  *(rw,no_subtree_check,root_squash)
+/mnt/media      *(rw,no_subtree_check,root_squash)
