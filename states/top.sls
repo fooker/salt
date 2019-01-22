@@ -75,6 +75,7 @@ base:
     - aurblobs
 
   'nas':
+    - nas
     - rsnapshot.server
     - syncthing
     - deluge
