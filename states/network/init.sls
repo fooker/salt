@@ -14,7 +14,7 @@ network:
 resolve:
   file.symlink:
     - name: /etc/resolv.conf
-    - target: /run/systemd/resolve/resolv.conf
+    - target: /run/systemd/resolve/stub-resolv.conf
     - force: True
   service.running:
     - enable: True
@@ -28,15 +28,7 @@ resolve:
 resolve.conf:
   file.managed:
     - name: /etc/systemd/resolved.conf
-    - contents: |
-        [Resolve]
-        LLMNR=no
-{% if grains['role'] == 'gateway' %}
-        Domains=mngt.int.{{ pillar.domain.name }} priv.int.{{ pillar.domain.name }} open.int.{{ pillar.domain.name }}
-        DNS=127.0.0.1
-{% else %}
-        #FallbackDNS=
-{% endif %}
+    - source: salt://network/files/resolved.conf
     - makedirs: True
 
 nsswitch.conf:

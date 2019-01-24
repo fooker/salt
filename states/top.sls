@@ -9,6 +9,7 @@ base:
     - common.pacman
 
     - network
+    - iptables
 
     - snmpd
     - snmpd.sys
@@ -31,10 +32,6 @@ base:
     - match: grain
     - tinc
     - mosh
-
-  '* and not nas':
-    - match: compound
-    - iptables
 
   'router':
     - dsl.ppp
