@@ -1,0 +1,11 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Run root.hints monthly
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+ 
+[Install]
+WantedBy=timers.target
