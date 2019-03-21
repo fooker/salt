@@ -4,6 +4,10 @@ dsl.ppp:
   file.managed:
     - name: /usr/local/lib/systemd/system/ppp@uplink.service.d/restart.conf
     - contents: |
+        [Unit]
+        After=systemd-networkd.service
+        PartOf=systemd-networkd.service
+
         [Service]
         Restart=on-failure
         RestartSec=30s
@@ -64,3 +68,22 @@ dsl.ppp-redail.timer:
     - makedirs: True
     - require_in:
       - file: systemd.system
+
+
+dsl.network:
+  file.managed:
+    - name: /etc/systemd/network/50-uplink.network
+    - source: salt://dsl/ppp/files/ppp.network
+    - makedirs: True
+    - require_in:
+      - file: network
+
+{% for iface in pillar.addresses[grains.id].int %}
+dsl.network.{{iface}}.extend:
+  file.managed:
+    - name: /etc/systemd/network/60-int.{{iface}}.network.d/ppp.conf
+    - source: salt://dsl/ppp/files/ppp.network.extend
+    - makedirs: True
+    - require_in:
+      - file: network
+{% endfor %}

@@ -1,0 +1,11 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Match]
+Name=ppp0
+
+[Network]
+DHCP=ipv6
+
+[DHCP]
+CriticalConnection=true
+ForceDHCPv6PDOtherInformation=true

@@ -35,11 +35,9 @@ base:
 
   'router':
     - dsl.ppp
-    - dsl.dhcp6c
     - router.gateway
     - router.dns
     - router.dhcp
-#    - router.radvd
     - router.ntp
     - router.vnstat
     - ddclient
