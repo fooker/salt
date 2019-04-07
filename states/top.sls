@@ -73,6 +73,7 @@ base:
     - syncthing
     - deluge
     - nfs/server
+    - smb/server
 
   'blaster':
     - odroid

@@ -1,0 +1,23 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[global]
+  workgroup = {{ pillar.smb.workgroup }}
+  server string = {{ grains.id }}
+  server role = standalone
+  security = user
+  encrypt passwords = true
+  invalid users = root
+  map to guest = Bad User
+  guest account = nobody
+  server multi channel support = yes
+  deadtime = 30
+  use sendfile = yes
+  aio read size = 1
+  aio write size = 1
+
+{% for name, share in pillar.smb.shares.items() %}
+[{{ name }}]
+  path={{ share.path }}
+  public = yes
+  guest ok = yes
+{% endfor %}
