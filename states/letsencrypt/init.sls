@@ -30,7 +30,7 @@ letsencrypt.dehydrated.domains:
 
 letsencrypt.dehydrated.renew:
   cmd.run:
-    - name: '/usr/bin/dehydrated --cron'
+    - name: '/usr/bin/dehydrated --cron --keep-going'
     - onchanges:
       - file: letsencrypt.dehydrated.domains
     - require:
