@@ -82,3 +82,7 @@ base:
     - mosquitto
     - homeassistant
     - pad
+
+  'scanner':
+    - scanner
+    - syncthing

@@ -1,0 +1,29 @@
+#!/bin/bash -e
+
+### This file is managed by saltstack - any changes will be overwritten ###
+
+TARGET="/mnt/scan"
+
+# Generate a document ID
+DID="$(uuidgen)"
+
+# Generate the target document directory
+mkdir "${TARGET}/${DID}"
+cd "${TARGET}/${DID}"
+
+# Scan the document
+scanadf \
+  --device-name "${SCANBD_DEVICE}" \
+  --verbose \
+  --output-file 'scan-%04d.ppm' \
+  --resolution 300 \
+  --mode 'Color' \
+  --source 'ADF Duplex'
+
+# Enhance the pages
+#unpaper \
+#  'scan-%04d.ppm' \
+#  'enhanced-%04d.ppm'
+
+# Create PDF
+convert scan-*.ppm scan.pdf

@@ -1,0 +1,5 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+# Allow private network
+{{ pillar.networks.priv.ip4.network }}/{{ pillar.networks.priv.ip4.netmask }}
+{{ pillar.networks.priv.ip6.network }}/{{ pillar.networks.priv.ip6.netmask }}

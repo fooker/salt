@@ -1,0 +1,2 @@
+scanner:
+  driver: fujitsu

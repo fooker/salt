@@ -1,0 +1,40 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+global {
+  user = daemon
+  group = scanner
+
+  pidfile = "/run/scanbd.pid"
+  
+  debug = true
+  debug-level = 2
+
+  saned = "/usr/sbin/saned"
+  saned_opt = {}
+  saned_env = { "SANE_CONFIG_DIR=/etc/scanbd/sane.d" }
+
+  scriptdir = /etc/scanbd/scripts
+
+  timeout = 500
+
+  environment {
+    device = "SCANBD_DEVICE"
+    action = "SCANBD_ACTION"
+  }
+
+  multiple_actions = true
+}
+
+device {{ pillar.scanner.driver }} {
+  filter = "^{{ pillar.scanner.driver }}.*"
+
+  action scan {
+    filter = "^scan.*"
+    numerical-trigger {
+            from-value = 1
+            to-value   = 0
+    }
+    desc   = "Start Scan"
+    script = "scan.script"
+  }
+}
