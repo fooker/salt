@@ -7,6 +7,7 @@ pacman.hooks.dir:
   file.directory:
     - name: '/etc/pacman.d/hooks'
 
+{% if grains.cpuarch == 'x86_64' %}
 pacman.stuff:
   file.append:
     - name: '/etc/pacman.conf'
@@ -24,4 +25,4 @@ pacman.stuff.key:
     - name: 'pacman-key --add /etc/pacman.d/stuff.gpg && pacman-key --lsign-key 9092C185099C935B2EDBAE7689EF0F826E3E6A09'
     - onchanges:
       - file: pacman.stuff.key
-
+{% endif %}
