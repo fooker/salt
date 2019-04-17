@@ -87,3 +87,11 @@ dsl.network.{{iface}}.extend:
     - require_in:
       - file: network
 {% endfor %}
+
+dsl.ferm:
+  file.managed:
+    - name: /etc/ferm.d/dsl.conf
+    - source: salt://dsl/ppp/files/ferm.conf
+    - require_in:
+      - file: ferm
+
