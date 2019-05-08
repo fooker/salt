@@ -72,7 +72,6 @@ mariadb.auth.monitoring:
     - require:
       - service: mariadb
 
-{% if grains['id'] == "bunker" -%}
 mariadb.rsnapshot:
   file.accumulated:
     - name: rsnapshot.backups
@@ -81,7 +80,6 @@ mariadb.rsnapshot:
         backup_script	/usr/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=no -a -i /etc/rsnapshot.id root@bunker.dev.open-desk.net '/usr/bin/innobackupex --stream=tar ./ 2> /dev/null' | tar -x	mariadb
     - require_in:
       - file: rsnapshot.target.conf
-{%- endif %}
 
 {% macro database(module) %}
 mariadb.database.{{ module }}:

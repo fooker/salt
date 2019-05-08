@@ -1,5 +1,7 @@
 # Volume containing brick should be formated with `mkfs.xfs -f -i size=512 -n size=8192 -d su=128K,sw=10 /dev/mapper/data`
 
+{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+
 glusterfs:
   pkg.installed:
     - name: glusterfs
@@ -28,6 +30,8 @@ glusterfs.volume.{{ volume }}:
       {% endfor %}
     - replica: {{ pillar.hive.nodes|count }}
     - start: True
+
+{{ rsnapshot.target('glusterfs-' + volume, '/srv/glusterfs/{{ volume }}') }}
 {% endfor %}
 
 glusterfs.iptables:
