@@ -129,7 +129,7 @@ peering:
       domains:
         - dn42
       netdev: maglab
-      remote: 'marvin.maglab.space'
+      remote: 'lintillas.maglab.space'
 
     north-zitadelle:
       router_id: 0x8133feaa
@@ -253,7 +253,7 @@ peering:
         wireguard:
           port:
             local: 23421
-            remote: 42001
+            remote: 42005
           privkey: |
             -----BEGIN PGP MESSAGE-----
             hQEMA0EEvUwCdTjhAQgApwsd20W4rSAP8aY3ZCDd9FLv15tMGp3krlTuK/zXydLL
@@ -266,10 +266,10 @@ peering:
             2YU3w56K3y41KU9wGAcQzqBqAhBlIvBLhM1yMCO5p2DBQLc5ww2qGA==
             =dl10
             -----END PGP MESSAGE-----
-          pubkey: icxW7cv/oNXnJK6NgmSqpW8tkYnLLe3UmOx47egD1ng=
+          pubkey: mTOnizd4uUjUqoMP1WiJdR/LeqyeIc3d+3dJnO5Z5yE=
         ip4:
-          local: '192.168.234.1'
-          remote: '192.168.234.0'
+          local: '192.168.234.5'
+          remote: '192.168.234.4'
         ip6:
           local: 'fe80:42::2'
           remote: 'fe80:42::1'
@@ -443,7 +443,7 @@ peering:
         wireguard:
           port:
             local: 23421
-            remote: 42002
+            remote: 42006
           privkey: |
             -----BEGIN PGP MESSAGE-----
             hQEMA0EEvUwCdTjhAQf/TuuCLiKp+8LLiHrOxRmt2OpSJbZSlhI0ZP3ejjpNESOK
@@ -456,10 +456,10 @@ peering:
             5CYUbdTSukWUPgBxjzIEGcTilJ7JcV8+m8xpvgPxw48n3kgRaTS5NQ==
             =fFkP
             -----END PGP MESSAGE-----
-          pubkey: ot1mVRa1tgfMk9JSxo7XaOcQHi/51BEmpnD0XspnRQk=
+          pubkey: wKN9BrkkKv884EBifkMMlwy96PADSOvaM9g5kM+Ub10=
         ip4:
-          local: '192.168.234.3'
-          remote: '192.168.234.2'
+          local: '192.168.234.7'
+          remote: '192.168.234.6'
         ip6:
           local: 'fe80:42::2'
           remote: 'fe80:42::1'
