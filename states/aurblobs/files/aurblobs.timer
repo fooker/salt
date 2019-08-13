@@ -1,0 +1,11 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Update aurblob packages
+
+[Timer]
+OnCalendar=00/6:0
+Unit=aurblobs.service
+
+[Install]
+WantedBy=basic.target

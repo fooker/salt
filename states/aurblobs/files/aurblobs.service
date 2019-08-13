@@ -1,0 +1,10 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Check for and Build new AUR PKGs
+
+[Service]
+WorkingDirectory=/var/lib/aurblobs/aurblobs/
+User=aurblobs
+Group=aurblobs
+ExecStart=/var/lib/aurblobs/.local/bin/aurblobs update --jobs 4
