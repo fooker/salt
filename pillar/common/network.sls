@@ -210,7 +210,7 @@ addresses:
       ip6:
         address: '2001:638:301:11a3::6'
         netmask: 64
-        gateway: '2001:638:301:11a3::'
+        gateway: '2001:638:301:11a3::1'
   bunker:
     int:
       mngt:
