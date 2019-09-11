@@ -1,5 +1,5 @@
 {% import 'rsnapshot/target/init.sls' as rsnapshot %}
-c
+
 weechat:
   pkg.installed:
     - name: weechat
@@ -11,7 +11,7 @@ weechat.user:
     - createhome: True
     - empty_password: True
   ssh_auth.present:
-    - name: {{ pillar['ssh']['authorized_keys']['fooker'] }}
+    - name: {{ pillar.ssh.authorized_keys.fooker }}
     - user: weechat
     - comment: fooker
     - options:
