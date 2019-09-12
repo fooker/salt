@@ -24,12 +24,12 @@ mariadb:
       - pkg: mariadb
       - cmd: mariadb.init
     - watch:
-      - file: /etc/mysql/*
+      - file: mariadb.config
       - pkg: mariadb
 
 mariadb.config:
   file.managed:
-    - name: /etc/mysql/my.cnf
+    - name: /etc/my.cnf.d/server.cnf
     - source: salt://mariadb/files/my.cnf.tmpl
     - makedirs: True
     - template: jinja
@@ -40,7 +40,7 @@ mariadb.init:
     - creates: /var/lib/mysql
     - require:
       - pkg: mariadb
-      - file: /etc/mysql/*
+      - file: mariadb.config
 
 mariadb.init.post:
   mysql_query.run:
