@@ -1,0 +1,48 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+disable_plaintext_auth = yes
+
+auth_cache_size = 10M
+auth_cache_ttl = 1 hour
+auth_cache_negative_ttl = 1 hour
+
+auth_username_chars = abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890.-_@
+
+auth_failure_delay = 5 secs
+
+auth_mechanisms = plain login
+
+passdb {
+  driver = sql
+  args = /etc/dovecot/mysql.conf.ext
+
+}
+
+# Answer user query (uid, gid, home) by static data
+userdb {
+  driver = static
+}
+
+# For user iteration (required by replication)
+userdb {
+  driver = sql
+  args = /etc/dovecot/mysql.conf.ext
+}
+
+service auth {
+  unix_listener auth-master {
+    mode = 0600
+    user = vmail
+  }
+  
+  unix_listener auth-userdb {
+    mode = 0600
+    user = vmail
+  }
+
+  unix_listener /var/spool/postfix/private/auth {
+    user = postfix
+    group = postfix
+    mode = 0660
+  }
+}

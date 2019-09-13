@@ -1,0 +1,7 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+hosts = 127.0.0.1
+user = mail
+password = {{ pillar.database.accounts.mail.password }}
+dbname = mail
+query = SELECT target FROM aliases WHERE address='%s' AND active = true

@@ -1,0 +1,26 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+driver = mysql
+
+connect = \
+  host=127.0.0.1 \
+  dbname=mail \
+  user=mail \
+  password={{ pillar.database.accounts.mail.password }}
+
+default_pass_scheme = CRYPT
+
+iterate_query = SELECT \
+    address AS user \
+  FROM mailboxes
+
+password_query = SELECT \
+    address AS user, \
+    password \
+  FROM mailboxes \
+  WHERE address = '%n@%d' AND active = true
+
+user_query = SELECT \
+    address AS user \
+  FROM mailboxes \
+  WHERE address = '%n@%d' AND active = true

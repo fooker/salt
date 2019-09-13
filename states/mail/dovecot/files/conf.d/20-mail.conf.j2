@@ -1,0 +1,43 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+mail_home = /srv/mail/%d/%u
+mail_location = maildir:~/mail
+
+namespace inbox {
+  type = private
+
+  inbox = yes
+  list = yes
+
+  location =
+  separator = /
+
+  prefix =
+}
+
+mail_uid = 800
+mail_gid = 800
+
+mail_privileged_group = 800
+
+mail_full_filesystem_access = no
+
+first_valid_uid = 800
+last_valid_uid = 800
+
+first_valid_gid = 800
+last_valid_gid = 800
+
+mail_plugins = $mail_plugins acl zlib listescape mail_log notify
+
+mailbox_idle_check_interval = 60 secs
+
+maildir_copy_with_hardlinks = yes
+
+recipient_delimiter = +
+
+mail_prefetch_count = 30
+
+plugin {
+   zlib_save = lz4
+}

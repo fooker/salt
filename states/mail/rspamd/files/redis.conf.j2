@@ -1,0 +1,4 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+read_servers = "[::1]:6379:10,[{{ pillar.addresses[pillar.hive.redis.master].hive.ip6.address }}]:6379:0";
+write_servers = "[{{ pillar.addresses[pillar.hive.redis.master].hive.ip6.address }}]:6379";

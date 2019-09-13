@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+  ServerName spam.open-desk.net
+  ServerAlias spam.{{ pillar.mail.servers[grains.id] }}.open-desk.net
+
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerName spam.open-desk.net
+  ServerAlias spam.{{ pillar.mail.servers[grains.id] }}.open-desk.net
+
+  ProxyPreserveHost on
+  ProxyPass "/" "http://[::1]:11334/"
+  ProxyPassReverse "/" "http://[::1]:11334/"
+
+  SSLEngine on
+  SSLCertificateFile /etc/dehydrated/certs/spam/fullchain.pem
+  SSLCertificateKeyFile /etc/dehydrated/certs/spam/privkey.pem
+
+  Header always set Strict-Transport-Security "max-age=15768000; includeSubDomains; preload"
+</VirtualHost>

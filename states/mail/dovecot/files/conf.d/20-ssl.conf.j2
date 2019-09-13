@@ -1,0 +1,17 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+ssl = required
+
+ssl_cert = </etc/dehydrated/certs/mail/fullchain.pem
+ssl_key = </etc/dehydrated/certs/mail/privkey.pem
+ssl_dh = </etc/dovecot/dh.pem
+
+ssl_require_crl = yes
+
+ssl_client_ca_dir = /etc/ssl/certs
+
+ssl_min_protocol = TLSv1
+ssl_cipher_list = ALL:!ADH:!LOW:!SSLv2:!SSLv3:!EXP:!aNULL:!eNULL:!3DES:!MD5:!PSK:!DSS:!RC4:!SEED:!IDEA:+HIGH:+MEDIUM
+ssl_options = no_compression
+
+ssl_prefer_server_ciphers = yes

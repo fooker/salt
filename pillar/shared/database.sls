@@ -87,3 +87,16 @@ database:
         =i6pJ
         -----END PGP MESSAGE-----
 
+    mail:
+      password: |
+        -----BEGIN PGP MESSAGE-----
+        hQEMA0EEvUwCdTjhAQgAmxpq7qzSmyuOVjmLHgzUcr11l/QvLwnzPrJhkCkXviQT
+        xyO+oNG4Nniq4aBhTt3NILac39gn2jH/geLYcysgcFLjp0ih0UZfOO+IrvvEMbXP
+        oa21QaJW9KL6rp/ZZ+Bpqv6zLA6vssHWfg9IAoU7CstocoH3EOdPC+XT4apbJ0Gp
+        h28P+rNzq75Iu1zR3hfuL4zRD7Y3DsOwewEhSyAv70gyWxFAzk9uLSsOc2hI34cG
+        C4/JYzCGI7oVJi9RsDciK/b+X1IpxSmtUbnx/DUIuSHfyfXK34LLWm6HroQxIMH4
+        K4F/MMt9bQjjvJFoa2l/Hl2aMLMku24px4vA1uY0jtJlAdZI4qBIEonEkWXT/hgZ
+        OrSv+mIyLndugY6fhOkjy/yEa+i8Bgr5iOMKvzYeHbiGi0lfSfo3wXON1qJkPv1A
+        xTaNpuGjNMuvZrrYJP2D95XYlcETfczrSuvN8e5gKnxDdB+gwko=
+        =UE7c
+        -----END PGP MESSAGE-----

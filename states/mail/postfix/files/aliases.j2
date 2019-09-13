@@ -1,0 +1,11 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+{% for domain in pillar.mail.domains %}
+webmaster@{{ domain }}       postmaster@{{ domain }}
+hostmaster@{{ domain }}      postmaster@{{ domain }}
+manager@{{ domain }}         postmaster@{{ domain }}
+dumper@{{ domain }}          postmaster@{{ domain }}
+operator@{{ domain }}        postmaster@{{ domain }}
+abuse@{{ domain }}           postmaster@{{ domain }}
+security@{{ domain }}        postmaster@{{ domain }}
+{% endfor %}

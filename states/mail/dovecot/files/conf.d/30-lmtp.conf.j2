@@ -1,0 +1,24 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+protocols = $protocols lmtp
+
+protocol lmtp {
+  mail_plugins = $mail_plugins sieve
+}
+
+service lmtp {
+  user = vmail
+
+  unix_listener lmtp {
+    user = vmail
+    mode = 0600
+  }
+
+  unix_listener /var/spool/postfix/private/dovecot-lmtp {
+    group = postfix
+    mode = 0600
+    user = postfix
+  }
+}
+
+recipient_delimiter = ~+

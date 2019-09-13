@@ -1,0 +1,37 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+domain (ip ip6)
+table filter
+chain INPUT {
+  proto tcp dport 143 {
+    mod conntrack ctstate NEW
+    mod recent {
+      set rsource name "imap" NOP;
+      update rsource name "imap" seconds 30 hitcount 10 rttl DROP;
+    }
+    ACCEPT;
+  }
+
+  proto tcp dport 993 {
+    mod conntrack ctstate NEW
+    mod recent {
+      set rsource name "imaps" NOP;
+      update rsource name "imaps" seconds 30 hitcount 10 rttl DROP;
+    }
+    ACCEPT;
+  }
+
+  proto tcp dport 4190 {
+    mod conntrack ctstate NEW
+    mod recent {
+      set rsource name "sieve" NOP;
+      update rsource name "sieve" seconds 30 hitcount 10 rttl DROP;
+    }
+    ACCEPT;
+  }
+
+  proto tcp dport 22025 {
+    source {{ pillar.addresses[pillar.hive.spouse].hive.ip6.address }}
+    ACCEPT;
+  }
+}

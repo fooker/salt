@@ -3,3 +3,6 @@ hive:
     - north-zitadelle
     - south-zitadelle
     - bunker
+
+  redis:
+    master: bunker

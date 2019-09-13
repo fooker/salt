@@ -1,0 +1,5 @@
+#!/bin/bash
+
+### This file is managed by saltstack - any changes will be overwritten ###
+
+/usr/bin/curl -s --data-binary @- http://localhost:11334/learnham

@@ -52,12 +52,17 @@ base:
     - peering
     - mariadb
     - web.apps
+    - redis
+    - mail.dovecot
+    - mail.postfix
+    - mail.rspamd
 
   'bunker':
     - hive
     - glusterfs
     - mariadb
     - syncthing
+    - redis
 
   'brueckenkopf':
     - salt.master

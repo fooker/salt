@@ -1,0 +1,55 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+bind 127.0.0.1 ::1{% if grains.id == pillar.hive.redis.master %} {{ pillar.addresses[grains.id].hive.ip4.address }} {{ pillar.addresses[grains.id].hive.ip6.address }}{% endif %}
+port 6379
+
+#unixsocket /run/redis.sock
+#unixsocketperm 700
+
+timeout 60
+
+daemonize no
+supervised no
+
+loglevel warning
+logfile ""
+
+databases 16
+
+always-show-logo no
+
+save 900 1
+save 300 10
+save 60 10000
+
+stop-writes-on-bgsave-error yes
+
+rdbcompression yes
+rdbchecksum yes
+
+dbfilename dump.rdb
+
+dir /var/lib/redis/
+
+{% if grains.id != pillar.hive.redis.master %}
+replicaof {{ pillar.addresses[pillar.hive.redis.master].hive.ip6.address }} 6379
+replica-serve-stale-data yes
+replica-read-only yes
+{% endif %}
+
+repl-diskless-sync no
+repl-ping-replica-period 5
+repl-timeout 30
+repl-disable-tcp-nodelay no
+repl-backlog-size 16mb
+repl-backlog-ttl 3600
+
+lazyfree-lazy-eviction no
+lazyfree-lazy-expire no
+lazyfree-lazy-server-del no
+replica-lazy-flush no
+
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+
+latency-monitor-threshold 0

@@ -12,6 +12,7 @@ web.apache:
       - apache
       - nghttp2
       - php-apache
+
   service.running:
     - enable: True
     - name: httpd

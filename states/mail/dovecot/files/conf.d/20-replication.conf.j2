@@ -1,0 +1,39 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+mail_plugins = $mail_plugins notify replication
+
+service replicator {
+  process_min_avail = 1
+
+  unix_listener replicator-doveadm {
+    user = vmail
+    mode = 0600
+  }
+}
+
+service aggregator {
+  fifo_listener replication-notify-fifo {
+    user = vmail
+    mode = 0600
+  }
+  unix_listener replication-notify {
+    user = vmail
+    mode = 0600
+  }
+}
+
+service doveadm {
+  inet_listener {
+    address = '{{ pillar.addresses[grains.id].hive.ip6.address }}'
+    port = 22025
+  }
+}
+
+replication_max_conns = 10
+
+doveadm_port = 22025
+doveadm_password = '{{ pillar.mail.doveadm_password }}'
+
+plugin {
+  mail_replica = tcp:[{{ pillar.addresses[pillar.hive.spouse].hive.ip6.address }}]:22025
+}

@@ -1,0 +1,23 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+imap_max_line_length = 64k
+
+protocols = $protocols imap
+
+protocol imap {
+  imap_metadata = yes
+  
+  mail_plugins = $mail_plugins imap_zlib imap_sieve
+}
+
+service imap-login {
+  service_count = 1
+  process_min_avail = 1
+  user = dovenull
+}
+
+service imap {
+  executable = imap
+}
+
+mail_attribute_dict = file:%h/dovecot-attributes
