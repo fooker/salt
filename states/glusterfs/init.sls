@@ -2,6 +2,7 @@
 
 {% import 'rsnapshot/target/init.sls' as rsnapshot %}
 
+
 glusterfs:
   pkg.installed:
     - name: glusterfs
@@ -31,7 +32,7 @@ glusterfs.volume.{{ volume }}:
     - replica: {{ pillar.hive.nodes|count }}
     - start: True
 
-{{ rsnapshot.target('glusterfs-' + volume, '/srv/glusterfs/{{ volume }}') }}
+{{ rsnapshot.target('glusterfs-' + volume, '/srv/glusterfs/'+ volume) }}
 {% endfor %}
 
 glusterfs.iptables:
