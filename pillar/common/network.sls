@@ -6,7 +6,6 @@ networks:
       gateway: 10.0.0.1
       dynamic: [10.0.0.128, 10.0.0.253]
     ip6:
-      sla: 0
       network: 'fd79:300d:6056:0100::'
       netmask: 64
       gateway: 'fd79:300d:6056:0100::1'
@@ -17,7 +16,6 @@ networks:
       gateway: 10.0.23.1
       dynamic: [10.0.23.128, 10.0.23.253]
     ip6:
-      sla: 23
       network: 'fd79:300d:6056:0123::'
       netmask: 64
       gateway: 'fd79:300d:6056:0123::1'
@@ -28,7 +26,6 @@ networks:
       gateway: 10.0.42.1
       dynamic: [10.0.42.128, 10.0.42.253]
     ip6:
-      sla: 42
       network: 'fd79:300d:6056:0142::'
       netmask: 64
       gateway: 'fd79:300d:6056:0142::1'
@@ -38,12 +35,7 @@ networks:
       netmask: 24
       gateway: 10.10.10.1
       dynamic: [10.10.10.100, 10.10.10.250]
-    ip6:
-      sla: 64
-    #   network: '2001:4dd0:ae46:64::'
-    #   netmask: 64
-    #   gateway: '2001:4dd0:ae46:64::1'
-
+    ip6: {}
 
 addresses:
   router:
@@ -63,7 +55,6 @@ addresses:
       major:
         mac: 00:0d:b9:34:db:e4
         ip4: 10.10.10.1
-      #  ip6: 2001:4dd0:ae46:64::1
     ffx:
       data:
         mac: 00:0d:b9:34:db:e4
