@@ -11,12 +11,6 @@ web:
         - www.chez-janine.de
       database: True
 
-    born1958:
-      domains:
-        - born1958.de
-        - www.born1958.de
-      database: True
-
     open_desk:
       domains:
         - open-desk.org
@@ -65,4 +59,3 @@ web:
         2oPPvil5ue4cDE9+szwn0kxLb+qdxB2JydWwMKRchkz5RF9ogkIHgfDxqP4=
         =O6Tz
         -----END PGP MESSAGE-----
-
