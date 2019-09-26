@@ -1,5 +1,8 @@
+{% import 'backup/client/init.sls' as backup %}
+
 include:
   - hive
+
 
 mariadb.tools:
   pkg.installed:
@@ -72,14 +75,7 @@ mariadb.auth.monitoring:
     - require:
       - service: mariadb
 
-mariadb.rsnapshot:
-  file.accumulated:
-    - name: rsnapshot.backups
-    - filename: /etc/rsnapshot.conf.incl
-    - text: |
-        backup_script	/usr/bin/ssh -o BatchMode=yes -o StrictHostKeyChecking=no -a -i /etc/rsnapshot.id root@{{ pillar.addresses[grains.id].ext.hostname }} '/usr/bin/mariabackup --backup --stream=xbstream --user=root' > backup.xbstream	{{ grains.id }}/mariadb
-    - require_in:
-      - file: rsnapshot.target.conf
+{{ backup.cmd('mariadb', '/usr/bin/mariabackup --backup --target-dir=./mariadb --user=root') }}
 
 {% macro database(module) %}
 mariadb.database.{{ module }}:
@@ -102,4 +98,3 @@ mariadb.database.{{ module }}:
       - mysql_database: {{ module }}
       - mysql_user: {{ module }}
 {% endmacro %}
-

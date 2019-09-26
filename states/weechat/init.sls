@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 weechat:
   pkg.installed:
@@ -39,4 +39,4 @@ weechat.iptables:
     - require_in:
       - file: ferm
 
-{{ rsnapshot.target('weechat', '/var/lib/weechat') }}
+{{ backup.dir('weechat', '/var/lib/weechat') }}

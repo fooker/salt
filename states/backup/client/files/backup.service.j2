@@ -1,0 +1,44 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Create a Backup
+
+Wants=network-online.target
+After=network-online.target
+
+
+[Service]
+Type=oneshot
+
+Environment='BORG_PASSPHRASE={{ pillar.backup.password }}'
+Environment='BORG_RSH=ssh -i /var/lib/backup/id_ed25519 -o UserKnownHostsFile=/var/lib/backup/known_hosts'
+
+PrivateTmp=yes
+WorkingDirectory=/tmp
+
+{% for cmd in accumulator.get('backup.cmds', []) -%}
+ExecStartPre={{ cmd }}
+{% endfor %}
+
+ExecStart=/usr/bin/borg create \
+    --verbose \
+    --umask 027 \
+    --list \
+    --stats \
+    --show-rc \
+    --compression lzma \
+    --exclude-caches \
+    'backup@{{ pillar.backup.server.host }}:system::{now:%%Y-%%m-%%dT%%H:%%M}' \
+    {% for dir in accumulator.get('backup.dirs', []) | sort -%}
+    {{ dir }} \
+    {% endfor -%}
+    .
+
+ExecStart=/usr/bin/borg prune \
+    --verbose \
+    --list \
+    --keep-hourly={{ pillar.backup.retains.hourly }} \
+    --keep-daily={{ pillar.backup.retains.daily }} \
+    --keep-weekly={{ pillar.backup.retains.weekly }} \
+    --keep-monthly={{ pillar.backup.retains.monthly }} \
+    'backup@{{ pillar.backup.server.host }}:system'

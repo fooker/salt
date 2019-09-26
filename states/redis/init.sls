@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 
 redis:
@@ -20,4 +20,4 @@ redis.config:
     - watch_in:
       - service: redis
 
-{{ rsnapshot.target('redis', '/var/lib/redis/dump.rdb') }}
+{{ backup.dir('redis', '/var/lib/redis/dump.rdb') }}

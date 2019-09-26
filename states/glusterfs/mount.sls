@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 {% for volume in pillar.hive.volumes %}
 {%- set mountpoint = pillar.hive.volumes[volume].mountpoint %}
@@ -18,5 +18,5 @@ glusterfs.mount.{{ volume }}:
     - watch:
       - file: glusterfs.mount.{{ volume }}
 
-{{ rsnapshot.target('data-' + volume, mountpoint) }}
+{{ backup.dir('data-' + volume, mountpoint) }}
 {% endfor %}

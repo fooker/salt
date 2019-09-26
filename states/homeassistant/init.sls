@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 {% import 'nginx/init.sls' as nginx %}
 
 
@@ -60,4 +60,4 @@ homeassistant.config:
 
 {{ nginx.vhost('homeassistant', source='salt://homeassistant/files/nginx.conf.j2', domains=['hass'], ssl=False, target='127.0.0.1:6680') }}
 
-{{ rsnapshot.target('homeassistant', '/var/lib/homeassistant/') }}
+{{ backup.dir('homeassistant', '/var/lib/homeassistant/') }}

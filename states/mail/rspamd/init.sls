@@ -1,5 +1,5 @@
 {% import 'letsencrypt/init.sls' as letsencrypt %}
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 
 include:
@@ -146,4 +146,4 @@ mail.rspamd.web:
     - require:
       - letsencrypt.domains.spam
 
-{{ rsnapshot.target('rspamd', '/var/lib/rspamd/') }}
+{{ backup.dir('rspamd', '/var/lib/rspamd/') }}

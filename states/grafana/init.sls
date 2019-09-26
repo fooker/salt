@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 {% import 'nginx/init.sls' as nginx %}
 
 
@@ -28,5 +28,5 @@ grafana.service:
 {{ nginx.vhost('grafana.to_ssl', source='salt://nginx/files/vhost/redirect-ssl.conf.j2', ssl=False, domains=['grafana.open-desk.net']) }}
 
 
-{{ rsnapshot.target('grafana', '/var/lib/grafana') }}
+{{ backup.dir('grafana', '/var/lib/grafana') }}
 

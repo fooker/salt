@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 
 include:
@@ -135,4 +135,4 @@ mail.dovecot.ferm:
     - require_in:
       - file: ferm
 
-{{ rsnapshot.target('mail', '/srv/mail/') }}
+{{ backup.dir('mail', '/srv/mail/') }}

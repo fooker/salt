@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 
 unifi:
   pkg.installed:
@@ -11,5 +11,5 @@ unifi:
     - watch:
       - file: /etc/ssh/sshd_config
 
-{{ rsnapshot.target('unifi', '/var/lib/unifi') }}
+{{ backup.dir('unifi', '/var/lib/unifi') }}
 

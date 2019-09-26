@@ -1,4 +1,22 @@
 backup:
+  server:
+    host: nas.open-desk.net
+    fingerprint: ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEbKB/3ip6pSZCJ+sAnVGgAPIA2x8AtDAI9ZzuCXU2rRc84ht53Y4GCwmz7VY6M3V2lyD5lfTh0JnANTSAoC7r0=
+
+  interval: '*-*-* 00/6:00:00'
+
+  retains:
+    hourly: 40
+    daily: 21
+    weekly: 12
+    monthly: 48
+
+  dirs:
+    - /etc
+    - /root
+    - /home
+
+
   retentions:
     - id: hourly
       count: 64

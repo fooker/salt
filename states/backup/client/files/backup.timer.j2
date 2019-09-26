@@ -1,0 +1,16 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+[Unit]
+Description=Create a Backup
+
+Wants=network-online.target
+After=network-online.target
+
+
+[Timer]
+OnCalendar={{ pillar.backup.interval }}
+Persistent=true
+
+
+[Install]
+WantedBy=timers.target

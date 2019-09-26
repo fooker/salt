@@ -1,4 +1,4 @@
-{% import 'rsnapshot/target/init.sls' as rsnapshot %}
+{% import 'backup/client/init.sls' as backup %}
 {% import 'nginx/init.sls' as nginx %}
 
 
@@ -55,4 +55,4 @@ aurblobs.timer:
 {{ nginx.vhost('aurblobs', source='salt://aurblobs/files/nginx.conf.j2', domains=['aurblobs.open-desk.net']) }}
 {{ nginx.vhost('aurblobs.to_ssl', source='salt://nginx/files/vhost/redirect-ssl.conf.j2', ssl=False, domains=['aurblobs.open-desk.net']) }}
 
-{{ rsnapshot.target('aurblobs', '/var/lib/aurblobs/.config/aurblobs', '/var/lib/aurblobs/.gnupg') }}
+{{ backup.dir('aurblobs', '/var/lib/aurblobs/.config/aurblobs', '/var/lib/aurblobs/.gnupg') }}

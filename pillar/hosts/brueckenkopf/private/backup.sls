@@ -1,0 +1,13 @@
+backup:
+  password: |
+    -----BEGIN PGP MESSAGE-----
+    hQEMA0EEvUwCdTjhAQgAtZYDIOfBG770wxaSVmAH3KaNEFuYUgOAiKDigqn3uVkg
+    5cYZ/BtqMij60PKsqUXjPvhRwIaEXyNxZig2fHrUrAp/wVt7Ni1LzElxtG2J+Rim
+    NjragpVFP6hl8XeWwpAOg3PQt3ZDFW8pep03rLROp5rFnnc0brPMYRUIGbjdM2O6
+    5l1W7oVQxaz/TevfJ5sduX0FPP7GAABoixrqLN4o7BG5zSpkbgtp3jIdp34mVGMX
+    JaWJZjLOBvl4fKjLSZ9nfvv2eflbdptGG6Jv6mrHe2NY06mOa6VYyuWFONIqwIDc
+    68Xh9Y30f61NUiCrazm8IDUOELvif990IQ64RRDxz9JmAZX80H9fcjyMSTMTxxXU
+    AoPTvj3kIWwpnS+OZ48n27jynVjBi3Sx4QmjTiFfYhlCMVhxRe/y3aEiPwdKc2dM
+    EXmK4zEhRMYIH5jXwUXdgi4iPMpD+3MmcZWaFOfoXkrE+5zN7VY8
+    =1zhk
+    -----END PGP MESSAGE-----

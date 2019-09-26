@@ -18,7 +18,7 @@ base:
 
     - ssh
 
-    - rsnapshot.target
+    - backup.client
 
   '* and not router':
     - match: compound
@@ -74,7 +74,7 @@ base:
 
   'nas':
     - nas
-    - rsnapshot.server
+    - backup.server
     - syncthing
     - deluge
     - nfs/server
