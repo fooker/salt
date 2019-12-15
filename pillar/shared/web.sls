@@ -26,6 +26,7 @@ web:
     box:
       domains:
         - box.open-desk.net
+        - frisch.cloud
       database: False
 
     wolke:
