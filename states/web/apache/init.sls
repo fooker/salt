@@ -11,7 +11,6 @@ web.apache:
     - pkgs:
       - apache
       - nghttp2
-      - php-apache
 
   service.running:
     - enable: True
@@ -20,7 +19,6 @@ web.apache:
       - pkg: web.apache
     - watch:
       - file: /etc/httpd/*
-      - file: /etc/php/*
 
 web.apache.conf:
   file.managed:
@@ -59,6 +57,19 @@ web.apache.default.conf:
     - name: /etc/httpd/conf/httpd.default.conf
     - source: salt://web/apache/files/httpd.default.conf.j2
     - template: jinja
+
+web.apache.php:
+  pkg.installed:
+    - pkgs:
+      - php-fpm
+
+  service.running:
+    - enable: True
+    - name: php-fpm.service
+    - require:
+      - pkg: web.apache.php
+    - watch:
+      - file: /etc/php/*
 
 web.apache.iptables:
   file.managed:

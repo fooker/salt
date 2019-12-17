@@ -58,7 +58,7 @@ web.php.extensions.memcached:
     - pkgs:
       - php-memcached
   file.managed:
-    - name: /etc/php/conf.d/memcachde.ini
+    - name: /etc/php/conf.d/memcached.ini
     - source: salt://web/php/files/php.memcached.ini.j2
     - template: jinja
     - makedirs: True

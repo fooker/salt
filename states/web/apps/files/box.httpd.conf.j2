@@ -2,10 +2,13 @@
 {% block config %}
   DocumentRoot /srv/http/box
 
-  DirectoryIndex index.php
+  DirectoryIndex /_h5ai/public/index.php
 
   <Directory /srv/http/box>
     Require all granted
-    Options +Indexes
+  </Directory>
+
+  <Directory "/srv/http/box/_h5ai">
+    AllowOverride All
   </Directory>
 {% endblock %}
