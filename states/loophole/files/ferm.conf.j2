@@ -1,0 +1,30 @@
+### This file is managed by saltstack - any changes will be overwritten ###
+
+{% for forwarding in pillar.loophole.forwardings.values() %}
+domain (ip)
+table filter
+chain FORWARD
+proto (tcp udp) {
+  dport {{ forwarding.port }}
+  in-interface ext
+  out-interface {{ forwarding.iface }}
+  ACCEPT;
+
+  sport {{ forwarding.port }}
+  in-interface {{ forwarding.iface }}
+  out-interface ext
+  ACCEPT;
+}
+
+domain (ip)
+table nat
+chain PREROUTING
+proto (tcp udp) {
+  dport {{ forwarding.port }}
+  DNAT to {{ forwarding.host }}:{{ forwarding.port }};
+
+  destination {{ forwarding.host }}
+  dport {{ forwarding.port }}
+  MASQUERADE;
+}
+{% endfor %}

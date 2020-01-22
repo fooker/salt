@@ -68,7 +68,7 @@ base:
     - salt.master
     - opennms
     - grafana
-    - rdp-proxy
+    - loophole
     - weechat
     - aurblobs
 
